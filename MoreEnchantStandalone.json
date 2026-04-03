@@ -1,0 +1,12 @@
+{
+  "id": "MoreEnchantStandalone",
+  "pck_name": "MoreEnchantStandalone",
+  "name": "MoreEnchantStandalone",
+  "author": "ClockCycas",
+  "description": "更多自定义附魔（无 RitsuLib 依赖）。卡牌奖励有概率随机附加附魔；商店除外。",
+  "version": "0.1.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": true
+}

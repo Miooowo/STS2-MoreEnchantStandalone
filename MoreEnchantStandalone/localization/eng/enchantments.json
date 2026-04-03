@@ -1,0 +1,102 @@
+{
+  "KEEN_EDGE_ENCHANTMENT.title": "Keen Edge",
+  "KEEN_EDGE_ENCHANTMENT.description": "This card deals [blue]{Amount}[/blue] extra damage on [gold]Strength[/gold]-modified attacks.",
+  "KEEN_EDGE_ENCHANTMENT.extraCardText": "+[blue]{Amount}[/blue] damage on [gold]Strength[/gold]-modified attacks.",
+
+  "RETURN_TO_HAND_ENCHANTMENT.title": "Return",
+  "RETURN_TO_HAND_ENCHANTMENT.description": "Return this card to your [gold]Hand[/gold].",
+  "RETURN_TO_HAND_ENCHANTMENT.extraCardText": "If it would go to the discard pile, put it into your [gold]Hand[/gold] instead.",
+
+  "LIKE_DAGGER_ENCHANTMENT.title": "Like Dagger",
+  "LIKE_DAGGER_ENCHANTMENT.description": "When played, add a [gold]Shiv[/gold] to your [gold]Hand[/gold].",
+  "LIKE_DAGGER_ENCHANTMENT.extraCardText": "Add a [gold]Shiv[/gold] to your [gold]Hand[/gold].",
+
+  "CHARGE_UP_ENCHANTMENT.title": "Charge Up",
+  "CHARGE_UP_ENCHANTMENT.description": "When played, gain [blue]1[/blue] [gold]Energy[/gold] next turn.",
+  "CHARGE_UP_ENCHANTMENT.extraCardText": "Next turn: +[blue]1[/blue] [gold]Energy[/gold].",
+
+  "INITIATIVE_ENERGY_ENCHANTMENT.title": "Initiative",
+  "INITIATIVE_ENERGY_ENCHANTMENT.description": "When played, gain [blue]2[/blue] [gold]Energy[/gold] next turn.",
+  "INITIATIVE_ENERGY_ENCHANTMENT.extraCardText": "Next turn: +[blue]2[/blue] [gold]Energy[/gold].",
+
+  "SURVIVOR_DISCARD_ENCHANTMENT.title": "Survivor",
+  "SURVIVOR_DISCARD_ENCHANTMENT.description": "When played, discard a card.",
+  "SURVIVOR_DISCARD_ENCHANTMENT.extraCardText": "Discard a card.",
+  "SURVIVOR_DISCARD_ENCHANTMENT.selectPrompt": "Choose a card to discard",
+
+  "STREAMLINE_ENCHANTMENT.title": "Streamline",
+  "STREAMLINE_ENCHANTMENT.description": "Each time this card is played, its cost is reduced by [blue]1[/blue] for the rest of combat.",
+  "STREAMLINE_ENCHANTMENT.extraCardText": "Per play this combat: cost [blue]-1[/blue].",
+
+  "SHOCK_CHANNEL_ENCHANTMENT.title": "Shock Channel",
+  "SHOCK_CHANNEL_ENCHANTMENT.description": "When played, [gold]Channel[/gold] [blue]1[/blue] [gold]Lightning[/gold] orb.",
+  "SHOCK_CHANNEL_ENCHANTMENT.extraCardText": "[gold]Channel[/gold] [blue]1[/blue] [gold]Lightning[/gold].",
+
+  "FROST_CHANNEL_ENCHANTMENT.title": "Frost Channel",
+  "FROST_CHANNEL_ENCHANTMENT.description": "When played, [gold]Channel[/gold] [blue]1[/blue] [gold]Frost[/gold] orb.",
+  "FROST_CHANNEL_ENCHANTMENT.extraCardText": "[gold]Channel[/gold] [blue]1[/blue] [gold]Frost[/gold].",
+
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "Spectral",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "[gold]Ethereal[/gold].",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "[gold]Ethereal[/gold].",
+
+  "SHIELD_PLATING_ENCHANTMENT.title": "Shield Plating",
+  "SHIELD_PLATING_ENCHANTMENT.description": "Costs [blue]1[/blue] more. When played, gain [blue]7[/blue] [gold]Block[/gold].",
+  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. Gain [blue]7[/blue] [gold]Block[/gold].",
+
+  "SWORD_ART_ENCHANTMENT.title": "Sword Art",
+  "SWORD_ART_ENCHANTMENT.description": "Costs [blue]1[/blue] more. This card deals [blue]6[/blue] more damage.",
+  "SWORD_ART_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. +[blue]6[/blue] damage.",
+
+  "SNAKEBITE_ENCHANTMENT.title": "Snakebite",
+  "SNAKEBITE_ENCHANTMENT.description": "Retain. When played, apply [blue]7[/blue] [gold]Poison[/gold].",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "[gold]Retain[/gold]. Apply [blue]7[/blue] [gold]Poison[/gold].",
+
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "Micro Current",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "When played, apply Kafka [gold]Electrocute[/gold] for about [blue]2[/blue] damage over [blue]2[/blue] turns.",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "Apply Kafka [gold]Electrocute[/gold] ([blue]2[/blue] / [blue]2[/blue]).",
+
+  "CHIMERA_STRIKE_ENCHANTMENT.title": "Strike",
+  "CHIMERA_STRIKE_ENCHANTMENT.description": "Title gains [gold]Strike[/gold]; [gold]Strike[/gold] tag; attacks deal [blue]6[/blue] extra damage (Perfected Strike, Hellraiser, Strike Dummy, etc.).",
+  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +[blue]6[/blue] attack damage.",
+
+  "CHIMERA_GEM_ENCHANTMENT.title": "Gem",
+  "CHIMERA_GEM_ENCHANTMENT.description": "Gain replay.",
+  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "Gain [blue]2[/blue] replay.",
+
+  "CHIMERA_INNATE_ENCHANTMENT.title": "Innate",
+  "CHIMERA_INNATE_ENCHANTMENT.description": "Gain Innate.",
+  "CHIMERA_INNATE_ENCHANTMENT.extraCardText": "Innate.",
+
+  "CHIMERA_COMPACT_ENCHANTMENT.title": "Compact",
+  "CHIMERA_COMPACT_ENCHANTMENT.description": "Cost -1. Damage and Block are reduced by about 33%.",
+  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "Cost -1. Damage and Block x[blue]2/3[/blue].",
+
+  "CHIMERA_BULKY_ENCHANTMENT.title": "Bulky",
+  "CHIMERA_BULKY_ENCHANTMENT.description": "Cost +1. Damage and Block scale with the card's cost.",
+  "CHIMERA_BULKY_ENCHANTMENT.extraCardText": "Cost +1. Damage and Block scale with cost.",
+
+  "CHIMERA_GIGANTIC_ENCHANTMENT.title": "Gigantic",
+  "CHIMERA_GIGANTIC_ENCHANTMENT.description": "Damage and Block are tripled.",
+  "CHIMERA_GIGANTIC_ENCHANTMENT.extraCardText": "Damage and Block x[blue]3[/blue].",
+
+  "CHIMERA_SOLIDIFY_ENCHANTMENT.title": "Solidify",
+  "CHIMERA_SOLIDIFY_ENCHANTMENT.description": "Block is tripled.",
+  "CHIMERA_SOLIDIFY_ENCHANTMENT.extraCardText": "Block x[blue]3[/blue].",
+
+  "CHIMERA_HEAVY_BLADE_ENCHANTMENT.title": "Heavy Blade",
+  "CHIMERA_HEAVY_BLADE_ENCHANTMENT.description": "Strength's bonus damage is tripled for this card's attacks.",
+  "CHIMERA_HEAVY_BLADE_ENCHANTMENT.extraCardText": "Strength bonus x[blue]3[/blue].",
+
+  "CHIMERA_ENLIGHTENMENT_ENCHANTMENT.title": "Enlightenment",
+  "CHIMERA_ENLIGHTENMENT_ENCHANTMENT.description": "When played, cards in your hand cost [blue]1[/blue] for the rest of this turn.",
+  "CHIMERA_ENLIGHTENMENT_ENCHANTMENT.extraCardText": "Hand costs [blue]1[/blue] this turn.",
+
+  "CHIMERA_ENTRENCH_ENCHANTMENT.title": "Entrench",
+  "CHIMERA_ENTRENCH_ENCHANTMENT.description": "When played, double your Block.",
+  "CHIMERA_ENTRENCH_ENCHANTMENT.extraCardText": "When played, double your [gold]Block[/gold].",
+
+  "FORGE_SWORD_ENCHANTMENT.title": "Forge Sword",
+  "FORGE_SWORD_ENCHANTMENT.description": "When played, [blue]Forge 10[/blue].",
+  "FORGE_SWORD_ENCHANTMENT.extraCardText": "[blue]Forge 10[/blue]."
+}

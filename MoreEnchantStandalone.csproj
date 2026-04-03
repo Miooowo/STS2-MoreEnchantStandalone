@@ -1,0 +1,116 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+
+	<PropertyGroup>
+
+		<TargetFramework>net9.0</TargetFramework>
+
+		<ImplicitUsings>true</ImplicitUsings>
+
+		<LangVersion>12.0</LangVersion>
+
+		<Nullable>enable</Nullable>
+
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+
+
+
+		<!-- 改成你的杀戮尖塔2目录 -->
+
+		<Sts2Dir>F:\SteamLibrary\steamapps\common\Slay the Spire 2</Sts2Dir>
+
+		<Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+
+		<!-- 本地路径可写在这里，或用 dotnet build /p:GodotPath="...\MegaDot_*_console.exe" 传入 -->
+
+		<GodotPath Condition="'$(GodotPath)' == ''">F:\megadot-4.5.1-m.8-windows-x86_64-llvm-editor-csharp\MegaDot_v4.5.1-stable_mono_win64_console.exe</GodotPath>
+
+	</PropertyGroup>
+
+
+
+	<ItemGroup>
+
+		<PackageReference Include="System.IO.Hashing" Version="9.0.0" />
+
+		<Reference Include="sts2">
+
+			<HintPath>$(Sts2DataDir)\sts2.dll</HintPath>
+
+			<Private>false</Private>
+
+		</Reference>
+
+		<Reference Include="0Harmony">
+
+			<HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath>
+
+			<Private>false</Private>
+
+		</Reference>
+
+		<Reference Include="Steamworks.NET">
+
+			<HintPath>$(Sts2DataDir)\Steamworks.NET.dll</HintPath>
+
+			<Private>false</Private>
+
+		</Reference>
+
+	</ItemGroup>
+
+	<!-- Godot 导出 PCK 时会再以 Configuration=ExportRelease/Debug 调用 dotnet publish；若此处仍执行 Godot，会形成递归导出并失败。仅在日常 Release/Debug 构建时部署到游戏目录并打 PCK。 -->
+	<PropertyGroup>
+		<DeployMoreEnchantToSts2>false</DeployMoreEnchantToSts2>
+		<DeployMoreEnchantToSts2 Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'Debug'">true</DeployMoreEnchantToSts2>
+	</PropertyGroup>
+
+	<Target Name="CopyModToGame" AfterTargets="Build">
+
+		<Warning Text="Sts2Dir 不存在，已跳过复制到游戏目录：$(Sts2Dir)" Condition="!Exists('$(Sts2Dir)')" />
+
+		<Exec Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(GodotPath)' != '' And Exists('$(GodotPath)') And Exists('$(Sts2Dir)')"
+
+		      WorkingDirectory="$(MSBuildProjectDirectory)"
+
+		      Command="&quot;$(GodotPath)&quot; --path &quot;$(MSBuildProjectDirectory)&quot; --headless --export-pack &quot;Mod PCK (MoreEnchantStandalone)&quot; &quot;$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck&quot;" />
+
+		<Error Text="已配置 GodotPath 但未生成 MoreEnchantStandalone.pck，请查看 MegaDot 控制台输出。" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(GodotPath)' != '' And Exists('$(GodotPath)') And Exists('$(Sts2Dir)') And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+
+		<Warning Text="已设置 GodotPath 但文件不存在，跳过 PCK 导出：$(GodotPath)" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(GodotPath)' != '' And !Exists('$(GodotPath)')" />
+
+		<Message Text="Copying MoreEnchantStandalone to $(Sts2Dir)\mods\$(MSBuildProjectName)\ ..." Importance="high" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And Exists('$(Sts2Dir)')" />
+
+		<MakeDir Directories="$(Sts2Dir)\mods\$(MSBuildProjectName)\" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And Exists('$(Sts2Dir)')" />
+
+		<Copy SourceFiles="$(TargetPath)"
+
+		      DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)\"
+
+		      SkipUnchangedFiles="true"
+
+		      Condition="'$(DeployMoreEnchantToSts2)' == 'true' And Exists('$(Sts2Dir)')" />
+
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\MoreEnchantStandalone.json"
+
+		      DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)\"
+
+		      SkipUnchangedFiles="true"
+
+		      Condition="'$(DeployMoreEnchantToSts2)' == 'true' And Exists('$(Sts2Dir)')" />
+
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck"
+
+		      DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)\"
+
+		      SkipUnchangedFiles="true"
+
+		      Condition="'$(DeployMoreEnchantToSts2)' == 'true' And Exists('$(Sts2Dir)') And Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+
+	</Target>
+
+</Project>
+

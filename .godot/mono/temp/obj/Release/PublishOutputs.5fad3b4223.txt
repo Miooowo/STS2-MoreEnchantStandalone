@@ -1,0 +1,5 @@
+C:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\MoreEnchantStandalone.dll
+C:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\MoreEnchantStandalone.deps.json
+C:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\MoreEnchantStandalone.pdb
+C:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\GodotSharp.dll
+C:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\System.IO.Hashing.dll

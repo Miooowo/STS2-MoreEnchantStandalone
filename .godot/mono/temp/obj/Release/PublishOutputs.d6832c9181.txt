@@ -1,0 +1,4 @@
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\MoreEnchantStandalone.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\MoreEnchantStandalone.deps.json
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\MoreEnchantStandalone.pdb
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Release\publish\GodotSharp.dll

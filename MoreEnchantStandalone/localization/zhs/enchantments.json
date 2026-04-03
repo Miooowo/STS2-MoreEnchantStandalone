@@ -1,0 +1,101 @@
+{
+  "KEEN_EDGE_ENCHANTMENT.title": "锐锋",
+  "KEEN_EDGE_ENCHANTMENT.description": "在受[gold]力量[/gold]加成的攻击中，这张牌额外造成[blue]{Amount}[/blue]点伤害。",
+  "KEEN_EDGE_ENCHANTMENT.extraCardText": "受[gold]力量[/gold]加成的攻击额外+[blue]{Amount}[/blue]伤害。",
+
+  "RETURN_TO_HAND_ENCHANTMENT.title": "返回",
+  "RETURN_TO_HAND_ENCHANTMENT.description": "将此牌返回你的手牌。",
+  "RETURN_TO_HAND_ENCHANTMENT.extraCardText": "将此牌返回你的手牌。",
+
+  "LIKE_DAGGER_ENCHANTMENT.title": "与匕首",
+  "LIKE_DAGGER_ENCHANTMENT.description": "打出时将一张[gold]小刀[/gold]置入手牌。",
+  "LIKE_DAGGER_ENCHANTMENT.extraCardText": "将一张[gold]小刀[/gold]置入手牌。",
+
+  "CHARGE_UP_ENCHANTMENT.title": "充电",
+  "CHARGE_UP_ENCHANTMENT.description": "打出时下回合获得[blue]1[/blue]点[gold]能量[/gold]。",
+  "CHARGE_UP_ENCHANTMENT.extraCardText": "下回合+[blue]1[/blue][gold]能量[/gold]。",
+
+  "INITIATIVE_ENERGY_ENCHANTMENT.title": "先机",
+  "INITIATIVE_ENERGY_ENCHANTMENT.description": "打出时下回合获得[blue]2[/blue]点[gold]能量[/gold]。",
+  "INITIATIVE_ENERGY_ENCHANTMENT.extraCardText": "下回合+[blue]2[/blue][gold]能量[/gold]。",
+
+  "SURVIVOR_DISCARD_ENCHANTMENT.title": "生存者",
+  "SURVIVOR_DISCARD_ENCHANTMENT.description": "打出时丢弃一张牌。",
+  "SURVIVOR_DISCARD_ENCHANTMENT.extraCardText": "丢弃一张牌。",
+  "SURVIVOR_DISCARD_ENCHANTMENT.selectPrompt": "选择要丢弃的牌",
+
+  "STREAMLINE_ENCHANTMENT.title": "精简",
+  "STREAMLINE_ENCHANTMENT.description": "本场战斗中此牌每被打出一次，耗能降低[blue]1[/blue]（可叠加）。",
+  "STREAMLINE_ENCHANTMENT.extraCardText": "每次打出：本场耗能[blue]-1[/blue]。",
+
+  "SHOCK_CHANNEL_ENCHANTMENT.title": "电击",
+  "SHOCK_CHANNEL_ENCHANTMENT.description": "打出时生成[blue]1[/blue]个[gold]闪电[/gold]充能球。",
+  "SHOCK_CHANNEL_ENCHANTMENT.extraCardText": "生成[blue]1[/blue][gold]闪电[/gold]球。",
+
+  "FROST_CHANNEL_ENCHANTMENT.title": "冰霜",
+  "FROST_CHANNEL_ENCHANTMENT.description": "打出时生成[blue]1[/blue]个[gold]冰霜[/gold]充能球。",
+  "FROST_CHANNEL_ENCHANTMENT.extraCardText": "生成[blue]1[/blue][gold]冰霜[/gold]球。",
+
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "幽灵",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "[gold]虚无[/gold]。",
+
+  "SHIELD_PLATING_ENCHANTMENT.title": "盾化",
+  "SHIELD_PLATING_ENCHANTMENT.description": "耗能+[blue]1[/blue]。打出时获得[blue]7[/blue]点[gold]格挡[/gold]。",
+  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。获得[blue]7[/blue][gold]格挡[/gold]。",
+
+  "SWORD_ART_ENCHANTMENT.title": "剑化",
+  "SWORD_ART_ENCHANTMENT.description": "耗能+[blue]1[/blue]。此牌造成伤害时额外+[blue]6[/blue]点。",
+  "SWORD_ART_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。伤害+[blue]6[/blue]。",
+
+  "SNAKEBITE_ENCHANTMENT.title": "蛇咬",
+  "SNAKEBITE_ENCHANTMENT.description": "为此牌添加[gold]保留[/gold]。\n打出时对目标施加[blue]7[/blue]层[gold]中毒[/gold]。",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "施加[blue]7[/blue]层[gold]中毒[/gold]。",
+
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "微电流",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "打出时对目标施加[gold]触电[/gold]（[blue]2[/blue]伤害，[blue]2[/blue]回合）。",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "施加[gold]触电[/gold]（[blue]2[/blue]伤，[blue]2[/blue]回合）。",
+
+  "CHIMERA_STRIKE_ENCHANTMENT.title": "打击",
+  "CHIMERA_STRIKE_ENCHANTMENT.description": "卡名添加[gold]打击[/gold]。\n获得[gold]打击[/gold]标签。\n攻击额外造成[blue]6[/blue]点伤害。",
+  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "造成的伤害增加[blue]6[/blue]点。",
+
+  "CHIMERA_GEM_ENCHANTMENT.title": "宝石",
+  "CHIMERA_GEM_ENCHANTMENT.description": "获得[gold]重放[/gold]2。",
+  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "",
+
+  "CHIMERA_INNATE_ENCHANTMENT.title": "启动",
+  "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",
+  "CHIMERA_INNATE_ENCHANTMENT.extraCardText": "",
+
+  "CHIMERA_COMPACT_ENCHANTMENT.title": "精小",
+  "CHIMERA_COMPACT_ENCHANTMENT.description": "耗能-1。\n伤害与格挡降低33%。",
+  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "耗能-1。\n伤害与格挡降低33%。",
+
+  "CHIMERA_BULKY_ENCHANTMENT.title": "笨重",
+  "CHIMERA_BULKY_ENCHANTMENT.description": "耗能+1。\n伤害与格挡按费用比例提高。",
+  "CHIMERA_BULKY_ENCHANTMENT.extraCardText": "耗能+1。\n伤害与格挡按费用比例提高。",
+
+  "CHIMERA_GIGANTIC_ENCHANTMENT.title": "超巨化",
+  "CHIMERA_GIGANTIC_ENCHANTMENT.description": "此牌的基础伤害x3。",
+  "CHIMERA_GIGANTIC_ENCHANTMENT.extraCardText": "此牌的基础伤害x3。",
+
+  "CHIMERA_SOLIDIFY_ENCHANTMENT.title": "固化",
+  "CHIMERA_SOLIDIFY_ENCHANTMENT.description": "此牌的基础格挡x3。",
+  "CHIMERA_SOLIDIFY_ENCHANTMENT.extraCardText": "此牌的基础格挡x3。",
+
+  "CHIMERA_HEAVY_BLADE_ENCHANTMENT.title": "重刃",
+  "CHIMERA_HEAVY_BLADE_ENCHANTMENT.description": "力量在此牌上发挥3倍效果。",
+  "CHIMERA_HEAVY_BLADE_ENCHANTMENT.extraCardText": "力量在此牌上发挥3倍效果。",
+
+  "CHIMERA_ENLIGHTENMENT_ENCHANTMENT.title": "开悟",
+  "CHIMERA_ENLIGHTENMENT_ENCHANTMENT.description": "本回合将手牌费用降低至[blue]1[/blue]。",
+  "CHIMERA_ENLIGHTENMENT_ENCHANTMENT.extraCardText": "本回合手牌费用降至[blue]1[/blue]。",
+
+  "CHIMERA_ENTRENCH_ENCHANTMENT.title": "巩固",
+  "CHIMERA_ENTRENCH_ENCHANTMENT.description": "打出后将你的格挡翻倍。",
+  "CHIMERA_ENTRENCH_ENCHANTMENT.extraCardText": "打出后将你的格挡翻倍。",
+
+  "FORGE_SWORD_ENCHANTMENT.title": "铸剑",
+  "FORGE_SWORD_ENCHANTMENT.description": "[gold]铸造[/gold][blue]10[/blue]。",
+  "FORGE_SWORD_ENCHANTMENT.extraCardText": "铸造10。"
+}

@@ -1,0 +1,10 @@
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Debug\MoreEnchantStandalone.deps.json
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Debug\MoreEnchantStandalone.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\bin\Debug\MoreEnchantStandalone.pdb
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.csproj.AssemblyReference.cache
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.csproj.CoreCompileInputs.cache
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\refint\MoreEnchantStandalone.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.pdb
+c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\ref\MoreEnchantStandalone.dll

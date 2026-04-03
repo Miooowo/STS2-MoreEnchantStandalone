@@ -97,5 +97,17 @@
 
   "FORGE_SWORD_ENCHANTMENT.title": "铸剑",
   "FORGE_SWORD_ENCHANTMENT.description": "[gold]铸造[/gold][blue]10[/blue]。",
-  "FORGE_SWORD_ENCHANTMENT.extraCardText": "铸造10。"
+  "FORGE_SWORD_ENCHANTMENT.extraCardText": "铸造10。",
+
+  "SCORCHING_ENCHANTMENT.title": "灼热",
+  "SCORCHING_ENCHANTMENT.description": "此牌可被多次升级。",
+  "SCORCHING_ENCHANTMENT.extraCardText": "可多次升级。",
+
+  "RESCUE_ENCHANTMENT.title": "抢救",
+  "RESCUE_ENCHANTMENT.description": "[gold]消耗[/gold]。打出时回复[blue]4[/blue]点生命。",
+  "RESCUE_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。回复[blue]4[/blue]生命。",
+
+  "BLIGHT_CORRUPTED_ENCHANTMENT.title": "腐化",
+  "BLIGHT_CORRUPTED_ENCHANTMENT.description": "受[gold]力量[/gold]加成的攻击伤害提高。打出时对自身造成伤害。",
+  "BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText": "灾厄腐化：力量攻击强化；打出自伤。"
 }

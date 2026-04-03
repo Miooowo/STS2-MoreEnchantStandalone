@@ -39,6 +39,8 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<ChimeraHeavyBladeEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChimeraEnlightenmentEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChimeraEntrenchEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ScorchingEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<RescueEnchantment>();
 
 		var harmony = new Harmony(ModId);
 		harmony.PatchAll(Assembly.GetExecutingAssembly());

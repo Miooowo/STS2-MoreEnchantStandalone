@@ -8,3 +8,4 @@ c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Release\More
 c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Release\refint\MoreEnchantStandalone.dll
 c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Release\MoreEnchantStandalone.pdb
 c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Release\ref\MoreEnchantStandalone.dll
+C:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Release\MoreEnchantStandalone.sourcelink.json

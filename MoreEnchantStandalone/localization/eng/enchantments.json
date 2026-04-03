@@ -98,5 +98,17 @@
 
   "FORGE_SWORD_ENCHANTMENT.title": "Forge Sword",
   "FORGE_SWORD_ENCHANTMENT.description": "When played, [blue]Forge 10[/blue].",
-  "FORGE_SWORD_ENCHANTMENT.extraCardText": "[blue]Forge 10[/blue]."
+  "FORGE_SWORD_ENCHANTMENT.extraCardText": "[blue]Forge 10[/blue].",
+
+  "SCORCHING_ENCHANTMENT.title": "Scorching",
+  "SCORCHING_ENCHANTMENT.description": "This card can be upgraded multiple times: first to Name[gold]+[/gold], then Name[gold]+2[/gold], [gold]+3[/gold], and so on.",
+  "SCORCHING_ENCHANTMENT.extraCardText": "Multiple upgrades ([gold]+[/gold], [gold]+2[/gold], ...).",
+
+  "RESCUE_ENCHANTMENT.title": "Rescue",
+  "RESCUE_ENCHANTMENT.description": "[gold]Exhaust[/gold]. Heal [blue]4[/blue] HP when played.",
+  "RESCUE_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Heal [blue]4[/blue] HP.",
+
+  "BLIGHT_CORRUPTED_ENCHANTMENT.title": "Corrupted",
+  "BLIGHT_CORRUPTED_ENCHANTMENT.description": "[gold]Strength[/gold]-modified attacks deal more damage. Deals damage to you when played.",
+  "BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText": "Blight Corrupted: stronger [gold]Strength[/gold] attacks; self-damage on play."
 }

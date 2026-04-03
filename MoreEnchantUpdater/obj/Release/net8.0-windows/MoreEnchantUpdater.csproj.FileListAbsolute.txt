@@ -1,0 +1,15 @@
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\bin\Release\net8.0-windows\MoreEnchantUpdater.exe
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\bin\Release\net8.0-windows\MoreEnchantUpdater.deps.json
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\bin\Release\net8.0-windows\MoreEnchantUpdater.runtimeconfig.json
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\bin\Release\net8.0-windows\MoreEnchantUpdater.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\bin\Release\net8.0-windows\MoreEnchantUpdater.pdb
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.AssemblyInfoInputs.cache
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.AssemblyInfo.cs
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.csproj.CoreCompileInputs.cache
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.sourcelink.json
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\refint\MoreEnchantUpdater.dll
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.pdb
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\MoreEnchantUpdater.genruntimeconfig.cache
+c:\Users\Miooo\Documents\MoreEnchantStandalone\MoreEnchantUpdater\obj\Release\net8.0-windows\ref\MoreEnchantUpdater.dll

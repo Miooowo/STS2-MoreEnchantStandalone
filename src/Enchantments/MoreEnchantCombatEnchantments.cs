@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
@@ -231,7 +233,7 @@ public sealed class ForgeSwordEnchantment : ModEnchantmentTemplate, IRewardEncha
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	private const decimal ForgeAmount = 10m;
-
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromForge();
 	public override bool HasExtraCardText => true;
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
@@ -242,5 +244,31 @@ public sealed class ForgeSwordEnchantment : ModEnchantmentTemplate, IRewardEncha
 
 		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
 		await ForgeCmd.Forge(ForgeAmount, player, this);
+	}
+}
+
+/// <summary>抢救：消耗。打出时回复[blue]4[/blue]点生命。</summary>
+public sealed class RescueEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
+{
+	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Uncommon;
+
+	private const decimal HealAmount = 4m;
+
+	public override bool HasExtraCardText => true;
+
+	protected override void OnEnchant()
+	{
+		if (Card != null)
+			CardCmd.ApplyKeyword(Card, CardKeyword.Exhaust);
+	}
+
+	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
+	{
+		var player = Card?.Owner;
+		if (player?.Creature == null || player.Osty == null)
+			return;
+
+		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
+		await CreatureCmd.Heal(player.Osty, HealAmount);
 	}
 }

@@ -1,9 +1,9 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1775228494
-CHANGELOG.md::TextFile::-1::1775228680::0::1::::<><><>0<>0<><>::
+::res://::1775231665
+CHANGELOG.md::TextFile::-1::1775231673::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile::-1::1775134251::0::1::::<><><>0<>0<><>::
-MoreEnchantStandalone.json::JSON::-1::1775228777::0::1::::<><><>0<>0<><>::
-README.md::TextFile::-1::1775228562::0::1::::<><><>0<>0<><>::
+MoreEnchantStandalone.json::JSON::-1::1775230758::0::1::::<><><>0<>0<><>::
+README.md::TextFile::-1::1775231674::0::1::::<><><>0<>0<><>::
 ::res://MoreEnchantStandalone/::1775075138
 ::res://MoreEnchantStandalone/localization/::1775075138
 ::res://MoreEnchantStandalone/localization/eng/::1775075138
@@ -34,8 +34,8 @@ entry.cs::CSharpScript::8894069596077494490::1775220818::0::1::::<><><>0<>0<><>:
 CardEnchantEligibility.cs::CSharpScript::3426938339326337576::1775180624::0::1::::<><><>0<>0<><>::
 CardStrikeTagUtil.cs::CSharpScript::5884757623053652298::1775096345::0::1::::<><><>0<>0<><>::
 MoreEnchantCardRewardUtil.cs::CSharpScript::5714237217294295710::1775134289::0::1::::<><><>0<>0<><>::
-MoreEnchantSettings.cs::CSharpScript::2908631395341522952::1775176621::0::1::::<><><>0<>0<><>::
-MoreEnchantSettingsStore.cs::CSharpScript::1617237065481429204::1775176828::0::1::::<><><>0<>0<><>::
+MoreEnchantSettings.cs::CSharpScript::2908631395341522952::1775231648::0::1::::<><><>0<>0<><>::
+MoreEnchantSettingsStore.cs::CSharpScript::1617237065481429204::1775231645::0::1::::<><><>0<>0<><>::
 ValuePropUtil.cs::CSharpScript::567105532119809544::1774931360::0::1::::<><><>0<>0<><>::
 ::res://src/DevConsole/::1775221956
 EnchantDeckConsoleCmd.cs::CSharpScript::8958838391800360147::1775223185::0::1::::<><><>0<>0<><>::
@@ -52,7 +52,7 @@ SnakebiteEnchantment.cs::CSharpScript::1417315961900260256::1775175573::0::1::::
 KafkaElectrocuteSupport.cs::CSharpScript::436202507262429866::1775140431::0::1::::<><><>0<>0<><>::
 ::res://src/Patches/::1775220990
 CardFactoryMoreEnchantPatch.cs::CSharpScript::5309606792364795599::1774931581::0::1::::<><><>0<>0<><>::
-CardModelScorchingPatches.cs::CSharpScript::860469748948303395::1775220947::0::1::::<><><>0<>0<><>::
+CardModelScorchingPatches.cs::CSharpScript::860469748948303395::1775231050::0::1::::<><><>0<>0<><>::
 CardModelStrikeTitlePatch.cs::CSharpScript::1697763993002318267::1775220813::0::1::::<><><>0<>0<><>::
 CloneCardPreserveModEnchantmentPatch.cs::CSharpScript::5929119171661778809::1774934146::0::1::::<><><>0<>0<><>::
 DeepCloneReapplyStrikeEnchantPatch.cs::CSharpScript::1384639243271306056::1775096417::0::1::::<><><>0<>0<><>::

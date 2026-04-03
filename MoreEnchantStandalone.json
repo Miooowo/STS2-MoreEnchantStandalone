@@ -4,7 +4,7 @@
   "name": "MoreEnchantStandalone",
   "author": "ClockCycas",
   "description": "更多自定义附魔（无依赖）。卡牌奖励有概率随机附加附魔；商店除外。",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [],

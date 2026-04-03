@@ -3,6 +3,12 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.2.1
+
+### 修复
+- **灼热 / 运行史牌组崩溃**：`NDeckHistory` 等路径在 `CardModel.FromSerializable` 中按 `current_upgrade_level` 循环升级时，若快照里的升级段数大于该牌**模板默认** `MaxUpgradeLevel`（灼热或其它模组多段升级，但附魔块与当前 `Enchantment` 实例不一致、或附魔 ID 无法识别），会触发 `cannot be upgraded past its MaxUpgradeLevel`。反序列化期间对栈顶 `SerializableCard` 若 `CurrentUpgradeLevel >` 模板 `MaxUpgradeLevel` 则临时抬升上限；读取模板上限时用计数器抑制本 postfix，避免递归误判。
+- **运行史整体排版偏移**：`MaxUpgradeLevel` postfix 曾抬到极大常数，原版 `CardModel.Title` 在 `MaxUpgradeLevel > 1` 时会走多段升级标题逻辑，运行史牌组条目又按标题宽度计算行宽，易导致整列位置异常。现改为按灼热/当前升级段数/反序列化所需抬到**最小够用**上限（如 `max(2, CurrentUpgradeLevel)` 或存档段数）。
+
 ## 0.2.0
 
 发布日期：2026-04-03
@@ -11,6 +17,7 @@
 - 附魔：灼热（多段升级与牌名显示补丁）；抢救（消耗 + 回血）
 - **调试命令** `enchantdeck`：对本局牌库按下标附魔；失败时提示原因，避免无效组合抛未处理异常。
 - 灾厄相关附魔本地化补键（如 `BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText`），减轻缺键导致的 `LocException`。
+
 
 ## 0.1.0
 

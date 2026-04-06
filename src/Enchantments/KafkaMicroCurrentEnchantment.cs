@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MoreEnchant.Kafka;
 using MoreEnchant.Standalone;
@@ -20,10 +21,17 @@ public sealed class KafkaMicroCurrentEnchantment : ModEnchantmentTemplate, IRewa
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	/// <summary>传给 <see cref="PowerCmd.Apply"/> 的数值；若 Kafka 触电用层数表示持续、伤害由 Power 内部固定，可在确认其行为后改为 2 等。</summary>
-	private const decimal ElectrocuteAmount = 2m;
-
 	public override bool HasExtraCardText => true;
+
+	/// <summary>动态变量名 <c>MicroCurrentDamage</c> / <c>MicroCurrentTurns</c> 供附魔文本使用（Kafka 触电无内置 <see cref="PowerVar{T}"/>）。</summary>
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get
+		{
+			yield return new DynamicVar("MicroCurrentDamage", 2m);
+			yield return new DynamicVar("MicroCurrentTurns", 2m);
+		}
+	}
 
 	public override bool CanEnchant(CardModel card)
 	{
@@ -62,7 +70,7 @@ public sealed class KafkaMicroCurrentEnchantment : ModEnchantmentTemplate, IRewa
 		{
 			VfxCmd.PlayOnCreatureCenter(targets[0], VfxCmd.lightningPath);
 			var power = proto.ToMutable();
-			await PowerCmd.Apply(power, targets[0], ElectrocuteAmount, applier, Card);
+			await PowerCmd.Apply(power, targets[0], DynamicVars["MicroCurrentDamage"].BaseValue, applier, Card);
 		}
 		else
 		{
@@ -70,7 +78,7 @@ public sealed class KafkaMicroCurrentEnchantment : ModEnchantmentTemplate, IRewa
 			{
 				VfxCmd.PlayOnCreatureCenter(target, VfxCmd.lightningPath);
 				var power = proto.ToMutable();
-				await PowerCmd.Apply(power, target, ElectrocuteAmount, applier, Card);
+				await PowerCmd.Apply(power, target, DynamicVars["MicroCurrentDamage"].BaseValue, applier, Card);
 			}
 		}
 	}

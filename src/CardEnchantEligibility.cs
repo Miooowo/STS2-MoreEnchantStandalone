@@ -30,6 +30,16 @@ internal static class CardEnchantEligibility
 		return false;
 	}
 
+	/// <summary>超巨化等仅放大「打出伤害」的附魔：需牌面有移动伤害，或打出时失去生命（<see cref="HpLossVar"/>）。</summary>
+	internal static bool CardHasMoveDamageOrHpLoss(CardModel card)
+	{
+		if (CardHasMoveDamageNumbers(card))
+			return true;
+		if (!card.DynamicVars.TryGetValue("HpLoss", out var v) || v is not HpLossVar hl)
+			return false;
+		return hl.BaseValue > 0;
+	}
+
 	internal static bool CardHasMoveBlockNumbers(CardModel card)
 	{
 		var dv = card.DynamicVars;

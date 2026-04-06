@@ -12,12 +12,12 @@
   "LIKE_DAGGER_ENCHANTMENT.extraCardText": "将一张[gold]小刀[/gold]置入手牌。",
 
   "CHARGE_UP_ENCHANTMENT.title": "充电",
-  "CHARGE_UP_ENCHANTMENT.description": "打出时下回合获得[blue]1[/blue]点[gold]能量[/gold]。",
-  "CHARGE_UP_ENCHANTMENT.extraCardText": "下回合+[blue]1[/blue][gold]能量[/gold]。",
+  "CHARGE_UP_ENCHANTMENT.description": "打出时下回合获得{Energy:energyIcons()}。",
+  "CHARGE_UP_ENCHANTMENT.extraCardText": "下回合获得{Energy:energyIcons()}。",
 
   "INITIATIVE_ENERGY_ENCHANTMENT.title": "先机",
-  "INITIATIVE_ENERGY_ENCHANTMENT.description": "打出时下回合获得[blue]2[/blue]点[gold]能量[/gold]。",
-  "INITIATIVE_ENERGY_ENCHANTMENT.extraCardText": "下回合+[blue]2[/blue][gold]能量[/gold]。",
+  "INITIATIVE_ENERGY_ENCHANTMENT.description": "打出时下回合获得{Energy:energyIcons()}。",
+  "INITIATIVE_ENERGY_ENCHANTMENT.extraCardText": "下回合获得{Energy:energyIcons()}。",
 
   "SURVIVOR_DISCARD_ENCHANTMENT.title": "生存者",
   "SURVIVOR_DISCARD_ENCHANTMENT.description": "打出时丢弃一张牌。",
@@ -25,47 +25,45 @@
   "SURVIVOR_DISCARD_ENCHANTMENT.selectPrompt": "选择要丢弃的牌",
 
   "STREAMLINE_ENCHANTMENT.title": "精简",
-  "STREAMLINE_ENCHANTMENT.description": "本场战斗中此牌每被打出一次，耗能降低[blue]1[/blue]（可叠加）。",
+  "STREAMLINE_ENCHANTMENT.description": "本场战斗中此牌每被打出一次，耗能降低[blue]1[/blue]。",
   "STREAMLINE_ENCHANTMENT.extraCardText": "每次打出：本场耗能[blue]-1[/blue]。",
 
   "SHOCK_CHANNEL_ENCHANTMENT.title": "电击",
-  "SHOCK_CHANNEL_ENCHANTMENT.description": "打出时生成[blue]1[/blue]个[gold]闪电[/gold]充能球。",
-  "SHOCK_CHANNEL_ENCHANTMENT.extraCardText": "生成[blue]1[/blue][gold]闪电[/gold]球。",
+  "SHOCK_CHANNEL_ENCHANTMENT.description": "打出时[gold]生成[/gold][blue]1[/blue]个[gold]闪电[/gold]充能球。",
+  "SHOCK_CHANNEL_ENCHANTMENT.extraCardText": "[gold]生成[/gold][blue]1[/blue]个[gold]闪电[/gold]充能球。",
 
   "FROST_CHANNEL_ENCHANTMENT.title": "冰霜",
-  "FROST_CHANNEL_ENCHANTMENT.description": "打出时生成[blue]1[/blue]个[gold]冰霜[/gold]充能球。",
-  "FROST_CHANNEL_ENCHANTMENT.extraCardText": "生成[blue]1[/blue][gold]冰霜[/gold]球。",
+  "FROST_CHANNEL_ENCHANTMENT.description": "打出时[gold]生成[/gold][blue]1[/blue]个[gold]冰霜[/gold]充能球。",
+  "FROST_CHANNEL_ENCHANTMENT.extraCardText": "[gold]生成[/gold][blue]1[/blue]个[gold]冰霜[/gold]充能球。",
 
   "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "幽灵",
   "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "[gold]虚无[/gold]。",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "盾化",
-  "SHIELD_PLATING_ENCHANTMENT.description": "耗能+[blue]1[/blue]。打出时获得[blue]7[/blue]点[gold]格挡[/gold]。",
-  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。获得[blue]7[/blue][gold]格挡[/gold]。",
+  "SHIELD_PLATING_ENCHANTMENT.description": "耗能+[blue]1[/blue]。打出时获得{Block:diff()}点[gold]格挡[/gold]。",
+  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。获得{Block:diff()}[gold]格挡[/gold]。",
 
   "SWORD_ART_ENCHANTMENT.title": "剑化",
-  "SWORD_ART_ENCHANTMENT.description": "耗能+[blue]1[/blue]。此牌造成伤害时额外+[blue]6[/blue]点。",
-  "SWORD_ART_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。伤害+[blue]6[/blue]。",
+  "SWORD_ART_ENCHANTMENT.description": "耗能+[blue]1[/blue]。此牌造成伤害时额外+{Damage:diff()}点。",
+  "SWORD_ART_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。伤害+{Damage:diff()}。",
 
   "SNAKEBITE_ENCHANTMENT.title": "蛇咬",
-  "SNAKEBITE_ENCHANTMENT.description": "为此牌添加[gold]保留[/gold]。\n打出时对目标施加[blue]7[/blue]层[gold]中毒[/gold]。",
-  "SNAKEBITE_ENCHANTMENT.extraCardText": "施加[blue]7[/blue]层[gold]中毒[/gold]。",
+  "SNAKEBITE_ENCHANTMENT.description": "为此牌添加[gold]保留[/gold]。\n此牌耗能变化为{Energy:energyIcons()}。\n打出时对目标施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "此牌耗能变化为{Energy:energyIcons()}。施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
 
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "微电流",
-  "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "打出时对目标施加[gold]触电[/gold]（[blue]2[/blue]伤害，[blue]2[/blue]回合）。",
-  "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "施加[gold]触电[/gold]（[blue]2[/blue]伤，[blue]2[/blue]回合）。",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "打出时对目标施加[gold]触电[/gold]（[blue]{MicroCurrentDamage:diff()}[/blue]伤害，[blue]{MicroCurrentTurns:diff()}[/blue]回合）。",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "施加[gold]触电[/gold]（[blue]{MicroCurrentDamage:diff()}[/blue]伤，[blue]{MicroCurrentTurns:diff()}[/blue]回合）。",
 
   "CHIMERA_STRIKE_ENCHANTMENT.title": "打击",
-  "CHIMERA_STRIKE_ENCHANTMENT.description": "卡名添加[gold]打击[/gold]。\n获得[gold]打击[/gold]标签。\n攻击额外造成[blue]6[/blue]点伤害。",
-  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "造成的伤害增加[blue]6[/blue]点。",
+  "CHIMERA_STRIKE_ENCHANTMENT.description": "卡名添加[gold]打击[/gold]。\n获得[gold]打击[/gold]标签。\n攻击额外造成{Damage:diff()}点伤害。",
+  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "造成的伤害增加{Damage:diff()}点。",
 
   "CHIMERA_GEM_ENCHANTMENT.title": "宝石",
   "CHIMERA_GEM_ENCHANTMENT.description": "获得[gold]重放[/gold]2。",
-  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "启动",
   "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",
-  "CHIMERA_INNATE_ENCHANTMENT.extraCardText": "",
 
   "CHIMERA_COMPACT_ENCHANTMENT.title": "精小",
   "CHIMERA_COMPACT_ENCHANTMENT.description": "耗能-1。\n伤害与格挡降低33%。",
@@ -96,16 +94,16 @@
   "CHIMERA_ENTRENCH_ENCHANTMENT.extraCardText": "打出后将你的格挡翻倍。",
 
   "FORGE_SWORD_ENCHANTMENT.title": "铸剑",
-  "FORGE_SWORD_ENCHANTMENT.description": "[gold]铸造[/gold][blue]10[/blue]。",
-  "FORGE_SWORD_ENCHANTMENT.extraCardText": "铸造10。",
+  "FORGE_SWORD_ENCHANTMENT.description": "打出时[gold]铸造[/gold]{Forge:diff()}。",
+  "FORGE_SWORD_ENCHANTMENT.extraCardText": "[gold]铸造[/gold]{Forge:diff()}。",
 
   "SCORCHING_ENCHANTMENT.title": "灼热",
   "SCORCHING_ENCHANTMENT.description": "此牌可被多次升级。",
   "SCORCHING_ENCHANTMENT.extraCardText": "可多次升级。",
 
   "RESCUE_ENCHANTMENT.title": "抢救",
-  "RESCUE_ENCHANTMENT.description": "[gold]消耗[/gold]。打出时回复[blue]4[/blue]点生命。",
-  "RESCUE_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。回复[blue]4[/blue]生命。",
+  "RESCUE_ENCHANTMENT.description": "此牌添加[gold]消耗[/gold]。\n打出时回复{Heal:diff()}点生命。",
+  "RESCUE_ENCHANTMENT.extraCardText": "回复{Heal:diff()}生命。",
 
   "BLIGHT_CORRUPTED_ENCHANTMENT.title": "腐化",
   "BLIGHT_CORRUPTED_ENCHANTMENT.description": "受[gold]力量[/gold]加成的攻击伤害提高。打出时对自身造成伤害。",

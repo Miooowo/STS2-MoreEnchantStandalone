@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Orbs;
@@ -41,6 +42,11 @@ public sealed class ChargeUpEnchantment : ModEnchantmentTemplate, IRewardEnchant
 
 	public override bool HasExtraCardText => true;
 
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new EnergyVar(1); }
+	}
+
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
 	{
 		var c = Card?.Owner?.Creature;
@@ -48,7 +54,7 @@ public sealed class ChargeUpEnchantment : ModEnchantmentTemplate, IRewardEnchant
 			return;
 
 		await CreatureCmd.TriggerAnim(c, "Cast", Card!.Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<EnergyNextTurnPower>(c, 1m, c, Card);
+		await PowerCmd.Apply<EnergyNextTurnPower>(c, DynamicVars.Energy.BaseValue, c, Card);
 	}
 }
 
@@ -59,6 +65,11 @@ public sealed class InitiativeEnergyEnchantment : ModEnchantmentTemplate, IRewar
 
 	public override bool HasExtraCardText => true;
 
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new EnergyVar(2); }
+	}
+
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
 	{
 		var c = Card?.Owner?.Creature;
@@ -66,7 +77,7 @@ public sealed class InitiativeEnergyEnchantment : ModEnchantmentTemplate, IRewar
 			return;
 
 		await CreatureCmd.TriggerAnim(c, "Cast", Card!.Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<EnergyNextTurnPower>(c, 2m, c, Card);
+		await PowerCmd.Apply<EnergyNextTurnPower>(c, DynamicVars.Energy.BaseValue, c, Card);
 	}
 }
 
@@ -121,9 +132,15 @@ public sealed class StreamlineEnchantment : ModEnchantmentTemplate, IRewardEncha
 	}
 }
 
-/// <summary>电击：唤起 1 个闪电充能球。</summary>
+/// <summary>电击：生成 1 个闪电充能球。</summary>
 public sealed class ShockChannelEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
+	{
+		HoverTipFactory.Static(StaticHoverTip.Channeling),
+		HoverTipFactory.FromOrb<LightningOrb>()
+	};
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	public override bool HasExtraCardText => true;
@@ -142,6 +159,12 @@ public sealed class ShockChannelEnchantment : ModEnchantmentTemplate, IRewardEnc
 /// <summary>冰霜：唤起 1 个冰霜充能球。</summary>
 public sealed class FrostChannelEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
+	{
+		HoverTipFactory.Static(StaticHoverTip.Channeling),
+		HoverTipFactory.FromOrb<FrostOrb>()
+	};
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	public override bool HasExtraCardText => true;
@@ -176,9 +199,12 @@ public sealed class ShieldPlatingEnchantment : ModEnchantmentTemplate, IRewardEn
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	private const decimal BlockGain = 7m;
-
 	public override bool HasExtraCardText => true;
+
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new BlockVar(7m, ValueProp.Move); }
+	}
 
 	public override void RecalculateValues()
 	{
@@ -198,7 +224,7 @@ public sealed class ShieldPlatingEnchantment : ModEnchantmentTemplate, IRewardEn
 		if (creature == null)
 			return;
 
-		await CreatureCmd.GainBlock(creature, BlockGain, ValueProp.Move, cardPlay, fast: false);
+		await CreatureCmd.GainBlock(creature, DynamicVars.Block, cardPlay, fast: false);
 	}
 }
 
@@ -207,9 +233,12 @@ public sealed class SwordArtEnchantment : ModEnchantmentTemplate, IRewardEnchant
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	private const decimal BonusDamage = 6m;
-
 	public override bool HasExtraCardText => true;
+
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new DamageVar(6m, ValueProp.Move); }
+	}
 
 	public override void RecalculateValues()
 	{
@@ -224,7 +253,7 @@ public sealed class SwordArtEnchantment : ModEnchantmentTemplate, IRewardEnchant
 	}
 
 	public override decimal EnchantDamageAdditive(decimal originalDamage, ValueProp props) =>
-		ChimeraAugmentEnchantments.IsMoveDamage(props) ? BonusDamage : 0m;
+		ChimeraAugmentEnchantments.IsMoveDamage(props) ? DynamicVars.Damage.BaseValue : 0m;
 }
 
 /// <summary>铸剑：打出时铸造[blue]10[/blue]（与战利品等牌的铸造机制一致）。</summary>
@@ -232,7 +261,11 @@ public sealed class ForgeSwordEnchantment : ModEnchantmentTemplate, IRewardEncha
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	private const decimal ForgeAmount = 10m;
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new ForgeVar(10); }
+	}
+
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromForge();
 	public override bool HasExtraCardText => true;
 
@@ -243,7 +276,7 @@ public sealed class ForgeSwordEnchantment : ModEnchantmentTemplate, IRewardEncha
 			return;
 
 		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
-		await ForgeCmd.Forge(ForgeAmount, player, this);
+		await ForgeCmd.Forge(DynamicVars.Forge.BaseValue, player, this);
 	}
 }
 
@@ -252,9 +285,12 @@ public sealed class RescueEnchantment : ModEnchantmentTemplate, IRewardEnchantRa
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Uncommon;
 
-	private const decimal HealAmount = 4m;
-
 	public override bool HasExtraCardText => true;
+
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new HealVar(4m); }
+	}
 
 	protected override void OnEnchant()
 	{
@@ -265,10 +301,11 @@ public sealed class RescueEnchantment : ModEnchantmentTemplate, IRewardEnchantRa
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
 	{
 		var player = Card?.Owner;
-		if (player?.Creature == null || player.Osty == null)
+		var creature = player?.Creature;
+		if (player == null || creature == null)
 			return;
 
-		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
-		await CreatureCmd.Heal(player.Osty, HealAmount);
+		await CreatureCmd.TriggerAnim(creature, "Cast", player.Character.CastAnimDelay);
+		await CreatureCmd.Heal(creature, DynamicVars.Heal.BaseValue);
 	}
 }

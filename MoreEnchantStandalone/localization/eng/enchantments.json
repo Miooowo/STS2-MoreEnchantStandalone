@@ -12,12 +12,12 @@
   "LIKE_DAGGER_ENCHANTMENT.extraCardText": "Add a [gold]Shiv[/gold] to your [gold]Hand[/gold].",
 
   "CHARGE_UP_ENCHANTMENT.title": "Charge Up",
-  "CHARGE_UP_ENCHANTMENT.description": "When played, gain [blue]1[/blue] [gold]Energy[/gold] next turn.",
-  "CHARGE_UP_ENCHANTMENT.extraCardText": "Next turn: +[blue]1[/blue] [gold]Energy[/gold].",
+  "CHARGE_UP_ENCHANTMENT.description": "When played, next turn, gain {Energy:energyIcons()}.",
+  "CHARGE_UP_ENCHANTMENT.extraCardText": "Next turn: gain {Energy:energyIcons()}.",
 
   "INITIATIVE_ENERGY_ENCHANTMENT.title": "Initiative",
-  "INITIATIVE_ENERGY_ENCHANTMENT.description": "When played, gain [blue]2[/blue] [gold]Energy[/gold] next turn.",
-  "INITIATIVE_ENERGY_ENCHANTMENT.extraCardText": "Next turn: +[blue]2[/blue] [gold]Energy[/gold].",
+  "INITIATIVE_ENERGY_ENCHANTMENT.description": "When played, next turn, gain {Energy:energyIcons()}.",
+  "INITIATIVE_ENERGY_ENCHANTMENT.extraCardText": "Next turn: gain {Energy:energyIcons()}.",
 
   "SURVIVOR_DISCARD_ENCHANTMENT.title": "Survivor",
   "SURVIVOR_DISCARD_ENCHANTMENT.description": "When played, discard a card.",
@@ -41,24 +41,24 @@
   "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "[gold]Ethereal[/gold].",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "Shield Plating",
-  "SHIELD_PLATING_ENCHANTMENT.description": "Costs [blue]1[/blue] more. When played, gain [blue]7[/blue] [gold]Block[/gold].",
-  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. Gain [blue]7[/blue] [gold]Block[/gold].",
+  "SHIELD_PLATING_ENCHANTMENT.description": "Costs [blue]1[/blue] more. When played, gain {Block:diff()} [gold]Block[/gold].",
+  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. Gain {Block:diff()} [gold]Block[/gold].",
 
   "SWORD_ART_ENCHANTMENT.title": "Sword Art",
-  "SWORD_ART_ENCHANTMENT.description": "Costs [blue]1[/blue] more. This card deals [blue]6[/blue] more damage.",
-  "SWORD_ART_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. +[blue]6[/blue] damage.",
+  "SWORD_ART_ENCHANTMENT.description": "Costs [blue]1[/blue] more. This card deals {Damage:diff()} more damage.",
+  "SWORD_ART_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. +{Damage:diff()} damage.",
 
   "SNAKEBITE_ENCHANTMENT.title": "Snakebite",
-  "SNAKEBITE_ENCHANTMENT.description": "Retain. When played, apply [blue]7[/blue] [gold]Poison[/gold].",
-  "SNAKEBITE_ENCHANTMENT.extraCardText": "[gold]Retain[/gold]. Apply [blue]7[/blue] [gold]Poison[/gold].",
+  "SNAKEBITE_ENCHANTMENT.description": "[gold]Retain[/gold]. Cost becomes 2{Energy:energyIcons()}. When played, apply {PoisonPower:diff()} [gold]Poison[/gold].",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "Cost becomes {Energy:energyIcons()}. Apply {PoisonPower:diff()} [gold]Poison[/gold].",
 
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "Micro Current",
-  "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "When played, apply Kafka [gold]Electrocute[/gold] for about [blue]2[/blue] damage over [blue]2[/blue] turns.",
-  "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "Apply Kafka [gold]Electrocute[/gold] ([blue]2[/blue] / [blue]2[/blue]).",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "When played, apply Kafka [gold]Electrocute[/gold] for about {MicroCurrentDamage:diff()} damage over {MicroCurrentTurns:diff()} turns.",
+  "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "Kafka [gold]Electrocute[/gold] ({MicroCurrentDamage:diff()} / {MicroCurrentTurns:diff()}).",
 
   "CHIMERA_STRIKE_ENCHANTMENT.title": "Strike",
-  "CHIMERA_STRIKE_ENCHANTMENT.description": "Title gains [gold]Strike[/gold]; [gold]Strike[/gold] tag; attacks deal [blue]6[/blue] extra damage (Perfected Strike, Hellraiser, Strike Dummy, etc.).",
-  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +[blue]6[/blue] attack damage.",
+  "CHIMERA_STRIKE_ENCHANTMENT.description": "Title gains [gold]Strike[/gold]; [gold]Strike[/gold] tag; attacks deal {Damage:diff()} extra damage (Perfected Strike, Hellraiser, Strike Dummy, etc.).",
+  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +{Damage:diff()} attack damage.",
 
   "CHIMERA_GEM_ENCHANTMENT.title": "Gem",
   "CHIMERA_GEM_ENCHANTMENT.description": "Gain replay.",
@@ -97,16 +97,16 @@
   "CHIMERA_ENTRENCH_ENCHANTMENT.extraCardText": "When played, double your [gold]Block[/gold].",
 
   "FORGE_SWORD_ENCHANTMENT.title": "Forge Sword",
-  "FORGE_SWORD_ENCHANTMENT.description": "When played, [blue]Forge 10[/blue].",
-  "FORGE_SWORD_ENCHANTMENT.extraCardText": "[blue]Forge 10[/blue].",
+  "FORGE_SWORD_ENCHANTMENT.description": "When played, [gold]Forge[/gold] {Forge:diff()}.",
+  "FORGE_SWORD_ENCHANTMENT.extraCardText": "[gold]Forge[/gold] {Forge:diff()}.",
 
   "SCORCHING_ENCHANTMENT.title": "Scorching",
   "SCORCHING_ENCHANTMENT.description": "This card can be upgraded multiple times: first to Name[gold]+[/gold], then Name[gold]+2[/gold], [gold]+3[/gold], and so on.",
   "SCORCHING_ENCHANTMENT.extraCardText": "Multiple upgrades ([gold]+[/gold], [gold]+2[/gold], ...).",
 
   "RESCUE_ENCHANTMENT.title": "Rescue",
-  "RESCUE_ENCHANTMENT.description": "[gold]Exhaust[/gold]. Heal [blue]4[/blue] HP when played.",
-  "RESCUE_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Heal [blue]4[/blue] HP.",
+  "RESCUE_ENCHANTMENT.description": "[gold]Exhaust[/gold]. Heal {Heal:diff()} HP when played.",
+  "RESCUE_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Heal {Heal:diff()} HP.",
 
   "BLIGHT_CORRUPTED_ENCHANTMENT.title": "Corrupted",
   "BLIGHT_CORRUPTED_ENCHANTMENT.description": "[gold]Strength[/gold]-modified attacks deal more damage. Deals damage to you when played.",

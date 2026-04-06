@@ -21,18 +21,39 @@
           }
         }
       },
-      "GodotSharpEditor/4.5.1": {
+      "System.IO.Hashing/9.0.0": {
         "type": "package",
-        "dependencies": {
-          "GodotSharp": "4.5.1"
-        },
         "compile": {
-          "lib/net8.0/GodotSharpEditor.dll": {
+          "lib/net9.0/System.IO.Hashing.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/GodotSharpEditor.dll": {
+          "lib/net9.0/System.IO.Hashing.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      }
+    },
+    "net9.0/win-x64": {
+      "Godot.SourceGenerators/4.5.1": {
+        "type": "package",
+        "build": {
+          "build/Godot.SourceGenerators.props": {}
+        }
+      },
+      "GodotSharp/4.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/GodotSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/GodotSharp.dll": {
             "related": ".xml"
           }
         }
@@ -82,19 +103,6 @@
         "lib/net8.0/GodotSharp.xml"
       ]
     },
-    "GodotSharpEditor/4.5.1": {
-      "sha512": "8CM49047b0Us3qPJo6L7kdldreOvR7JCoXlKoSHzpA0TQP6+Qnoxz/26GZ1ONg2wW4vV9uzor0AHXSGUFP9XSw==",
-      "type": "package",
-      "path": "godotsharpeditor/4.5.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "godotsharpeditor.4.5.1.nupkg.sha512",
-        "godotsharpeditor.nuspec",
-        "lib/net8.0/GodotSharpEditor.dll",
-        "lib/net8.0/GodotSharpEditor.xml"
-      ]
-    },
     "System.IO.Hashing/9.0.0": {
       "sha512": "seeO8icDfED/Qwl9PDFUx2Gf/7xv7dPsMnw5PnRwNZuz4EWMpy0wIVohC4MfCcTIoJgp+KUrWG4WH3NPSusQOA==",
       "type": "package",
@@ -128,7 +136,6 @@
     "net9.0": [
       "Godot.SourceGenerators >= 4.5.1",
       "GodotSharp >= 4.5.1",
-      "GodotSharpEditor >= 4.5.1",
       "System.IO.Hashing >= 9.0.0"
     ]
   },
@@ -138,11 +145,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
+      "projectUniqueName": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
       "projectName": "MoreEnchantStandalone",
-      "projectPath": "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
+      "projectPath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
       "packagesPath": "C:\\Users\\Miooo\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\.godot\\mono\\temp\\obj\\",
+      "outputPath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Miooo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -187,11 +194,6 @@
             "version": "[4.5.1, )",
             "autoReferenced": true
           },
-          "GodotSharpEditor": {
-            "target": "Package",
-            "version": "[4.5.1, )",
-            "autoReferenced": true
-          },
           "System.IO.Hashing": {
             "target": "Package",
             "version": "[9.0.0, )"
@@ -214,11 +216,23 @@
             "version": "[9.0.13, 9.0.13]"
           },
           {
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+            "version": "[9.0.13, 9.0.13]"
+          },
+          {
             "name": "Microsoft.NETCore.App.Ref",
             "version": "[9.0.13, 9.0.13]"
           },
           {
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
+            "version": "[9.0.13, 9.0.13]"
+          },
+          {
             "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[9.0.13, 9.0.13]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
             "version": "[9.0.13, 9.0.13]"
           }
         ],
@@ -228,6 +242,11 @@
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
       }
     }
   }

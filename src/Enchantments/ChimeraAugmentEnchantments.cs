@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -22,11 +23,14 @@ public sealed class ChimeraStrikeEnchantment : ModEnchantmentTemplate, IRewardEn
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	private const decimal BonusDamage = 6m;
-
 	public override bool HasExtraCardText => true;
 
 	public override bool CanEnchantCardType(CardType cardType) => cardType == CardType.Attack;
+
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new DamageVar(6m, ValueProp.Move); }
+	}
 
 	protected override void OnEnchant()
 	{
@@ -37,7 +41,7 @@ public sealed class ChimeraStrikeEnchantment : ModEnchantmentTemplate, IRewardEn
 	{
 		if (!ChimeraAugmentEnchantments.IsMoveDamage(props))
 			return 0m;
-		return BonusDamage;
+		return DynamicVars.Damage.BaseValue;
 	}
 }
 
@@ -46,7 +50,7 @@ public sealed class ChimeraGemEnchantment : ModEnchantmentTemplate, IRewardEncha
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Special;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	public override int EnchantPlayCount(int originalPlayCount) =>
 		originalPlayCount + 2;
@@ -57,7 +61,7 @@ public sealed class ChimeraInnateEnchantment : ModEnchantmentTemplate, IRewardEn
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Uncommon;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	protected override void OnEnchant()
 	{
@@ -135,6 +139,9 @@ public sealed class ChimeraGiganticEnchantment : ModEnchantmentTemplate, IReward
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
 	public override bool HasExtraCardText => true;
+
+	public override bool CanEnchant(CardModel card) =>
+		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveDamageOrHpLoss(card);
 
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ChimeraAugmentEnchantments.IsMoveDamage(props) ? 3m : 1m;

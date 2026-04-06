@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj": {}
+    "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj": {
+    "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
+        "projectUniqueName": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
         "projectName": "MoreEnchantStandalone",
-        "projectPath": "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
+        "projectPath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
         "packagesPath": "C:\\Users\\Miooo\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\.godot\\mono\\temp\\obj\\",
+        "outputPath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Miooo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -56,11 +56,6 @@
               "version": "[4.5.1, )",
               "autoReferenced": true
             },
-            "GodotSharpEditor": {
-              "target": "Package",
-              "version": "[4.5.1, )",
-              "autoReferenced": true
-            },
             "System.IO.Hashing": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -83,11 +78,23 @@
               "version": "[9.0.13, 9.0.13]"
             },
             {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[9.0.13, 9.0.13]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Ref",
               "version": "[9.0.13, 9.0.13]"
             },
             {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[9.0.13, 9.0.13]"
+            },
+            {
               "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.13, 9.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
               "version": "[9.0.13, 9.0.13]"
             }
           ],
@@ -97,6 +104,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }

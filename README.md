@@ -1,3 +1,5 @@
+![](https://count.getloli.com/@:MoreEnchantStandalone?theme=minecraft)
+
 # MoreEnchantStandalone
 
 「杀戮尖塔 2」模组：**不依赖 RitsuLib**，在卡牌奖励等环节为牌附加多种自定义附魔，并提供游戏内设置与调试命令。

@@ -4,6 +4,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 using MoreEnchant.Enchantments;
 using MoreEnchant.Standalone;
+using MoreEnchant.Standalone.Compat;
 
 namespace MoreEnchant.scripts;
 
@@ -41,6 +42,9 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<ChimeraEntrenchEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ScorchingEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<RescueEnchantment>();
+
+		// 可选拓展：若安装了 MultiEnchantmentMod，则启用蛇咬等附魔的 MergeAmount 叠层语义。
+		MultiEnchantmentCompat.TryEnableForSnakebite(typeof(SnakebiteEnchantment));
 
 		var harmony = new Harmony(ModId);
 		harmony.PatchAll(Assembly.GetExecutingAssembly());

@@ -59,7 +59,7 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		var chimeraRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
 		var chimeraCheck = new CheckBox
 		{
-			Text = "按卡牌稀有度使用奇美拉式四档权重",
+			Text = "按卡牌稀有度使用奇美拉式五档权重",
 			ButtonPressed = settings.UseChimeraRarityByCardRarity,
 			FocusMode = Control.FocusModeEnum.None,
 			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
@@ -69,7 +69,7 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 
 		var weightsHint = new Label
 		{
-			Text = "关闭上一项时，使用下列相对权重（与四档一同归一化）：",
+			Text = "关闭上一项时，使用下列相对权重（与五档一同归一化）：",
 			AutowrapMode = TextServer.AutowrapMode.WordSmart,
 		};
 		root.AddChild(weightsHint);
@@ -80,6 +80,7 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 
 		var wCommon = AddWeightSpin(weightsGrid, "普通", settings.WeightCommon, v => settings.WeightCommon = v);
 		var wUncommon = AddWeightSpin(weightsGrid, "罕见", settings.WeightUncommon, v => settings.WeightUncommon = v);
+		var wCurse = AddWeightSpin(weightsGrid, "诅咒", settings.WeightCurse, v => settings.WeightCurse = v);
 		var wRare = AddWeightSpin(weightsGrid, "稀有", settings.WeightRare, v => settings.WeightRare = v);
 		var wSpecial = AddWeightSpin(weightsGrid, "特殊", settings.WeightSpecial, v => settings.WeightSpecial = v);
 		root.AddChild(weightsGrid);
@@ -89,7 +90,7 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 			var on = settings.UseChimeraRarityByCardRarity;
 			weightsHint.Visible = !on;
 			weightsGrid.Visible = !on;
-			foreach (var c in new[] { wCommon, wUncommon, wRare, wSpecial })
+			foreach (var c in new[] { wCommon, wUncommon, wCurse, wRare, wSpecial })
 				c.Editable = !on;
 		}
 

@@ -42,6 +42,12 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<ChimeraEntrenchEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ScorchingEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<RescueEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ClumsyCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ObsessionCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SporeCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<MediocreCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<BellCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<BadLuckCurseEnchantment>();
 
 		// 可选拓展：若安装了 MultiEnchantmentMod，则启用蛇咬等附魔的 MergeAmount 叠层语义。
 		MultiEnchantmentCompat.TryEnableForSnakebite(typeof(SnakebiteEnchantment));

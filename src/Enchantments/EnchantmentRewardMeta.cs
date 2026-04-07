@@ -5,6 +5,8 @@ public enum EnchantmentRewardRarity
 {
 	Common,
 	Uncommon,
+	/// <summary>诅咒档：比 <see cref="Uncommon"/> 难随、比 <see cref="Rare"/> 易随（奖励分桶权重介于两者之间）。</summary>
+	Curse,
 	Rare,
 	Special
 }

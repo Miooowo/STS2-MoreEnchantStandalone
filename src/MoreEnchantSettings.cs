@@ -12,17 +12,21 @@ public sealed class MoreEnchantSettings
 	public int RewardEnchantChancePercent { get; set; } = 10;
 
 	/// <summary>
-	/// 为真时按卡牌稀有度使用 Chimera 式四档权重曲线；为假时仅使用下方四组相对权重（无视卡牌稀有度）。
+	/// 为真时按卡牌稀有度使用 Chimera 式五档权重曲线；为假时仅使用下方五组相对权重（无视卡牌稀有度）。
 	/// </summary>
 	[JsonPropertyName("use_chimera_rarity_by_card_rarity")]
 	public bool UseChimeraRarityByCardRarity { get; set; } = true;
 
-	/// <summary>自定义：普通档相对权重（与另外三档一同归一化）。</summary>
+	/// <summary>自定义：普通档相对权重（与其余四档一同归一化）。</summary>
 	[JsonPropertyName("weight_common")]
 	public int WeightCommon { get; set; } = 500;
 
 	[JsonPropertyName("weight_uncommon")]
 	public int WeightUncommon { get; set; } = 300;
+
+	/// <summary>自定义：诅咒档相对权重（介于罕见与稀有之间）。</summary>
+	[JsonPropertyName("weight_curse")]
+	public int WeightCurse { get; set; } = 250;
 
 	[JsonPropertyName("weight_rare")]
 	public int WeightRare { get; set; } = 199;

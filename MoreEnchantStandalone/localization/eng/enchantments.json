@@ -110,5 +110,29 @@
 
   "BLIGHT_CORRUPTED_ENCHANTMENT.title": "Corrupted",
   "BLIGHT_CORRUPTED_ENCHANTMENT.description": "[gold]Strength[/gold]-modified attacks deal more damage. Deals damage to you when played.",
-  "BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText": "Blight Corrupted: stronger [gold]Strength[/gold] attacks; self-damage on play."
+  "BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText": "Blight Corrupted: stronger [gold]Strength[/gold] attacks; self-damage on play.",
+
+  "CLUMSY_CURSE_ENCHANTMENT.title": "Clumsy",
+  "CLUMSY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Unplayable[/gold] for 1 turn. While in your [gold]Hand[/gold], whenever you play a card, discard a random other card from your [gold]Hand[/gold].",
+  "CLUMSY_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. [gold]Unplayable[/gold] turn 1. In hand: random discard when you play.",
+
+  "OBSESSION_CURSE_ENCHANTMENT.title": "Obsession",
+  "OBSESSION_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. Costs [blue]1[/blue] more. When drawn, gain {Energy:energyIcons()}. While this card is in your [gold]Hand[/gold], you must play it first.",
+  "OBSESSION_CURSE_ENCHANTMENT.extraCardText": "Costs [blue]1[/blue] more. When drawn, gain {Energy:energyIcons()}. While this card is in your [gold]Hand[/gold], you must play it first.",
+
+  "SPORE_CURSE_ENCHANTMENT.title": "Spore",
+  "SPORE_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Exhaust[/gold].",
+  "SPORE_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. [gold]Exhaust[/gold].",
+
+  "MEDIOCRE_CURSE_ENCHANTMENT.title": "Mediocre",
+  "MEDIOCRE_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Unplayable[/gold] for 1 turn. While in your [gold]Hand[/gold], you can play at most [blue]3[/blue] cards per turn.",
+  "MEDIOCRE_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. Turn 1 [gold]Unplayable[/gold]. In hand: max [blue]3[/blue] plays/turn.",
+
+  "BELL_CURSE_ENCHANTMENT.title": "Curse of the Bell",
+  "BELL_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. When added from a card reward, obtain [blue]1[/blue] [gold]Common[/gold], [blue]1[/blue] [gold]Uncommon[/gold], and [blue]1[/blue] [gold]Rare[/gold] [gold]Relic[/gold]. [gold]Unplayable[/gold] in combat. [gold]Eternal[/gold].",
+  "BELL_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. Reward: Common + Uncommon + Rare [gold]Relic[/gold]. Combat: [gold]Unplayable[/gold]. [gold]Eternal[/gold].",
+
+  "BAD_LUCK_CURSE_ENCHANTMENT.title": "Bad Luck",
+  "BAD_LUCK_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Unplayable[/gold] for 1 turn. At end of your turn, if this is in your [gold]Hand[/gold], lose [blue]{Damage:diff()}[/blue] HP.",
+  "BAD_LUCK_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. Turn 1 [gold]Unplayable[/gold]. End of turn in hand: [blue]{Damage:diff()}[/blue] HP."
 }

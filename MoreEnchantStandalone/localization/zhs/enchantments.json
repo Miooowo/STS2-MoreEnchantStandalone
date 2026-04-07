@@ -49,7 +49,7 @@
 
   "SNAKEBITE_ENCHANTMENT.title": "蛇咬",
   "SNAKEBITE_ENCHANTMENT.description": "为此牌添加[gold]保留[/gold]。\n此牌耗能变化为{Energy:energyIcons()}。\n打出时对目标施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
-  "SNAKEBITE_ENCHANTMENT.extraCardText": "此牌耗能变化为{Energy:energyIcons()}。施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "此牌耗能变化为{Energy:energyIcons()}。\n施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
 
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "微电流",
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "打出时对目标施加[gold]触电[/gold]（[blue]{MicroCurrentDamage:diff()}[/blue]伤害，[blue]{MicroCurrentTurns:diff()}[/blue]回合）。",
@@ -107,5 +107,27 @@
 
   "BLIGHT_CORRUPTED_ENCHANTMENT.title": "腐化",
   "BLIGHT_CORRUPTED_ENCHANTMENT.description": "受[gold]力量[/gold]加成的攻击伤害提高。打出时对自身造成伤害。",
-  "BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText": "灾厄腐化：力量攻击强化；打出自伤。"
+  "BLIGHT_CORRUPTED_ENCHANTMENT.extraCardText": "灾厄腐化：力量攻击强化；打出自伤。",
+
+  "CLUMSY_CURSE_ENCHANTMENT.title": "笨拙",
+  "CLUMSY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n首回合[gold]无法打出[/gold]。\n此牌在[gold]手牌[/gold]中时，每当你打出一张牌，随机丢弃一张其他手牌。",
+  "CLUMSY_CURSE_ENCHANTMENT.extraCardText": "首回合[gold]无法打出[/gold]。\n此牌在[gold]手牌[/gold]中时，每打出一张牌随机弃掉另一张手牌。",
+
+  "OBSESSION_CURSE_ENCHANTMENT.title": "执迷",
+  "OBSESSION_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n耗能+[blue]1[/blue]。\n当你抽到此牌时获得{Energy:energyIcons()}。\n此牌在你[gold]手牌[/gold]中时，你必须优先打出。",
+  "OBSESSION_CURSE_ENCHANTMENT.extraCardText": "耗能+[blue]1[/blue]。\n当你抽到此牌时获得{Energy:energyIcons()}。\n此牌在你[gold]手牌[/gold]中时，你必须优先打出。",
+
+  "SPORE_CURSE_ENCHANTMENT.title": "孢子",
+  "SPORE_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n[gold]消耗[/gold]。",
+
+  "MEDIOCRE_CURSE_ENCHANTMENT.title": "凡庸",
+  "MEDIOCRE_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n首回合[gold]无法打出[/gold]。\n此牌在[gold]手牌[/gold]中时，本回合最多打出[blue]3[/blue]张牌。",
+  "MEDIOCRE_CURSE_ENCHANTMENT.extraCardText": "首回合[gold]无法打出[/gold]。\n此牌在[gold]手牌[/gold]中时，本回合最多打出[blue]3[/blue]张牌。",
+
+  "BELL_CURSE_ENCHANTMENT.title": "铃铛的诅咒",
+  "BELL_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n拾起带有此附魔的卡牌奖励时，获得[blue]3[/blue]件[gold]遗物[/gold]。\n[gold]不能被打出[/gold]。\n[gold]永恒[/gold]。",
+
+  "BAD_LUCK_CURSE_ENCHANTMENT.title": "霉运",
+  "BAD_LUCK_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n首回合[gold]无法打出[/gold]。\n你的回合结束时，若此牌仍在[gold]手牌[/gold]中，失去[blue]{Damage:diff()}[/blue]点生命。",
+  "BAD_LUCK_CURSE_ENCHANTMENT.extraCardText": "首回合[gold]无法打出[/gold]。\n回合结束时若在手牌：失去[blue]{Damage:diff()}[/blue]生命。"
 }

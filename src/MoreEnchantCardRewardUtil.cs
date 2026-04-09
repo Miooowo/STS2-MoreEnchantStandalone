@@ -23,18 +23,28 @@ internal static class MoreEnchantCardRewardUtil
 	{
 		if (options.Flags.HasFlag(CardCreationFlags.NoModifyHooks))
 			return;
-		if (options.Source == CardCreationSource.Shop)
-			return;
 
-		var rng = player.PlayerRng.Rewards;
+		var rng = options.Source == CardCreationSource.Shop
+			? player.PlayerRng.Shops
+			: player.PlayerRng.Rewards;
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
-		var settings = MoreEnchantSettingsStore.Get();
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+
+		if (options.Source == CardCreationSource.Shop && !settings.ShopEnchantEnabled)
+			return;
 
 		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardBellCurse &&
 		    options.Source == CardCreationSource.Encounter)
 		{
 			MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardBellCurse = false;
 			TryApplyForcedBellCurseCardReward(player, results, rng);
+		}
+
+		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardRandomCurse &&
+		    options.Source == CardCreationSource.Encounter)
+		{
+			MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardRandomCurse = false;
+			TryApplyForcedRandomCurseCardReward(player, results, rng);
 		}
 
 		foreach (var result in results)
@@ -45,11 +55,22 @@ internal static class MoreEnchantCardRewardUtil
 			if (ShouldSkipEnchantingRewardCard(card))
 				continue;
 
-			var chancePercent = Math.Clamp(settings.RewardEnchantChancePercent, 0, 100);
+			bool ancientCard = card.Rarity == CardRarity.Ancient;
+			if (ancientCard && !settings.AncientRewardEnchantEnabled)
+				continue;
+
+			int chancePercent;
+			if (options.Source == CardCreationSource.Shop)
+				chancePercent = Math.Clamp(settings.ShopEnchantChancePercent, 0, 100);
+			else if (ancientCard)
+				chancePercent = Math.Clamp(settings.AncientRewardEnchantChancePercent, 0, 100);
+			else
+				chancePercent = Math.Clamp(settings.RewardEnchantChancePercent, 0, 100);
+
 			if (chancePercent <= 0 || rng.NextInt(0, 100) >= chancePercent)
 				continue;
 
-			var pick = RollEnchantmentTemplate(card, templates, rng, settings);
+			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancientCard);
 			if (pick == null)
 				continue;
 
@@ -77,7 +98,7 @@ internal static class MoreEnchantCardRewardUtil
 			Math.Max(0f, settings.WeightSpecial));
 	}
 
-	/// <summary>与 ChimeraTheSpire 奇美拉卡牌修饰的按卡牌稀有度分桶权重一致（插入诅咒档于罕见与稀有之间）。</summary>
+	/// <summary>与 ChimeraTheSpire 奇美拉卡牌修饰的按卡牌稀有度分桶权重一致；诅咒档整体已下调。</summary>
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetBucketWeightsForCardRarity(
 		CardRarity rarity)
 	{
@@ -85,19 +106,20 @@ internal static class MoreEnchantCardRewardUtil
 		{
 			case CardRarity.Basic:
 			case CardRarity.Common:
-				return (0.50f, 0.30f, 0.12f, 0.079f, 0.001f);
+				return (0.50f, 0.30f, 0.10f, 0.079f, 0.001f);
 			case CardRarity.Uncommon:
-				return (0.30f, 0.40f, 0.15f, 0.14f, 0.01f);
+				return (0.30f, 0.40f, 0.05f, 0.14f, 0.01f);
 			case CardRarity.Rare:
-				return (0.25f, 0.30f, 0.35f, 0.05f, 0.05f);
+				return (0.25f, 0.30f, 0.01f, 0.05f, 0.05f);
 			case CardRarity.Event:
 			case CardRarity.Curse:
-				return (0.3244f, 0.3333f, 0.24f, 0.10f, 0.0023f);
+				return (0.3244f, 0.3333f, 0.12f, 0.10f, 0.0023f);
 			case CardRarity.Ancient:
+				return (0.20f, 0.20f, 0.00f, 0.35f, 0.25f);
 			case CardRarity.Quest:
-				return (0.20f, 0.30f, 0.35f, 0.05f, 0.10f);
+				return (0.20f, 0.30f, 0.10f, 0.05f, 0.10f);
 			default:
-				return (0.50f, 0.30f, 0.12f, 0.079f, 0.001f);
+				return (0.50f, 0.30f, 0.10f, 0.079f, 0.001f);
 		}
 	}
 
@@ -116,9 +138,22 @@ internal static class MoreEnchantCardRewardUtil
 	private static bool ShouldSkipEnchantingRewardCard(CardModel card) =>
 		card.Rarity is CardRarity.Token or CardRarity.Status;
 
+	/// <summary>被附魔的奖励牌越稀有，诅咒档权重越低（先古之民等路径可整档排除）。</summary>
+	private static float CurseBucketScaleForRewardCard(CardRarity rarity) =>
+		rarity switch
+		{
+			CardRarity.Basic or CardRarity.Common => 1f,
+			CardRarity.Uncommon => 0.70f,
+			CardRarity.Rare => 0.40f,
+			CardRarity.Event or CardRarity.Curse => 0.55f,
+			CardRarity.Ancient or CardRarity.Quest => 0.35f,
+			_ => 0.80f,
+		};
+
 	private static EnchantmentModel? RollEnchantmentTemplate(CardModel card, EnchantmentModel[] templates,
 		Rng rng,
-		MoreEnchantSettings settings)
+		MoreEnchantSettings settings,
+		bool excludeCurse)
 	{
 		var byRarity = new Dictionary<EnchantmentRewardRarity, List<EnchantmentModel>>();
 		foreach (var t in templates)
@@ -127,6 +162,8 @@ internal static class MoreEnchantCardRewardUtil
 				continue;
 
 			var r = GetRewardRarity(t);
+			if (excludeCurse && r == EnchantmentRewardRarity.Curse)
+				continue;
 			if (!byRarity.TryGetValue(r, out var list))
 			{
 				list = [];
@@ -140,6 +177,10 @@ internal static class MoreEnchantCardRewardUtil
 			return null;
 
 		var (wCommon, wUncommon, wCurse, wRare, wSpecial) = GetEffectiveBucketWeights(card, settings);
+		if (!excludeCurse)
+			wCurse *= 0.78f * CurseBucketScaleForRewardCard(card.Rarity);
+		else
+			wCurse = 0f;
 
 		bool hasCommon = byRarity.TryGetValue(EnchantmentRewardRarity.Common, out var listCommon) &&
 		                 listCommon.Count > 0;
@@ -208,6 +249,37 @@ internal static class MoreEnchantCardRewardUtil
 
 			var enchant = (EnchantmentModel)bellPick.MutableClone();
 			var amount = RollEnchantAmount(rng, bellPick);
+			CardCmd.Enchant(enchant, card, amount);
+			if (enchant is BellCurseEnchantment)
+				BellCurseReward.MarkPendingRelicGrant(card);
+			return;
+		}
+	}
+
+	/// <summary>将首张可附魔的候选牌强制附上随机诅咒档附魔（铃铛诅咒仍会走遗物发放标记）。</summary>
+	private static void TryApplyForcedRandomCurseCardReward(Player player, List<CardCreationResult> results, Rng rng)
+	{
+		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+
+		foreach (var result in results)
+		{
+			var card = result.Card;
+			if (card.Enchantment != null)
+				continue;
+			if (ShouldSkipEnchantingRewardCard(card))
+				continue;
+
+			var curses = templates
+				.Where(t => GetRewardRarity(t) == EnchantmentRewardRarity.Curse && t.CanEnchant(card))
+				.ToList();
+			if (curses.Count == 0)
+				continue;
+
+			var pick = rng.NextItem(curses);
+			if (pick == null)
+				continue;
+			var enchant = (EnchantmentModel)pick.MutableClone();
+			var amount = RollEnchantAmount(rng, pick);
 			CardCmd.Enchant(enchant, card, amount);
 			if (enchant is BellCurseEnchantment)
 				BellCurseReward.MarkPendingRelicGrant(card);

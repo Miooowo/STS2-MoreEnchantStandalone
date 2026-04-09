@@ -41,12 +41,12 @@
   "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "[gold]Ethereal[/gold].",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "Shield Plating",
-  "SHIELD_PLATING_ENCHANTMENT.description": "Costs [blue]1[/blue] more. When played, gain {Block:diff()} [gold]Block[/gold].",
-  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. Gain {Block:diff()} [gold]Block[/gold].",
+  "SHIELD_PLATING_ENCHANTMENT.description": "This card's cost increases by 1{Energy:energyIcons()}. When played, gain {Block:diff()} [gold]Block[/gold].",
+  "SHIELD_PLATING_ENCHANTMENT.extraCardText": "Cost +1{Energy:energyIcons()}.\nGain {Block:diff()} [gold]Block[/gold].",
 
   "SWORD_ART_ENCHANTMENT.title": "Sword Art",
-  "SWORD_ART_ENCHANTMENT.description": "Costs [blue]1[/blue] more. This card deals {Damage:diff()} more damage.",
-  "SWORD_ART_ENCHANTMENT.extraCardText": "Cost +[blue]1[/blue]. +{Damage:diff()} damage.",
+  "SWORD_ART_ENCHANTMENT.description": "This card's cost increases by 1{Energy:energyIcons()}. When played, deal [blue]{SwordArtDamage:diff()}[/blue] damage to a random enemy.",
+  "SWORD_ART_ENCHANTMENT.extraCardText": "Cost +1{Energy:energyIcons()}.\nOn play: [blue]{SwordArtDamage:diff()}[/blue] to a random enemy.",
 
   "SNAKEBITE_ENCHANTMENT.title": "Snakebite",
   "SNAKEBITE_ENCHANTMENT.description": "[gold]Retain[/gold]. Cost becomes 2{Energy:energyIcons()}. When played, apply {PoisonPower:diff()} [gold]Poison[/gold].",
@@ -57,8 +57,8 @@
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.extraCardText": "Kafka [gold]Electrocute[/gold] ({MicroCurrentDamage:diff()} / {MicroCurrentTurns:diff()}).",
 
   "CHIMERA_STRIKE_ENCHANTMENT.title": "Strike",
-  "CHIMERA_STRIKE_ENCHANTMENT.description": "Title gains [gold]Strike[/gold]; [gold]Strike[/gold] tag; attacks deal {Damage:diff()} extra damage (Perfected Strike, Hellraiser, Strike Dummy, etc.).",
-  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +{Damage:diff()} attack damage.",
+  "CHIMERA_STRIKE_ENCHANTMENT.description": "Title gains [gold]Strike[/gold]; [gold]Strike[/gold] tag; attacks deal {StrikeDmg:diff()} extra damage (Perfected Strike, Hellraiser, Strike Dummy, etc.).",
+  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +{StrikeDmg:diff()} attack damage.",
 
   "CHIMERA_GEM_ENCHANTMENT.title": "Gem",
   "CHIMERA_GEM_ENCHANTMENT.description": "Gain replay.",
@@ -73,8 +73,8 @@
   "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "Cost -1. Damage and Block x[blue]2/3[/blue].",
 
   "CHIMERA_BULKY_ENCHANTMENT.title": "Bulky",
-  "CHIMERA_BULKY_ENCHANTMENT.description": "Cost +1. Damage and Block scale with the card's cost.",
-  "CHIMERA_BULKY_ENCHANTMENT.extraCardText": "Cost +1. Damage and Block scale with cost.",
+  "CHIMERA_BULKY_ENCHANTMENT.description": "This card's cost increases by 1{Energy:energyIcons()}. Damage and Block scale with the card's cost.",
+  "CHIMERA_BULKY_ENCHANTMENT.extraCardText": "Cost +1{Energy:energyIcons()}.\nDamage and Block scale with cost.",
 
   "CHIMERA_GIGANTIC_ENCHANTMENT.title": "Gigantic",
   "CHIMERA_GIGANTIC_ENCHANTMENT.description": "Damage and Block are tripled.",
@@ -117,8 +117,8 @@
   "CLUMSY_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. [gold]Unplayable[/gold] turn 1. In hand: random discard when you play.",
 
   "OBSESSION_CURSE_ENCHANTMENT.title": "Obsession",
-  "OBSESSION_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. Costs [blue]1[/blue] more. When drawn, gain {Energy:energyIcons()}. While this card is in your [gold]Hand[/gold], you must play it first.",
-  "OBSESSION_CURSE_ENCHANTMENT.extraCardText": "Costs [blue]1[/blue] more. When drawn, gain {Energy:energyIcons()}. While this card is in your [gold]Hand[/gold], you must play it first.",
+  "OBSESSION_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. This card's cost increases by 1{Energy:energyIcons()}. When drawn, gain {ObsessionDrawEnergy:energyIcons()}. While this card is in your [gold]Hand[/gold], you must play it first.",
+  "OBSESSION_CURSE_ENCHANTMENT.extraCardText": "Cost +1{Energy:energyIcons()}.\nWhen drawn, gain {ObsessionDrawEnergy:energyIcons()}. While this card is in your [gold]Hand[/gold], you must play it first.",
 
   "SPORE_CURSE_ENCHANTMENT.title": "Spore",
   "SPORE_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Exhaust[/gold].",
@@ -134,5 +134,13 @@
 
   "BAD_LUCK_CURSE_ENCHANTMENT.title": "Bad Luck",
   "BAD_LUCK_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Unplayable[/gold] for 1 turn. At end of your turn, if this is in your [gold]Hand[/gold], lose [blue]{Damage:diff()}[/blue] HP.",
-  "BAD_LUCK_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. Turn 1 [gold]Unplayable[/gold]. End of turn in hand: [blue]{Damage:diff()}[/blue] HP."
+  "BAD_LUCK_CURSE_ENCHANTMENT.extraCardText": "[gold]Curse[/gold]. Turn 1 [gold]Unplayable[/gold]. End of turn in hand: [blue]{Damage:diff()}[/blue] HP.",
+
+  "INFECTION_CURSE_ENCHANTMENT.title": "Infection",
+  "INFECTION_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. This card gains the same animated border as the [gold]Infection[/gold] status card.",
+  "INFECTION_CURSE_ENCHANTMENT.extraCardText": "Same animated border as [gold]Infection[/gold].",
+
+  "FINALE_CURTAIN_ENCHANTMENT.title": "Splendid",
+  "FINALE_CURTAIN_ENCHANTMENT.description": "During [gold]combat[/gold], while your draw pile is empty, damage you deal and [gold]Block[/gold] you gain from playing this card are tripled.",
+  "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "In combat, empty draw pile: [gold]Attack[/gold] damage and [gold]Block[/gold] from this card x[blue]3[/blue]."
 }

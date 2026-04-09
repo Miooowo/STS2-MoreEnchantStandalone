@@ -56,6 +56,97 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		};
 		root.AddChild(chanceRow);
 
+		var mpNote = new Label
+		{
+			Text = "联机时以下选项以房主（Host）设置为准。",
+			AutowrapMode = TextServer.AutowrapMode.WordSmart,
+			MouseFilter = Control.MouseFilterEnum.Ignore,
+		};
+		root.AddChild(mpNote);
+
+		var shopEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
+		var shopCheck = new CheckBox
+		{
+			Text = "商店卡牌随机附魔",
+			ButtonPressed = settings.ShopEnchantEnabled,
+			FocusMode = Control.FocusModeEnum.None,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+		};
+		shopEnableRow.AddChild(shopCheck);
+		root.AddChild(shopEnableRow);
+
+		var shopChanceRow = CreateLabeledRow(
+			"商店附魔概率（%）",
+			out var shopChanceSlider,
+			out var shopChanceLabel);
+		shopChanceSlider.MinValue = 0;
+		shopChanceSlider.MaxValue = 100;
+		shopChanceSlider.Step = 1;
+		shopChanceSlider.FocusMode = Control.FocusModeEnum.None;
+		shopChanceSlider.Value = settings.ShopEnchantChancePercent;
+		shopChanceLabel.Text = $"{settings.ShopEnchantChancePercent}%";
+		shopChanceSlider.ValueChanged += v =>
+		{
+			settings.ShopEnchantChancePercent = Mathf.Clamp((int)v, 0, 100);
+			shopChanceLabel.Text = $"{settings.ShopEnchantChancePercent}%";
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		root.AddChild(shopChanceRow);
+
+		var ancientEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
+		var ancientCheck = new CheckBox
+		{
+			Text = "先古之民（Ancient）卡牌奖励随机附魔（不会出现诅咒档附魔）",
+			ButtonPressed = settings.AncientRewardEnchantEnabled,
+			FocusMode = Control.FocusModeEnum.None,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+		};
+		ancientEnableRow.AddChild(ancientCheck);
+		root.AddChild(ancientEnableRow);
+
+		var ancientChanceRow = CreateLabeledRow(
+			"先古之民卡牌奖励附魔概率（%）",
+			out var ancientChanceSlider,
+			out var ancientChanceLabel);
+		ancientChanceSlider.MinValue = 0;
+		ancientChanceSlider.MaxValue = 100;
+		ancientChanceSlider.Step = 1;
+		ancientChanceSlider.FocusMode = Control.FocusModeEnum.None;
+		ancientChanceSlider.Value = settings.AncientRewardEnchantChancePercent;
+		ancientChanceLabel.Text = $"{settings.AncientRewardEnchantChancePercent}%";
+		ancientChanceSlider.ValueChanged += v =>
+		{
+			settings.AncientRewardEnchantChancePercent = Mathf.Clamp((int)v, 0, 100);
+			ancientChanceLabel.Text = $"{settings.AncientRewardEnchantChancePercent}%";
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		root.AddChild(ancientChanceRow);
+
+		void RefreshShopAncientUi()
+		{
+			var shopOn = settings.ShopEnchantEnabled;
+			shopChanceSlider.MouseFilter = shopOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+			shopChanceSlider.Modulate = shopOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
+
+			var ancOn = settings.AncientRewardEnchantEnabled;
+			ancientChanceSlider.MouseFilter = ancOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+			ancientChanceSlider.Modulate = ancOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
+		}
+
+		shopCheck.Toggled += pressed =>
+		{
+			settings.ShopEnchantEnabled = pressed;
+			RefreshShopAncientUi();
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		ancientCheck.Toggled += pressed =>
+		{
+			settings.AncientRewardEnchantEnabled = pressed;
+			RefreshShopAncientUi();
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		RefreshShopAncientUi();
+
 		var chimeraRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
 		var chimeraCheck = new CheckBox
 		{

@@ -23,6 +23,9 @@ internal static class MediocreCursePlayLimiter
 	{
 		if (owner == null)
 			return;
+		// 联机：仅统计「本玩家」打出的牌；队友出牌不应累加到持有凡庸者的计数上。
+		if (!ReferenceEquals(cardPlay.Card?.Owner, owner))
+			return;
 		var hand = owner.PlayerCombatState?.Hand.Cards;
 		if (hand == null)
 			return;

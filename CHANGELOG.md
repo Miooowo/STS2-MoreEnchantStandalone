@@ -3,6 +3,31 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.4.0
+
+发布日期：2026-04-08
+
+### 新增
+- **感染**诅咒附魔（`INFECTION_CURSE_ENCHANTMENT`）：为卡牌挂载与原版状态牌 **Infection（感染）** 相同的 overlay 场景（`cards/overlays/infection`），由 `NCard.ReloadOverlay` 补丁在附魔存在时覆盖默认 overlay。
+- 调试控制台命令 **`forcerandomcursereward`**：战斗中执行后， 卡牌奖励（`CardCreationSource.Encounter`）中首张可接受诅咒的牌必附 **随机诅咒档** 附魔（与 `forcebellreward` 同属 `MoreEnchantCombatRewardDebug`；新战斗开始会清除未消费的请求）。
+- **华丽**（附魔 ID 为 `FINALE_CURTAIN`）罕见附魔：战斗中抽牌堆为空时，此牌打出的伤害与获得的格挡 ×3。
+- 商店卡牌可配置随机附魔（默认开启），独立概率；先古之民（**Ancient** 稀有度）卡牌奖励可配置随机附魔（默认开启、独立概率），且**不会出现诅咒档附魔**。
+- 设置页说明：联机时玩法选项以房主 **Host** 为准。
+- **打击**附魔图标：来自卡得。
+
+### 变更
+- **诅咒档附魔**：五档曲线中诅咒基础权重下调；按**被附魔奖励牌的稀有度**进一步压低诅咒桶权重（牌越稀有越低）。执迷：抽到该牌时获得 **2** 点能量。
+- **剑化**附魔：耗能+1，伤害+12。(此处为错误，本应当是6)→耗能+1，对随机敌人造成6点伤害。
+- **剑化**：用 `EnergyVar`（费用 +1）与 `SwordArtDamage`（随机目标伤害）驱动本地化；费用句与 **盾化**、**笨重**、**执迷** 统一为「此牌费用增加1{Energy:energyIcons()}」（英文：`This card's cost increases by 1{Energy:energyIcons()}` / 附卡摘要 `Cost +1{Energy:energyIcons()}.`）。
+- **盾化**、**笨重**、**执迷**：`CanonicalVars` 增加与 `RecalculateValues` 一致的 `EnergyVar(1)`，与上述费用句式对齐。
+- binary_format/architecture="x86_64" → "msil"，尝试兼容移植版。
+
+### 修复
+- 凡庸附魔联机：仅统计本玩家出牌，队友出牌不再错误累加回合内打出张数。
+- 卡牌奖励获得的克隆附魔无法克隆的bug。
+- **打击**附魔：`CanonicalVars` 使用 `DamageVar` 时，卡牌预览路径会在 `DamageVar.UpdateCardPreview` 内再次调用 `EnchantDamageAdditive`，与附魔自身加伤叠加，导致 +6 显示/结算成 +12。现改为普通动态变量 `StrikeDmg`（仅文案）+ `EnchantDamageAdditive` 固定返回常量，二者不再重复叠加。
+- **剑化**附魔：+6结算为+12的bug。
+
 ## 0.3.1
 
 ### 修复
@@ -66,3 +91,12 @@
 ## 未发布
 
 （在此记录已合并但未打版本号的改动，发布新版本时将对应条目移到上方并写上版本号与日期。）
+
+### 新增
+
+
+### 变更
+- **华丽**（`FINALE_CURTAIN`）：×3 与卡牌金边仅在**战斗中**且当前牌处于战斗上下文（`Card.CombatState != null`）且抽牌堆为空时生效；非战斗下预览不再误乘 3。满足条件时 `ShouldGlowGold`，与华丽收场可打出时的金边一致。中文名「华丽」、英文标题 **Splendid**；说明文案补充「战斗中」。
+
+### 修复
+- **华丽** ×3 曾对所有带 `Move` 的结算生效；**Omnislice（全向斩）** 对次要目标使用 `Unpowered|Move` 并传入已乘过附魔的主目标伤害，导致溅射再×3（如 24→72）。现与锐锋等一致，仅对 **Powered** 攻击/格挡（`Move` 且无 `Unpowered`）应用乘区。

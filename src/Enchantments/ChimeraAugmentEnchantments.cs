@@ -21,15 +21,19 @@ internal static class ChimeraAugmentEnchantments
 /// <summary>打击：<see cref="CardTag.Strike"/> + 攻击伤害 +6；标题显示打击后缀。</summary>
 public sealed class ChimeraStrikeEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const decimal MoveDamageBonus = 6m;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	public override bool HasExtraCardText => true;
 
 	public override bool CanEnchantCardType(CardType cardType) => cardType == CardType.Attack;
 
+	/// <summary>勿使用 <see cref="DamageVar"/>：其 <c>UpdateCardPreview</c> 会再调用
+	/// <see cref="EnchantmentModel.EnchantDamageAdditive"/>，与固定加伤叠加会显示/结算成双倍。</summary>
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new DamageVar(6m, ValueProp.Move); }
+		get { yield return new DynamicVar("StrikeDmg", MoveDamageBonus); }
 	}
 
 	protected override void OnEnchant()
@@ -41,7 +45,7 @@ public sealed class ChimeraStrikeEnchantment : ModEnchantmentTemplate, IRewardEn
 	{
 		if (!ChimeraAugmentEnchantments.IsMoveDamage(props))
 			return 0m;
-		return DynamicVars.Damage.BaseValue;
+		return MoveDamageBonus;
 	}
 }
 
@@ -102,9 +106,16 @@ public sealed class ChimeraCompactEnchantment : ModEnchantmentTemplate, IRewardE
 /// <summary>笨重：伤害与格挡按 (费用+1)/费用 放大。（不处理费用变化）</summary>
 public sealed class ChimeraBulkyEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const int CostIncrease = 1;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	public override bool HasExtraCardText => true;
+
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new EnergyVar(CostIncrease); }
+	}
 
 	public override void RecalculateValues()
 	{
@@ -116,7 +127,7 @@ public sealed class ChimeraBulkyEnchantment : ModEnchantmentTemplate, IRewardEnc
 		if (canonical < 0)
 			return;
 
-		Card.EnergyCost.SetCustomBaseCost(canonical + 1);
+		Card.EnergyCost.SetCustomBaseCost(canonical + CostIncrease);
 	}
 
 	private decimal Ratio()

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9USKpMNkSm0=",
+  "dgSpecHash": "6zyPi5+crSw=",
   "success": true,
   "projectFilePath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
   "expectedPackageFiles": [
@@ -8,11 +8,8 @@
     "C:\\Users\\Miooo\\.nuget\\packages\\godotsharp\\4.5.1\\godotsharp.4.5.1.nupkg.sha512",
     "C:\\Users\\Miooo\\.nuget\\packages\\system.io.hashing\\9.0.0\\system.io.hashing.9.0.0.nupkg.sha512",
     "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.13\\microsoft.netcore.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.13\\microsoft.netcore.app.runtime.win-x64.9.0.13.nupkg.sha512",
     "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.13\\microsoft.windowsdesktop.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.13\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.13.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.13\\microsoft.aspnetcore.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.13\\microsoft.aspnetcore.app.runtime.win-x64.9.0.13.nupkg.sha512"
+    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.13\\microsoft.aspnetcore.app.ref.9.0.13.nupkg.sha512"
   ],
   "logs": []
 }

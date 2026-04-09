@@ -197,13 +197,19 @@ public sealed class SpectralEtherealEnchantment : ModEnchantmentTemplate, IRewar
 /// <summary>盾化：耗能 +1；打出时获得 7 点格挡。</summary>
 public sealed class ShieldPlatingEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const int CostIncrease = 1;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	public override bool HasExtraCardText => true;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new BlockVar(7m, ValueProp.Move); }
+		get
+		{
+			yield return new EnergyVar(CostIncrease);
+			yield return new BlockVar(7m, ValueProp.Move);
+		}
 	}
 
 	public override void RecalculateValues()
@@ -215,7 +221,7 @@ public sealed class ShieldPlatingEnchantment : ModEnchantmentTemplate, IRewardEn
 		if (canonical < 0)
 			return;
 
-		Card.EnergyCost.SetCustomBaseCost(canonical + 1);
+		Card.EnergyCost.SetCustomBaseCost(canonical + CostIncrease);
 	}
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
@@ -228,16 +234,24 @@ public sealed class ShieldPlatingEnchantment : ModEnchantmentTemplate, IRewardEn
 	}
 }
 
-/// <summary>剑化：耗能 +1；此牌造成伤害时额外 +6（与 <see cref="ChimeraStrikeEnchantment"/> 相同伤害通道）。</summary>
+/// <summary>剑化：耗能 +1；打出时对随机敌人造成 6 点伤害。</summary>
 public sealed class SwordArtEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const int CostIncrease = 1;
+
+	private const decimal RandomHitDamage = 6m;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
 	public override bool HasExtraCardText => true;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new DamageVar(6m, ValueProp.Move); }
+		get
+		{
+			yield return new EnergyVar(CostIncrease);
+			yield return new DynamicVar("SwordArtDamage", RandomHitDamage);
+		}
 	}
 
 	public override void RecalculateValues()
@@ -249,11 +263,29 @@ public sealed class SwordArtEnchantment : ModEnchantmentTemplate, IRewardEnchant
 		if (canonical < 0)
 			return;
 
-		Card.EnergyCost.SetCustomBaseCost(canonical + 1);
+		Card.EnergyCost.SetCustomBaseCost(canonical + CostIncrease);
 	}
 
-	public override decimal EnchantDamageAdditive(decimal originalDamage, ValueProp props) =>
-		ChimeraAugmentEnchantments.IsMoveDamage(props) ? DynamicVars.Damage.BaseValue : 0m;
+	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
+	{
+		var card = Card;
+		var owner = card?.Owner;
+		if (owner?.Creature?.CombatState == null || card == null)
+			return;
+
+		var state = card.CombatState!;
+		var hittable = state.HittableEnemies;
+		if (hittable.Count == 0)
+			return;
+
+		var target = owner.RunState.Rng.CombatTargets.NextItem(hittable);
+		if (target == null)
+			return;
+
+		await DamageCmd.Attack(RandomHitDamage).FromCard(card).Targeting(target)
+			.WithHitFx("vfx/vfx_attack_slash", null, "blunt_attack.mp3")
+			.Execute(choiceContext);
+	}
 }
 
 /// <summary>铸剑：打出时铸造[blue]10[/blue]（与战利品等牌的铸造机制一致）。</summary>

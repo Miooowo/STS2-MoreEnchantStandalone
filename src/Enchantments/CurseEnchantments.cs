@@ -66,15 +66,24 @@ public sealed class ClumsyCurseEnchantment : ModEnchantmentTemplate, IRewardEnch
 /// <summary>执迷：耗能+1；抽到该牌时获得能量；手牌中有执迷时须先打出执迷牌（见 <see cref="MoreEnchant.Patches.ObsessionCurseIsPlayablePatch"/>）。</summary>
 public sealed class ObsessionCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const int CostIncrease = 1;
+
+	private const int DrawEnergyAmount = 2;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Curse;
 
 	public override bool HasExtraCardText => true;
 
 	public override bool ShouldGlowRed => true;
 
+	/// <summary>两个 <see cref="EnergyVar"/>：默认名用于费用 +1 文案；<c>ObsessionDrawEnergy</c> 用于抽牌得能（须为 <see cref="EnergyVar"/>，<c>energyIcons()</c> 格式化器不接受普通 <see cref="DynamicVar"/>）。</summary>
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new EnergyVar(1); }
+		get
+		{
+			yield return new EnergyVar(CostIncrease);
+			yield return new EnergyVar("ObsessionDrawEnergy", DrawEnergyAmount);
+		}
 	}
 
 	public override void RecalculateValues()
@@ -86,7 +95,7 @@ public sealed class ObsessionCurseEnchantment : ModEnchantmentTemplate, IRewardE
 		if (canonical < 0)
 			return;
 
-		Card.EnergyCost.SetCustomBaseCost(canonical + 1);
+		Card.EnergyCost.SetCustomBaseCost(canonical + CostIncrease);
 	}
 
 	public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
@@ -103,7 +112,7 @@ public sealed class ObsessionCurseEnchantment : ModEnchantmentTemplate, IRewardE
 		if (Card?.Owner is not Player player)
 			return;
 
-		int e = (int)DynamicVars.Energy.BaseValue;
+		int e = (int)DynamicVars["ObsessionDrawEnergy"].BaseValue;
 		if (e <= 0)
 			return;
 
@@ -177,6 +186,14 @@ public sealed class BellCurseEnchantment : ModEnchantmentTemplate, IRewardEnchan
             // Eternal 不存在则忽略
         }
 	}
+}
+
+/// <summary>感染：卡牌使用与状态牌 <see cref="MegaCrit.Sts2.Core.Models.Cards.Infection"/> 相同的动态 overlay（由 <see cref="MoreEnchant.Patches.NCardInfectionCurseOverlayPatch"/> 挂载）。</summary>
+public sealed class InfectionCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
+{
+	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Curse;
+
+	public override bool HasExtraCardText => true;
 }
 
 /// <summary>霉运：首回合不可打出；回合结束时若仍在手牌则受到伤害。</summary>

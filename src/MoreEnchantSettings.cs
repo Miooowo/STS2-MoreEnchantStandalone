@@ -11,6 +11,22 @@ public sealed class MoreEnchantSettings
 	[JsonPropertyName("reward_enchant_chance_percent")]
 	public int RewardEnchantChancePercent { get; set; } = 10;
 
+	/// <summary>商店单张卡牌是否可随机附魔（概率见 <see cref="ShopEnchantChancePercent"/>）。联机以房主设置为准。</summary>
+	[JsonPropertyName("shop_enchant_enabled")]
+	public bool ShopEnchantEnabled { get; set; } = true;
+
+	/// <summary>商店卡牌附魔独立概率（0–100）。</summary>
+	[JsonPropertyName("shop_enchant_chance_percent")]
+	public int ShopEnchantChancePercent { get; set; } = 10;
+
+	/// <summary>先古之民（Ancient 稀有度）卡牌奖励是否可随机附魔；此类卡牌不会出现诅咒档附魔。</summary>
+	[JsonPropertyName("ancient_reward_enchant_enabled")]
+	public bool AncientRewardEnchantEnabled { get; set; } = true;
+
+	/// <summary>先古之民卡牌奖励附魔概率（0–100）。</summary>
+	[JsonPropertyName("ancient_reward_enchant_chance_percent")]
+	public int AncientRewardEnchantChancePercent { get; set; } = 10;
+
 	/// <summary>
 	/// 为真时按卡牌稀有度使用 Chimera 式五档权重曲线；为假时仅使用下方五组相对权重（无视卡牌稀有度）。
 	/// </summary>

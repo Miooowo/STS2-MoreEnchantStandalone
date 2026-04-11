@@ -8,7 +8,7 @@ namespace MoreEnchant.Enchantments;
 /// <summary>返回：打出后若将进入弃牌堆，则改为回到手牌（与粒子墙 <c>ParticleWall</c> 相同机制）。</summary>
 public sealed class ReturnToHandEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
-	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
+	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Special;
 
 	public override bool HasExtraCardText => true;
 

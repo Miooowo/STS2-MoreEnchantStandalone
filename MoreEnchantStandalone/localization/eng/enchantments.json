@@ -142,5 +142,53 @@
 
   "FINALE_CURTAIN_ENCHANTMENT.title": "Splendid",
   "FINALE_CURTAIN_ENCHANTMENT.description": "During [gold]combat[/gold], while your draw pile is empty, damage you deal and [gold]Block[/gold] you gain from playing this card are tripled.",
-  "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "In combat, empty draw pile: [gold]Attack[/gold] damage and [gold]Block[/gold] from this card x[blue]3[/blue]."
+  "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "In combat, empty draw pile: [gold]Attack[/gold] damage and [gold]Block[/gold] from this card x[blue]3[/blue].",
+
+  "SHAME_CURSE_ENCHANTMENT.title": "Shame",
+  "SHAME_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. This card's cost is reduced by [blue]1[/blue]{Energy:energyIcons()}. When you play this card, gain [blue]2[/blue] [gold]Frail[/gold].",
+  "SHAME_CURSE_ENCHANTMENT.extraCardText": "Cost [blue]-1[/blue]{Energy:energyIcons()}. On play: [blue]2[/blue] [gold]Frail[/gold].",
+
+  "DOUBT_CURSE_ENCHANTMENT.title": "Doubt",
+  "DOUBT_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. When drawn, draw [blue]1[/blue] additional card. When you play this card, gain [blue]1[/blue] [gold]Weak[/gold].",
+  "DOUBT_CURSE_ENCHANTMENT.extraCardText": "When drawn: +[blue]1[/blue] draw. On play: [blue]1[/blue] [gold]Weak[/gold].",
+
+  "FOLLY_CURSE_ENCHANTMENT.title": "Folly",
+  "FOLLY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Retain[/gold]. [gold]Eternal[/gold]. This combat, its cost starts at [blue]0[/blue] and increases by [blue]1[/blue] each time it is played. When played, return it to your [gold]Hand[/gold].",
+  "FOLLY_CURSE_ENCHANTMENT.extraCardText": "[gold]Retain[/gold], [gold]Eternal[/gold]. Cost starts [blue]0[/blue], +[blue]1[/blue] per play this combat; returns to hand when played.",
+
+  "DEBT_CURSE_ENCHANTMENT.title": "Debt",
+  "DEBT_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. When drawn, gain {Energy:energyIcons()} and lose [blue]{Gold:diff()}[/blue] [gold]Gold[/gold].",
+  "DEBT_CURSE_ENCHANTMENT.extraCardText": "When drawn: gain {Energy:energyIcons()}, lose [blue]{Gold:diff()}[/blue] [gold]Gold[/gold].",
+
+  "GREED_CURSE_ENCHANTMENT.title": "Greed",
+  "GREED_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. When drawn, gain {Energy:energyIcons()}; at the start of your next turn, lose that much [gold]Energy[/gold].",
+  "GREED_CURSE_ENCHANTMENT.extraCardText": "When drawn: gain {Energy:energyIcons()}; next turn start: lose the same [gold]Energy[/gold].",
+
+  "POOR_SLEEP_CURSE_ENCHANTMENT.title": "Poor Sleep",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. Each time you play this card during the current [gold]Act[/gold], the HP you heal from resting at [gold]Rest Sites[/gold] that [gold]Act[/gold] is reduced by [blue]1[/blue] (stacks; resets in a new [gold]Act[/gold]).\nThis [gold]Act[/gold] so far: [blue]{PoorSleepPlays:diff()}[/blue] (rest heal is reduced by the same amount).",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.extraCardText": "This [gold]Act[/gold]: [blue]{PoorSleepPlays:diff()}[/blue] plays · rest heal [blue]-{PoorSleepPlays:diff()}[/blue] · resets next [gold]Act[/gold]",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.additionalRestSiteHealText": "[Poor Sleep]: Heal [blue]{PoorSleepPlays:diff()}[/blue] less HP from resting this [gold]Act[/gold].",
+
+  "DECAY_CURSE_ENCHANTMENT.title": "Decay",
+  "DECAY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. Your [gold]Strength[/gold]-modified attacks deal double damage. When played, lose [blue]4[/blue] HP. At the end of your turn, if this is in your [gold]Hand[/gold], take [blue]{Damage:diff()}[/blue] damage.",
+  "DECAY_CURSE_ENCHANTMENT.extraCardText": "[gold]Strength[/gold] attacks x[blue]2[/blue]. On play: [blue]4[/blue] HP. End of turn in hand: [blue]{Damage:diff()}[/blue] damage.",
+
+  "REGRET_CURSE_ENCHANTMENT.title": "Regret",
+  "REGRET_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. At the end of your turn, if this is in your [gold]Hand[/gold], lose HP equal to the number of cards in your [gold]Hand[/gold].",
+  "REGRET_CURSE_ENCHANTMENT.extraCardText": "End of turn in hand: lose HP equal to hand size.",
+
+  "ANGUISH_CURSE_ENCHANTMENT.title": "Anguish",
+  "ANGUISH_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Innate[/gold]. While this is in your [gold]Hand[/gold], whenever you play another card this turn, lose [blue]1[/blue] [gold]Energy[/gold].",
+  "ANGUISH_CURSE_ENCHANTMENT.extraCardText": "[gold]Innate[/gold]. In hand: each other card played this turn, [blue]-1[/blue] [gold]Energy[/gold].",
+
+  "GUILT_CURSE_ENCHANTMENT.title": "Guilty",
+  "GUILT_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. Like [gold]Touch of Insanity[/gold]: during combat, this card's Energy cost becomes {Energy:energyIcons()} and its Stars cost becomes 0[img]res://images/packed/sprite_fonts/star_icon.png[/img], until combat ends.\nRemoved from your [gold]Deck[/gold] after {Combats:diff()} {Combats:plural:combat|combats}.",
+  "GUILT_CURSE_ENCHANTMENT.extraCardText": "This combat: Energy {Energy:energyIcons()}, Stars 0[img]res://images/packed/sprite_fonts/star_icon.png[/img] (same as Touch of Insanity).\nRemoved from [gold]Deck[/gold] after {Combats:diff()} {Combats:plural:combat|combats}.",
+
+  "INJURY_CURSE_ENCHANTMENT.title": "Injury",
+  "INJURY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. This card's cost is increased by [blue]1[/blue]. When played, a random other card in your [gold]Hand[/gold] gains [blue]+1[/blue] cost.",
+  "INJURY_CURSE_ENCHANTMENT.extraCardText": "Cost [blue]+1[/blue]. On play: random other hand card cost [blue]+1[/blue].",
+
+  "CALAMITY_CURSE_ENCHANTMENT.title": "Calamity",
+  "CALAMITY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Ethereal[/gold]. [gold]Eternal[/gold]."
 }

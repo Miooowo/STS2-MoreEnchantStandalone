@@ -2,6 +2,8 @@
 
 	<PropertyGroup>
 
+		<Version>0.5.0</Version>
+
 		<TargetFramework>net9.0</TargetFramework>
 
 		<ImplicitUsings>true</ImplicitUsings>
@@ -66,19 +68,25 @@
 	<PropertyGroup>
 		<DeployMoreEnchantToSts2>false</DeployMoreEnchantToSts2>
 		<DeployMoreEnchantToSts2 Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'Debug'">true</DeployMoreEnchantToSts2>
+		<!-- 无头导出在部分 MegaDot/环境下会崩（EditorSettings / RenderingServer 等）；可 dotnet publish -c Release /p:ExportModPck=false 仅编译并复制 DLL，再用编辑器「导出」生成 PCK。 -->
+		<ExportModPck>true</ExportModPck>
+		<!-- 尝试缓解无头崩溃；若仍失败请配合 ExportModPck=false 或在本机 MegaDot 编辑器里导出一次 PCK。 -->
+		<GodotExportExtraArgs>--display-driver headless --audio-driver Dummy</GodotExportExtraArgs>
 	</PropertyGroup>
 
 	<Target Name="CopyModToGame" AfterTargets="Build">
 
 		<Warning Text="Sts2Dir 不存在，已跳过复制到游戏目录：$(Sts2Dir)" Condition="!Exists('$(Sts2Dir)')" />
 
-		<Exec Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(GodotPath)' != '' And Exists('$(GodotPath)') And Exists('$(Sts2Dir)')"
+		<Exec Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(ExportModPck)' == 'true' And '$(GodotPath)' != '' And Exists('$(GodotPath)') And Exists('$(Sts2Dir)')"
 
 		      WorkingDirectory="$(MSBuildProjectDirectory)"
 
-		      Command="&quot;$(GodotPath)&quot; --path &quot;$(MSBuildProjectDirectory)&quot; --headless --export-pack &quot;Mod PCK (MoreEnchantStandalone)&quot; &quot;$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck&quot;" />
+		      Command="&quot;$(GodotPath)&quot; --path &quot;$(MSBuildProjectDirectory)&quot; --headless $(GodotExportExtraArgs) --export-pack &quot;Mod PCK (MoreEnchantStandalone)&quot; &quot;$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck&quot;" />
 
-		<Error Text="已配置 GodotPath 但未生成 MoreEnchantStandalone.pck，请查看 MegaDot 控制台输出。" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(GodotPath)' != '' And Exists('$(GodotPath)') And Exists('$(Sts2Dir)') And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+		<Message Text="已跳过 Mod PCK 无头导出 (ExportModPck=false)。请在 MegaDot 编辑器中用预设「Mod PCK (MoreEnchantStandalone)」导出 MoreEnchantStandalone.pck，或打开 ExportModPck 后重试。" Importance="high" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(ExportModPck)' != 'true' And Exists('$(Sts2Dir)')" />
+
+		<Error Text="已配置 GodotPath 且 ExportModPck=true，但未生成 MoreEnchantStandalone.pck，请查看 MegaDot 控制台输出；若在无头环境反复崩溃可尝试 /p:ExportModPck=false 并在编辑器中导出 PCK。" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(ExportModPck)' == 'true' And '$(GodotPath)' != '' And Exists('$(GodotPath)') And Exists('$(Sts2Dir)') And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
 
 		<Warning Text="已设置 GodotPath 但文件不存在，跳过 PCK 导出：$(GodotPath)" Condition="'$(DeployMoreEnchantToSts2)' == 'true' And '$(GodotPath)' != '' And !Exists('$(GodotPath)')" />
 

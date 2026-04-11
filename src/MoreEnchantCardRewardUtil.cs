@@ -78,8 +78,6 @@ internal static class MoreEnchantCardRewardUtil
 			var amount = RollEnchantAmount(rng, pick);
 
 			CardCmd.Enchant(enchant, card, amount);
-			if (enchant is BellCurseEnchantment)
-				BellCurseReward.MarkPendingRelicGrant(card);
 		}
 	}
 
@@ -250,13 +248,11 @@ internal static class MoreEnchantCardRewardUtil
 			var enchant = (EnchantmentModel)bellPick.MutableClone();
 			var amount = RollEnchantAmount(rng, bellPick);
 			CardCmd.Enchant(enchant, card, amount);
-			if (enchant is BellCurseEnchantment)
-				BellCurseReward.MarkPendingRelicGrant(card);
 			return;
 		}
 	}
 
-	/// <summary>将首张可附魔的候选牌强制附上随机诅咒档附魔（铃铛诅咒仍会走遗物发放标记）。</summary>
+	/// <summary>将首张可附魔的候选牌强制附上随机诅咒档附魔（铃铛诅咒遗物在拾起时由 RewardSynchronizer 补丁发放）。</summary>
 	private static void TryApplyForcedRandomCurseCardReward(Player player, List<CardCreationResult> results, Rng rng)
 	{
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
@@ -281,8 +277,6 @@ internal static class MoreEnchantCardRewardUtil
 			var enchant = (EnchantmentModel)pick.MutableClone();
 			var amount = RollEnchantAmount(rng, pick);
 			CardCmd.Enchant(enchant, card, amount);
-			if (enchant is BellCurseEnchantment)
-				BellCurseReward.MarkPendingRelicGrant(card);
 			return;
 		}
 	}

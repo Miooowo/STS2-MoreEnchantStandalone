@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -167,9 +167,25 @@ public sealed class MediocreCurseEnchantment : ModEnchantmentTemplate, IRewardEn
 /// <summary>铃铛的诅咒：奖励入手时各获得 1 件普通、罕见、稀有遗物；战斗中不可打出；永恒。</summary>
 public sealed class BellCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private int _rewardRelicsGrantedGate;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Curse;
 
 	public override bool HasExtraCardText => false;
+
+	/// <summary>
+	/// 玩家真正获得带铃铛诅咒的牌时由 <see cref="MoreEnchant.Patches.RewardSynchronizerBellCurseRelicGrantPatch"/> 调用；
+	/// 仅第一次成功；避免用 <see cref="CardModel"/> 引用做待发放集合（奖励展示实例与入手实例可能不是同一引用）。
+	/// </summary>
+	internal bool TryTakeRewardRelicGrantOnce() =>
+		Interlocked.CompareExchange(ref _rewardRelicsGrantedGate, 1, 0) == 0;
+
+	/// <summary>
+	/// 牌被 <see cref="MegaCrit.Sts2.Core.Runs.RunState.CloneCard"/> / <see cref="MegaCrit.Sts2.Core.Combat.CombatState.CloneCard"/> 等复制时，
+	/// 附魔状态会被 <c>ClonePreservingMutability</c> 一并复制，导致遗物门闩仍为已发放；每张实体牌应各领一次铃铛遗物（如冰梆等复制进牌组）。
+	/// </summary>
+	internal void ResetRewardRelicGrantGateForClonedCard() =>
+		Interlocked.Exchange(ref _rewardRelicsGrantedGate, 0);
 
 	protected override void OnEnchant()
 	{
@@ -241,39 +257,13 @@ public sealed class BadLuckCurseEnchantment : ModEnchantmentTemplate, IRewardEnc
 }
 
 /// <summary>
-/// 卡牌奖励附上铃铛诅咒时：先在生成阶段 <see cref="MarkPendingRelicGrant"/>，玩家拾起该牌时由
-/// <c>RewardSynchronizer.SyncLocalObtainedCard</c> 补丁触发，发放普通/罕见/稀有遗物各一件。
+/// 铃铛诅咒遗物发放逻辑；在玩家拾起带铃铛诅咒的牌时由
+/// <c>RewardSynchronizer.SyncLocalObtainedCard</c> 补丁调用 <see cref="BellCurseEnchantment.TryTakeRewardRelicGrantOnce"/> 后执行。
 /// </summary>
 internal static class BellCurseReward
 {
 	/// <summary>铃铛诅咒遗物中排除 <see cref="Whetstone"/>（磨刀石）。</summary>
 	private static readonly RelicModel[] RelicPullBlacklist = [ModelDb.Relic<Whetstone>()];
-
-	private static readonly HashSet<CardModel> PendingRelicGrantCards = new(new CardRefEqualityComparer());
-
-	private static readonly object PendingLock = new();
-
-	internal static void MarkPendingRelicGrant(CardModel? card)
-	{
-		if (card == null)
-			return;
-
-		lock (PendingLock)
-		{
-			PendingRelicGrantCards.Add(card);
-		}
-	}
-
-	internal static bool TryConsumePendingRelicGrant(CardModel? card)
-	{
-		if (card == null)
-			return false;
-
-		lock (PendingLock)
-		{
-			return PendingRelicGrantCards.Remove(card);
-		}
-	}
 
 	internal static async Task GrantCore(Player player)
 	{
@@ -289,13 +279,6 @@ internal static class BellCurseReward
 			var relic = RelicFactory.PullNextRelicFromBack(player, rarity, RelicPullBlacklist).ToMutable();
 			await RelicCmd.Obtain(relic, player);
 		}
-	}
-
-	private sealed class CardRefEqualityComparer : IEqualityComparer<CardModel>
-	{
-		public bool Equals(CardModel? x, CardModel? y) => ReferenceEquals(x, y);
-
-		public int GetHashCode(CardModel obj) => RuntimeHelpers.GetHashCode(obj);
 	}
 }
 

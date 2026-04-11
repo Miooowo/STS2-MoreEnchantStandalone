@@ -2,6 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
+using MoreEnchant.Enchantments;
 
 namespace MoreEnchant.Patches;
 
@@ -16,6 +17,7 @@ internal static class CloneCardPreserveModEnchantmentPatch
 	private static void CombatStateClonePostfix(CardModel mutableCard, ref CardModel __result)
 	{
 		RestoreEnchantmentIfLost(mutableCard, ref __result);
+		ResetBellCurseRelicGateOnClonedCard(__result);
 	}
 
 	[HarmonyPostfix]
@@ -23,6 +25,7 @@ internal static class CloneCardPreserveModEnchantmentPatch
 	private static void RunStateClonePostfix(CardModel mutableCard, ref CardModel __result)
 	{
 		RestoreEnchantmentIfLost(mutableCard, ref __result);
+		ResetBellCurseRelicGateOnClonedCard(__result);
 	}
 
 	private static void RestoreEnchantmentIfLost(CardModel source, ref CardModel clone)
@@ -34,5 +37,12 @@ internal static class CloneCardPreserveModEnchantmentPatch
 		clone.EnchantInternal(enchCopy, enchCopy.Amount);
 		clone.Enchantment!.ModifyCard();
 		clone.FinalizeUpgradeInternal();
+	}
+
+	/// <summary>克隆出的新卡是独立实体，铃铛诅咒应能再次在「入手」时发放遗物。</summary>
+	private static void ResetBellCurseRelicGateOnClonedCard(CardModel? clone)
+	{
+		if (clone?.Enchantment is BellCurseEnchantment bell)
+			bell.ResetRewardRelicGrantGateForClonedCard();
 	}
 }

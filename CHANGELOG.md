@@ -3,6 +3,34 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.5.0
+
+发布日期：2026-04-12
+
+### 新增
+- 诅咒附魔：
+- - **愚行**
+- - **羞耻**
+- - **债务**
+- - **贪婪**
+- - **睡眠不佳**
+- - **苦恼**
+- - **腐朽**
+- - **悔恨**
+- - **进阶之灾**
+- - **愧疚**
+- - **疑虑**
+- - **受伤**
+- 工程：`MoreEnchantStandalone.csproj` 支持 `/p:ExportModPck=false` 跳过无头 PCK 导出；默认可选 `--display-driver headless --audio-driver Dummy` 以缓解部分环境下 MegaDot 导出崩溃。
+
+### 变更
+- **铃铛的诅咒**：遗物发放改为依赖牌上的附魔实例一次性门闩，不再用奖励生成时的 `CardModel` 引用（展示实例与入手实例不一致时也能领到遗物）；`RunState` / `CombatState` 的 `CloneCard` 后为复制牌重置门闩，复制入组可再领一轮。
+- **铃铛的诅咒**：对 `CardPileCmd.Add`（含 `CardModel` + `PileType`、返回 `Task` / `Task<T>` 的静态重载）在**加入牌组**完成后补发遗物，覆盖不经 `RewardSynchronizer.SyncLocalObtainedCard` 的路径（如部分遗物复制进牌组）；包装异步返回值时**保留泛型 `Task<T>` 结果**，避免选完卡牌奖励后空引用或流程卡住。
+
+### 修复
+- 卡牌奖励选择后 `CardReward.OnSelect` 等处因错误替换 `CardPileCmd.Add` 返回的 `Task<T>` 导致的卡住 / `NullReferenceException`。
+- Harmony 补丁在部分游戏版本上找不到固定签名的 `CardPileCmd.Add` 导致 Mod 初始化失败：改为扫描符合条件的重载并配合 `Prepare()`。
+
 ## 0.4.0
 
 发布日期：2026-04-08

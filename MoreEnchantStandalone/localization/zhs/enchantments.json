@@ -137,5 +137,53 @@
 
   "FINALE_CURTAIN_ENCHANTMENT.title": "华丽",
   "FINALE_CURTAIN_ENCHANTMENT.description": "在[gold]战斗[/gold]中，当你的[gold]抽牌堆[/gold]中没有牌时，此牌造成的伤害与获得的[gold]格挡[/gold]变为[blue]3[/blue]倍。",
-  "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "战斗中抽牌堆为空：此牌造成的伤害与[gold]格挡[/gold]×[blue]3[/blue]。"
+  "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "战斗中抽牌堆为空：此牌造成的伤害与[gold]格挡[/gold]×[blue]3[/blue]。",
+
+  "SHAME_CURSE_ENCHANTMENT.title": "羞耻",
+  "SHAME_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌费用减少[blue]1[/blue]{Energy:energyIcons()}。\n打出后获得[blue]2[/blue]层[gold]脆弱[/gold]。",
+  "SHAME_CURSE_ENCHANTMENT.extraCardText": "费用[blue]-1[/blue]{Energy:energyIcons()}。\n打出后获得[blue]2[/blue]层[gold]脆弱[/gold]。",
+
+  "DOUBT_CURSE_ENCHANTMENT.title": "疑虑",
+  "DOUBT_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n当你抽到此牌时，额外抽[blue]1[/blue]张牌。\n使用此牌时，获得[blue]1[/blue]层[gold]虚弱[/gold]。",
+  "DOUBT_CURSE_ENCHANTMENT.extraCardText": "当你抽到此牌时，额外抽[blue]1[/blue]张牌。\n打出后获得[blue]1[/blue]层[gold]虚弱[/gold]。",
+
+  "FOLLY_CURSE_ENCHANTMENT.title": "愚行",
+  "FOLLY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n[gold]保留[/gold]。\n[gold]永恒[/gold]。\n战斗开始时费用为0，每打出一次耗能[blue]+1[/blue]。\n打出后返回[gold]手牌[/gold]。",
+  "FOLLY_CURSE_ENCHANTMENT.extraCardText": "战斗开始时费用为0，每打出一次耗能[blue]+1[/blue]。\n打出后返回[gold]手牌[/gold]。",
+
+  "DEBT_CURSE_ENCHANTMENT.title": "债务",
+  "DEBT_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n当你抽到此牌时，获得{Energy:energyIcons()}并失去[blue]{Gold:diff()}[/blue][gold]金币[/gold]。",
+  "DEBT_CURSE_ENCHANTMENT.extraCardText": "当你抽到此牌时，获得{Energy:energyIcons()}，失去[blue]{Gold:diff()}[/blue]金币。",
+
+  "GREED_CURSE_ENCHANTMENT.title": "贪婪",
+  "GREED_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n当你抽到此牌时，获得{Energy:energyIcons()}；下回合开始时失去等量[gold]能量[/gold]。",
+  "GREED_CURSE_ENCHANTMENT.extraCardText": "抽到：获得{Energy:energyIcons()}；下回合开始时失去等量能量。",
+
+  "POOR_SLEEP_CURSE_ENCHANTMENT.title": "睡眠不佳",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌在当前[gold]阶段[/gold]内每打出一次，本阶段在[gold]休息点[/gold]休息时回复的生命减少[blue]1[/blue]点（可叠加，进入新阶段后重置）。\n本阶段累计：[blue]{PoorSleepPlays:diff()}[/blue]（休息回复减少同值）。",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.extraCardText": "本阶段累计[blue]{PoorSleepPlays:diff()}[/blue] · 休息回复[blue]-{PoorSleepPlays:diff()}[/blue] · 新阶段重置",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.additionalRestSiteHealText": "【睡眠不佳】本阶段通过休息回复的生命额外减少[blue]{PoorSleepPlays:diff()}[/blue]点。",
+
+  "DECAY_CURSE_ENCHANTMENT.title": "腐朽",
+  "DECAY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n你造成的[gold]力量[/gold]攻击伤害翻倍。\n打出时失去[blue]4[/blue]点生命。\n你的回合结束时，若此牌在[gold]手牌[/gold]中，受到[blue]{Damage:diff()}[/blue]点伤害。",
+  "DECAY_CURSE_ENCHANTMENT.extraCardText": "力量攻击伤害×[blue]2[/blue]。打出失去[blue]4[/blue]生命。回合结束若在手牌：受到[blue]{Damage:diff()}[/blue]伤害。",
+
+  "REGRET_CURSE_ENCHANTMENT.title": "悔恨",
+  "REGRET_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n你的回合结束时，若此牌在[gold]手牌[/gold]中，失去等同于当前[gold]手牌[/gold]数量的生命。",
+  "REGRET_CURSE_ENCHANTMENT.extraCardText": "回合结束若在手牌：失去等同于手牌张数的生命。",
+
+  "ANGUISH_CURSE_ENCHANTMENT.title": "苦恼",
+  "ANGUISH_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n[gold]固有[/gold]。\n若此牌在你的[gold]手牌[/gold]中，本回合每打出一张其他牌，失去[blue]1[/blue]点[gold]能量[/gold]。",
+  "ANGUISH_CURSE_ENCHANTMENT.extraCardText": "[gold]固有[/gold]。在手牌时：每打出一张其他牌，失去[blue]1[/blue]能量。",
+
+  "GUILT_CURSE_ENCHANTMENT.title": "愧疚",
+  "GUILT_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌可以免费打出。\n在{Combats:diff()}场战斗后从你的[gold]牌组[/gold]中移除。",
+  "GUILT_CURSE_ENCHANTMENT.extraCardText": "此牌可以免费打出。\n在{Combats:diff()}场战斗后从[gold]牌组[/gold]移除。",
+
+  "INJURY_CURSE_ENCHANTMENT.title": "受伤",
+  "INJURY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌耗能[blue]+1[/blue]。\n打出后使你[gold]手牌[/gold]中随机一张牌的耗能[blue]+1[/blue]。",
+  "INJURY_CURSE_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]。\n随机一张手牌耗能[blue]+1[/blue]。",
+
+  "CALAMITY_CURSE_ENCHANTMENT.title": "进阶之灾",
+  "CALAMITY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n[gold]虚无[/gold]。\n[gold]永恒[/gold]。"
 }

@@ -19,6 +19,8 @@ namespace MoreEnchant.Enchantments;
 /// </summary>
 public sealed class MagicCorruptionEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Exhaust) };
 	private const int FixedEnergyCost = 3;
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
@@ -28,7 +30,7 @@ public sealed class MagicCorruptionEnchantment : ModEnchantmentTemplate, IReward
 	/// <summary>供文案 <c>{Energy:energyIcons()}</c> 解析（此牌固定 3 费展示）。</summary>
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new EnergyVar(FixedEnergyCost); }
+		get { yield return new EnergyVar(1); }
 	}
 
 	public override void RecalculateValues()

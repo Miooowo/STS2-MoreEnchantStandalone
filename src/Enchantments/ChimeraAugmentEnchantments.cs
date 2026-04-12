@@ -26,7 +26,7 @@ public sealed class ChimeraStrikeEnchantment : ModEnchantmentTemplate, IRewardEn
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	public override bool CanEnchantCardType(CardType cardType) => cardType == CardType.Attack;
 
@@ -189,7 +189,7 @@ public sealed class ChimeraGiganticEnchantment : ModEnchantmentTemplate, IReward
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveDamageOrHpLoss(card);
@@ -203,7 +203,7 @@ public sealed class ChimeraSolidifyEnchantment : ModEnchantmentTemplate, IReward
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveBlockNumbers(card);

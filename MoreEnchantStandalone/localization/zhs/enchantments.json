@@ -38,7 +38,7 @@
 
   "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "幽灵",
   "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "此牌获得的[gold]格挡[/gold]增加[blue]50%[/blue]。\n[gold]虚无[/gold]。",
-  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "格挡[blue]+50%[/blue]。\n[gold]虚无[/gold]。",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "格挡[blue]+50%[/blue]。",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "盾化",
   "SHIELD_PLATING_ENCHANTMENT.description": "此牌费用增加1{Energy:energyIcons()}。打出时获得{Block:diff()}点[gold]格挡[/gold]。",
@@ -58,7 +58,6 @@
 
   "CHIMERA_STRIKE_ENCHANTMENT.title": "打击",
   "CHIMERA_STRIKE_ENCHANTMENT.description": "卡名添加[gold]打击[/gold]。\n获得[gold]打击[/gold]标签。\n攻击额外造成{StrikeDmg:diff()}点伤害。",
-  "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "造成的伤害增加{StrikeDmg:diff()}点。",
 
   "CHIMERA_GEM_ENCHANTMENT.title": "宝石",
   "CHIMERA_GEM_ENCHANTMENT.description": "获得[gold]重放[/gold]2。",
@@ -76,11 +75,9 @@
 
   "CHIMERA_GIGANTIC_ENCHANTMENT.title": "超巨化",
   "CHIMERA_GIGANTIC_ENCHANTMENT.description": "此牌的基础伤害x3。",
-  "CHIMERA_GIGANTIC_ENCHANTMENT.extraCardText": "此牌的基础伤害x3。",
 
   "CHIMERA_SOLIDIFY_ENCHANTMENT.title": "固化",
   "CHIMERA_SOLIDIFY_ENCHANTMENT.description": "此牌的基础格挡x3。",
-  "CHIMERA_SOLIDIFY_ENCHANTMENT.extraCardText": "此牌的基础格挡x3。",
 
   "CHIMERA_HEAVY_BLADE_ENCHANTMENT.title": "重刃",
   "CHIMERA_HEAVY_BLADE_ENCHANTMENT.description": "力量在此牌上发挥3倍效果。",
@@ -130,11 +127,10 @@
 
   "INFECTION_CURSE_ENCHANTMENT.title": "感染",
   "INFECTION_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌获得与状态牌[gold]感染[/gold]相同的动态卡面边框。",
-  "INFECTION_CURSE_ENCHANTMENT.extraCardText": "与[gold]感染[/gold]牌同款的动态边框。",
 
   "MAGIC_CORRUPTION_ENCHANTMENT.title": "魔法腐化",
-  "MAGIC_CORRUPTION_ENCHANTMENT.description": "此牌耗能变为[blue]3[/blue]{Energy:energyIcons()}。\n你所有具有[gold]附魔[/gold]的牌可以免费打出，其在打出后[gold]消耗[/gold]。",
-  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "此牌[blue]3[/blue]{Energy:energyIcons()}。\n具有附魔的牌可以免费打出，其在打出后消耗。",
+  "MAGIC_CORRUPTION_ENCHANTMENT.description": "此牌耗能变为3{Energy:energyIcons()}。\n你所有具有[gold]附魔[/gold]的牌可以免费打出，其在打出后[gold]消耗[/gold]。",
+  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "具有附魔的牌可以免费打出，其在打出后消耗。",
 
   "FINALE_CURTAIN_ENCHANTMENT.title": "华丽",
   "FINALE_CURTAIN_ENCHANTMENT.description": "在[gold]战斗[/gold]中，当你的[gold]抽牌堆[/gold]中没有牌时，此牌造成的伤害与获得的[gold]格挡[/gold]变为[blue]3[/blue]倍。",

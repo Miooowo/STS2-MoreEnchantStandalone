@@ -209,7 +209,7 @@ public sealed class InfectionCurseEnchantment : ModEnchantmentTemplate, IRewardE
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Curse;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 }
 
 /// <summary>霉运：首回合不可打出；回合结束时若仍在手牌则受到伤害。</summary>

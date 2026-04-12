@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MoreEnchant.Powers;
 using MoreEnchant.Standalone;
@@ -24,8 +25,11 @@ public sealed class MagicCorruptionEnchantment : ModEnchantmentTemplate, IReward
 
 	public override bool HasExtraCardText => true;
 
-	// protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-	// 	new IHoverTip[] { HoverTipFactory.FromPower<MagicCorruptionPower>() };
+	/// <summary>供文案 <c>{Energy:energyIcons()}</c> 解析（此牌固定 3 费展示）。</summary>
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new EnergyVar(FixedEnergyCost); }
+	}
 
 	public override void RecalculateValues()
 	{

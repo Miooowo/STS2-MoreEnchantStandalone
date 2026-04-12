@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MoreEnchant.Enchantments;
 
@@ -18,6 +19,12 @@ public sealed class MagicCorruptionPower : PowerModel
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Single;
+
+	/// <summary>供文案 <c>{Energy:energyIcons()}</c> 解析（附魔牌能量费用视为 0 的展示）。</summary>
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new EnergyVar(0); }
+	}
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Exhaust) };

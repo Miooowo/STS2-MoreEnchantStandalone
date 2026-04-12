@@ -142,7 +142,7 @@
 
   "MAGIC_CORRUPTION_ENCHANTMENT.title": "Magic Corruption",
   "MAGIC_CORRUPTION_ENCHANTMENT.description": "This card's cost becomes [blue]3[/blue]{Energy:energyIcons()}.\nWhen played, gain the [gold]Magic Corruption[/gold] buff and remove this card from combat.\nBuff: your [gold]enchanted[/gold] cards cost [blue]0[/blue] [gold]Energy[/gold] and [blue]0[/blue] [gold]Stars[/gold], and [gold]Exhaust[/gold] when played (Powers keep their normal destination).",
-  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "Costs [blue]3[/blue].\nOn play: gain [gold]Magic Corruption[/gold] and remove self from combat.\nBuff: enchanted cards cost [blue]0[/blue] / [blue]0[/blue] Stars and [gold]Exhaust[/gold] when played.",
+  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "Costs [blue]3[/blue]{Energy:energyIcons()}.\nOn play: gain [gold]Magic Corruption[/gold] and remove self from combat.\nBuff: enchanted cards cost [blue]0[/blue] / [blue]0[/blue] Stars and [gold]Exhaust[/gold] when played.",
 
   "FINALE_CURTAIN_ENCHANTMENT.title": "Splendid",
   "FINALE_CURTAIN_ENCHANTMENT.description": "During [gold]combat[/gold], while your draw pile is empty, damage you deal and [gold]Block[/gold] you gain from playing this card are tripled.",

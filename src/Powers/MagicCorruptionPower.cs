@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
@@ -8,7 +11,7 @@ using MoreEnchant.Enchantments;
 namespace MoreEnchant.Powers;
 
 /// <summary>
-/// 魔法腐化（能力）：打出带「魔法腐化」附魔的牌后施加。使你其他带附魔的牌能量与辉星费用视为 0，打出后消耗（能力牌等保持原去向）。
+/// 魔法腐化（能力）：打出带「魔法腐化」附魔的牌后施加。使你其他带附魔的牌能量与辉星费用视为 0，打出后消耗（能力牌等保持原去向）；并为所有带附魔的牌添加[消耗]关键词。
 /// </summary>
 public sealed class MagicCorruptionPower : PowerModel
 {
@@ -18,6 +21,37 @@ public sealed class MagicCorruptionPower : PowerModel
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Exhaust) };
+
+	/// <summary>能力生效瞬间：为当前战斗中所有带附魔的牌补上[消耗]关键词。</summary>
+	internal static void ApplyExhaustKeywordToAllEnchantedCards(Player player)
+	{
+		if (player.PlayerCombatState == null)
+			return;
+		foreach (var pile in player.PlayerCombatState.AllPiles)
+		{
+			foreach (var card in pile.Cards)
+				TryApplyExhaustKeywordToCard(card);
+		}
+	}
+
+	private static void TryApplyExhaustKeywordToCard(CardModel card)
+	{
+		if (card.Enchantment == null)
+			return;
+		if (card.Keywords.Contains(CardKeyword.Exhaust))
+			return;
+		CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
+	}
+
+	public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
+	{
+		if (!addedByPlayer || card.Enchantment == null)
+			return Task.CompletedTask;
+		if (card.Owner is not Player player || player.Creature != Owner)
+			return Task.CompletedTask;
+		TryApplyExhaustKeywordToCard(card);
+		return Task.CompletedTask;
+	}
 
 	public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
 	{

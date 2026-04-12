@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
@@ -83,17 +84,56 @@ public sealed class ChimeraCompactEnchantment : ModEnchantmentTemplate, IRewardE
 
 	public override bool HasExtraCardText => true;
 
+	protected override IEnumerable<DynamicVar> CanonicalVars
+	{
+		get { yield return new StarsVar(0); }
+	}
+
 	public override void RecalculateValues()
 	{
 		// Chimera：耗能 -1（X 费不处理）
 		if (Card == null || Card.EnergyCost.CostsX)
+		{
+			RefreshStarsVarPreview();
 			return;
+		}
 
 		int canonical = Card.EnergyCost.Canonical;
 		if (canonical < 0)
+		{
+			RefreshStarsVarPreview();
 			return;
+		}
 
 		Card.EnergyCost.SetCustomBaseCost(System.Math.Max(0, canonical - 1));
+		RefreshStarsVarPreview();
+	}
+
+	public override bool TryModifyStarCost(CardModel card, decimal originalCost, out decimal modifiedCost)
+	{
+		modifiedCost = originalCost;
+		if (card != Card || card.HasStarCostX || originalCost <= 0m)
+			return false;
+		var next = Math.Max(0m, Math.Floor(originalCost * 2m / 3m));
+		if (next == originalCost)
+			return false;
+		modifiedCost = next;
+		return true;
+	}
+
+	private void RefreshStarsVarPreview()
+	{
+		if (Card == null || Card.HasStarCostX)
+		{
+			DynamicVars.Stars.BaseValue = 0m;
+			return;
+		}
+
+		int s = Card.CurrentStarCost;
+		if (s <= 0)
+			DynamicVars.Stars.BaseValue = 0m;
+		else
+			DynamicVars.Stars.BaseValue = Math.Max(0m, Math.Floor(s * 2m / 3m));
 	}
 
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Factories;
@@ -79,6 +80,44 @@ internal static class MoreEnchantCardRewardUtil
 
 			CardCmd.Enchant(enchant, card, amount);
 		}
+	}
+
+	/// <summary>
+	/// 战斗内 <see cref="CardPileCmd.AddGeneratedCardsToCombat"/> 等路径生成并入库的牌；仅 <paramref name="addedByPlayer"/> 为真时处理。
+	/// </summary>
+	internal static void TryApplyRandomEnchantToCombatGeneratedCard(CardModel card, bool addedByPlayer)
+	{
+		if (!addedByPlayer || card?.Owner is not Player player)
+			return;
+		if (!LocalContext.IsMine(card))
+			return;
+
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.CombatGeneratedEnchantEnabled)
+			return;
+		if (card.Enchantment != null)
+			return;
+		if (ShouldSkipEnchantingRewardCard(card))
+			return;
+
+		var chancePercent = Math.Clamp(settings.CombatGeneratedEnchantChancePercent, 0, 100);
+		if (chancePercent <= 0)
+			return;
+
+		var rng = player.PlayerRng.Transformations;
+		if (rng.NextInt(0, 100) >= chancePercent)
+			return;
+
+		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var ancient = card.Rarity == CardRarity.Ancient;
+		var excludeCurse = ancient;
+		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse);
+		if (pick == null)
+			return;
+
+		var enchant = (EnchantmentModel)pick.MutableClone();
+		var amount = RollEnchantAmount(rng, pick);
+		CardCmd.Enchant(enchant, card, amount);
 	}
 
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(

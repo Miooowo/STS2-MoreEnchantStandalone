@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using MoreEnchant;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
@@ -180,12 +181,20 @@ public sealed class FrostChannelEnchantment : ModEnchantmentTemplate, IRewardEnc
 	}
 }
 
-/// <summary>幽灵：<see cref="CardKeyword.Ethereal"/>。</summary>
+/// <summary>幽灵：此牌获得的格挡 ×1.5；<see cref="CardKeyword.Ethereal"/>。</summary>
 public sealed class SpectralEtherealEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const decimal BlockMultiplier = 1.5m;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	public override bool HasExtraCardText => false;
+	public override bool HasExtraCardText => true;
+
+	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Ethereal) };
+
+	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) ? BlockMultiplier : 1m;
 
 	protected override void OnEnchant()
 	{

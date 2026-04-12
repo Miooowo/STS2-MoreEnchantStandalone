@@ -37,8 +37,8 @@
   "FROST_CHANNEL_ENCHANTMENT.extraCardText": "[gold]Channel[/gold] [blue]1[/blue] [gold]Frost[/gold].",
 
   "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "Spectral",
-  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "[gold]Ethereal[/gold].",
-  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "[gold]Ethereal[/gold].",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "Block from this card is [blue]50%[/blue] higher.\n[gold]Ethereal[/gold].",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "Block [blue]+50%[/blue].\n[gold]Ethereal[/gold].",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "Shield Plating",
   "SHIELD_PLATING_ENCHANTMENT.description": "This card's cost increases by 1{Energy:energyIcons()}. When played, gain {Block:diff()} [gold]Block[/gold].",
@@ -69,8 +69,8 @@
   "CHIMERA_INNATE_ENCHANTMENT.extraCardText": "Innate.",
 
   "CHIMERA_COMPACT_ENCHANTMENT.title": "Compact",
-  "CHIMERA_COMPACT_ENCHANTMENT.description": "Cost -1. Damage and Block are reduced by about 33%.",
-  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "Cost -1. Damage and Block x[blue]2/3[/blue].",
+  "CHIMERA_COMPACT_ENCHANTMENT.description": "Cost -1. Damage and Block are reduced by about 33%.\nIf this card has a Stars cost (not X): Stars cost becomes about [blue]2/3[/blue] (rounded down): {Stars:starIcons()}.",
+  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "Cost -1. Damage, Block, Stars x[blue]2/3[/blue] (rounded down).\nStars: {Stars:starIcons()}.",
 
   "CHIMERA_BULKY_ENCHANTMENT.title": "Bulky",
   "CHIMERA_BULKY_ENCHANTMENT.description": "This card's cost increases by 1{Energy:energyIcons()}. Damage and Block scale with the card's cost.",
@@ -140,6 +140,10 @@
   "INFECTION_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. This card gains the same animated border as the [gold]Infection[/gold] status card.",
   "INFECTION_CURSE_ENCHANTMENT.extraCardText": "Same animated border as [gold]Infection[/gold].",
 
+  "MAGIC_CORRUPTION_ENCHANTMENT.title": "Magic Corruption",
+  "MAGIC_CORRUPTION_ENCHANTMENT.description": "This card's cost becomes [blue]3[/blue]{Energy:energyIcons()}.\nWhen played, gain the [gold]Magic Corruption[/gold] buff and remove this card from combat.\nBuff: your [gold]enchanted[/gold] cards cost [blue]0[/blue] [gold]Energy[/gold] and [blue]0[/blue] [gold]Stars[/gold], and [gold]Exhaust[/gold] when played (Powers keep their normal destination).",
+  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "Costs [blue]3[/blue].\nOn play: gain [gold]Magic Corruption[/gold] and remove self from combat.\nBuff: enchanted cards cost [blue]0[/blue] / [blue]0[/blue] Stars and [gold]Exhaust[/gold] when played.",
+
   "FINALE_CURTAIN_ENCHANTMENT.title": "Splendid",
   "FINALE_CURTAIN_ENCHANTMENT.description": "During [gold]combat[/gold], while your draw pile is empty, damage you deal and [gold]Block[/gold] you gain from playing this card are tripled.",
   "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "In combat, empty draw pile: [gold]Attack[/gold] damage and [gold]Block[/gold] from this card x[blue]3[/blue].",
@@ -190,5 +194,57 @@
   "INJURY_CURSE_ENCHANTMENT.extraCardText": "Cost [blue]+1[/blue]. On play: random other hand card cost [blue]+1[/blue].",
 
   "CALAMITY_CURSE_ENCHANTMENT.title": "Calamity",
-  "CALAMITY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Ethereal[/gold]. [gold]Eternal[/gold]."
+  "CALAMITY_CURSE_ENCHANTMENT.description": "[gold]Curse[/gold]. [gold]Ethereal[/gold]. [gold]Eternal[/gold].",
+
+  "STEADFAST_EXHAUST_ENCHANTMENT.title": "Steadfast",
+  "STEADFAST_EXHAUST_ENCHANTMENT.description": "Block from this card is [blue]33%[/blue] higher.\nWhen played, [gold]Exhaust[/gold] a card.",
+  "STEADFAST_EXHAUST_ENCHANTMENT.extraCardText": "Block [blue]+33%[/blue].\nWhen played, [gold]Exhaust[/gold] a card.",
+
+  "RUIN_AUTO_PLAY_ENCHANTMENT.title": "Ruin",
+  "RUIN_AUTO_PLAY_ENCHANTMENT.description": "When played, play the top card of your draw pile and [gold]Exhaust[/gold] it.",
+  "RUIN_AUTO_PLAY_ENCHANTMENT.extraCardText": "Play top of draw pile; [gold]Exhaust[/gold] it.",
+
+  "QUICK_DRAW_ENCHANTMENT.title": "Quick",
+  "QUICK_DRAW_ENCHANTMENT.description": "When played, draw [blue]1[/blue] card.",
+  "QUICK_DRAW_ENCHANTMENT.extraCardText": "Draw [blue]1[/blue].",
+
+  "BLOODLETTING_ENERGY_ENCHANTMENT.title": "Bloodletting",
+  "BLOODLETTING_ENERGY_ENCHANTMENT.description": "When played, lose [blue]{HpLoss:diff()}[/blue] HP. Gain {Energy:energyIcons()}.",
+  "BLOODLETTING_ENERGY_ENCHANTMENT.extraCardText": "Lose [blue]{HpLoss:diff()}[/blue] HP. Gain {Energy:energyIcons()}.",
+
+  "ARMING_UPGRADE_ENCHANTMENT.title": "Arming",
+  "ARMING_UPGRADE_ENCHANTMENT.description": "When played, upgrade a card in your [gold]Hand[/gold].",
+  "ARMING_UPGRADE_ENCHANTMENT.extraCardText": "Upgrade a [gold]Hand[/gold] card.",
+
+  "TERROR_VULNERABLE_ENCHANTMENT.title": "Terror",
+  "TERROR_VULNERABLE_ENCHANTMENT.description": "[gold]Exhaust[/gold]. When played, apply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].",
+  "TERROR_VULNERABLE_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Apply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].",
+
+  "SHIVER_VULNERABLE_ENCHANTMENT.title": "Shiver",
+  "SHIVER_VULNERABLE_ENCHANTMENT.description": "When played, apply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].",
+  "SHIVER_VULNERABLE_ENCHANTMENT.extraCardText": "Apply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].",
+
+  "NEUTRAL_WEAK_ENCHANTMENT.title": "Neutral",
+  "NEUTRAL_WEAK_ENCHANTMENT.description": "When played, apply [blue]{WeakPower:diff()}[/blue] [gold]Weak[/gold].",
+  "NEUTRAL_WEAK_ENCHANTMENT.extraCardText": "Apply [blue]{WeakPower:diff()}[/blue] [gold]Weak[/gold].",
+
+  "BACKPACK_DRAW_DISCARD_ENCHANTMENT.title": "Backpack",
+  "BACKPACK_DRAW_DISCARD_ENCHANTMENT.description": "When played, draw [blue]1[/blue] card, then discard [blue]1[/blue] card.",
+  "BACKPACK_DRAW_DISCARD_ENCHANTMENT.extraCardText": "Draw [blue]1[/blue], discard [blue]1[/blue].",
+
+  "STARLIGHT_STARS_ENCHANTMENT.title": "Starlight",
+  "STARLIGHT_STARS_ENCHANTMENT.description": "When played, gain {Stars:starIcons()}.",
+  "STARLIGHT_STARS_ENCHANTMENT.extraCardText": "Gain {Stars:starIcons()}.",
+
+  "ESCORT_SUMMON_ENCHANTMENT.title": "Escort",
+  "ESCORT_SUMMON_ENCHANTMENT.description": "When played, [gold]Summon[/gold] {Summon:diff()}.",
+  "ESCORT_SUMMON_ENCHANTMENT.extraCardText": "[gold]Summon[/gold] {Summon:diff()}.",
+
+  "EXTRA_HIT_ENCHANTMENT.title": "Extra Strikes",
+  "EXTRA_HIT_ENCHANTMENT.description": "On [gold]Strength[/gold]-modified attacks, this card deals [blue]{Amount}[/blue] additional hit(s).",
+  "EXTRA_HIT_ENCHANTMENT.extraCardText": "[gold]Strength[/gold] attacks: +[blue]{Amount}[/blue] hit(s).",
+
+  "SHRED_DEBRIS_ENCHANTMENT.title": "Shred",
+  "SHRED_DEBRIS_ENCHANTMENT.description": "On [gold]Strength[/gold]-modified attacks, this card deals [blue]33%[/blue] more damage and gains [blue]33%[/blue] more [gold]Block[/gold] from this card. When played, add a [gold]Debris[/gold] into your [gold]Hand[/gold].",
+  "SHRED_DEBRIS_ENCHANTMENT.extraCardText": "[gold]Strength[/gold] attack damage and [gold]Block[/gold] from this card: x[blue]4/3[/blue]. On play: add [gold]Debris[/gold] to hand."
 }

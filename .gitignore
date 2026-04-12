@@ -1,0 +1,3 @@
+# GitHub Release 构建产物（由 Release 构建生成，见 csproj 中 PackGithubRelease）
+release/*
+!release/.gitkeep

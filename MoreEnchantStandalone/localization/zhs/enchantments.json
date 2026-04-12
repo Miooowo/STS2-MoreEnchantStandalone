@@ -37,7 +37,8 @@
   "FROST_CHANNEL_ENCHANTMENT.extraCardText": "[gold]生成[/gold][blue]1[/blue]个[gold]冰霜[/gold]充能球。",
 
   "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "幽灵",
-  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "[gold]虚无[/gold]。",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "此牌获得的[gold]格挡[/gold]增加[blue]50%[/blue]。\n[gold]虚无[/gold]。",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "格挡[blue]+50%[/blue]。\n[gold]虚无[/gold]。",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "盾化",
   "SHIELD_PLATING_ENCHANTMENT.description": "此牌费用增加1{Energy:energyIcons()}。打出时获得{Block:diff()}点[gold]格挡[/gold]。",
@@ -66,8 +67,8 @@
   "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",
 
   "CHIMERA_COMPACT_ENCHANTMENT.title": "精小",
-  "CHIMERA_COMPACT_ENCHANTMENT.description": "耗能-1。\n伤害与格挡降低33%。",
-  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "耗能-1。\n伤害与格挡降低33%。",
+  "CHIMERA_COMPACT_ENCHANTMENT.description": "耗能-1。\n辉星消耗降低33%，即{Stars:starIcons()}。\n伤害与格挡降低33%。",
+  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "耗能-1。\n辉星消耗变为{Stars:starIcons()}。\n伤害与格挡降低33%。",
 
   "CHIMERA_BULKY_ENCHANTMENT.title": "笨重",
   "CHIMERA_BULKY_ENCHANTMENT.description": "此牌费用增加1{Energy:energyIcons()}。\n伤害与格挡按费用比例提高。",
@@ -135,6 +136,10 @@
   "INFECTION_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌获得与状态牌[gold]感染[/gold]相同的动态卡面边框。",
   "INFECTION_CURSE_ENCHANTMENT.extraCardText": "与[gold]感染[/gold]牌同款的动态边框。",
 
+  "MAGIC_CORRUPTION_ENCHANTMENT.title": "魔法腐化",
+  "MAGIC_CORRUPTION_ENCHANTMENT.description": "此牌耗能变为[blue]3[/blue]{Energy:energyIcons()}。\n打出后获得[gold]魔法腐化[/gold]能力，并从战斗中移除。\n能力：你所有[gold]带附魔[/gold]的牌耗能变为[blue]0[/blue]、辉星费用变为[blue]0[/blue]，打出后[gold]消耗[/gold]（能力牌等仍按原规则）。",
+  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "此牌[blue]3[/blue]费。\n打出后获得[gold]魔法腐化[/gold]，自身移出战斗。\n能力：带附魔的牌[blue]0[/blue]费/[blue]0[/blue]辉星，打出[gold]消耗[/gold]。",
+
   "FINALE_CURTAIN_ENCHANTMENT.title": "华丽",
   "FINALE_CURTAIN_ENCHANTMENT.description": "在[gold]战斗[/gold]中，当你的[gold]抽牌堆[/gold]中没有牌时，此牌造成的伤害与获得的[gold]格挡[/gold]变为[blue]3[/blue]倍。",
   "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "战斗中抽牌堆为空：此牌造成的伤害与[gold]格挡[/gold]×[blue]3[/blue]。",
@@ -160,8 +165,8 @@
   "GREED_CURSE_ENCHANTMENT.extraCardText": "抽到：获得{Energy:energyIcons()}；下回合开始时失去等量能量。",
 
   "POOR_SLEEP_CURSE_ENCHANTMENT.title": "睡眠不佳",
-  "POOR_SLEEP_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌在当前[gold]阶段[/gold]内每打出一次，本阶段在[gold]休息点[/gold]休息时回复的生命减少[blue]1[/blue]点（可叠加，进入新阶段后重置）。\n本阶段累计：[blue]{PoorSleepPlays:diff()}[/blue]（休息回复减少同值）。",
-  "POOR_SLEEP_CURSE_ENCHANTMENT.extraCardText": "本阶段累计[blue]{PoorSleepPlays:diff()}[/blue] · 休息回复[blue]-{PoorSleepPlays:diff()}[/blue] · 新阶段重置",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌在当前[gold]阶段[/gold]内每打出一次，本阶段在[gold]休息点[/gold]休息时回复的生命减少[blue]1[/blue]点（进入新阶段后重置）。\n本阶段累计：[blue]{PoorSleepPlays:diff()}[/blue]。",
+  "POOR_SLEEP_CURSE_ENCHANTMENT.extraCardText": "休息回复[blue]-{PoorSleepPlays:diff()}[/blue]，\n新阶段重置。",
   "POOR_SLEEP_CURSE_ENCHANTMENT.additionalRestSiteHealText": "【睡眠不佳】本阶段通过休息回复的生命额外减少[blue]{PoorSleepPlays:diff()}[/blue]点。",
 
   "DECAY_CURSE_ENCHANTMENT.title": "腐朽",
@@ -185,5 +190,57 @@
   "INJURY_CURSE_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]。\n随机一张手牌耗能[blue]+1[/blue]。",
 
   "CALAMITY_CURSE_ENCHANTMENT.title": "进阶之灾",
-  "CALAMITY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n[gold]虚无[/gold]。\n[gold]永恒[/gold]。"
+  "CALAMITY_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n[gold]虚无[/gold]。\n[gold]永恒[/gold]。",
+
+  "STEADFAST_EXHAUST_ENCHANTMENT.title": "坚毅",
+  "STEADFAST_EXHAUST_ENCHANTMENT.description": "此牌获得的[gold]格挡[/gold]增加[blue]33%[/blue]。\n打出时[gold]消耗[/gold]一张牌。",
+  "STEADFAST_EXHAUST_ENCHANTMENT.extraCardText": "格挡[blue]+33%[/blue]。\n打出时[gold]消耗[/gold]一张牌。",
+
+  "RUIN_AUTO_PLAY_ENCHANTMENT.title": "破灭",
+  "RUIN_AUTO_PLAY_ENCHANTMENT.description": "打出时打出抽牌堆顶部的牌并将其[gold]消耗[/gold]。",
+  "RUIN_AUTO_PLAY_ENCHANTMENT.extraCardText": "打出抽牌堆顶牌并[gold]消耗[/gold]。",
+
+  "QUICK_DRAW_ENCHANTMENT.title": "快速",
+  "QUICK_DRAW_ENCHANTMENT.description": "打出时抽[blue]1[/blue]张牌。",
+  "QUICK_DRAW_ENCHANTMENT.extraCardText": "抽[blue]1[/blue]张牌。",
+
+  "BLOODLETTING_ENERGY_ENCHANTMENT.title": "放血",
+  "BLOODLETTING_ENERGY_ENCHANTMENT.description": "打出时失去[blue]{HpLoss:diff()}[/blue]点生命。\n获得{Energy:energyIcons()}。",
+  "BLOODLETTING_ENERGY_ENCHANTMENT.extraCardText": "失去[blue]{HpLoss:diff()}[/blue]生命。\n获得{Energy:energyIcons()}。",
+
+  "ARMING_UPGRADE_ENCHANTMENT.title": "武装",
+  "ARMING_UPGRADE_ENCHANTMENT.description": "打出时升级你[gold]手牌[/gold]中的一张牌。",
+  "ARMING_UPGRADE_ENCHANTMENT.extraCardText": "升级一张[gold]手牌[/gold]。",
+
+  "TERROR_VULNERABLE_ENCHANTMENT.title": "恐怖",
+  "TERROR_VULNERABLE_ENCHANTMENT.description": "此牌添加[gold]消耗[/gold]。\n打出时给予敌人[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。",
+  "TERROR_VULNERABLE_ENCHANTMENT.extraCardText": "给予[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。",
+
+  "SHIVER_VULNERABLE_ENCHANTMENT.title": "战栗",
+  "SHIVER_VULNERABLE_ENCHANTMENT.description": "打出时给予敌人[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。",
+  "SHIVER_VULNERABLE_ENCHANTMENT.extraCardText": "给予敌人[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。",
+
+  "NEUTRAL_WEAK_ENCHANTMENT.title": "中和",
+  "NEUTRAL_WEAK_ENCHANTMENT.description": "打出时给予敌人[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]。",
+  "NEUTRAL_WEAK_ENCHANTMENT.extraCardText": "给予敌人[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]。",
+
+  "BACKPACK_DRAW_DISCARD_ENCHANTMENT.title": "背包",
+  "BACKPACK_DRAW_DISCARD_ENCHANTMENT.description": "打出时抽[blue]1[/blue]张牌。\n丢弃[blue]1[/blue]张牌。",
+  "BACKPACK_DRAW_DISCARD_ENCHANTMENT.extraCardText": "抽[blue]1[/blue]张牌。\n丢弃[blue]1[/blue]张牌。",
+
+  "STARLIGHT_STARS_ENCHANTMENT.title": "星光",
+  "STARLIGHT_STARS_ENCHANTMENT.description": "打出时获得{Stars:starIcons()}。",
+  "STARLIGHT_STARS_ENCHANTMENT.extraCardText": "获得{Stars:starIcons()}。",
+
+  "ESCORT_SUMMON_ENCHANTMENT.title": "护卫",
+  "ESCORT_SUMMON_ENCHANTMENT.description": "打出时[gold]召唤[/gold]{Summon:diff()}。",
+  "ESCORT_SUMMON_ENCHANTMENT.extraCardText": "[gold]召唤[/gold]{Summon:diff()}。",
+
+  "EXTRA_HIT_ENCHANTMENT.title": "多打",
+  "EXTRA_HIT_ENCHANTMENT.description": "此牌造成的伤害额外增加[blue]{Amount}[/blue]段。",
+  "EXTRA_HIT_ENCHANTMENT.extraCardText": "此牌造成的伤害额外增加[blue]{Amount}[/blue]段。",
+
+  "SHRED_DEBRIS_ENCHANTMENT.title": "碎屑",
+  "SHRED_DEBRIS_ENCHANTMENT.description": "此牌造成的伤害与获得的格挡提高[blue]33%[/blue]。\n打出时将一张碎屑牌添加至你的手牌。",
+  "SHRED_DEBRIS_ENCHANTMENT.extraCardText": "此牌造成的伤害与获得的格挡提高[blue]33%[/blue]。\n将一张碎屑添加至你的手牌。"
 }

@@ -27,6 +27,14 @@ public sealed class MoreEnchantSettings
 	[JsonPropertyName("ancient_reward_enchant_chance_percent")]
 	public int AncientRewardEnchantChancePercent { get; set; } = 10;
 
+	/// <summary>通过 <see cref="MegaCrit.Sts2.Core.Commands.CardPileCmd.AddGeneratedCardsToCombat"/> 加入战斗的牌（玩家侧）是否可随机附魔。联机以房主设置为准。</summary>
+	[JsonPropertyName("combat_generated_enchant_enabled")]
+	public bool CombatGeneratedEnchantEnabled { get; set; }
+
+	/// <summary>战斗内生成牌附魔概率（0–100），独立于心商店/奖励。</summary>
+	[JsonPropertyName("combat_generated_enchant_chance_percent")]
+	public int CombatGeneratedEnchantChancePercent { get; set; } = 10;
+
 	/// <summary>
 	/// 为真时按卡牌稀有度使用 Chimera 式五档权重曲线；为假时仅使用下方五组相对权重（无视卡牌稀有度）。
 	/// </summary>

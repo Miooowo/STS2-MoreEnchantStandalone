@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -24,6 +25,7 @@ namespace MoreEnchant.Enchantments;
 /// <summary>羞耻：费用 -1{Energy}；打出时获得 2 层 <see cref="FrailPower"/>。</summary>
 public sealed class ShameCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { HoverTipFactory.FromPower<FrailPower>() };
 	private const int FrailStacks = 2;
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Curse;
@@ -63,6 +65,7 @@ public sealed class ShameCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 /// <summary>疑虑：抽到该牌时额外抽 1 张；打出时获得 1 层 <see cref="WeakPower"/>。</summary>
 public sealed class DoubtCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { HoverTipFactory.FromPower<WeakPower>() };
 	private const int WeakStacks = 1;
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Curse;

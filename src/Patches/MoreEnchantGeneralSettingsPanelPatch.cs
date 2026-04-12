@@ -122,7 +122,36 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		};
 		root.AddChild(ancientChanceRow);
 
-		void RefreshShopAncientUi()
+		var combatEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
+		var combatCheck = new CheckBox
+		{
+			Text = "战斗内生成卡牌随机附魔",
+			ButtonPressed = settings.CombatGeneratedEnchantEnabled,
+			FocusMode = Control.FocusModeEnum.None,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+		};
+		combatEnableRow.AddChild(combatCheck);
+		root.AddChild(combatEnableRow);
+
+		var combatChanceRow = CreateLabeledRow(
+			"战斗内生成附魔概率（%）",
+			out var combatChanceSlider,
+			out var combatChanceLabel);
+		combatChanceSlider.MinValue = 0;
+		combatChanceSlider.MaxValue = 100;
+		combatChanceSlider.Step = 1;
+		combatChanceSlider.FocusMode = Control.FocusModeEnum.None;
+		combatChanceSlider.Value = settings.CombatGeneratedEnchantChancePercent;
+		combatChanceLabel.Text = $"{settings.CombatGeneratedEnchantChancePercent}%";
+		combatChanceSlider.ValueChanged += v =>
+		{
+			settings.CombatGeneratedEnchantChancePercent = Mathf.Clamp((int)v, 0, 100);
+			combatChanceLabel.Text = $"{settings.CombatGeneratedEnchantChancePercent}%";
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		root.AddChild(combatChanceRow);
+
+		void RefreshShopAncientCombatUi()
 		{
 			var shopOn = settings.ShopEnchantEnabled;
 			shopChanceSlider.MouseFilter = shopOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
@@ -131,21 +160,31 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 			var ancOn = settings.AncientRewardEnchantEnabled;
 			ancientChanceSlider.MouseFilter = ancOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
 			ancientChanceSlider.Modulate = ancOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
+
+			var combatOn = settings.CombatGeneratedEnchantEnabled;
+			combatChanceSlider.MouseFilter = combatOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+			combatChanceSlider.Modulate = combatOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
 		}
 
 		shopCheck.Toggled += pressed =>
 		{
 			settings.ShopEnchantEnabled = pressed;
-			RefreshShopAncientUi();
+			RefreshShopAncientCombatUi();
 			MoreEnchantSettingsStore.PersistCurrent();
 		};
 		ancientCheck.Toggled += pressed =>
 		{
 			settings.AncientRewardEnchantEnabled = pressed;
-			RefreshShopAncientUi();
+			RefreshShopAncientCombatUi();
 			MoreEnchantSettingsStore.PersistCurrent();
 		};
-		RefreshShopAncientUi();
+		combatCheck.Toggled += pressed =>
+		{
+			settings.CombatGeneratedEnchantEnabled = pressed;
+			RefreshShopAncientCombatUi();
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		RefreshShopAncientCombatUi();
 
 		var chimeraRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
 		var chimeraCheck = new CheckBox

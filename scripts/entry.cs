@@ -49,6 +49,7 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<BellCurseEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<BadLuckCurseEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<InfectionCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<MagicCorruptionEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<FinaleCurtainEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ShameCurseEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<DoubtCurseEnchantment>();
@@ -62,6 +63,19 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<GuiltCurseEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<InjuryCurseEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<CalamityCurseEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SteadfastExhaustEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<RuinAutoPlayEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<QuickDrawEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<BloodlettingEnergyEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ArmingUpgradeEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<TerrorVulnerableEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ShiverVulnerableEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<NeutralWeakEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<BackpackDrawDiscardEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<StarlightStarsEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<EscortSummonEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ExtraHitEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ShredDebrisEnchantment>();
 
 		// 可选拓展：若安装了 MultiEnchantmentMod，则启用蛇咬等附魔的 MergeAmount 叠层语义。
 		MultiEnchantmentCompat.TryEnableForSnakebite(typeof(SnakebiteEnchantment));

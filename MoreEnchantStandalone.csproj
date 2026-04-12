@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 
-		<Version>0.5.0</Version>
+		<Version>0.6.0</Version>
 
 		<TargetFramework>net9.0</TargetFramework>
 
@@ -72,7 +72,23 @@
 		<ExportModPck>true</ExportModPck>
 		<!-- 尝试缓解无头崩溃；若仍失败请配合 ExportModPck=false 或在本机 MegaDot 编辑器里导出一次 PCK。 -->
 		<GodotExportExtraArgs>--display-driver headless --audio-driver Dummy</GodotExportExtraArgs>
+		<GithubReleaseDir>$(MSBuildProjectDirectory)\release</GithubReleaseDir>
+		<GithubReleaseZip>$(GithubReleaseDir)\MoreEnchantStandalone-$(Version).zip</GithubReleaseZip>
 	</PropertyGroup>
+
+	<!-- Release 构建默认将 dll/json/pck 复制到 release/ 并打 zip；命令行已传 /p:PackGithubRelease=... 时不再覆盖 -->
+	<Choose>
+		<When Condition="'$(PackGithubRelease)' == '' AND '$(Configuration)' == 'Release'">
+			<PropertyGroup>
+				<PackGithubRelease>true</PackGithubRelease>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(PackGithubRelease)' == ''">
+			<PropertyGroup>
+				<PackGithubRelease>false</PackGithubRelease>
+			</PropertyGroup>
+		</When>
+	</Choose>
 
 	<Target Name="CopyModToGame" AfterTargets="Build">
 
@@ -117,6 +133,48 @@
 		      SkipUnchangedFiles="true"
 
 		      Condition="'$(DeployMoreEnchantToSts2)' == 'true' And Exists('$(Sts2Dir)') And Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+
+	</Target>
+
+	<Target Name="StageGithubRelease" AfterTargets="CopyModToGame">
+
+		<MakeDir Directories="$(GithubReleaseDir)" Condition="'$(PackGithubRelease)' == 'true'" />
+
+		<Copy SourceFiles="$(TargetPath)"
+
+		      DestinationFiles="$(GithubReleaseDir)\MoreEnchantStandalone.dll"
+
+		      SkipUnchangedFiles="false"
+
+		      Condition="'$(PackGithubRelease)' == 'true'" />
+
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\MoreEnchantStandalone.json"
+
+		      DestinationFolder="$(GithubReleaseDir)"
+
+		      SkipUnchangedFiles="false"
+
+		      Condition="'$(PackGithubRelease)' == 'true' And Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.json')" />
+
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck"
+
+		      DestinationFolder="$(GithubReleaseDir)"
+
+		      SkipUnchangedFiles="false"
+
+		      Condition="'$(PackGithubRelease)' == 'true' And Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+
+		<Warning Text="PackGithubRelease：未找到 MoreEnchantStandalone.pck，已跳过复制到 release/ 与 zip。请成功导出 PCK 后重新构建，或关闭 PackGithubRelease。" Condition="'$(PackGithubRelease)' == 'true' And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+
+		<Warning Text="PackGithubRelease：未找到 MoreEnchantStandalone.json，已跳过复制到 release/ 与 zip。" Condition="'$(PackGithubRelease)' == 'true' And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.json')" />
+
+		<Exec Condition="'$(PackGithubRelease)' == 'true' And Exists('$(GithubReleaseDir)\MoreEnchantStandalone.dll') And Exists('$(GithubReleaseDir)\MoreEnchantStandalone.json') And Exists('$(GithubReleaseDir)\MoreEnchantStandalone.pck')"
+
+		      WorkingDirectory="$(MSBuildProjectDirectory)"
+
+		      Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;$ErrorActionPreference='Stop'; $d='$(GithubReleaseDir)'; $z='$(GithubReleaseZip)'; $fs=@('MoreEnchantStandalone.dll','MoreEnchantStandalone.json','MoreEnchantStandalone.pck') | ForEach-Object { Join-Path $d $_ }; Compress-Archive -LiteralPath $fs -DestinationPath $z -Force&quot;" />
+
+		<Message Text="已写入 GitHub Release 目录：$(GithubReleaseDir)（含 MoreEnchantStandalone-$(Version).zip）" Importance="high" Condition="'$(PackGithubRelease)' == 'true' And Exists('$(GithubReleaseZip)')" />
 
 	</Target>
 

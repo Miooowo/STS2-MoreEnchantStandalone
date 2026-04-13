@@ -1,6 +1,7 @@
 using System.Reflection;
 using Godot;
 using HarmonyLib;
+using Steamworks;
 using MegaCrit.Sts2.Core.Modding;
 using MoreEnchant.Enchantments;
 using MoreEnchant.Standalone;
@@ -76,6 +77,18 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<EscortSummonEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ExtraHitEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ShredDebrisEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SlipperyFirstPlayEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<GainBufferPowerEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ReplicaExhaustCopyEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<MeltDoubleVulnerableEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<PlunderDrawEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<DuelStrengthEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<DemonShieldShareBlockEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ReaperDoomOnDamageEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<EagerPerAttackEnergyEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<PounceNextSkillFreeEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<PincerFlankingMarkEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SlyKeywordEnchantment>();
 
 		// 可选拓展：若安装了 MultiEnchantmentMod，则启用蛇咬等附魔的 MergeAmount 叠层语义。
 		MultiEnchantmentCompat.TryEnableForSnakebite(typeof(SnakebiteEnchantment));
@@ -85,6 +98,15 @@ public static class Entry
 
 		EnsureGodotScriptsRegistered(Assembly.GetExecutingAssembly());
 		_ = MoreEnchantSettingsStore.Get();
+
+		// 与游戏本体一致：Slay the Spire 2 Steam AppID（MegaCrit.Sts2.Core.Platform.Steam.SteamInitializer.steamAppId）
+		const uint Sts2SteamAppId = 2868840u;
+		if (!SteamApps.BIsSubscribedApp(new AppId_t(Sts2SteamAppId)))
+		{
+			const string msg = "MoreEnchantStandalone 需要在 Steam 正版《杀戮尖塔2》中运行。";
+			GD.PushError(msg);
+			throw new InvalidOperationException(msg);
+		}
 	}
 
 	private static void EnsureGodotScriptsRegistered(Assembly assembly)

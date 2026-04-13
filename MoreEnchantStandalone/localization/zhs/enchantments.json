@@ -261,8 +261,8 @@
   "DUEL_STRENGTH_ENCHANTMENT.extraCardText": "你+[blue]{StrengthPower:diff()}[/blue][gold]力量[/gold]；敌人各+[blue]1[/blue][gold]力量[/gold]。",
 
   "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.title": "恶魔护盾",
-  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.description": "罕见。仅多人。此牌[gold]消耗[/gold]。失去[blue]1[/blue]点生命；将你的[gold]格挡[/gold]给予另一名玩家。",
-  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。失去[blue]1[/blue]生命；队友获得你当前[gold]格挡[/gold]。",
+  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.description": "罕见。仅多人。此牌[gold]消耗[/gold]。失去[blue]1[/blue]点生命；将你的[gold]格挡[/gold]给予你[gold]选择[/gold]的一名队友。",
+  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。失去[blue]1[/blue]生命；[gold]选择[/gold]队友获得你当前[gold]格挡[/gold]。",
 
   "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.title": "死神",
   "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.description": "稀有。仅可附于带打出伤害的牌。你的攻击造成伤害时，施加[gold]灾厄[/gold]，层数为伤害值的一半。",

@@ -273,8 +273,8 @@
   "DUEL_STRENGTH_ENCHANTMENT.extraCardText": "You +[blue]{StrengthPower:diff()}[/blue] [gold]Str[/gold]; enemies +[blue]1[/blue] [gold]Str[/gold].",
 
   "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.title": "Demon Shield",
-  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.description": "Uncommon. Multiplayer only. [gold]Exhaust[/gold]. Lose [blue]1[/blue] HP; another player gains [gold]Block[/gold] equal to your current [gold]Block[/gold].",
-  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Lose [blue]1[/blue] HP; ally gains your [gold]Block[/gold].",
+  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.description": "Uncommon. Multiplayer only. [gold]Exhaust[/gold]. Lose [blue]1[/blue] HP; a [gold]chosen[/gold] teammate gains [gold]Block[/gold] equal to your current [gold]Block[/gold].",
+  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Lose [blue]1[/blue] HP; [gold]pick[/gold] a teammate to gain your [gold]Block[/gold].",
 
   "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.title": "Reaper",
   "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.description": "Rare. Only on cards with play damage. When your attack deals damage, apply [gold]Doom[/gold] equal to half the damage dealt.",

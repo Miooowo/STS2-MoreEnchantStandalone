@@ -253,8 +253,8 @@
   "SLIPPERY_FIRST_PLAY_ENCHANTMENT.extraCardText": "First play this combat: gain [blue]{SlipperyPower:diff()}[/blue] [gold]Slippery[/gold].",
 
   "GAIN_BUFFER_POWER_ENCHANTMENT.title": "Buffer",
-  "GAIN_BUFFER_POWER_ENCHANTMENT.description": "Special. When played, gain [blue]{BufferPower:diff()}[/blue] [gold]Buffer[/gold].",
-  "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "Gain [blue]{BufferPower:diff()}[/blue] [gold]Buffer[/gold].",
+  "GAIN_BUFFER_POWER_ENCHANTMENT.description": "Special. The [gold]first[/gold] time you play this card each combat, gain [blue]{BufferPower:diff()}[/blue] [gold]Buffer[/gold].",
+  "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "First play this combat: gain [blue]{BufferPower:diff()}[/blue] [gold]Buffer[/gold].",
 
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.title": "Replica",
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "When played, add an [gold]Exhaust[/gold] copy of this card to your [gold]discard pile[/gold].",

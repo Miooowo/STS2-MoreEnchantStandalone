@@ -30,10 +30,10 @@ using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
 
-/// <summary>滑溜：本场战斗中首次打出时获得 2 层滑溜。</summary>
+/// <summary>滑溜：本场战斗中首次打出时获得 1 层滑溜。</summary>
 public sealed class SlipperyFirstPlayEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
-	private const decimal SlipperyStacks = 2m;
+	private const decimal SlipperyStacks = 1m;
 
 	private bool _pendingFirstPlayInCombat = true;
 
@@ -68,10 +68,12 @@ public sealed class SlipperyFirstPlayEnchantment : ModEnchantmentTemplate, IRewa
 	}
 }
 
-/// <summary>缓冲：获得缓冲。</summary>
+/// <summary>缓冲：每场战斗中第一次打出这张牌时，获得 1 层缓冲。</summary>
 public sealed class GainBufferPowerEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
 	private const decimal BufferStacks = 1m;
+
+	private bool _pendingFirstPlayInCombat = true;
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Special;
 
@@ -83,13 +85,22 @@ public sealed class GainBufferPowerEnchantment : ModEnchantmentTemplate, IReward
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromPower<BufferPower>() };
 
+	public override Task BeforeCombatStart()
+	{
+		_pendingFirstPlayInCombat = true;
+		return Task.CompletedTask;
+	}
+
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
 	{
+		if (!_pendingFirstPlayInCombat)
+			return;
 		var player = Card?.Owner;
 		var c = player?.Creature;
 		if (c == null)
 			return;
 
+		_pendingFirstPlayInCombat = false;
 		await CreatureCmd.TriggerAnim(c, "Cast", player!.Character.CastAnimDelay);
 		await PowerCmd.Apply<BufferPower>(c, BufferStacks, c, Card);
 	}

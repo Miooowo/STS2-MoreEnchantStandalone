@@ -241,8 +241,8 @@
   "SLIPPERY_FIRST_PLAY_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]{SlipperyPower:diff()}[/blue]层[gold]滑溜[/gold]。",
 
   "GAIN_BUFFER_POWER_ENCHANTMENT.title": "缓冲",
-  "GAIN_BUFFER_POWER_ENCHANTMENT.description": "特殊。打出时获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
-  "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
+  "GAIN_BUFFER_POWER_ENCHANTMENT.description": "特殊。你在每场战斗中[gold]第一次[/gold]打出这张牌时，获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
+  "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
 
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.title": "复刻",
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "打出后将一张此牌的[gold]消耗[/gold]复制品置入你的[gold]弃牌堆[/gold]。",

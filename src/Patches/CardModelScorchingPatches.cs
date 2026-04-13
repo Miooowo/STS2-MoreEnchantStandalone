@@ -100,8 +100,9 @@ internal static class CardModelScorchingMaxUpgradePatch
 	{
 		var need = __result;
 
+		// 至少保留 2 档可升空间；且须严格大于 CurrentUpgradeLevel，否则升到档 2 后 Max 仍为 2 → 无法继续升级。
 		if (__instance.Enchantment is ScorchingEnchantment)
-			need = Math.Max(need, Math.Max(2, __instance.CurrentUpgradeLevel));
+			need = Math.Max(need, Math.Max(2, __instance.CurrentUpgradeLevel + 1));
 
 		if (CardModelFromSerializableScope.ActiveSaveNeedsDeserializeMaxCapLift())
 			need = Math.Max(need, CardModelFromSerializableScope.PeekTopSaveCurrentUpgradeLevel());

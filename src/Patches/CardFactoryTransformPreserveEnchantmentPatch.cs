@@ -18,7 +18,7 @@ internal static class CardFactoryTransformPreserveEnchantmentPatch
 		typeof(CardFactory),
 		nameof(CardFactory.CreateRandomCardForTransform),
 		[typeof(CardModel), typeof(bool), typeof(Rng)])]
-	private static void PostfixThreeArgs(CardModel original, CardModel __result)
+	private static void PostfixThreeArgs(CardModel original, bool isInCombat, Rng rng, ref CardModel __result)
 	{
 		TryCopyEnchantment(original, __result);
 	}
@@ -28,7 +28,12 @@ internal static class CardFactoryTransformPreserveEnchantmentPatch
 		typeof(CardFactory),
 		nameof(CardFactory.CreateRandomCardForTransform),
 		[typeof(CardModel), typeof(IEnumerable<CardModel>), typeof(bool), typeof(Rng)])]
-	private static void PostfixFourArgs(CardModel original, CardModel __result)
+	private static void PostfixFourArgs(
+		CardModel original,
+		IEnumerable<CardModel> options,
+		bool isInCombat,
+		Rng rng,
+		ref CardModel __result)
 	{
 		TryCopyEnchantment(original, __result);
 	}

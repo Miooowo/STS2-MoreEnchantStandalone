@@ -155,6 +155,42 @@ internal static class MoreEnchantCardRewardUtil
 		CardCmd.Enchant(enchant, card, amount);
 	}
 
+	/// <summary>
+	/// 非 <see cref="CardFactory.CreateForReward"/> 路径、直接入牌组的牌（巨大扭蛋额外打击/防御、涅奥的苦痛、卷轴箱等）；
+	/// 与 <see cref="MegaCrit.Sts2.Core.Commands.CardSelectCmd.FromChooseABundleScreen"/> 卷轴箱预览共用 <see cref="MoreEnchantSettings.DeckDirectEnchantChancePercent"/>。
+	/// </summary>
+	internal static void TryApplyRandomEnchantDirectDeckAdd(Player player, CardModel card)
+	{
+		if (card.Enchantment != null)
+			return;
+		if (!LocalContext.IsMine(card))
+			return;
+		if (ShouldSkipEnchantingRewardCard(card))
+			return;
+
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.DeckDirectEnchantEnabled)
+			return;
+
+		var chancePercent = Math.Clamp(settings.DeckDirectEnchantChancePercent, 0, 100);
+		if (chancePercent <= 0)
+			return;
+
+		var rng = player.PlayerRng.Rewards;
+		if (rng.NextInt(0, 100) >= chancePercent)
+			return;
+
+		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var ancient = card.Rarity == CardRarity.Ancient;
+		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient);
+		if (pick == null)
+			return;
+
+		var enchant = (EnchantmentModel)pick.MutableClone();
+		var amount = RollEnchantAmount(rng, pick);
+		CardCmd.Enchant(enchant, card, amount);
+	}
+
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(
 		CardModel card,
 		MoreEnchantSettings settings)

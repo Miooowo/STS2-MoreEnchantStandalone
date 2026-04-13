@@ -237,12 +237,12 @@
   "SHRED_DEBRIS_ENCHANTMENT.extraCardText": "此牌造成的伤害与获得的格挡提高[blue]33%[/blue]。\n将一张碎屑添加至你的手牌。",
 
   "SLIPPERY_FIRST_PLAY_ENCHANTMENT.title": "滑溜",
-  "SLIPPERY_FIRST_PLAY_ENCHANTMENT.description": "稀有。本场战斗中[gold]首次[/gold]打出时，获得[blue]{SlipperyPower:diff()}[/blue]层[gold]滑溜[/gold]。",
-  "SLIPPERY_FIRST_PLAY_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]{SlipperyPower:diff()}[/blue]层[gold]滑溜[/gold]。",
+  "SLIPPERY_FIRST_PLAY_ENCHANTMENT.description": "你在每场战斗中第一次打出这张牌时，获得[blue]{SlipperyPower:diff()}[/blue]层[gold]滑溜[/gold]。",
+  "SLIPPERY_FIRST_PLAY_ENCHANTMENT.extraCardText": "本场首次打出，获得[blue]{SlipperyPower:diff()}[/blue]层[gold]滑溜[/gold]。",
 
   "GAIN_BUFFER_POWER_ENCHANTMENT.title": "缓冲",
-  "GAIN_BUFFER_POWER_ENCHANTMENT.description": "特殊。你在每场战斗中[gold]第一次[/gold]打出这张牌时，获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
-  "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
+  "GAIN_BUFFER_POWER_ENCHANTMENT.description": "你在每场战斗中第一次打出这张牌时，获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
+  "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "本场首次打出，获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
 
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.title": "复刻",
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "打出后将一张此牌的[gold]消耗[/gold]复制品置入你的[gold]弃牌堆[/gold]。",
@@ -253,34 +253,33 @@
   "MELT_DOUBLE_VULNERABLE_ENCHANTMENT.extraCardText": "目标[gold]易伤[/gold]层数翻倍。",
 
   "PLUNDER_DRAW_ENCHANTMENT.title": "劫掠",
-  "PLUNDER_DRAW_ENCHANTMENT.description": "罕见。抽牌直到你抽到一张非[gold]攻击[/gold]牌。",
+  "PLUNDER_DRAW_ENCHANTMENT.description": "抽牌直到你抽到一张非[gold]攻击[/gold]牌。",
   "PLUNDER_DRAW_ENCHANTMENT.extraCardText": "抽牌直到抽到非[gold]攻击[/gold]牌。",
 
   "DUEL_STRENGTH_ENCHANTMENT.title": "与我一战",
-  "DUEL_STRENGTH_ENCHANTMENT.description": "罕见。打出时获得[blue]{StrengthPower:diff()}[/blue]点[gold]力量[/gold]；每名目标敌人获得[blue]1[/blue]点[gold]力量[/gold]。",
-  "DUEL_STRENGTH_ENCHANTMENT.extraCardText": "你+[blue]{StrengthPower:diff()}[/blue][gold]力量[/gold]；敌人各+[blue]1[/blue][gold]力量[/gold]。",
+  "DUEL_STRENGTH_ENCHANTMENT.description": "打出时获得[blue]{StrengthPower:diff()}[/blue]点[gold]力量[/gold]。\n该敌人获得[blue]1[/blue]点[gold]力量[/gold]。",
+  "DUEL_STRENGTH_ENCHANTMENT.extraCardText": "打出时获得{StrengthPower:diff()}点力量。\n该敌人获得1点力量。",
 
   "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.title": "恶魔护盾",
-  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.description": "罕见。仅多人。此牌[gold]消耗[/gold]。失去[blue]1[/blue]点生命；将你的[gold]格挡[/gold]给予你[gold]选择[/gold]的一名队友。",
-  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。失去[blue]1[/blue]生命；[gold]选择[/gold]队友获得你当前[gold]格挡[/gold]。",
+  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.description": "仅多人。此牌[gold]消耗[/gold]。\n失去[blue]1[/blue]生命。\n给予另一位玩家你当前格挡值的格挡。",
+  "DEMON_SHIELD_SHARE_BLOCK_ENCHANTMENT.extraCardText": "失去[blue]1[/blue]生命。\n给予另一位玩家你当前格挡值的格挡。",
 
   "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.title": "死神",
-  "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.description": "稀有。仅可附于带打出伤害的牌。你的攻击造成伤害时，施加[gold]灾厄[/gold]，层数为伤害值的一半。",
-  "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.extraCardText": "攻击伤血：施加一半伤害的[gold]灾厄[/gold]。",
+  "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.description": "当你的攻击造成伤害时，同时给予一半伤害值的[gold]灾厄[/gold]。",
+  "REAPER_DOOM_ON_DAMAGE_ENCHANTMENT.extraCardText": "当你的攻击造成伤害时，同时给予一半伤害值的灾厄。",
 
   "EAGER_PER_ATTACK_ENERGY_ENCHANTMENT.title": "跃跃欲试",
-  "EAGER_PER_ATTACK_ENERGY_ENCHANTMENT.description": "罕见。此牌耗能[blue]+1[/blue]。打出时，你[gold]手牌[/gold]中每有一张[gold]攻击[/gold]牌，获得[blue]1[/blue]点[gold]能量[/gold]。",
+  "EAGER_PER_ATTACK_ENERGY_ENCHANTMENT.description": "此牌耗能[blue]+1[/blue]。打出时，你[gold]手牌[/gold]中每有一张[gold]攻击[/gold]牌，获得[blue]1[/blue]点[gold]能量[/gold]。",
   "EAGER_PER_ATTACK_ENERGY_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]。按手牌中[gold]攻击[/gold]牌数获得[gold]能量[/gold]。",
 
   "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.title": "猛扑",
-  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.description": "罕见。仅[gold]攻击[/gold]且基础耗能不低于[blue]2[/blue]。打出后你的下一张[gold]技能[/gold]耗能为[blue]0[/blue]。",
-  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.extraCardText": "下一张[gold]技能[/gold][blue]0[/blue]耗能。",
+  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.description": "打出后你的下一张[gold]技能[/gold]耗能为[blue]0[/blue]。",
+  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.extraCardText": "下一张技能牌耗能为blue]0。",
 
   "PINCER_FLANKING_MARK_ENCHANTMENT.title": "夹击",
-  "PINCER_FLANKING_MARK_ENCHANTMENT.description": "罕见。仅多人。此牌耗能[blue]+1[/blue]。对目标施加[gold]夹击[/gold]（其他玩家对该敌人的攻击伤害翻倍）。",
-  "PINCER_FLANKING_MARK_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]。施加[gold]夹击[/gold]。",
+  "PINCER_FLANKING_MARK_ENCHANTMENT.description": "此牌耗能[blue]+1[/blue]。\n一名敌人在本回合受到的来自其他玩家的伤害翻倍。",
+  "PINCER_FLANKING_MARK_ENCHANTMENT.extraCardText": "一名敌人在本回合受到的来自其他玩家的伤害翻倍。。",
 
   "SLY_KEYWORD_ENCHANTMENT.title": "奇巧",
-  "SLY_KEYWORD_ENCHANTMENT.description": "此牌获得[gold]奇巧[/gold]。",
-  "SLY_KEYWORD_ENCHANTMENT.extraCardText": "[gold]奇巧[/gold]。"
+  "SLY_KEYWORD_ENCHANTMENT.description": "此牌获得[gold]奇巧[/gold]。"
 }

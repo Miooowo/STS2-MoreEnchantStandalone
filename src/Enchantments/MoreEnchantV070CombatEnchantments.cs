@@ -509,7 +509,7 @@ public sealed class SlyKeywordEnchantment : ModEnchantmentTemplate, IRewardEncha
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Sly) };

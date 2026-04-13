@@ -24,6 +24,14 @@ internal static class MoreEnchantSettingsMigration
 			changed = true;
 		}
 
+		if (s.SchemaVersion < 3)
+		{
+			s.DeckDirectEnchantEnabled = true;
+			s.DeckDirectEnchantChancePercent = 10;
+			s.SchemaVersion = 3;
+			changed = true;
+		}
+
 		return changed;
 	}
 }

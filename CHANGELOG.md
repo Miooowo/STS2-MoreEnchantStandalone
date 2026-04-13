@@ -10,9 +10,10 @@
 - 战斗附魔：**滑溜**（稀有，本场首次打出获得 1 滑溜）、**缓冲**（特殊，本场首次打出获得 1 缓冲）、**复刻**（打出后置入消耗复制品于弃牌堆）、**熔融**（目标易伤层数翻倍）、**劫掠**（罕见，抽至非攻击）、**与我一战**（罕见，你+2 力量、敌人各+1 力量）、**恶魔护盾**（罕见，多人；消耗；自损 1；**自选队友**获得你当前格挡）、**死神**（稀有，仅伤害牌；攻击伤血施加一半伤害的灾厄）、**跃跃欲试**（罕见，耗能+1；按手牌攻击数获能）、**猛扑**（罕见，攻击且基础耗能≥2；下一张技能 0 费）、**夹击**（罕见，多人；耗能+1；夹击/侧袭效果）、**奇巧**（普通，获得奇巧关键词）。
 - 设置：变牌随机附魔开关与独立概率（`transform_enchant_enabled` / `transform_enchant_chance_percent`）；旧配置通过 `schema_version` 迁移为与「卡牌奖励附魔概率」一致（无则 10%）。
 - 设置：`deck_direct_enchant_enabled` / `deck_direct_enchant_chance_percent`（默认 10%）：非奖励工厂、直接入牌组的牌（巨大扭蛋额外打击/防御、涅奥的苦痛、卷轴箱等）在入组时掷骰；卷轴箱三选一在打开预览前对候选牌掷骰（与入组同一套概率）。`schema_version` 3 迁移写入默认值。
+- README.md新增star历史。
 
 ### 修复
-- **灼热**：`MaxUpgradeLevel` 与 `CurrentUpgradeLevel` 同为 2 时无法再升级；改为至少为 `CurrentUpgradeLevel + 1`（且不少于 2）以允许多段升级。
+- **灼热**：`MaxUpgradeLevel` 改为999。
 - **多打**：无论叠层多少，仅额外增加 1 段力量攻击。
 - **变牌继承附魔**：在 <c>CardTransformation.GetReplacement</c> 返回后统一继承原牌附魔；原牌无附魔时再按非战斗奖励概率随机附魔。保留 <c>CardFactory.CreateRandomCardForTransform</c> 后缀作双保险。<c>Hook.ModifyCardBeingAddedToDeck</c> 后缀用 <c>[HarmonyArgument(1)]</c> 绑定第二个参数 <c>CardModel card</c>（首参为 <c>IRunState</c>），避免误绑；蛋遗物克隆升级后再从入参卡补回附魔。
 

@@ -7,9 +7,9 @@ public sealed class MoreEnchantSettings
 {
 	public const string StoreKey = "settings";
 
-	/// <summary>设置 JSON 架构版本；低于 2 时由 <see cref="MoreEnchantSettingsStore"/> 迁移变牌附魔默认值。</summary>
+	/// <summary>设置 JSON 架构版本；低于 2/3 时由 <see cref="MoreEnchantSettingsStore"/> 迁移默认值。</summary>
 	[JsonPropertyName("schema_version")]
-	public int SchemaVersion { get; set; } = 2;
+	public int SchemaVersion { get; set; } = 3;
 
 	/// <summary>卡牌奖励等：每张选项获得随机附魔的基础概率（0–100，百分数）。</summary>
 	[JsonPropertyName("reward_enchant_chance_percent")]
@@ -46,6 +46,16 @@ public sealed class MoreEnchantSettings
 	/// <summary>变牌随机附魔概率（0–100），独立于卡牌奖励概率。</summary>
 	[JsonPropertyName("transform_enchant_chance_percent")]
 	public int TransformEnchantChancePercent { get; set; } = 10;
+
+	/// <summary>
+	/// 非奖励工厂路径、直接 <c>CardPileCmd.Add</c> 入牌组时（如巨大扭蛋额外打击防御、涅奥苦痛、卷轴箱等）是否可随机附魔。
+	/// </summary>
+	[JsonPropertyName("deck_direct_enchant_enabled")]
+	public bool DeckDirectEnchantEnabled { get; set; } = true;
+
+	/// <summary>直加牌组随机附魔概率（0–100）；卷轴箱三选一预览与最终入组共用同一套掷骰与权重。</summary>
+	[JsonPropertyName("deck_direct_enchant_chance_percent")]
+	public int DeckDirectEnchantChancePercent { get; set; } = 10;
 
 	/// <summary>
 	/// 为真时按卡牌稀有度使用 Chimera 式五档权重曲线；为假时仅使用下方五组相对权重（无视卡牌稀有度）。

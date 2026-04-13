@@ -122,6 +122,35 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		};
 		root.AddChild(ancientChanceRow);
 
+		var transformEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
+		var transformCheck = new CheckBox
+		{
+			Text = "变牌随机附魔（替牌继承后仍无附魔时）",
+			ButtonPressed = settings.TransformEnchantEnabled,
+			FocusMode = Control.FocusModeEnum.None,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+		};
+		transformEnableRow.AddChild(transformCheck);
+		root.AddChild(transformEnableRow);
+
+		var transformChanceRow = CreateLabeledRow(
+			"变牌附魔概率（%）",
+			out var transformChanceSlider,
+			out var transformChanceLabel);
+		transformChanceSlider.MinValue = 0;
+		transformChanceSlider.MaxValue = 100;
+		transformChanceSlider.Step = 1;
+		transformChanceSlider.FocusMode = Control.FocusModeEnum.None;
+		transformChanceSlider.Value = settings.TransformEnchantChancePercent;
+		transformChanceLabel.Text = $"{settings.TransformEnchantChancePercent}%";
+		transformChanceSlider.ValueChanged += v =>
+		{
+			settings.TransformEnchantChancePercent = Mathf.Clamp((int)v, 0, 100);
+			transformChanceLabel.Text = $"{settings.TransformEnchantChancePercent}%";
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		root.AddChild(transformChanceRow);
+
 		var combatEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
 		var combatCheck = new CheckBox
 		{
@@ -161,6 +190,10 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 			ancientChanceSlider.MouseFilter = ancOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
 			ancientChanceSlider.Modulate = ancOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
 
+			var transformOn = settings.TransformEnchantEnabled;
+			transformChanceSlider.MouseFilter = transformOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+			transformChanceSlider.Modulate = transformOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
+
 			var combatOn = settings.CombatGeneratedEnchantEnabled;
 			combatChanceSlider.MouseFilter = combatOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
 			combatChanceSlider.Modulate = combatOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
@@ -181,6 +214,12 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		combatCheck.Toggled += pressed =>
 		{
 			settings.CombatGeneratedEnchantEnabled = pressed;
+			RefreshShopAncientCombatUi();
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		transformCheck.Toggled += pressed =>
+		{
+			settings.TransformEnchantEnabled = pressed;
 			RefreshShopAncientCombatUi();
 			MoreEnchantSettingsStore.PersistCurrent();
 		};

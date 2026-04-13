@@ -7,6 +7,10 @@ public sealed class MoreEnchantSettings
 {
 	public const string StoreKey = "settings";
 
+	/// <summary>设置 JSON 架构版本；低于 2 时由 <see cref="MoreEnchantSettingsStore"/> 迁移变牌附魔默认值。</summary>
+	[JsonPropertyName("schema_version")]
+	public int SchemaVersion { get; set; } = 2;
+
 	/// <summary>卡牌奖励等：每张选项获得随机附魔的基础概率（0–100，百分数）。</summary>
 	[JsonPropertyName("reward_enchant_chance_percent")]
 	public int RewardEnchantChancePercent { get; set; } = 10;
@@ -34,6 +38,14 @@ public sealed class MoreEnchantSettings
 	/// <summary>战斗内生成牌附魔概率（0–100），独立于心商店/奖励。</summary>
 	[JsonPropertyName("combat_generated_enchant_chance_percent")]
 	public int CombatGeneratedEnchantChancePercent { get; set; } = 10;
+
+	/// <summary>变牌（替牌继承原牌附魔后仍无附魔时）是否可再随机附魔。联机以房主为准。</summary>
+	[JsonPropertyName("transform_enchant_enabled")]
+	public bool TransformEnchantEnabled { get; set; } = true;
+
+	/// <summary>变牌随机附魔概率（0–100），独立于卡牌奖励概率。</summary>
+	[JsonPropertyName("transform_enchant_chance_percent")]
+	public int TransformEnchantChancePercent { get; set; } = 10;
 
 	/// <summary>
 	/// 为真时按卡牌稀有度使用 Chimera 式五档权重曲线；为假时仅使用下方五组相对权重（无视卡牌稀有度）。

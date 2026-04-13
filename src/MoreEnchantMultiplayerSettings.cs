@@ -16,8 +16,7 @@ internal static class MoreEnchantMultiplayerSettings
 		lock (Sync)
 		{
 			_hostReplica = JsonSerializer.Deserialize<MoreEnchantSettings>(json) ?? new MoreEnchantSettings();
-			if (_hostReplica.WeightCurse <= 0)
-				_hostReplica.WeightCurse = 250;
+			MoreEnchantSettingsMigration.Apply(_hostReplica);
 		}
 	}
 

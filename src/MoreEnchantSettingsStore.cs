@@ -31,9 +31,8 @@ internal static class MoreEnchantSettingsStore
 					_cached = new MoreEnchantSettings();
 				}
 
-				// 旧版 JSON 无 weight_curse，反序列化会为 0。
-				if (_cached.WeightCurse <= 0)
-					_cached.WeightCurse = 250;
+				if (MoreEnchantSettingsMigration.Apply(_cached))
+					PersistCurrent();
 
 				return _cached;
 			}

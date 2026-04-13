@@ -121,7 +121,7 @@ internal static class MoreEnchantCardRewardUtil
 	}
 
 	/// <summary>
-	/// 变牌替牌在继承原牌附魔后仍无附魔时（例如原牌无附魔），按非战斗奖励规则尝试随机附魔（与奖励牌同一套概率/设置）。
+	/// 变牌替牌在继承原牌附魔后仍无附魔时（例如原牌无附魔），按 <see cref="MoreEnchantSettings.TransformEnchantChancePercent"/> 等尝试随机附魔。
 	/// </summary>
 	internal static void TryApplyRandomEnchantAfterTransformCard(Player player, CardModel card)
 	{
@@ -132,9 +132,27 @@ internal static class MoreEnchantCardRewardUtil
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
 
-		var list = new List<CardCreationResult> { new CardCreationResult(card) };
-		var options = CardCreationOptions.ForNonCombatWithDefaultOdds(new[] { player.Character.CardPool });
-		ApplyRandomEnchantments(player, list, options);
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.TransformEnchantEnabled)
+			return;
+
+		var chancePercent = Math.Clamp(settings.TransformEnchantChancePercent, 0, 100);
+		if (chancePercent <= 0)
+			return;
+
+		var rng = player.PlayerRng.Transformations;
+		if (rng.NextInt(0, 100) >= chancePercent)
+			return;
+
+		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var ancient = card.Rarity == CardRarity.Ancient;
+		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient);
+		if (pick == null)
+			return;
+
+		var enchant = (EnchantmentModel)pick.MutableClone();
+		var amount = RollEnchantAmount(rng, pick);
+		CardCmd.Enchant(enchant, card, amount);
 	}
 
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(

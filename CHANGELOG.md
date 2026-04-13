@@ -7,6 +7,7 @@
 
 ### 新增
 - steam验证机制。
+- 设置：变牌随机附魔开关与独立概率（`transform_enchant_enabled` / `transform_enchant_chance_percent`）；旧配置通过 `schema_version` 迁移为与「卡牌奖励附魔概率」一致（无则 10%）。
 
 ### 修复
 - **多打**：无论叠层多少，仅额外增加 1 段力量攻击。

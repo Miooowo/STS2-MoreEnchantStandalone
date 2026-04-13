@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Random;
-using MoreEnchant.Enchantments;
+using MoreEnchant;
 
 namespace MoreEnchant.Patches;
 
@@ -20,7 +19,7 @@ internal static class CardFactoryTransformPreserveEnchantmentPatch
 		[typeof(CardModel), typeof(bool), typeof(Rng)])]
 	private static void PostfixThreeArgs(CardModel original, bool isInCombat, Rng rng, ref CardModel __result)
 	{
-		TryCopyEnchantment(original, __result);
+		ModEnchantmentTransferUtil.CopyEnchantmentToIfMissing(original, __result);
 	}
 
 	[HarmonyPostfix]
@@ -35,20 +34,6 @@ internal static class CardFactoryTransformPreserveEnchantmentPatch
 		Rng rng,
 		ref CardModel __result)
 	{
-		TryCopyEnchantment(original, __result);
-	}
-
-	private static void TryCopyEnchantment(CardModel? original, CardModel? result)
-	{
-		if (original?.Enchantment == null || result == null || result.Enchantment != null)
-			return;
-
-		var enchCopy = (EnchantmentModel)original.Enchantment.ClonePreservingMutability();
-		result.EnchantInternal(enchCopy, enchCopy.Amount);
-		result.Enchantment!.ModifyCard();
-		result.FinalizeUpgradeInternal();
-
-		if (result.Enchantment is BellCurseEnchantment bell)
-			bell.ResetRewardRelicGrantGateForClonedCard();
+		ModEnchantmentTransferUtil.CopyEnchantmentToIfMissing(original, __result);
 	}
 }

@@ -10,7 +10,7 @@
 
 ### 修复
 - **多打**：无论叠层多少，仅额外增加 1 段力量攻击。
-- **变牌继承附魔**：通过 <c>CardFactory.CreateRandomCardForTransform</c> 得到的替牌（如先古遗物「树叶药膏」将打击/防御变为随机牌）会继承原牌附魔；后缀补丁须包含 <c>isInCombat</c>/<c>rng</c> 等完整形参，否则 <c>__result</c> 未绑定到真实返回值导致继承不生效。
+- **变牌继承附魔**：通过 <c>CardFactory.CreateRandomCardForTransform</c> 得到的替牌（如先古遗物「树叶药膏」将打击/防御变为随机牌）会继承原牌附魔；<c>CreateRandomCardForTransform</c> 后缀须含完整形参以正确绑定返回值。加入牌组时 <c>Hook.ModifyCardBeingAddedToDeck</c>（熔火蛋/冻结蛋等会 <c>CloneCard</c> 再升级）可能换成新实例导致附魔丢失，再于此后缀从入参卡补回。
 
 ## 0.6.0
 

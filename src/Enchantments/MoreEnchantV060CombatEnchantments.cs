@@ -329,12 +329,12 @@ public sealed class EscortSummonEnchantment : ModEnchantmentTemplate, IRewardEnc
 	}
 }
 
-/// <summary>多打：力量攻击的伤害段数 +1（可叠层）。</summary>
+/// <summary>多打：力量攻击的伤害段数 +1（与叠层无关）。</summary>
 public sealed class ExtraHitEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Uncommon;
 
-	public override bool ShowAmount => true;
+	public override bool ShowAmount => false;
 
 	public override bool HasExtraCardText => true;
 

@@ -15,11 +15,11 @@ internal static class ExtraHitEnchantmentAttackPatch
 	[HarmonyPostfix]
 	private static void Postfix(AttackCommand attackCommand, ref decimal __result)
 	{
-		if (attackCommand.ModelSource is not CardModel card || card.Enchantment is not ExtraHitEnchantment extra)
+		if (attackCommand.ModelSource is not CardModel card || card.Enchantment is not ExtraHitEnchantment)
 			return;
 		if (!ValuePropCombatUtil.IsPoweredAttackMove(attackCommand.DamageProps))
 			return;
 
-		__result += extra.Amount;
+		__result += 1m;
 	}
 }

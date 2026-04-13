@@ -120,6 +120,23 @@ internal static class MoreEnchantCardRewardUtil
 		CardCmd.Enchant(enchant, card, amount);
 	}
 
+	/// <summary>
+	/// 变牌替牌在继承原牌附魔后仍无附魔时（例如原牌无附魔），按非战斗奖励规则尝试随机附魔（与奖励牌同一套概率/设置）。
+	/// </summary>
+	internal static void TryApplyRandomEnchantAfterTransformCard(Player player, CardModel card)
+	{
+		if (card.Enchantment != null)
+			return;
+		if (!LocalContext.IsMine(card))
+			return;
+		if (ShouldSkipEnchantingRewardCard(card))
+			return;
+
+		var list = new List<CardCreationResult> { new CardCreationResult(card) };
+		var options = CardCreationOptions.ForNonCombatWithDefaultOdds(new[] { player.Character.CardPool });
+		ApplyRandomEnchantments(player, list, options);
+	}
+
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(
 		CardModel card,
 		MoreEnchantSettings settings)

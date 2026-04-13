@@ -13,7 +13,7 @@ namespace MoreEnchant.Patches;
 internal static class ModifyCardBeingAddedToDeckPreserveEnchantmentPatch
 {
 	[HarmonyPostfix]
-	private static void Postfix(CardModel card, ref CardModel __result)
+	private static void Postfix([HarmonyArgument(1)] CardModel card, ref CardModel __result)
 	{
 		ModEnchantmentTransferUtil.CopyEnchantmentToIfMissing(card, __result);
 	}

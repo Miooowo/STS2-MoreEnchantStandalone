@@ -3,6 +3,15 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.7.1
+
+### 修复
+- **沉眠精华**（原版附魔）：奖励池不再附魔于 0 能（非 X）牌（[#2](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/2)）。
+- **返回**：附魔不再出现于能力牌（[#3](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/3)）。
+- **超巨化（奇美拉）**：仅可附于带打出伤害的攻击牌（[#4](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/4)）。
+- **灼热**：`MaxUpgradeLevel` 与 `CurrentUpgradeLevel` 同为 2 时无法再升级；改为至少为 `CurrentUpgradeLevel + 1`（且不少于 2）以允许多段升级。
+
+---
 ## 0.7.0
 
 ### 新增
@@ -12,11 +21,10 @@
 - 设置：`deck_direct_enchant_enabled` / `deck_direct_enchant_chance_percent`（默认 10%）：非奖励工厂、直接入牌组的牌（巨大扭蛋额外打击/防御、涅奥的苦痛、卷轴箱等）在入组时掷骰；卷轴箱三选一在打开预览前对候选牌掷骰（与入组同一套概率）。`schema_version` 3 迁移写入默认值。
 - README.md新增star历史。
 
+### 变更
+- **灼热**：`MaxUpgradeLevel` 改为999。
+
 ### 修复
-- **沉眠精华**（原版附魔）：奖励池不再附魔于 0 能（非 X）牌（[#2](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/2)）。
-- **返回**：附魔不再出现于能力牌（[#3](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/3)）。
-- **超巨化（奇美拉）**：仅可附于带打出伤害的攻击牌（[#4](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/4)）。
-- **灼热**：`MaxUpgradeLevel` 与 `CurrentUpgradeLevel` 同为 2 时无法再升级；改为至少为 `CurrentUpgradeLevel + 1`（且不少于 2）以允许多段升级。
 - **多打**：无论叠层多少，仅额外增加 1 段力量攻击。
 - **变牌继承附魔**：在 <c>CardTransformation.GetReplacement</c> 返回后统一继承原牌附魔；原牌无附魔时再按非战斗奖励概率随机附魔。保留 <c>CardFactory.CreateRandomCardForTransform</c> 后缀作双保险。<c>Hook.ModifyCardBeingAddedToDeck</c> 后缀用 <c>[HarmonyArgument(1)]</c> 绑定第二个参数 <c>CardModel card</c>（首参为 <c>IRunState</c>），避免误绑；蛋遗物克隆升级后再从入参卡补回附魔。
 

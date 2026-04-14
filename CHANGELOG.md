@@ -5,11 +5,12 @@
 ---
 ## 0.7.1
 
+发布日期：2026-04-13
+
 ### 修复
 - **沉眠精华**（原版附魔）：奖励池不再附魔于 0 能（非 X）牌（[#2](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/2)）。
 - **返回**：附魔不再出现于能力牌（[#3](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/3)）。
 - **超巨化（奇美拉）**：仅可附于带打出伤害的攻击牌（[#4](https://github.com/Miooowo/STS2-MoreEnchantStandalone/issues/4)）。
-- **灼热**：`MaxUpgradeLevel` 与 `CurrentUpgradeLevel` 同为 2 时无法再升级；改为至少为 `CurrentUpgradeLevel + 1`（且不少于 2）以允许多段升级。
 
 ---
 ## 0.7.0

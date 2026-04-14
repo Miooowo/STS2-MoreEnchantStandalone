@@ -73,4 +73,4 @@
 
 ## Release History
 
-![Release History](https://raw.githubusercontent.com/OWNER/REPO/BRANCH/docs/release-chart.svg)
+![Release History](https://raw.githubusercontent.com/Miooowo/STS2-MoreEnchantStandalone/main/docs/release-chart.svg)

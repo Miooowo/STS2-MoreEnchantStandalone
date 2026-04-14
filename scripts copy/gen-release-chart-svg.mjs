@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * 拉取 GitHub Releases 并写入 SVG（供 README 引用或 CI 提交）
- * 用法: node scripts/gen-release-chart-svg.mjs <owner> <repo> [输出路径]
+ * 用法: node scripts copy/gen-release-chart-svg.mjs <owner> <repo> [输出路径]
  * 环境: GITHUB_TOKEN 可选，提高 API 限额
  */
 import fs from "node:fs";
@@ -85,8 +85,8 @@ const outPath = path.resolve(
 
 if (!owner || !repo) {
   console.error(
-    "用法: node scripts/gen-release-chart-svg.mjs <owner> <repo> [输出路径]\n" +
-      "示例: node scripts/gen-release-chart-svg.mjs Miooowo STS2-MoreEnchantStandalone docs/release-chart.svg"
+    "用法: node scripts copy/gen-release-chart-svg.mjs <owner> <repo> [输出路径]\n" +
+      "示例: node scripts copy/gen-release-chart-svg.mjs Miooowo STS2-MoreEnchantStandalone docs/release-chart.svg"
   );
   process.exit(1);
 }

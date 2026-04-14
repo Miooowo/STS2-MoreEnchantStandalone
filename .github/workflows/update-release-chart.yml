@@ -27,7 +27,7 @@ jobs:
         run: |
           OWNER="${GITHUB_REPOSITORY%%/*}"
           REPO="${GITHUB_REPOSITORY##*/}"
-          node scripts/gen-release-chart-svg.mjs "$OWNER" "$REPO" docs/release-chart.svg
+          node scripts copy/gen-release-chart-svg.mjs "$OWNER" "$REPO" docs/release-chart.svg
 
       - name: Commit if changed
         run: |

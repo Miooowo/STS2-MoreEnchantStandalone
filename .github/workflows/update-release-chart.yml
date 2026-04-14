@@ -1,0 +1,42 @@
+# 定期将 Release 曲线渲染为 SVG 并提交，便于 README 使用固定图片地址（类似自建版 star-history）
+name: Update release chart SVG
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "17 5 * * 1" # 每周一 05:17 UTC
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate SVG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPO="${GITHUB_REPOSITORY##*/}"
+          node scripts/gen-release-chart-svg.mjs "$OWNER" "$REPO" docs/release-chart.svg
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/release-chart.svg
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: update release chart SVG"
+            git push
+          fi

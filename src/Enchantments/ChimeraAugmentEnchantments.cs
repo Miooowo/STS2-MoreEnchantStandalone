@@ -184,15 +184,17 @@ public sealed class ChimeraBulkyEnchantment : ModEnchantmentTemplate, IRewardEnc
 		props.HasFlag(ValueProp.Move) ? Ratio() : 1m;
 }
 
-/// <summary>超巨化：伤害变为 3 倍。</summary>
+/// <summary>超巨化：伤害变为 3 倍。仅攻击且牌面带打出伤害（与奖励筛选一致）。</summary>
 public sealed class ChimeraGiganticEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
 	public override bool HasExtraCardText => false;
 
+	public override bool CanEnchantCardType(CardType cardType) => cardType == CardType.Attack;
+
 	public override bool CanEnchant(CardModel card) =>
-		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveDamageOrHpLoss(card);
+		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveDamageNumbers(card);
 
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ChimeraAugmentEnchantments.IsMoveDamage(props) ? 3m : 1m;

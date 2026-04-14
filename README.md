@@ -70,3 +70,7 @@
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Miooowo/STS2-MoreEnchantStandalone&type=date&legend=top-left" />
  </picture>
 </a>
+
+## Release History
+
+![Release History](https://raw.githubusercontent.com/OWNER/REPO/BRANCH/docs/release-chart.svg)

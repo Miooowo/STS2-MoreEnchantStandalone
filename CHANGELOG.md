@@ -5,7 +5,7 @@
 ---
 ## 0.7.2
 
-发布日期：2026-04-13
+发布日期：2026-04-15
 
 ### 新增
 - **附魔图鉴**：图鉴主菜单增加入口；界面风格接近药水研究所与遗物收集（可滚动内容、按奖励品质分段、原版返回键与悬浮说明）；相关代码位于 `src/EnchantmentCompendium/`。
@@ -15,6 +15,7 @@
 - **中和**附魔图标，来自clockcycas。
 
 ### 变更
+- **开发**：新增 Cursor 项目规则 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`），与 [`AGENTS.md`](AGENTS.md) 对齐会话与发布流程；`AGENTS.md` 顶部说明与规则文件的主次关系。
 - **附魔图鉴**：相关文案使用 `main_menu_ui` 表（键 `COMPENDIUM_ENCHANT_BROWSER.*`），不再放在 `enchantments`；图鉴入口封面图为 `images/ui/main_menu/enchantment_compendium.png`。
 - **幽灵（Spectral / 附魔图鉴 id：`SpectralEthereal`）**
   - **可附魔条件**：攻击牌仅当牌面带有「打出时」**Move** 格挡；技能/能力牌当带有 `PowerVar`，或牌面存在正数格挡动态变量（含 **`Unpowered` 的 `BlockVar`**，如创世之柱、寿衣；此前仅识别 Move 格挡与 `PowerVar`，会漏掉此类牌）。

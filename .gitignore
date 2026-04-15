@@ -1,3 +1,4 @@
+# Cursor：项目规则放在 .cursor/rules/ 并应纳入 git；请勿将 .cursor/ 整体加入忽略。
 # GitHub Release 构建产物（由 Release 构建生成，见 csproj 中 PackGithubRelease）
 release/*
 !release/.gitkeep

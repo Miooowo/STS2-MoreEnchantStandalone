@@ -1,0 +1,64 @@
+---
+description: MoreEnchantStandalone 会话与发布流程（与 AGENTS.md 一致；AI 须遵守）
+alwaysApply: true
+---
+
+# MoreEnchantStandalone 工作流（强制）
+
+## 项目
+
+在《杀戮尖塔 2》中为本体增加额外附魔，并在游戏中按概率出现。
+
+## 会话规则
+
+- 每次会话**完成代码/资源修改后**：执行一次 `git commit`，并更新 [CHANGELOG.md](CHANGELOG.md)（若本次改动值得记录）。
+- 每次完成**影响程序行为或资源**的改动后：执行下方「发布强制命令」**第 1 步**（生成 DLL + 导出 PCK + 写入 `release/` 与 zip），便于本地实测。  
+  **例外**：仅文档、或仅 `.cursor/rules` / `AGENTS.md` 等规则说明、且用户未要求打包时，可跳过第 1 步。
+- 当用户说**「发布」**：执行第 3 步，上传发布物到 GitHub Release。
+- 发布产物目录：仓库根目录下的 [release/](release/)（与 `MoreEnchantStandalone.csproj` 中 `GithubReleaseDir` 一致）。
+
+## 发布强制命令（禁止擅自改 `dotnet` / `gh` 的核心参数）
+
+以下均在**仓库根目录**（含 `MoreEnchantStandalone.csproj` 的目录）执行。
+
+### 1. 生成 DLL、导出 PCK、写入 release 并打 zip
+
+使用 **Release** 配置完整构建（与日常发版一致；勿随意加 `/p:ExportModPck=false` 等跳过 PCK，除非用户明确要求「只编译」）：
+
+```powershell
+dotnet build "MoreEnchantStandalone.csproj" -c Release
+```
+
+成功后期望存在（版本号以 `MoreEnchantStandalone.csproj` 的 `Version` 为准）：
+
+- `release/MoreEnchantStandalone.dll`
+- `release/MoreEnchantStandalone.json`
+- `release/MoreEnchantStandalone.pck`
+- `release/MoreEnchantStandalone-<Version>.zip`
+
+### 2. 打包为 zip
+
+上一步的 Release 构建若已配置 `PackGithubRelease`，通常**已生成** `release/MoreEnchantStandalone-<Version>.zip`。若缺失，先解决第 1 步（Godot 路径、`Sts2Dir`、PCK 导出错误等），勿用手写 zip 替代，除非用户指定。
+
+### 3. GitHub Release 上传
+
+仓库：`Miooowo/STS2-MoreEnchantStandalone`。上传至少包含：
+
+- `release/MoreEnchantStandalone-<Version>.zip`
+- 可选：单独附件 `release/MoreEnchantStandalone.dll`、`release/MoreEnchantStandalone.json`、`release/MoreEnchantStandalone.pck`（用户或 AGENTS.md 要求时）
+
+创建或增补 Release 时使用 `gh`（已登录 `gh auth` 前提下），**标签名与版本一致**（如 `v0.7.2`）。示例（新建 Release 并附 zip；按实际版本与说明文件替换）：
+
+```powershell
+gh release create "v0.7.2" --repo "Miooowo/STS2-MoreEnchantStandalone" --title "MoreEnchantStandalone 0.7.2" --notes-file "release/RELEASE_NOTES_0.7.2.md" --latest "release/MoreEnchantStandalone-0.7.2.zip"
+```
+
+若需追加三个独立文件到**已有** Release：
+
+```powershell
+gh release upload "v0.7.2" "release/MoreEnchantStandalone.dll" "release/MoreEnchantStandalone.json" "release/MoreEnchantStandalone.pck" -R "Miooowo/STS2-MoreEnchantStandalone" --clobber
+```
+
+## 与 AGENTS.md 的关系
+
+完整措辞与链接以根目录 [AGENTS.md](AGENTS.md) 为准；本规则为 Cursor **始终注入**的摘要，二者冲突时以 **AGENTS.md 与仓库内实际脚本/csproj 为准**并应同步更新本文件。

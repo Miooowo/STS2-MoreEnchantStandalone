@@ -188,13 +188,37 @@ public sealed class SpectralEtherealEnchantment : ModEnchantmentTemplate, IRewar
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
+
+	public override bool CanEnchant(CardModel card) =>
+		base.CanEnchant(card) && CardEnchantEligibility.CardEligibleForSpectralGhost(card);
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Ethereal) };
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) ? BlockMultiplier : 1m;
+	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props)
+	{
+		if (ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props))
+			return BlockMultiplier;
+		if (ShouldScaleUnpoweredBlockOnCardFace(props))
+			return BlockMultiplier;
+		return 1m;
+	}
+
+	/// <summary>技能/能力牌上 Unpowered 的 BlockVar（如创世之柱、寿衣）预览走附魔乘区，否则牌面仍显示未乘 1.5 的数值。</summary>
+	private bool ShouldScaleUnpoweredBlockOnCardFace(ValueProp props)
+	{
+		if (Card == null || !props.HasFlag(ValueProp.Unpowered))
+			return false;
+		if (Card.Type is not (CardType.Skill or CardType.Power))
+			return false;
+		if (Card.DynamicVars.TryGetValue("Block", out var b) && b is BlockVar bv && bv.Props.HasFlag(ValueProp.Unpowered))
+			return true;
+		if (Card.DynamicVars.TryGetValue("CalculatedBlock", out var c) && c is CalculatedBlockVar cb &&
+		    cb.Props.HasFlag(ValueProp.Unpowered))
+			return true;
+		return false;
+	}
 
 	protected override void OnEnchant()
 	{

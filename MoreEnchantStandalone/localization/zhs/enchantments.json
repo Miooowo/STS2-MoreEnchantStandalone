@@ -37,8 +37,7 @@
   "FROST_CHANNEL_ENCHANTMENT.extraCardText": "[gold]生成[/gold][blue]1[/blue]个[gold]冰霜[/gold]充能球。",
 
   "SPECTRAL_ETHEREAL_ENCHANTMENT.title": "幽灵",
-  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "此牌获得的[gold]格挡[/gold]增加[blue]50%[/blue]。\n[gold]虚无[/gold]。",
-  "SPECTRAL_ETHEREAL_ENCHANTMENT.extraCardText": "格挡[blue]+50%[/blue]。",
+  "SPECTRAL_ETHEREAL_ENCHANTMENT.description": "[gold]虚无[/gold]。\n此牌获得的[gold]格挡[/gold]增加[blue]50%[/blue]。",
 
   "SHIELD_PLATING_ENCHANTMENT.title": "盾化",
   "SHIELD_PLATING_ENCHANTMENT.description": "此牌费用增加1{Energy:energyIcons()}。打出时获得{Block:diff()}点[gold]格挡[/gold]。",
@@ -129,11 +128,11 @@
   "INFECTION_CURSE_ENCHANTMENT.description": "[gold]诅咒[/gold]。\n此牌获得与状态牌[gold]感染[/gold]相同的动态卡面边框。",
 
   "MAGIC_CORRUPTION_ENCHANTMENT.title": "魔法腐化",
-  "MAGIC_CORRUPTION_ENCHANTMENT.description": "此牌耗能变为3{Energy:energyIcons()}。\n你所有具有[gold]附魔[/gold]的牌可以免费打出，其在打出后[gold]消耗[/gold]。",
-  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "具有附魔的牌可以免费打出，其在打出后消耗。",
+  "MAGIC_CORRUPTION_ENCHANTMENT.description": "此牌耗能变为3{Energy:energyIcons()}。\n打出此牌后你所有具有[gold]附魔[/gold]的牌可以免费打出，其在打出后[gold]消耗[/gold]。",
+  "MAGIC_CORRUPTION_ENCHANTMENT.extraCardText": "打出此牌后，具有附魔的牌可以免费打出，其在打出后消耗。",
 
   "FINALE_CURTAIN_ENCHANTMENT.title": "华丽",
-  "FINALE_CURTAIN_ENCHANTMENT.description": "在[gold]战斗[/gold]中，当你的[gold]抽牌堆[/gold]中没有牌时，此牌造成的伤害与获得的[gold]格挡[/gold]变为[blue]3[/blue]倍。",
+  "FINALE_CURTAIN_ENCHANTMENT.description": "当你的[gold]抽牌堆[/gold]中没有牌时，此牌造成的伤害与获得的[gold]格挡[/gold]变为[blue]3[/blue]倍。",
   "FINALE_CURTAIN_ENCHANTMENT.extraCardText": "战斗中抽牌堆为空：此牌造成的伤害与[gold]格挡[/gold]×[blue]3[/blue]。",
 
   "SHAME_CURSE_ENCHANTMENT.title": "羞耻",

@@ -1,0 +1,10 @@
+{
+  "COMPENDIUM_ENCHANT_BROWSER.header.common": "[gold][b]普通[/b][/gold] 常见一档；未标注品质的原版附魔默认归入此类。",
+  "COMPENDIUM_ENCHANT_BROWSER.header.uncommon": "[gold][b]罕见[/b][/gold] 罕见一档（与卡牌奖励权重一致）。",
+  "COMPENDIUM_ENCHANT_BROWSER.header.curse": "[gold][b]诅咒[/b][/gold] 诅咒类附魔，在奖励中有独立抽取权重。",
+  "COMPENDIUM_ENCHANT_BROWSER.header.rare": "[gold][b]稀有[/b][/gold] 稀有一档。",
+  "COMPENDIUM_ENCHANT_BROWSER.header.special": "[gold][b]特殊[/b][/gold] 特殊原型或单独规则（如部分原版特殊附魔）。",
+
+  "COMPENDIUM_ENCHANT_BROWSER.button.title": "附魔图鉴",
+  "COMPENDIUM_ENCHANT_BROWSER.button.description": "浏览游戏中与更多附魔模组注册的附魔。"
+}

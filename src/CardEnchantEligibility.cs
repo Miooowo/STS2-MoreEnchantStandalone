@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -52,6 +53,45 @@ internal static class CardEnchantEligibility
 			if (cb.BaseValue > 0)
 				return true;
 			if (dv.TryGetValue("CalculationExtra", out var xe) && xe.BaseValue > 0)
+				return true;
+		}
+
+		return false;
+	}
+
+	/// <summary>幽灵：攻击牌仅当有打出格挡（Move）；技能/能力牌当有牌面格挡数值（含 Unpowered 的 <see cref="BlockVar"/>，如创世之柱、寿衣）、或 <see cref="PowerVar{T}"/>。</summary>
+	internal static bool CardEligibleForSpectralGhost(CardModel card)
+	{
+		if (card.Type == CardType.Attack)
+			return CardHasMoveBlockNumbers(card);
+		if (card.Type is CardType.Skill or CardType.Power)
+			return CardHasPowerVar(card) || CardHasPositiveBlockDynamicVarsForSpectral(card);
+		return false;
+	}
+
+	/// <summary>牌面带正数格挡变量（Move 或 Unpowered 均可）。能力牌常用 Unpowered <see cref="BlockVar"/> 表示传给能力的数值，不含 Move。</summary>
+	internal static bool CardHasPositiveBlockDynamicVarsForSpectral(CardModel card)
+	{
+		var dv = card.DynamicVars;
+		if (dv.TryGetValue("Block", out var b0) && b0 is BlockVar bv && bv.BaseValue > 0m)
+			return true;
+		if (dv.TryGetValue("CalculatedBlock", out var c0) && c0 is CalculatedBlockVar cb)
+		{
+			if (cb.BaseValue > 0m)
+				return true;
+			if (dv.TryGetValue("CalculationExtra", out var xe) && xe.BaseValue > 0m)
+				return true;
+		}
+
+		return false;
+	}
+
+	internal static bool CardHasPowerVar(CardModel card)
+	{
+		foreach (var v in card.DynamicVars.Values)
+		{
+			var t = v.GetType();
+			if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(PowerVar<>))
 				return true;
 		}
 

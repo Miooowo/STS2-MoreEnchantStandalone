@@ -1,0 +1,10 @@
+{
+  "COMPENDIUM_ENCHANT_BROWSER.header.common": "[gold][b]Common[/b][/gold] Common tier; vanilla enchantments without a rarity tag default here.",
+  "COMPENDIUM_ENCHANT_BROWSER.header.uncommon": "[gold][b]Uncommon[/b][/gold] Uncommon tier (matches card reward weights).",
+  "COMPENDIUM_ENCHANT_BROWSER.header.curse": "[gold][b]Curse[/b][/gold] Curse enchantments use a separate reward bucket.",
+  "COMPENDIUM_ENCHANT_BROWSER.header.rare": "[gold][b]Rare[/b][/gold] Rare tier.",
+  "COMPENDIUM_ENCHANT_BROWSER.header.special": "[gold][b]Special[/b][/gold] Special prototypes or rules (e.g. some vanilla special enchantments).",
+
+  "COMPENDIUM_ENCHANT_BROWSER.button.title": "Enchantment Compendium",
+  "COMPENDIUM_ENCHANT_BROWSER.button.description": "Browse enchantments from the game and from More Enchant (this mod)."
+}

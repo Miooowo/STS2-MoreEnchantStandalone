@@ -3,6 +3,29 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.7.2
+
+发布日期：2026-04-13
+
+### 新增
+- **附魔图鉴**：图鉴主菜单增加入口；界面风格接近药水研究所与遗物收集（可滚动内容、按奖励品质分段、原版返回键与悬浮说明）；相关代码位于 `src/EnchantmentCompendium/`。
+- 简体中文（`zhs`）下，本模组附魔缺失专属图标时使用 `images/enchantments/enchantment_icon.png` 作为兜底；其他语言仍使用原版缺失图。
+- **附魔图鉴**ui图片来自clockcycas。
+- **超巨化**、**华丽**、**铸剑**附魔图标，来自王筱巫。
+- **中和**附魔图标，来自clockcycas。
+
+### 变更
+- **附魔图鉴**：相关文案使用 `main_menu_ui` 表（键 `COMPENDIUM_ENCHANT_BROWSER.*`），不再放在 `enchantments`；图鉴入口封面图为 `images/ui/main_menu/enchantment_compendium.png`。
+- **幽灵（Spectral / 附魔图鉴 id：`SpectralEthereal`）**
+  - **可附魔条件**：攻击牌仅当牌面带有「打出时」**Move** 格挡；技能/能力牌当带有 `PowerVar`，或牌面存在正数格挡动态变量（含 **`Unpowered` 的 `BlockVar`**，如创世之柱、寿衣；此前仅识别 Move 格挡与 `PowerVar`，会漏掉此类牌）。
+  - **能力施加/叠层**：与格挡相关的能力数值在 `Hook.ModifyPowerAmountGiven` 中一次性 ×1.5（四舍五入）；仅对白名单内的原版能力类型生效（力量/敏捷等纯数值能力不在此列）。已移除早期对 `Hook.ModifyBlock` 补 `cardSource` 的做法，避免 Unpowered 格挡被二次乘算。
+  - **牌面数值**：`EnchantBlockMultiplicative` 除 **Move** 打出格挡外，对技能/能力牌上 **`Unpowered` 的 `Block` / `CalculatedBlock`** 同样 ×1.5，使牌面预览与战斗内层数、格挡收益一致。
+
+### 修复
+- **幽灵**：修复创世之柱、寿衣等牌无法附魔、或附魔后牌面格挡/能力数字未反映 ×1.5 的问题。
+
+
+---
 ## 0.7.1
 
 发布日期：2026-04-13

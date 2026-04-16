@@ -15,14 +15,11 @@
 - **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.3.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`）。
 
 ### 修复
-- **附魔资格**：[`CardEnchantEligibility`](src/CardEnchantEligibility.cs) 恢复误删的 `CardHasMoveBlockNumbers` 与 `CardHasMoveDamageOrHpLoss`，并移除重复的 `CardHasMoveDamageNumbers` 定义，避免编译失败与幽灵/格挡类判定缺失。
+- **附魔资格 / 超巨化**：[`CardEnchantEligibility`](src/CardEnchantEligibility.cs) 移除错误的重复 `CardHasMoveDamageNumbers` 定义，保留 `CardHasMoveDamageOrHpLoss`（供华丽等）与 `CardHasMoveBlockNumbers` 等；[`ChimeraGiganticEnchantment`](src/Enchantments/ChimeraAugmentEnchantments.cs) 去掉单独的 `CanEnchantCardType`，将「仅攻击」并入 `CanEnchant`，与 `CardHasMoveDamageNumbers` 一并判定。
 - **文案（GitHub #6）**：模组 [`localization/zhs/powers.json`](MoreEnchantStandalone/localization/zhs/powers.json) 与 [`localization/eng/powers.json`](MoreEnchantStandalone/localization/eng/powers.json) 覆盖原版「滑溜」`SLIPPERY_POWER` 的 `description` / `smartDescription`，改为「受到伤害」表述，与伤害封顶早于格挡的结算一致。
 - **精简（GitHub #5）**：[`StreamlineEnchantment`](src/Enchantments/MoreEnchantCombatEnchantments.cs) 增加 `CanEnchant`，排除 X 费、负基础费与基础耗能 `Canonical <= 0` 的牌，与 `AfterCardPlayed` 行为一致，避免奖励池无意义附魔。
 - **灼热（GitHub #7）**：[`ScorchingEnchantment`](src/Enchantments/ScorchingEnchantment.cs) 在 `CanEnchant` 中调用 [`CardEnchantEligibility.CardNextUpgradeImprovesFaceNumbers`](src/CardEnchantEligibility.cs)：对可升级牌 `MutableClone` 后执行一次 `UpgradeInternal` + `FinalizeUpgradeInternal`，比较耗能（非 X）、星耗（非 X）、各数理 `DynamicVar.BaseValue`（跳过 `StringVar`）及 `HpLoss`（降低视为收益），不再依赖全文描述字符串对比；仍按 `Id.Entry` 表排除破灭、武装、恶魔护盾、回响形态、杂耍、隐秘匕首等。
 - **兼容**：铃铛诅咒遗物发放处 `PullNextRelicFromBack` 使用 `Func<RelicModel, bool>` 过滤以匹配新版 sts2。
-
-### 移除
-- **超巨化**附魔的冗余判定。
 
 ---
 

@@ -7,8 +7,8 @@
 - **Beta 附魔**：夹击、恶魔护盾迁至 `src/Enchantments/beta/`，默认不进入随机池；设置 → 常规中「附魔 Beta」开启后参与掷骰，联机以房主为准。
 - **精简**：`StreamlineEnchantment` 不再对能力牌生效。
 - **文档**：`README.md` 增加 AI 协作说明。
-- **工作流**：约定更新 `CHANGELOG` 某发行版本小节时，须同步维护 `release/RELEASE_NOTES_<版本>.md`（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；已在 `.cursor/rules/more-enchant-workflow.mdc` 与 `AGENTS.md` 中写明。
-- **开发**：新增 Cursor 项目规则 `more-enchant-workflow.mdc`（`alwaysApply: true`），与 `AGENTS.md` 对齐会话与发布流程；`AGENTS.md` 顶部说明与规则文件的主次关系。
+- **工作流**：约定更新 `CHANGELOG` 某发行版本小节时须同步维护 `release/RELEASE_NOTES_<版本>.md`（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 `.cursor/rules/more-enchant-workflow.mdc`（`alwaysApply: true`）。
+- **仓库**：删除 `AGENTS.md`；`release/` 仅保留本版 `RELEASE_NOTES` 与 zip，移除往期 RELEASE_NOTES 与旧版 zip。
 
 ### 修复
 

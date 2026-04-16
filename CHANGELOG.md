@@ -8,11 +8,11 @@
 发布日期：2026-04-15
 
 ### 变更
+- **仓库**：删除根目录 `AGENTS.md`；[`release/`](release/) 仅保留当前版本 `0.7.3` 的 `RELEASE_NOTES_0.7.3.md` 与 `MoreEnchantStandalone-0.7.3.zip`，移除往期 RELEASE_NOTES 与旧版 zip。
 - **Beta 附魔**：夹击、恶魔护盾迁至 [`src/Enchantments/beta/`](src/Enchantments/beta/)，实现 [`IBetaGatedRewardEnchantment`](src/Enchantments/beta/IBetaGatedRewardEnchantment.cs)；[`MoreEnchantSettings.BetaRewardEnchantmentsEnabled`](src/MoreEnchantSettings.cs) 默认关闭，[`MoreEnchantCardRewardUtil.RollEnchantmentTemplate`](src/MoreEnchantCardRewardUtil.cs) 在未开启时不纳入随机池；设置页复选框见 [`MoreEnchantGeneralSettingsPanelPatch`](src/Patches/MoreEnchantGeneralSettingsPanelPatch.cs)，联机仍随房主 `InitialGameInfo` 快照。
 - **精简**：[`StreamlineEnchantment`](src/Enchantments/MoreEnchantCombatEnchantments.cs) 通过 `CanEnchantCardType` 排除能力牌（`CardType.Power`）。
 - **文档**：[`README.md`](README.md) 增加 AI 协作说明。
-- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时，须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.3.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；已在 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc) 与 [`AGENTS.md`](AGENTS.md) 中写明。
-- **开发**：新增 Cursor 项目规则 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`），与 [`AGENTS.md`](AGENTS.md) 对齐会话与发布流程；`AGENTS.md` 顶部说明与规则文件的主次关系。
+- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.3.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`）。
 
 ### 修复
 - **附魔资格**：[`CardEnchantEligibility`](src/CardEnchantEligibility.cs) 恢复误删的 `CardHasMoveBlockNumbers` 与 `CardHasMoveDamageOrHpLoss`，并移除重复的 `CardHasMoveDamageNumbers` 定义，避免编译失败与幽灵/格挡类判定缺失。

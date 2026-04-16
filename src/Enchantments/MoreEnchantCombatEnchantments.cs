@@ -120,6 +120,17 @@ public sealed class StreamlineEnchantment : ModEnchantmentTemplate, IRewardEncha
 
 	public override bool HasExtraCardText => true;
 
+	public override bool CanEnchantCardType(CardType cardType) => cardType != CardType.Power;
+
+	public override bool CanEnchant(CardModel card)
+	{
+		if (!base.CanEnchant(card))
+			return false;
+		if (card.EnergyCost.CostsX || card.EnergyCost.Canonical < 0)
+			return false;
+		return card.EnergyCost.Canonical > 0;
+	}
+
 	public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
 	{
 		if (cardPlay.Card != Card || Card == null)

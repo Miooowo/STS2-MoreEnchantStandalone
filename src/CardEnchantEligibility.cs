@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -8,6 +11,103 @@ namespace MoreEnchant;
 /// <summary>根据卡牌 <see cref="CardModel.DynamicVars"/> 判断是否带有「打出时」的伤害/格挡数值，用于奖励附魔过滤。</summary>
 internal static class CardEnchantEligibility
 {
+	/// <summary>
+	/// 灼热附魔按 <c>card.Id.Entry</c> 排除：单次降费至 0 后叠升无收益（破灭）、仅分支玩法无牌面数字（武装）、升级仅去消耗/虚无（恶魔护盾、回响形态）、仅加固有（杂耍）、衍生牌强化（隐秘匕首）等；数值模拟仍可能放行个别牌，故集中维护。
+	/// </summary>
+	private static readonly HashSet<string> ScorchingExcludedCardEntries = new(StringComparer.OrdinalIgnoreCase)
+	{
+		"HAVOC",
+		"ARMAMENTS",
+		"DEMONIC_SHIELD",
+		"ECHO_FORM",
+		"JUGGLING",
+		"HIDDEN_DAGGERS",
+	};
+
+	internal static bool IsScorchingExcludedByCardId(CardModel card)
+	{
+		if (card?.Id.Entry is not { } entry)
+			return false;
+		return ScorchingExcludedCardEntries.Contains(entry);
+	}
+
+	/// <summary>
+	/// 灼热：模拟下一次 <see cref="CardModel.UpgradeInternal"/> + <see cref="CardModel.FinalizeUpgradeInternal"/>，
+	/// 若耗能（非 X）降低、星耗（非 X）降低、任一数理动态变量按「越大越好」变强，或 <c>HpLoss</c> 降低，则视为有牌面收益。
+	/// 不可升级时由调用方另行处理；异常时保守返回 <c>true</c> 以免清空奖励池。
+	/// </summary>
+	internal static bool CardNextUpgradeImprovesFaceNumbers(CardModel card)
+	{
+		try
+		{
+			if (!card.IsUpgradable)
+				return true;
+
+			var probe = (CardModel)card.MutableClone();
+			var energyCostsX = probe.EnergyCost.CostsX;
+			var beforeEnergy = energyCostsX ? 0 : probe.EnergyCost.GetWithModifiers(CostModifiers.None);
+			var hasStarCostX = probe.HasStarCostX;
+			var beforeStar = probe.BaseStarCost;
+			var beforeVars = SnapshotNumericDynamicVars(probe);
+
+			probe.UpgradeInternal();
+			probe.FinalizeUpgradeInternal();
+
+			if (!energyCostsX)
+			{
+				var afterEnergy = probe.EnergyCost.GetWithModifiers(CostModifiers.None);
+				if (afterEnergy < beforeEnergy)
+					return true;
+			}
+
+			if (!hasStarCostX && beforeStar >= 0)
+			{
+				var afterStar = probe.BaseStarCost;
+				if (afterStar >= 0 && afterStar < beforeStar)
+					return true;
+			}
+
+			var afterVars = SnapshotNumericDynamicVars(probe);
+			foreach (var key in beforeVars.Keys.Union(afterVars.Keys))
+			{
+				var b = beforeVars.GetValueOrDefault(key);
+				var a = afterVars.GetValueOrDefault(key);
+				if (DecimalsEqual(b, a))
+					continue;
+				if (DynamicVarChangeIsImprovement(key, b, a))
+					return true;
+			}
+
+			return false;
+		}
+		catch
+		{
+			return true;
+		}
+	}
+
+	private static Dictionary<string, decimal> SnapshotNumericDynamicVars(CardModel c)
+	{
+		var d = new Dictionary<string, decimal>(StringComparer.Ordinal);
+		foreach (var kv in c.DynamicVars)
+		{
+			if (kv.Value is StringVar)
+				continue;
+			d[kv.Key] = kv.Value.BaseValue;
+		}
+
+		return d;
+	}
+
+	private static bool DecimalsEqual(decimal x, decimal y) => Math.Abs(x - y) < 0.0001m;
+
+	private static bool DynamicVarChangeIsImprovement(string key, decimal before, decimal after)
+	{
+		if (key.Equals("HpLoss", StringComparison.Ordinal))
+			return after < before;
+		return after > before;
+	}
+
 	internal static bool CardHasMoveDamageNumbers(CardModel card)
 	{
 		var dv = card.DynamicVars;

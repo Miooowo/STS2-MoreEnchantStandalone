@@ -7,9 +7,9 @@ public sealed class MoreEnchantSettings
 {
 	public const string StoreKey = "settings";
 
-	/// <summary>设置 JSON 架构版本；低于 2/3 时由 <see cref="MoreEnchantSettingsStore"/> 迁移默认值。</summary>
+	/// <summary>设置 JSON 架构版本；低于当前版本时由 <see cref="MoreEnchantSettingsStore"/> 迁移默认值。</summary>
 	[JsonPropertyName("schema_version")]
-	public int SchemaVersion { get; set; } = 3;
+	public int SchemaVersion { get; set; } = 4;
 
 	/// <summary>卡牌奖励等：每张选项获得随机附魔的基础概率（0–100，百分数）。</summary>
 	[JsonPropertyName("reward_enchant_chance_percent")]
@@ -79,4 +79,8 @@ public sealed class MoreEnchantSettings
 
 	[JsonPropertyName("weight_special")]
 	public int WeightSpecial { get; set; } = 1;
+
+	/// <summary>为真时随机附魔池包含 Beta 附魔（夹击、恶魔护盾等）。联机以房主设置为准。</summary>
+	[JsonPropertyName("beta_reward_enchantments_enabled")]
+	public bool BetaRewardEnchantmentsEnabled { get; set; }
 }

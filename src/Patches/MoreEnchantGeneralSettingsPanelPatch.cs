@@ -58,11 +58,22 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 
 		var mpNote = new Label
 		{
-			Text = "联机时以下选项以房主（Host）设置为准。",
+			Text = "联机时以下选项以房主（Host）设置为准（含附魔 Beta）。",
 			AutowrapMode = TextServer.AutowrapMode.WordSmart,
 			MouseFilter = Control.MouseFilterEnum.Ignore,
 		};
 		root.AddChild(mpNote);
+
+		var betaEnchantRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
+		var betaEnchantCheck = new CheckBox
+		{
+			Text = "附魔 Beta：夹击、恶魔护盾（随机奖励池）",
+			ButtonPressed = settings.BetaRewardEnchantmentsEnabled,
+			FocusMode = Control.FocusModeEnum.None,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+		};
+		betaEnchantRow.AddChild(betaEnchantCheck);
+		root.AddChild(betaEnchantRow);
 
 		var shopEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
 		var shopCheck = new CheckBox
@@ -260,6 +271,11 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		{
 			settings.DeckDirectEnchantEnabled = pressed;
 			RefreshShopAncientCombatUi();
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		betaEnchantCheck.Toggled += pressed =>
+		{
+			settings.BetaRewardEnchantmentsEnabled = pressed;
 			MoreEnchantSettingsStore.PersistCurrent();
 		};
 		RefreshShopAncientCombatUi();

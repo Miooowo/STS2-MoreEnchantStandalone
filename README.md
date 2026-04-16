@@ -49,6 +49,12 @@
 
 ---
 
+## AI 协作
+
+欢迎用 Cursor、GitHub Copilot 等工具在本仓库上协作改代码。请优先阅读 [`AGENTS.md`](AGENTS.md) 与 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)：行为或资源变更后应更新 `CHANGELOG.md`、与 `MoreEnchantStandalone.csproj` 中 `Version` 一致的 `release/RELEASE_NOTES_<版本>.md`，并按项目约定执行构建与打包验证。
+
+---
+
 ## 依赖与兼容性
 
 - `MoreEnchantStandalone.json` 中 `dependencies` 为空：不依赖 RitsuLib。

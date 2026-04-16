@@ -3,6 +3,29 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.7.3
+
+发布日期：2026-04-15
+
+### 变更
+- **Beta 附魔**：夹击、恶魔护盾迁至 [`src/Enchantments/beta/`](src/Enchantments/beta/)，实现 [`IBetaGatedRewardEnchantment`](src/Enchantments/beta/IBetaGatedRewardEnchantment.cs)；[`MoreEnchantSettings.BetaRewardEnchantmentsEnabled`](src/MoreEnchantSettings.cs) 默认关闭，[`MoreEnchantCardRewardUtil.RollEnchantmentTemplate`](src/MoreEnchantCardRewardUtil.cs) 在未开启时不纳入随机池；设置页复选框见 [`MoreEnchantGeneralSettingsPanelPatch`](src/Patches/MoreEnchantGeneralSettingsPanelPatch.cs)，联机仍随房主 `InitialGameInfo` 快照。
+- **精简**：[`StreamlineEnchantment`](src/Enchantments/MoreEnchantCombatEnchantments.cs) 通过 `CanEnchantCardType` 排除能力牌（`CardType.Power`）。
+- **文档**：[`README.md`](README.md) 增加 AI 协作说明。
+- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时，须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.3.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；已在 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc) 与 [`AGENTS.md`](AGENTS.md) 中写明。
+- **开发**：新增 Cursor 项目规则 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`），与 [`AGENTS.md`](AGENTS.md) 对齐会话与发布流程；`AGENTS.md` 顶部说明与规则文件的主次关系。
+
+### 修复
+- **附魔资格**：[`CardEnchantEligibility`](src/CardEnchantEligibility.cs) 恢复误删的 `CardHasMoveBlockNumbers` 与 `CardHasMoveDamageOrHpLoss`，并移除重复的 `CardHasMoveDamageNumbers` 定义，避免编译失败与幽灵/格挡类判定缺失。
+- **文案（GitHub #6）**：模组 [`localization/zhs/powers.json`](MoreEnchantStandalone/localization/zhs/powers.json) 与 [`localization/eng/powers.json`](MoreEnchantStandalone/localization/eng/powers.json) 覆盖原版「滑溜」`SLIPPERY_POWER` 的 `description` / `smartDescription`，改为「受到伤害」表述，与伤害封顶早于格挡的结算一致。
+- **精简（GitHub #5）**：[`StreamlineEnchantment`](src/Enchantments/MoreEnchantCombatEnchantments.cs) 增加 `CanEnchant`，排除 X 费、负基础费与基础耗能 `Canonical <= 0` 的牌，与 `AfterCardPlayed` 行为一致，避免奖励池无意义附魔。
+- **灼热（GitHub #7）**：[`ScorchingEnchantment`](src/Enchantments/ScorchingEnchantment.cs) 在 `CanEnchant` 中调用 [`CardEnchantEligibility.CardNextUpgradeImprovesFaceNumbers`](src/CardEnchantEligibility.cs)：对可升级牌 `MutableClone` 后执行一次 `UpgradeInternal` + `FinalizeUpgradeInternal`，比较耗能（非 X）、星耗（非 X）、各数理 `DynamicVar.BaseValue`（跳过 `StringVar`）及 `HpLoss`（降低视为收益），不再依赖全文描述字符串对比；仍按 `Id.Entry` 表排除破灭、武装、恶魔护盾、回响形态、杂耍、隐秘匕首等。
+- **兼容**：铃铛诅咒遗物发放处 `PullNextRelicFromBack` 使用 `Func<RelicModel, bool>` 过滤以匹配新版 sts2。
+
+### 移除
+- **超巨化**附魔的冗余判定。
+
+---
+
 ## 0.7.2
 
 发布日期：2026-04-15
@@ -15,7 +38,6 @@
 - **中和**附魔图标，来自clockcycas。
 
 ### 变更
-- **开发**：新增 Cursor 项目规则 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`），与 [`AGENTS.md`](AGENTS.md) 对齐会话与发布流程；`AGENTS.md` 顶部说明与规则文件的主次关系。
 - **附魔图鉴**：相关文案使用 `main_menu_ui` 表（键 `COMPENDIUM_ENCHANT_BROWSER.*`），不再放在 `enchantments`；图鉴入口封面图为 `images/ui/main_menu/enchantment_compendium.png`。
 - **幽灵（Spectral / 附魔图鉴 id：`SpectralEthereal`）**
   - **可附魔条件**：攻击牌仅当牌面带有「打出时」**Move** 格挡；技能/能力牌当带有 `PowerVar`，或牌面存在正数格挡动态变量（含 **`Unpowered` 的 `BlockVar`**，如创世之柱、寿衣；此前仅识别 Move 格挡与 `PowerVar`，会漏掉此类牌）。

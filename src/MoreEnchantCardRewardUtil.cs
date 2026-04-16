@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Models.Exceptions;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
 using MoreEnchant.Enchantments;
+using MoreEnchant.Enchantments.Beta;
 
 namespace MoreEnchant;
 
@@ -266,6 +267,8 @@ internal static class MoreEnchantCardRewardUtil
 		var byRarity = new Dictionary<EnchantmentRewardRarity, List<EnchantmentModel>>();
 		foreach (var t in templates)
 		{
+			if (t is IBetaGatedRewardEnchantment && !settings.BetaRewardEnchantmentsEnabled)
+				continue;
 			if (!t.CanEnchant(card))
 				continue;
 

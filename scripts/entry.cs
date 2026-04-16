@@ -4,6 +4,7 @@ using HarmonyLib;
 using Steamworks;
 using MegaCrit.Sts2.Core.Modding;
 using MoreEnchant.Enchantments;
+using MoreEnchant.Enchantments.Beta;
 using MoreEnchant.Standalone;
 using MoreEnchant.Standalone.Compat;
 

@@ -32,6 +32,13 @@ internal static class MoreEnchantSettingsMigration
 			changed = true;
 		}
 
+		if (s.SchemaVersion < 4)
+		{
+			s.BetaRewardEnchantmentsEnabled = false;
+			s.SchemaVersion = 4;
+			changed = true;
+		}
+
 		return changed;
 	}
 }

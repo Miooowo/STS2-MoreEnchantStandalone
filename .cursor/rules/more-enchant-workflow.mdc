@@ -12,7 +12,7 @@ alwaysApply: true
 ## 会话规则
 
 - 每次会话**完成代码/资源修改后**：执行一次 `git commit`，并更新 [CHANGELOG.md](CHANGELOG.md)（若本次改动值得记录）。  
-  **若本次为某发行版本补充/修改了 `CHANGELOG` 中该版本的小节**：须**同步**编写或更新 [`release/RELEASE_NOTES_<Version>.md`](release/RELEASE_NOTES_0.7.3.md)（文件名中 `<Version>` 与 `MoreEnchantStandalone.csproj` 的 `Version` 一致，如 `0.7.3` → `RELEASE_NOTES_0.7.3.md`）。内容应与 CHANGELOG 对应版本**要点一致**（可略短），供 `gh release create --notes-file` 使用；无新版本则不必新建文件。
+  **若本次为某发行版本补充/修改了 `CHANGELOG` 中该版本的小节**：须**同步**编写或更新 [`release/RELEASE_NOTES_<Version>.md`](release/RELEASE_NOTES_0.7.4.md)（文件名中 `<Version>` 与 `MoreEnchantStandalone.csproj` 的 `Version` 一致，如 `0.7.4` → `RELEASE_NOTES_0.7.4.md`）。内容应与 CHANGELOG 对应版本**要点一致**（可略短），供 `gh release create --notes-file` 使用；无新版本则不必新建文件。
 - 每次完成**影响程序行为或资源**的改动后：执行下方「发布强制命令」**第 1 步**（生成 DLL + 导出 PCK + 写入 `release/` 与 zip），便于本地实测。  
   **例外**：仅文档、或仅 `.cursor/rules` 等规则说明、且用户未要求打包时，可跳过第 1 步。
 - 当用户说**「发布」**：执行第 3 步，上传发布物到 GitHub Release。
@@ -48,16 +48,16 @@ dotnet build "MoreEnchantStandalone.csproj" -c Release
 - `release/MoreEnchantStandalone-<Version>.zip`
 - 可选：单独附件 `release/MoreEnchantStandalone.dll`、`release/MoreEnchantStandalone.json`、`release/MoreEnchantStandalone.pck`（用户要求时）
 
-创建或增补 Release 时使用 `gh`（已登录 `gh auth` 前提下），**标签名与版本一致**（如 `v0.7.3`）。示例（新建 Release 并附 zip；按实际版本与说明文件替换）：
+创建或增补 Release 时使用 `gh`（已登录 `gh auth` 前提下），**标签名与版本一致**（如 `v0.7.4`）。示例（新建 Release 并附 zip；按实际版本与说明文件替换）：
 
 ```powershell
-gh release create "v0.7.3" --repo "Miooowo/STS2-MoreEnchantStandalone" --title "MoreEnchantStandalone 0.7.3" --notes-file "release/RELEASE_NOTES_0.7.3.md" --latest "release/MoreEnchantStandalone-0.7.3.zip"
+gh release create "v0.7.4" --repo "Miooowo/STS2-MoreEnchantStandalone" --title "MoreEnchantStandalone 0.7.4" --notes-file "release/RELEASE_NOTES_0.7.4.md" --latest "release/MoreEnchantStandalone-0.7.4.zip"
 ```
 
 若需追加三个独立文件到**已有** Release：
 
 ```powershell
-gh release upload "v0.7.3" "release/MoreEnchantStandalone.dll" "release/MoreEnchantStandalone.json" "release/MoreEnchantStandalone.pck" -R "Miooowo/STS2-MoreEnchantStandalone" --clobber
+gh release upload "v0.7.4" "release/MoreEnchantStandalone.dll" "release/MoreEnchantStandalone.json" "release/MoreEnchantStandalone.pck" -R "Miooowo/STS2-MoreEnchantStandalone" --clobber
 ```
 
 ## 说明

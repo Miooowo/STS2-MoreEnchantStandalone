@@ -3,6 +3,17 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.7.4
+
+发布日期：2026-04-16
+
+### 新增
+- **感染**附魔图标，来自铃铛蔷薇
+
+### 修复
+- **精小（GitHub #9）**：[`CardEnchantEligibility.CardUsesStarCost`](src/CardEnchantEligibility.cs) 判定牌是否具有辉星机制；[`ChimeraCompactEnchantment`](src/Enchantments/ChimeraAugmentEnchantments.cs) `CanEnchant` 排除「非 X、基础耗能已为 0、且无辉星」的牌；[`ChimeraCompactEnchantmentTextPatch`](src/Patches/ChimeraCompactEnchantmentTextPatch.cs) 在无辉星牌上将说明/卡面紫字改为 `description_noStars` / `extraCardText_noStars`（[`enchantments.json`](MoreEnchantStandalone/localization/zhs/enchantments.json) `zhs` / `eng`），避免 `{Stars:starIcons()}` 为空时辉星句断裂。
+---
+
 ## 0.7.3
 
 发布日期：2026-04-15
@@ -12,7 +23,7 @@
 - **Beta 附魔**：夹击、恶魔护盾迁至 [`src/Enchantments/beta/`](src/Enchantments/beta/)，实现 [`IBetaGatedRewardEnchantment`](src/Enchantments/beta/IBetaGatedRewardEnchantment.cs)；[`MoreEnchantSettings.BetaRewardEnchantmentsEnabled`](src/MoreEnchantSettings.cs) 默认关闭，[`MoreEnchantCardRewardUtil.RollEnchantmentTemplate`](src/MoreEnchantCardRewardUtil.cs) 在未开启时不纳入随机池；设置页复选框见 [`MoreEnchantGeneralSettingsPanelPatch`](src/Patches/MoreEnchantGeneralSettingsPanelPatch.cs)，联机仍随房主 `InitialGameInfo` 快照。
 - **精简**：[`StreamlineEnchantment`](src/Enchantments/MoreEnchantCombatEnchantments.cs) 通过 `CanEnchantCardType` 排除能力牌（`CardType.Power`）。
 - **文档**：[`README.md`](README.md) 增加 AI 协作说明。
-- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.3.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`）。
+- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.4.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`）。
 
 ### 修复
 - **附魔资格 / 超巨化**：[`CardEnchantEligibility`](src/CardEnchantEligibility.cs) 移除错误的重复 `CardHasMoveDamageNumbers` 定义，保留 `CardHasMoveDamageOrHpLoss`（供华丽等）与 `CardHasMoveBlockNumbers` 等；[`ChimeraGiganticEnchantment`](src/Enchantments/ChimeraAugmentEnchantments.cs) 去掉单独的 `CanEnchantCardType`，将「仅攻击」并入 `CanEnchant`，与 `CardHasMoveDamageNumbers` 一并判定。

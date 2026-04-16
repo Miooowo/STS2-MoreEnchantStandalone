@@ -66,7 +66,9 @@
 
   "CHIMERA_COMPACT_ENCHANTMENT.title": "精小",
   "CHIMERA_COMPACT_ENCHANTMENT.description": "耗能-1。\n辉星消耗降低33%，即{Stars:starIcons()}。\n伤害与格挡降低33%。",
+  "CHIMERA_COMPACT_ENCHANTMENT.description_noStars": "耗能-1。\n伤害与格挡降低33%。",
   "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "耗能-1。\n辉星消耗变为{Stars:starIcons()}。\n伤害与格挡降低33%。",
+  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText_noStars": "耗能-1。\n伤害与格挡降低33%。",
 
   "CHIMERA_BULKY_ENCHANTMENT.title": "笨重",
   "CHIMERA_BULKY_ENCHANTMENT.description": "此牌费用增加1{Energy:energyIcons()}。\n伤害与格挡按费用比例提高。",

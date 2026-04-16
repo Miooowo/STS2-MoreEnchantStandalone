@@ -31,6 +31,10 @@ internal static class CardEnchantEligibility
 		return ScorchingExcludedCardEntries.Contains(entry);
 	}
 
+	/// <summary>牌是否使用辉星费用（星 X 或 <see cref="CardModel.CanonicalStarCost"/> ≥ 0）；多数非储君牌为 false。</summary>
+	internal static bool CardUsesStarCost(CardModel card) =>
+		card.HasStarCostX || card.CanonicalStarCost >= 0;
+
 	/// <summary>
 	/// 灼热：模拟下一次 <see cref="CardModel.UpgradeInternal"/> + <see cref="CardModel.FinalizeUpgradeInternal"/>，
 	/// 若耗能（非 X）降低、星耗（非 X）降低、任一数理动态变量按「越大越好」变强，或 <c>HpLoss</c> 降低，则视为有牌面收益。

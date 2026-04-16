@@ -70,7 +70,9 @@
 
   "CHIMERA_COMPACT_ENCHANTMENT.title": "Compact",
   "CHIMERA_COMPACT_ENCHANTMENT.description": "Cost -1. Damage and Block are reduced by about 33%.\nIf this card has a Stars cost (not X): Stars cost becomes about [blue]2/3[/blue] (rounded down): {Stars:starIcons()}.",
+  "CHIMERA_COMPACT_ENCHANTMENT.description_noStars": "Cost -1. Damage and Block are reduced by about 33%.",
   "CHIMERA_COMPACT_ENCHANTMENT.extraCardText": "Cost -1. Damage, Block, Stars x[blue]2/3[/blue] (rounded down).\nStars: {Stars:starIcons()}.",
+  "CHIMERA_COMPACT_ENCHANTMENT.extraCardText_noStars": "Cost -1. Damage and Block x[blue]2/3[/blue] (rounded down).",
 
   "CHIMERA_BULKY_ENCHANTMENT.title": "Bulky",
   "CHIMERA_BULKY_ENCHANTMENT.description": "This card's cost increases by 1{Energy:energyIcons()}. Damage and Block scale with the card's cost.",

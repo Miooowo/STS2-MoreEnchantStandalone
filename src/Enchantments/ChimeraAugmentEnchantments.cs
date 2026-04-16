@@ -84,6 +84,11 @@ public sealed class ChimeraCompactEnchantment : ModEnchantmentTemplate, IRewardE
 
 	public override bool HasExtraCardText => true;
 
+	public override bool CanEnchant(CardModel card) =>
+		base.CanEnchant(card)
+		&& !(!card.EnergyCost.CostsX && card.EnergyCost.Canonical == 0
+		      && !CardEnchantEligibility.CardUsesStarCost(card));
+
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
 		get { yield return new StarsVar(0); }

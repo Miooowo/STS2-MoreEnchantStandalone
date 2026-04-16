@@ -12,5 +12,4 @@
 - **附魔资格 / 超巨化**：`CardEnchantEligibility` 去掉重复的 `CardHasMoveDamageNumbers` 并保留 `CardHasMoveDamageOrHpLoss` 等；`ChimeraGiganticEnchantment` 将「仅攻击」并入 `CanEnchant`，去掉单独的 `CanEnchantCardType`。
 - **文案（GitHub #6）**：模组 `powers.json`（`zhs` / `eng`）覆盖原版「滑溜」`SLIPPERY_POWER` 描述与 smartDescription，改为「受到伤害 / takes damage」表述，与伤害封顶早于格挡的结算一致。
 - **精简（GitHub #5）**：`StreamlineEnchantment` 增加 `CanEnchant`，排除 X 费、负基础费与 0 基础耗能牌。
-- **兼容**：铃铛诅咒遗物发放处 `PullNextRelicFromBack` 使用 `Func<RelicModel, bool>` 过滤以匹配新版 sts2。
 - **灼热（GitHub #7）**：[`ScorchingEnchantment`](src/Enchantments/ScorchingEnchantment.cs) 用 [`CardEnchantEligibility.CardNextUpgradeImprovesFaceNumbers`](src/CardEnchantEligibility.cs) 模拟升级并比较牌面数理变量与耗能/星耗，取代全文描述对比；仍排除破灭、武装、恶魔护盾、回响形态、杂耍、隐秘匕首等 `Id.Entry`。

@@ -394,6 +394,8 @@ internal static class DebuffTargetUtil
 			TargetType.AllEnemies => hittable.ToList(),
 			TargetType.AnyEnemy or TargetType.RandomEnemy =>
 				SingleFrom(card.Owner.RunState.Rng.CombatTargets.NextItem(hittable)),
+			// Self 等：目标不在 HittableEnemies 时勿走默认 RNG，否则既不符合意图，又可能多消耗 CombatTargets RNG 导致联机 checksum 分叉。
+			TargetType.Self or TargetType.None or TargetType.TargetedNoCreature or TargetType.Osty => null,
 			_ => SingleFrom(card.Owner.RunState.Rng.CombatTargets.NextItem(hittable)),
 		};
 	}

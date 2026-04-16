@@ -1,4 +1,6 @@
 {
   "MAGIC_CORRUPTION_POWER.title": "Magic Corruption",
-  "MAGIC_CORRUPTION_POWER.description": "Your enchanted cards cost [blue]0[/blue]{Energy:energyIcons()} and [blue]0[/blue] [gold]Stars[/gold], and [gold]Exhaust[/gold] when played (Powers keep their normal destination)."
+  "MAGIC_CORRUPTION_POWER.description": "Your enchanted cards cost [blue]0[/blue]{Energy:energyIcons()} and [blue]0[/blue] [gold]Stars[/gold], and [gold]Exhaust[/gold] when played (Powers keep their normal destination).",
+  "SLIPPERY_POWER.description": "The next time this creature takes damage, it only takes [blue]1[/blue] damage.",
+  "SLIPPERY_POWER.smartDescription": "The next [blue]{Amount}[/blue] times [gold]{OwnerName}[/gold] takes damage, it only takes [blue]1[/blue] damage each time."
 }

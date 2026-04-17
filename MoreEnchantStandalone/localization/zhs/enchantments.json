@@ -246,7 +246,7 @@
   "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "本场首次打出，获得[blue]{BufferPower:diff()}[/blue]层[gold]缓冲[/gold]。",
 
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.title": "复刻",
-  "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "打出后将一张此牌的[gold]消耗[/gold]复制品置入你的[gold]弃牌堆[/gold]。",
+  "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "打出后将一张此牌的[gold]消耗[/gold]复制品置入你的[gold]弃牌堆[/gold]。\n(复刻复制的牌不包含附魔)",
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.extraCardText": "将一张[gold]消耗[/gold]复制品置入[gold]弃牌堆[/gold]。",
 
   "MELT_DOUBLE_VULNERABLE_ENCHANTMENT.title": "熔融",

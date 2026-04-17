@@ -276,7 +276,7 @@ internal static class BellCurseReward
 
 		foreach (var rarity in tiers)
 		{
-			var relic = RelicFactory.PullNextRelicFromBack(player, rarity, RelicPullBlacklist).ToMutable();
+			var relic = RelicFactory.PullNextRelicFromBack(player, rarity, r => RelicPullBlacklist.Contains(r)).ToMutable();
 			await RelicCmd.Obtain(relic, player);
 		}
 	}

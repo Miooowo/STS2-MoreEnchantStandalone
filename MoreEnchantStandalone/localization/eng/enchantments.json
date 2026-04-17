@@ -259,7 +259,7 @@
   "GAIN_BUFFER_POWER_ENCHANTMENT.extraCardText": "First play this combat: gain [blue]{BufferPower:diff()}[/blue] [gold]Buffer[/gold].",
 
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.title": "Replica",
-  "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "When played, add an [gold]Exhaust[/gold] copy of this card to your [gold]discard pile[/gold].",
+  "REPLICA_EXHAUST_COPY_ENCHANTMENT.description": "When played, add an [gold]Exhaust[/gold] copy of this card to your [gold]discard pile[/gold].\n(Replica does not include enchantments.)",
   "REPLICA_EXHAUST_COPY_ENCHANTMENT.extraCardText": "Add an [gold]Exhaust[/gold] copy to [gold]discard[/gold].",
 
   "MELT_DOUBLE_VULNERABLE_ENCHANTMENT.title": "Melt",

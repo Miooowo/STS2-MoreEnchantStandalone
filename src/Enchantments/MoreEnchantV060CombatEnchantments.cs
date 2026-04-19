@@ -386,18 +386,33 @@ internal static class DebuffTargetUtil
 	internal static List<Creature>? Resolve(CardModel card, CardPlay? cardPlay, CombatState state)
 	{
 		var hittable = state.HittableEnemies;
+
+		// 全敌牌打出时仍可能带单一 Target（动画/指示器）；易伤等 debuff 应对全体可命中敌人生效（GitHub #12）。
+		if (card.TargetType == TargetType.AllEnemies)
+			return hittable.ToList();
+
 		if (cardPlay?.Target != null && hittable.Contains(cardPlay.Target))
 			return new List<Creature> { cardPlay.Target };
 
 		return card.TargetType switch
 		{
-			TargetType.AllEnemies => hittable.ToList(),
 			TargetType.AnyEnemy or TargetType.RandomEnemy =>
 				SingleFrom(card.Owner.RunState.Rng.CombatTargets.NextItem(hittable)),
-			// Self 等：目标不在 HittableEnemies 时勿走默认 RNG，否则既不符合意图，又可能多消耗 CombatTargets RNG 导致联机 checksum 分叉。
-			TargetType.Self or TargetType.None or TargetType.TargetedNoCreature or TargetType.Osty => null,
+			// 非指向性：易伤等对随机一名可命中敌人生效；全敌牌（含群体攻击/全敌技能）已在上方对全体生效。
+			TargetType.Self or TargetType.None or TargetType.TargetedNoCreature or TargetType.Osty =>
+				ResolveNonPointing(card, hittable),
 			_ => SingleFrom(card.Owner.RunState.Rng.CombatTargets.NextItem(hittable)),
 		};
+	}
+
+	/// <summary>
+	/// 非指向性牌（Self/None 等）：对随机一名可命中敌人施加 debuff；与 <see cref="TargetType.AllEnemies"/> 的全体处理配合使用。
+	/// </summary>
+	private static List<Creature>? ResolveNonPointing(CardModel card, IReadOnlyList<Creature> hittable)
+	{
+		if (hittable.Count == 0)
+			return null;
+		return SingleFrom(card.Owner.RunState.Rng.CombatTargets.NextItem(hittable));
 	}
 
 	private static List<Creature>? SingleFrom(Creature? c) =>

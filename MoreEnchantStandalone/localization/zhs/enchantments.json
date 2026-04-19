@@ -274,13 +274,41 @@
   "EAGER_PER_ATTACK_ENERGY_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]。按手牌中[gold]攻击[/gold]牌数获得[gold]能量[/gold]。",
 
   "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.title": "猛扑",
-  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.description": "打出后你的下一张[gold]技能[/gold]耗能为[blue]0[/blue]。",
-  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.extraCardText": "下一张技能牌耗能为blue]0。",
+  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.description": "打出后你的下一张[gold]技能[/gold]牌耗能为[blue]0[/blue]。",
+  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.extraCardText": "下一张技能牌耗能为0。",
 
   "PINCER_FLANKING_MARK_ENCHANTMENT.title": "夹击",
   "PINCER_FLANKING_MARK_ENCHANTMENT.description": "此牌耗能[blue]+1[/blue]。\n一名敌人在本回合受到的来自其他玩家的伤害翻倍。",
   "PINCER_FLANKING_MARK_ENCHANTMENT.extraCardText": "一名敌人在本回合受到的来自其他玩家的伤害翻倍。。",
 
   "SLY_KEYWORD_ENCHANTMENT.title": "奇巧",
-  "SLY_KEYWORD_ENCHANTMENT.description": "此牌获得[gold]奇巧[/gold]。"
+  "SLY_KEYWORD_ENCHANTMENT.description": "此牌获得[gold]奇巧[/gold]。",
+
+  "SURGE_ENCHANTMENT.title": "潮涌",
+  "SURGE_ENCHANTMENT.description": "[gold]潮涌[/gold]3。",
+  "SURGE_ENCHANTMENT.extraCardText": "潮涌3。",
+
+  "FEED_ENCHANTMENT.title": "狂宴",
+  "FEED_ENCHANTMENT.description": "[gold]斩杀[/gold]时，永久获得3点最大生命值。\n[gold]消耗[/gold]。",
+  "FEED_ENCHANTMENT.extraCardText": "[gold]斩杀[/gold]时，永久获得3点最大生命值。",
+
+  "COLOSSUS_ENCHANTMENT.title": "巨像",
+  "COLOSSUS_ENCHANTMENT.description": "在本回合中，有易伤状态的敌人对你造成的伤害降低50%。",
+  "COLOSSUS_ENCHANTMENT.extraCardText": "在本回合中，有易伤状态的敌人对你造成的伤害降低50%。",
+
+  "HELLRAISER_ENCHANTMENT.title": "地狱狂徒",
+  "HELLRAISER_ENCHANTMENT.description": "第一次打出这张牌时，获得[gold]地狱狂徒[/gold]。",
+  "HELLRAISER_ENCHANTMENT.extraCardText": "每当你抽到名字中有“打击”的牌时，对一名随机敌人打出。",
+
+  "CORROSIVE_WAVE_ENCHANTMENT.title": "腐蚀波",
+  "CORROSIVE_WAVE_ENCHANTMENT.description": "打出此牌后，你在本回合每抽到一张牌，对所有敌人施加[blue]{PoisonPower:diff()}[/blue]层[gold]中毒[/gold]。",
+  "CORROSIVE_WAVE_ENCHANTMENT.extraCardText": "打出此牌后，你在本回合每抽到一张牌，对所有敌人施加{PoisonPower:diff()}层中毒。",
+
+  "CALAMITY_WAVE_DOOM_ENCHANTMENT.title": "灾厄波",
+  "CALAMITY_WAVE_DOOM_ENCHANTMENT.description": "打出此牌后，你在本回合每抽到一张牌，对所有敌人施加[blue]{DoomPower:diff()}[/blue]层[gold]灾厄[/gold]。",
+  "CALAMITY_WAVE_DOOM_ENCHANTMENT.extraCardText": "打出此牌后，你在本回合每抽到一张牌，对所有敌人施加{DoomPower:diff()}层灾厄。",
+
+  "FORGE_WAVE_ENCHANTMENT.title": "铸剑波",
+  "FORGE_WAVE_ENCHANTMENT.description": "打出此牌后，你在本回合每抽到一张牌，[gold]铸造[/gold][blue]{Forge:diff()}[/blue]。",
+  "FORGE_WAVE_ENCHANTMENT.extraCardText": "打出此牌后，你在本回合每抽到一张牌，铸造{Forge:diff()}。"
 }

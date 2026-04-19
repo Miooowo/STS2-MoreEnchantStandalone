@@ -3,6 +3,21 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.8
+
+发布日期：2026-04-18
+
+### 新增
+- **那维莱特联动**：[`NeuvilletteCompat`](src/Standalone/Compat/NeuvilletteCompat.cs) 检测 CharMod / 资源路径；[`SurgeEnchantment`](src/Enchantments/NeuvilletteSurgeEnchantment.cs) 打出时对玩家施加潮涌（`SurgePower`）3 层，仅模组可用时进入奖励池。
+- **稀有附魔**（[`MoreEnchantV080CombatEnchantments`](src/Enchantments/MoreEnchantV080CombatEnchantments.cs)）：狂宴（斩杀攻击伤害致死 +3 最大生命，消耗）、巨像（本回合带易伤的敌人对你伤害 ×0.5）、地狱狂徒（抽到带打击标签的牌时对随机敌人自动打出）、腐蚀波 / 灾厄波 / 铸剑波（打出后本回合每次抽牌：全体敌人中毒 2 / 灾厄 3 / 铸造 4）。
+
+### 修复
+- **铃铛诅咒**（[`BellCurseReward`](src/Enchantments/CurseEnchantments.cs)）：`GrantCore` 经 `PullNextRelicFromBack` 固定各发放 1 件普通、罕见、稀有遗物；第三参谓词为 **true 表示可抽出**，以 **`ModelId`** 排除磨刀石（此前误当作「跳过」导致仅磨刀石可抽、其余回落头环）；与 `GrantCoreAfterUiFrame` 一并缓解战后选牌界面卡死、遗物未入账（GitHub #14）。
+- **恐怖**附魔在非指向性卡牌上无法给予易伤的bug
+- 能力牌和无数值的牌也会获得**笨重**的bug
+
+---
+
 ## 0.7.5
 
 发布日期：2026-04-17
@@ -11,7 +26,7 @@
 - **复刻**描述补充说明不复制附魔。
 
 ### 修复
-- 待验证：**联机 checksum（GitHub #10）**：[`PlayerCombatStateRecalculateAllPlayersInMultiPatch`](src/Patches/PlayerCombatStateRecalculateAllPlayersInMultiPatch.cs) 在多人下于 `PlayerCombatState.RecalculateCardValues` 之后为**其他玩家**补跑同等刷新，使改费附魔的 `RecalculateValues` / `SetCustomBaseCost` 在双方客户端与宿主一致（本体 `CombatStateTracker` 仅对本机 `GetMe` 调用原方法）。
+- **联机 checksum（GitHub #10）**：[`PlayerCombatStateRecalculateAllPlayersInMultiPatch`](src/Patches/PlayerCombatStateRecalculateAllPlayersInMultiPatch.cs) 在多人下于 `PlayerCombatState.RecalculateCardValues` 之后为**其他玩家**补跑同等刷新，使改费附魔的 `RecalculateValues` / `SetCustomBaseCost` 在双方客户端与宿主一致（本体 `CombatStateTracker` 仅对本机 `GetMe` 调用原方法）。
 
 ---
 
@@ -35,7 +50,7 @@
 - **Beta 附魔**：夹击、恶魔护盾迁至 [`src/Enchantments/beta/`](src/Enchantments/beta/)，实现 [`IBetaGatedRewardEnchantment`](src/Enchantments/beta/IBetaGatedRewardEnchantment.cs)；[`MoreEnchantSettings.BetaRewardEnchantmentsEnabled`](src/MoreEnchantSettings.cs) 默认关闭，[`MoreEnchantCardRewardUtil.RollEnchantmentTemplate`](src/MoreEnchantCardRewardUtil.cs) 在未开启时不纳入随机池；设置页复选框见 [`MoreEnchantGeneralSettingsPanelPatch`](src/Patches/MoreEnchantGeneralSettingsPanelPatch.cs)，联机仍随房主 `InitialGameInfo` 快照。
 - **精简**：[`StreamlineEnchantment`](src/Enchantments/MoreEnchantCombatEnchantments.cs) 通过 `CanEnchantCardType` 排除能力牌（`CardType.Power`）。
 - **文档**：[`README.md`](README.md) 增加 AI 协作说明。
-- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.7.5.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`）。
+- **工作流**：约定更新 [`CHANGELOG.md`](CHANGELOG.md) 某发行版本小节时须同步维护 [`release/RELEASE_NOTES_<版本>.md`](release/RELEASE_NOTES_0.8.md)（与 `MoreEnchantStandalone.csproj` 的 `Version` 一致）；完整流程见 [`.cursor/rules/more-enchant-workflow.mdc`](.cursor/rules/more-enchant-workflow.mdc)（`alwaysApply: true`）。
 
 ### 修复
 - **附魔资格 / 超巨化**：[`CardEnchantEligibility`](src/CardEnchantEligibility.cs) 移除错误的重复 `CardHasMoveDamageNumbers` 定义，保留 `CardHasMoveDamageOrHpLoss`（供华丽等）与 `CardHasMoveBlockNumbers` 等；[`ChimeraGiganticEnchantment`](src/Enchantments/ChimeraAugmentEnchantments.cs) 去掉单独的 `CanEnchantCardType`，将「仅攻击」并入 `CanEnchant`，与 `CardHasMoveDamageNumbers` 一并判定。

@@ -157,6 +157,11 @@ public sealed class ChimeraBulkyEnchantment : ModEnchantmentTemplate, IRewardEnc
 
 	public override bool HasExtraCardText => true;
 
+	public override bool CanEnchant(CardModel card) =>
+		base.CanEnchant(card)
+		&& card.Type != CardType.Power
+		&& (CardEnchantEligibility.CardHasMoveDamageNumbers(card) || CardEnchantEligibility.CardHasMoveBlockNumbers(card));
+
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
 		get { yield return new EnergyVar(CostIncrease); }

@@ -21,6 +21,6 @@ internal static class RewardSynchronizerBellCurseRelicGrantPatch
 			return;
 		if (card.Enchantment is not BellCurseEnchantment bell || !bell.TryTakeRewardRelicGrantOnce())
 			return;
-		_ = TaskHelper.RunSafely(BellCurseReward.GrantCore(p));
+		_ = TaskHelper.RunSafely(BellCurseReward.GrantCoreAfterUiFrame(p));
 	}
 }

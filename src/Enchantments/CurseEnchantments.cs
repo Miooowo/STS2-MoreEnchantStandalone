@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -265,6 +266,16 @@ internal static class BellCurseReward
 	/// <summary>铃铛诅咒遗物中排除 <see cref="Whetstone"/>（磨刀石）。</summary>
 	private static readonly RelicModel[] RelicPullBlacklist = [ModelDb.Relic<Whetstone>()];
 
+	/// <summary>
+	/// 本体 <c>PullNextRelicFromBack</c> 第三参为 true 时遗物<strong>可</strong>被抽出；磨刀石用 <see cref="ModelId"/> 排除（与 deque 实例引用无关）。
+	/// </summary>
+	private static bool IsBellRelicPullAllowed(RelicModel r) =>
+		!RelicPullBlacklist.Any(b => b.Id == r.Id);
+
+	/// <summary>
+	/// 固定各发放 1 件普通、罕见、稀有遗物（经 <see cref="RelicFactory.PullNextRelicFromBack"/> 从对应稀有度池尾抽），并排除磨刀石。
+	/// 若某档池在排除后无可抽物，工厂会回落至 <see cref="MegaCrit.Sts2.Core.Models.Relics.Circlet"/>（游戏内置行为）。
+	/// </summary>
 	internal static async Task GrantCore(Player player)
 	{
 		RelicRarity[] tiers =
@@ -276,9 +287,19 @@ internal static class BellCurseReward
 
 		foreach (var rarity in tiers)
 		{
-			var relic = RelicFactory.PullNextRelicFromBack(player, rarity, r => RelicPullBlacklist.Contains(r)).ToMutable();
+			var relic = RelicFactory.PullNextRelicFromBack(player, rarity, IsBellRelicPullAllowed).ToMutable();
 			await RelicCmd.Obtain(relic, player);
 		}
+	}
+
+	/// <summary>
+	/// 奖励同步路径上立即 <see cref="GrantCore"/> 会与选牌 UI 冲突（卡死、无飞入动画、遗物未发）；延后一帧再发（GitHub #14）。
+	/// </summary>
+	internal static async Task GrantCoreAfterUiFrame(Player player)
+	{
+		if (Engine.GetMainLoop() is SceneTree tree)
+			await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+		await GrantCore(player);
 	}
 }
 

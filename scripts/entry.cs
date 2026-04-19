@@ -90,6 +90,13 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<PounceNextSkillFreeEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<PincerFlankingMarkEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SlyKeywordEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SurgeEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<FeedEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ColossusEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<HellraiserEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<CorrosiveWaveEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<CalamityWaveDoomEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ForgeWaveEnchantment>();
 
 		// 可选拓展：若安装了 MultiEnchantmentMod，则启用蛇咬等附魔的 MergeAmount 叠层语义。
 		MultiEnchantmentCompat.TryEnableForSnakebite(typeof(SnakebiteEnchantment));

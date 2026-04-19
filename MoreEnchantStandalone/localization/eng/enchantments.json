@@ -288,7 +288,7 @@
 
   "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.title": "Pounce",
   "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.description": "Uncommon. [gold]Attacks[/gold] only; base cost at least [blue]2[/blue]. After you play this, your next [gold]Skill[/gold] costs [blue]0[/blue].",
-  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.extraCardText": "Next [gold]Skill[/gold] costs [blue]0[/blue].",
+  "POUNCE_NEXT_SKILL_FREE_ENCHANTMENT.extraCardText": "Next Skill costs 0.",
 
   "PINCER_FLANKING_MARK_ENCHANTMENT.title": "Pincer",
   "PINCER_FLANKING_MARK_ENCHANTMENT.description": "Uncommon. Multiplayer only. Costs [blue]+1[/blue]. Apply [gold]Flanking[/gold] (other players' attacks to that enemy deal double damage).",
@@ -296,5 +296,33 @@
 
   "SLY_KEYWORD_ENCHANTMENT.title": "Deft",
   "SLY_KEYWORD_ENCHANTMENT.description": "This card gains [gold]Sly[/gold].",
-  "SLY_KEYWORD_ENCHANTMENT.extraCardText": "[gold]Sly[/gold]."
+  "SLY_KEYWORD_ENCHANTMENT.extraCardText": "[gold]Sly[/gold].",
+
+  "SURGE_ENCHANTMENT.title": "Surge",
+  "SURGE_ENCHANTMENT.description": "Rare. Only appears in rewards when the Neuvillette mod is installed.\nWhen played, heal [blue]{Surge:diff()}[/blue] HP, then gain that much [gold]Tidefall[/gold] ([gold]SurgePower[/gold], same as cards like Walk Into Rain; [gold]Living Water[/gold] stacks add to both heal and Tidefall).",
+  "SURGE_ENCHANTMENT.extraCardText": "When played, heal [blue]{Surge:diff()}[/blue] and gain equal Tidefall stacks.",
+
+  "FEED_ENCHANTMENT.title": "Feast",
+  "FEED_ENCHANTMENT.description": "Rare. Only on cards with play damage. [gold]Exhaust[/gold]. When your attack with this card kills a non-[gold]Minion[/gold] enemy, gain [blue]3[/blue] Max HP.",
+  "FEED_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Non-minion kill: +[blue]3[/blue] Max HP.",
+
+  "COLOSSUS_VULNERABLE_MITIGATION_ENCHANTMENT.title": "Colossus",
+  "COLOSSUS_VULNERABLE_MITIGATION_ENCHANTMENT.description": "Rare. After you play this, until this turn ends, attack damage enemies with [gold]Vulnerable[/gold] deal to you is halved.",
+  "COLOSSUS_VULNERABLE_MITIGATION_ENCHANTMENT.extraCardText": "This turn: halve attack damage from enemies that have Vulnerable.",
+
+  "HELL_BRAWLER_STRIKE_DRAW_AUTO_ENCHANTMENT.title": "Hell Brawler",
+  "HELL_BRAWLER_STRIKE_DRAW_AUTO_ENCHANTMENT.description": "Rare. The first time you play this each combat, gain [gold]Hellraiser[/gold] (same as the Hellraiser card: [gold]Strike[/gold] cards you draw [gold]Autoplay[/gold]).",
+  "HELL_BRAWLER_STRIKE_DRAW_AUTO_ENCHANTMENT.extraCardText": "First play this combat: gain Hellraiser.",
+
+  "CORROSIVE_WAVE_ENCHANTMENT.title": "Corrosive Wave",
+  "CORROSIVE_WAVE_ENCHANTMENT.description": "Rare. After you play this, whenever you draw another card from your deck this turn, apply [blue]{PoisonPower:diff()}[/blue] [gold]Poison[/gold] to ALL enemies.",
+  "CORROSIVE_WAVE_ENCHANTMENT.extraCardText": "This turn: each draw applies Poison to all enemies.",
+
+  "CALAMITY_WAVE_DOOM_ENCHANTMENT.title": "Calamity Wave",
+  "CALAMITY_WAVE_DOOM_ENCHANTMENT.description": "Rare. After you play this, whenever you draw another card from your deck this turn, apply [blue]{DoomPower:diff()}[/blue] [gold]Doom[/gold] to ALL enemies.",
+  "CALAMITY_WAVE_DOOM_ENCHANTMENT.extraCardText": "This turn: each draw applies Doom to all enemies.",
+
+  "FORGE_WAVE_ENCHANTMENT.title": "Forge Wave",
+  "FORGE_WAVE_ENCHANTMENT.description": "Rare. After you play this, whenever you draw another card from your deck this turn, [gold]Forge[/gold] [blue]{Forge:diff()}[/blue].",
+  "FORGE_WAVE_ENCHANTMENT.extraCardText": "This turn: each draw [gold]Forges[/gold] [blue]{Forge:diff()}[/blue]."
 }

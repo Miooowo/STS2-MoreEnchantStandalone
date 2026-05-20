@@ -1,8 +1,4 @@
 {
-  "KEEN_EDGE_ENCHANTMENT.title": "锐锋",
-  "KEEN_EDGE_ENCHANTMENT.description": "在受[gold]力量[/gold]加成的攻击中，这张牌额外造成[blue]{Amount}[/blue]点伤害。",
-  "KEEN_EDGE_ENCHANTMENT.extraCardText": "受[gold]力量[/gold]加成的攻击额外+[blue]{Amount}[/blue]伤害。",
-
   "RETURN_TO_HAND_ENCHANTMENT.title": "返回",
   "RETURN_TO_HAND_ENCHANTMENT.description": "将此牌返回你的手牌。",
   "RETURN_TO_HAND_ENCHANTMENT.extraCardText": "将此牌返回你的手牌。",

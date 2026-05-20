@@ -110,7 +110,9 @@ internal static class CardEnchantEligibility
 		if (key.Equals("HpLoss", StringComparison.Ordinal))
 			return after < before;
 		return after > before;
-	}	/// <summary>锐锋、重刃、超巨化等：需牌面带正数的「打出」伤害动态变量（含 Move 伤害、ExtraDamage、CalculatedDamage 等）。</summary>
+	}
+
+	/// <summary>重刃、超巨化等：需牌面带正数的「打出」伤害动态变量（含 Move 伤害、ExtraDamage、CalculatedDamage 等）。</summary>
 	internal static bool CardHasMoveDamageNumbers(CardModel card)
 	{
 		var dv = card.DynamicVars;

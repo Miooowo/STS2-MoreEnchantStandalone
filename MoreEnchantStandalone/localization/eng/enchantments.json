@@ -1,8 +1,4 @@
 {
-  "KEEN_EDGE_ENCHANTMENT.title": "Keen Edge",
-  "KEEN_EDGE_ENCHANTMENT.description": "This card deals [blue]{Amount}[/blue] extra damage on [gold]Strength[/gold]-modified attacks.",
-  "KEEN_EDGE_ENCHANTMENT.extraCardText": "+[blue]{Amount}[/blue] damage on [gold]Strength[/gold]-modified attacks.",
-
   "RETURN_TO_HAND_ENCHANTMENT.title": "Return",
   "RETURN_TO_HAND_ENCHANTMENT.description": "Return this card to your [gold]Hand[/gold].",
   "RETURN_TO_HAND_ENCHANTMENT.extraCardText": "If it would go to the discard pile, put it into your [gold]Hand[/gold] instead.",

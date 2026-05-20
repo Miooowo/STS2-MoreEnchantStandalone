@@ -17,7 +17,6 @@ public static class Entry
 
 	public static void Init()
 	{
-		MoreEnchantEnchantmentRegistry.Register<KeenEdgeEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<LikeDaggerEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChargeUpEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<InitiativeEnergyEnchantment>();

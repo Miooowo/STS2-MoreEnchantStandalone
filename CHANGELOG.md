@@ -12,6 +12,7 @@
 - **稀有附魔**（[`MoreEnchantV080CombatEnchantments`](src/Enchantments/MoreEnchantV080CombatEnchantments.cs)）：狂宴（斩杀攻击伤害致死 +3 最大生命，消耗）、巨像（本回合带易伤的敌人对你伤害 ×0.5）、地狱狂徒（抽到带打击标签的牌时对随机敌人自动打出）、腐蚀波 / 灾厄波 / 铸剑波（打出后本回合每次抽牌：全体敌人中毒 2 / 灾厄 3 / 铸造 4）。
 
 ### 修复
+- 删除 **锐锋（Keen Edge）** 附魔：移除注册、实现与中英文文案，避免继续进入随机附魔池与控制台附魔候选。
 - **铃铛诅咒**（[`BellCurseReward`](src/Enchantments/CurseEnchantments.cs)）：`GrantCore` 经 `PullNextRelicFromBack` 固定各发放 1 件普通、罕见、稀有遗物；第三参谓词为 **true 表示可抽出**，以 **`ModelId`** 排除磨刀石（此前误当作「跳过」导致仅磨刀石可抽、其余回落头环）；与 `GrantCoreAfterUiFrame` 一并缓解战后选牌界面卡死、遗物未入账（GitHub #14）。
 - **恐怖**附魔在非指向性卡牌上无法给予易伤的bug
 - 能力牌和无数值的牌也会获得**笨重**的bug

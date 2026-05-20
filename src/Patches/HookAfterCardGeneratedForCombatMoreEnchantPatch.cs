@@ -1,7 +1,9 @@
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
+using MoreEnchant.Compat;
 
 namespace MoreEnchant.Patches;
 
@@ -13,9 +15,39 @@ namespace MoreEnchant.Patches;
 internal static class HookAfterCardGeneratedForCombatMoreEnchantPatch
 {
 	[HarmonyPrefix]
-	private static void Prefix(CombatState combatState, CardModel card, bool addedByPlayer)
+	private static void Prefix(object[] __args)
 	{
-		_ = combatState;
+		if (__args == null || __args.Length < 2 || __args[1] is not CardModel card)
+			return;
+
+		var addedByPlayer = ResolveAddedByPlayer(__args, card);
 		MoreEnchantCardRewardUtil.TryApplyRandomEnchantToCombatGeneratedCard(card, addedByPlayer);
+
+		if (card.Enchantment is IAfterCardGeneratedForCombatCompat enchantCompat)
+			_ = TaskHelper.RunSafely(enchantCompat.AfterCardGeneratedForCombatCompat(card, addedByPlayer));
+
+		var creature = card.Owner?.Creature;
+		if (creature == null)
+			return;
+		foreach (var power in creature.Powers)
+		{
+			if (power is IAfterCardGeneratedForCombatCompat powerCompat)
+				_ = TaskHelper.RunSafely(powerCompat.AfterCardGeneratedForCombatCompat(card, addedByPlayer));
+		}
+	}
+
+	private static bool ResolveAddedByPlayer(object[] args, CardModel card)
+	{
+		if (args.Length < 3)
+			return false;
+
+		return args[2] switch
+		{
+			bool b => b,
+			// 新版 Hook 参数为 creator(Player)；只要存在创建者即视为玩家生成。
+			// 不能用 ReferenceEquals(card.Owner, creator) 判定，联机跨端对象引用不稳定会导致一端 true 一端 false，引发 RNG 分叉。
+			Player creator => creator != null,
+			_ => false,
+		};
 	}
 }

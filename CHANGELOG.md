@@ -13,6 +13,7 @@
 
 ### 修复
 - 删除 **锐锋（Keen Edge）** 附魔：移除注册、实现与中英文文案，避免继续进入随机附魔池与控制台附魔候选。
+- **联机 checksum 分叉（Neow 事件后）**：[`HookAfterCardGeneratedForCombatMoreEnchantPatch`](src/Patches/HookAfterCardGeneratedForCombatMoreEnchantPatch.cs) 在新版 `Hook.AfterCardGeneratedForCombat(..., Player creator)` 签名下，不再使用 `ReferenceEquals(card.Owner, creator)` 推断玩家生成，改为 `creator != null`，避免跨端引用差异导致 `addedByPlayer` 判定不一致并消耗不同 RNG 计数。
 - **铃铛诅咒**（[`BellCurseReward`](src/Enchantments/CurseEnchantments.cs)）：`GrantCore` 经 `PullNextRelicFromBack` 固定各发放 1 件普通、罕见、稀有遗物；第三参谓词为 **true 表示可抽出**，以 **`ModelId`** 排除磨刀石（此前误当作「跳过」导致仅磨刀石可抽、其余回落头环）；与 `GrantCoreAfterUiFrame` 一并缓解战后选牌界面卡死、遗物未入账（GitHub #14）。
 - **恐怖**附魔在非指向性卡牌上无法给予易伤的bug
 - 能力牌和无数值的牌也会获得**笨重**的bug

@@ -10,6 +10,9 @@
 ### 新增
 - **初始卡组随机附魔设置**：新增 `starting_deck_enchant_enabled`（默认 `false`）与 `starting_deck_enchant_chance_percent`（默认 `10`）。开启后在进入新局时，对初始卡组每张牌按概率尝试随机附魔。
 
+### 修复
+- **战斗内生牌反射兼容参数错位**：`CardPileCmdCompat.AddGeneratedCardToCombat` 改为按参数类型动态装配实参，避免在部分签名下把 `bool addedByPlayer` 误传为 `CardPilePosition` 并导致 `Object of type 'System.Boolean' cannot be converted to type 'CardPilePosition'` 异常。
+
 ---
 ## 0.9
 

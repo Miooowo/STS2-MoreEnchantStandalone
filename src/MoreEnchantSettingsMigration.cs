@@ -39,6 +39,14 @@ internal static class MoreEnchantSettingsMigration
 			changed = true;
 		}
 
+		if (s.SchemaVersion < 5)
+		{
+			s.StartingDeckEnchantEnabled = false;
+			s.StartingDeckEnchantChancePercent = 10;
+			s.SchemaVersion = 5;
+			changed = true;
+		}
+
 		return changed;
 	}
 }

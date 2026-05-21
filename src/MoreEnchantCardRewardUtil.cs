@@ -192,6 +192,44 @@ internal static class MoreEnchantCardRewardUtil
 		CardCmd.Enchant(enchant, card, amount);
 	}
 
+	/// <summary>
+	/// 新局创建时对初始卡组逐张尝试随机附魔；默认关闭，联机客机遵循房主设置。
+	/// </summary>
+	internal static void TryApplyRandomEnchantToStartingDeck(Player player)
+	{
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.StartingDeckEnchantEnabled)
+			return;
+
+		var chancePercent = Math.Clamp(settings.StartingDeckEnchantChancePercent, 0, 100);
+		if (chancePercent <= 0)
+			return;
+
+		var cards = player.Deck.Cards;
+		if (cards.Count == 0)
+			return;
+
+		var rng = player.PlayerRng.Rewards;
+		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		foreach (var card in cards)
+		{
+			if (card == null || card.Enchantment != null)
+				continue;
+			if (ShouldSkipEnchantingRewardCard(card))
+				continue;
+			if (rng.NextInt(0, 100) >= chancePercent)
+				continue;
+
+			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: card.Rarity == CardRarity.Ancient);
+			if (pick == null)
+				continue;
+
+			var enchant = (EnchantmentModel)pick.MutableClone();
+			var amount = RollEnchantAmount(rng, pick);
+			CardCmd.Enchant(enchant, card, amount);
+		}
+	}
+
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(
 		CardModel card,
 		MoreEnchantSettings settings)

@@ -191,6 +191,35 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		};
 		root.AddChild(deckDirectChanceRow);
 
+		var startingDeckEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
+		var startingDeckCheck = new CheckBox
+		{
+			Text = "初始卡组随机附魔（进入新局时逐张掷骰）",
+			ButtonPressed = settings.StartingDeckEnchantEnabled,
+			FocusMode = Control.FocusModeEnum.None,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+		};
+		startingDeckEnableRow.AddChild(startingDeckCheck);
+		root.AddChild(startingDeckEnableRow);
+
+		var startingDeckChanceRow = CreateLabeledRow(
+			"初始卡组附魔概率（%）",
+			out var startingDeckChanceSlider,
+			out var startingDeckChanceLabel);
+		startingDeckChanceSlider.MinValue = 0;
+		startingDeckChanceSlider.MaxValue = 100;
+		startingDeckChanceSlider.Step = 1;
+		startingDeckChanceSlider.FocusMode = Control.FocusModeEnum.None;
+		startingDeckChanceSlider.Value = settings.StartingDeckEnchantChancePercent;
+		startingDeckChanceLabel.Text = $"{settings.StartingDeckEnchantChancePercent}%";
+		startingDeckChanceSlider.ValueChanged += v =>
+		{
+			settings.StartingDeckEnchantChancePercent = Mathf.Clamp((int)v, 0, 100);
+			startingDeckChanceLabel.Text = $"{settings.StartingDeckEnchantChancePercent}%";
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		root.AddChild(startingDeckChanceRow);
+
 		var combatEnableRow = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Pass };
 		var combatCheck = new CheckBox
 		{
@@ -238,6 +267,10 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 			deckDirectChanceSlider.MouseFilter = deckDirectOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
 			deckDirectChanceSlider.Modulate = deckDirectOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
 
+			var startingDeckOn = settings.StartingDeckEnchantEnabled;
+			startingDeckChanceSlider.MouseFilter = startingDeckOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+			startingDeckChanceSlider.Modulate = startingDeckOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
+
 			var combatOn = settings.CombatGeneratedEnchantEnabled;
 			combatChanceSlider.MouseFilter = combatOn ? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
 			combatChanceSlider.Modulate = combatOn ? Colors.White : new Color(1f, 1f, 1f, 0.45f);
@@ -270,6 +303,12 @@ internal static class MoreEnchantGeneralSettingsPanelPatch
 		deckDirectCheck.Toggled += pressed =>
 		{
 			settings.DeckDirectEnchantEnabled = pressed;
+			RefreshShopAncientCombatUi();
+			MoreEnchantSettingsStore.PersistCurrent();
+		};
+		startingDeckCheck.Toggled += pressed =>
+		{
+			settings.StartingDeckEnchantEnabled = pressed;
 			RefreshShopAncientCombatUi();
 			MoreEnchantSettingsStore.PersistCurrent();
 		};

@@ -9,7 +9,7 @@ public sealed class MoreEnchantSettings
 
 	/// <summary>设置 JSON 架构版本；低于当前版本时由 <see cref="MoreEnchantSettingsStore"/> 迁移默认值。</summary>
 	[JsonPropertyName("schema_version")]
-	public int SchemaVersion { get; set; } = 4;
+	public int SchemaVersion { get; set; } = 5;
 
 	/// <summary>卡牌奖励等：每张选项获得随机附魔的基础概率（0–100，百分数）。</summary>
 	[JsonPropertyName("reward_enchant_chance_percent")]
@@ -56,6 +56,14 @@ public sealed class MoreEnchantSettings
 	/// <summary>直加牌组随机附魔概率（0–100）；卷轴箱三选一预览与最终入组共用同一套掷骰与权重。</summary>
 	[JsonPropertyName("deck_direct_enchant_chance_percent")]
 	public int DeckDirectEnchantChancePercent { get; set; } = 10;
+
+	/// <summary>进入新局时，是否对初始卡组每张牌尝试随机附魔。联机以房主设置为准。</summary>
+	[JsonPropertyName("starting_deck_enchant_enabled")]
+	public bool StartingDeckEnchantEnabled { get; set; }
+
+	/// <summary>初始卡组随机附魔概率（0–100）。</summary>
+	[JsonPropertyName("starting_deck_enchant_chance_percent")]
+	public int StartingDeckEnchantChancePercent { get; set; } = 10;
 
 	/// <summary>
 	/// 为真时按卡牌稀有度使用 Chimera 式五档权重曲线；为假时仅使用下方五组相对权重（无视卡牌稀有度）。

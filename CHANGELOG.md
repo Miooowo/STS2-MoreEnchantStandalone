@@ -3,6 +3,25 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.9.1
+
+发布日期：2026-05-22
+
+### 新增
+- **初始卡组随机附魔设置**：新增 `starting_deck_enchant_enabled`（默认 `false`）与 `starting_deck_enchant_chance_percent`（默认 `10`）。开启后在进入新局时，对初始卡组每张牌按概率尝试随机附魔。
+
+---
+## 0.9
+
+发布日期：2026-05-20
+
+### 删除
+- **锐锋（Keen Edge）** 附魔：移除注册、实现与中英文文案，不再进入随机附魔池。
+
+### 修复
+- **联机 checksum 分叉（Neow 事件后）**：兼容新版 `Hook.AfterCardGeneratedForCombat(..., Player creator)` 时，玩家生成判定改为 `creator != null`，避免跨端对象引用差异导致 RNG 计数不一致。
+
+---
 ## 0.8
 
 发布日期：2026-04-18
@@ -12,8 +31,6 @@
 - **稀有附魔**（[`MoreEnchantV080CombatEnchantments`](src/Enchantments/MoreEnchantV080CombatEnchantments.cs)）：狂宴（斩杀攻击伤害致死 +3 最大生命，消耗）、巨像（本回合带易伤的敌人对你伤害 ×0.5）、地狱狂徒（抽到带打击标签的牌时对随机敌人自动打出）、腐蚀波 / 灾厄波 / 铸剑波（打出后本回合每次抽牌：全体敌人中毒 2 / 灾厄 3 / 铸造 4）。
 
 ### 修复
-- 删除 **锐锋（Keen Edge）** 附魔：移除注册、实现与中英文文案，避免继续进入随机附魔池与控制台附魔候选。
-- **联机 checksum 分叉（Neow 事件后）**：[`HookAfterCardGeneratedForCombatMoreEnchantPatch`](src/Patches/HookAfterCardGeneratedForCombatMoreEnchantPatch.cs) 在新版 `Hook.AfterCardGeneratedForCombat(..., Player creator)` 签名下，不再使用 `ReferenceEquals(card.Owner, creator)` 推断玩家生成，改为 `creator != null`，避免跨端引用差异导致 `addedByPlayer` 判定不一致并消耗不同 RNG 计数。
 - **铃铛诅咒**（[`BellCurseReward`](src/Enchantments/CurseEnchantments.cs)）：`GrantCore` 经 `PullNextRelicFromBack` 固定各发放 1 件普通、罕见、稀有遗物；第三参谓词为 **true 表示可抽出**，以 **`ModelId`** 排除磨刀石（此前误当作「跳过」导致仅磨刀石可抽、其余回落头环）；与 `GrantCoreAfterUiFrame` 一并缓解战后选牌界面卡死、遗物未入账（GitHub #14）。
 - **恐怖**附魔在非指向性卡牌上无法给予易伤的bug
 - 能力牌和无数值的牌也会获得**笨重**的bug

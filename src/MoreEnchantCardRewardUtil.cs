@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Factories;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Models.Enchantments.Mocks;
@@ -14,6 +15,7 @@ using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
 using MoreEnchant.Enchantments;
 using MoreEnchant.Enchantments.Beta;
+using MoreEnchant.Standalone.Compat;
 
 namespace MoreEnchant;
 
@@ -228,6 +230,16 @@ internal static class MoreEnchantCardRewardUtil
 			var amount = RollEnchantAmount(rng, pick);
 			CardCmd.Enchant(enchant, card, amount);
 		}
+	}
+
+	/// <summary>在卡牌真正入组后处理“拾起触发”类附魔（铃铛诅咒/锻造器等）。</summary>
+	internal static void TryHandleOnCardPickedUp(Player player, CardModel card)
+	{
+		if (card?.Enchantment is BellCurseEnchantment bell && bell.TryTakeRewardRelicGrantOnce())
+			_ = TaskHelper.RunSafely(BellCurseReward.GrantCoreAfterUiFrame(player));
+
+		if (card?.Enchantment is HextechForgeEnchantment forge && forge.TryTakePickupGrantOnce())
+			_ = TaskHelper.RunSafely(HextechRunesCompat.TryGrantRandomForgeAfterUiFrame(player));
 	}
 
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(

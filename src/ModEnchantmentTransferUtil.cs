@@ -19,5 +19,7 @@ internal static class ModEnchantmentTransferUtil
 
 		if (target.Enchantment is BellCurseEnchantment bell)
 			bell.ResetRewardRelicGrantGateForClonedCard();
+		if (target.Enchantment is HextechForgeEnchantment forge)
+			forge.ResetPickupGrantGateForClonedCard();
 	}
 }

@@ -6,9 +6,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MoreEnchant.Enchantments;
 
 namespace MoreEnchant.Patches;
 
@@ -108,8 +106,6 @@ internal static class CardPileCmdBellCurseDeckAddPatch
 	{
 		if (card.Owner is not Player p)
 			return;
-		if (card.Enchantment is not BellCurseEnchantment bell || !bell.TryTakeRewardRelicGrantOnce())
-			return;
-		_ = TaskHelper.RunSafely(BellCurseReward.GrantCoreAfterUiFrame(p));
+		MoreEnchantCardRewardUtil.TryHandleOnCardPickedUp(p, card);
 	}
 }

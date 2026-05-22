@@ -44,5 +44,7 @@ internal static class CloneCardPreserveModEnchantmentPatch
 	{
 		if (clone?.Enchantment is BellCurseEnchantment bell)
 			bell.ResetRewardRelicGrantGateForClonedCard();
+		if (clone?.Enchantment is HextechForgeEnchantment forge)
+			forge.ResetPickupGrantGateForClonedCard();
 	}
 }

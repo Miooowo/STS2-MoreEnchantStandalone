@@ -9,6 +9,9 @@
 
 ### 新增
 - **初始卡组随机附魔设置**：新增 `starting_deck_enchant_enabled`（默认 `false`）与 `starting_deck_enchant_chance_percent`（默认 `10`）。开启后在进入新局时，对初始卡组每张牌按概率尝试随机附魔。
+- **海克斯符文联动附魔**：新增 4 个联动附魔（锻造器、白银海克斯、黄金海克斯、棱彩海克斯）。未安装海克斯符文 mod 时不会进入随机附魔池。
+- **锻造器附魔拾牌触发**：覆盖奖励、商店、事件/遗物直加、变牌后入组等路径；拾起带该附魔的牌时获得 1 个随机属性锻造器。
+- **临时海克斯发放与战后清理**：白银/黄金/棱彩海克斯附魔在每场首次打出时发放 1 个对应阶位临时海克斯，并在战斗结束后自动移除。
 
 ### 修复
 - **战斗内生牌反射兼容参数错位**：`CardPileCmdCompat.AddGeneratedCardToCombat` 改为按参数类型动态装配实参，避免在部分签名下把 `bool addedByPlayer` 误传为 `CardPilePosition` 并导致 `Object of type 'System.Boolean' cannot be converted to type 'CardPilePosition'` 异常。

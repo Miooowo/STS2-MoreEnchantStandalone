@@ -306,5 +306,21 @@
 
   "FORGE_WAVE_ENCHANTMENT.title": "铸剑波",
   "FORGE_WAVE_ENCHANTMENT.description": "打出此牌后，你在本回合每抽到一张牌，[gold]铸造[/gold][blue]{Forge:diff()}[/blue]。",
-  "FORGE_WAVE_ENCHANTMENT.extraCardText": "打出此牌后，你在本回合每抽到一张牌，铸造{Forge:diff()}。"
+  "FORGE_WAVE_ENCHANTMENT.extraCardText": "打出此牌后，你在本回合每抽到一张牌，铸造{Forge:diff()}。",
+
+  "HEXTECH_FORGE_ENCHANTMENT.title": "锻造器",
+  "HEXTECH_FORGE_ENCHANTMENT.description": "罕见。仅在安装海克斯符文 mod 时出现。\n拾起这张牌并加入牌组时，获得1个随机属性锻造器。",
+  "HEXTECH_FORGE_ENCHANTMENT.extraCardText": "拾起入组时：获得1个随机属性锻造器。",
+
+  "SILVER_HEXTECH_ENCHANTMENT.title": "白银海克斯",
+  "SILVER_HEXTECH_ENCHANTMENT.description": "罕见。仅在安装海克斯符文 mod 时出现。\n每场战斗中首次打出此牌时，获得1个临时白银阶海克斯（战斗结束后移除）。",
+  "SILVER_HEXTECH_ENCHANTMENT.extraCardText": "每场首次打出：获得1个临时白银阶海克斯。",
+
+  "GOLD_HEXTECH_ENCHANTMENT.title": "黄金海克斯",
+  "GOLD_HEXTECH_ENCHANTMENT.description": "稀有。仅在安装海克斯符文 mod 时出现。\n每场战斗中首次打出此牌时，获得1个临时黄金阶海克斯（战斗结束后移除）。",
+  "GOLD_HEXTECH_ENCHANTMENT.extraCardText": "每场首次打出：获得1个临时黄金阶海克斯。",
+
+  "PRISMATIC_HEXTECH_ENCHANTMENT.title": "棱彩海克斯",
+  "PRISMATIC_HEXTECH_ENCHANTMENT.description": "特殊。仅在安装海克斯符文 mod 时出现。\n每场战斗中首次打出此牌时，获得1个临时棱彩阶海克斯（战斗结束后移除）。",
+  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "每场首次打出：获得1个临时棱彩阶海克斯。"
 }

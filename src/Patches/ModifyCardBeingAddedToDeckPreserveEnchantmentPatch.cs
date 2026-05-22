@@ -19,6 +19,9 @@ internal static class ModifyCardBeingAddedToDeckPreserveEnchantmentPatch
 	{
 		ModEnchantmentTransferUtil.CopyEnchantmentToIfMissing(card, __result);
 		if (__result?.Owner is Player p)
+		{
 			MoreEnchantCardRewardUtil.TryApplyRandomEnchantDirectDeckAdd(p, __result);
+			MoreEnchantCardRewardUtil.TryHandleOnCardPickedUp(p, __result);
+		}
 	}
 }

@@ -14,6 +14,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using MoreEnchant;
+using MoreEnchant.Compat;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
@@ -30,7 +31,7 @@ public sealed class SteadfastExhaustEnchantment : ModEnchantmentTemplate, IRewar
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) ? BlockMultiplier : 1m;
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
@@ -170,15 +171,19 @@ public sealed class TerrorVulnerableEnchantment : ModEnchantmentTemplate, IRewar
 		if (Card?.Owner?.Creature?.CombatState == null)
 			return;
 
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, Card.CombatState!);
+		if (Card.CombatState is not CombatState combatState)
+			return;
+		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
 		if (targets == null || targets.Count == 0)
 			return;
 
 		await CreatureCmd.TriggerAnim(Card.Owner.Creature, "Cast", Card.Owner.Character.CastAnimDelay);
 		if (targets.Count == 1)
-			await PowerCmd.Apply<VulnerablePower>(targets[0], VulnerableStacks, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<VulnerablePower>(targets[0], VulnerableStacks, Card.Owner.Creature, Card,
+				choiceContext);
 		else
-			await PowerCmd.Apply<VulnerablePower>(targets, VulnerableStacks, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<VulnerablePower>(targets, VulnerableStacks, Card.Owner.Creature, Card,
+				choiceContext);
 	}
 }
 
@@ -204,15 +209,19 @@ public sealed class ShiverVulnerableEnchantment : ModEnchantmentTemplate, IRewar
 		if (Card?.Owner?.Creature?.CombatState == null)
 			return;
 
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, Card.CombatState!);
+		if (Card.CombatState is not CombatState combatState)
+			return;
+		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
 		if (targets == null || targets.Count == 0)
 			return;
 
 		await CreatureCmd.TriggerAnim(Card.Owner.Creature, "Cast", Card.Owner.Character.CastAnimDelay);
 		if (targets.Count == 1)
-			await PowerCmd.Apply<VulnerablePower>(targets[0], VulnerableStacks, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<VulnerablePower>(targets[0], VulnerableStacks, Card.Owner.Creature, Card,
+				choiceContext);
 		else
-			await PowerCmd.Apply<VulnerablePower>(targets, VulnerableStacks, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<VulnerablePower>(targets, VulnerableStacks, Card.Owner.Creature, Card,
+				choiceContext);
 	}
 }
 
@@ -238,15 +247,17 @@ public sealed class NeutralWeakEnchantment : ModEnchantmentTemplate, IRewardEnch
 		if (Card?.Owner?.Creature?.CombatState == null)
 			return;
 
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, Card.CombatState!);
+		if (Card.CombatState is not CombatState combatState)
+			return;
+		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
 		if (targets == null || targets.Count == 0)
 			return;
 
 		await CreatureCmd.TriggerAnim(Card.Owner.Creature, "Cast", Card.Owner.Character.CastAnimDelay);
 		if (targets.Count == 1)
-			await PowerCmd.Apply<WeakPower>(targets[0], WeakStacks, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<WeakPower>(targets[0], WeakStacks, Card.Owner.Creature, Card, choiceContext);
 		else
-			await PowerCmd.Apply<WeakPower>(targets, WeakStacks, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<WeakPower>(targets, WeakStacks, Card.Owner.Creature, Card, choiceContext);
 	}
 }
 
@@ -361,7 +372,7 @@ public sealed class ShredDebrisEnchantment : ModEnchantmentTemplate, IRewardEnch
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -377,7 +388,7 @@ public sealed class ShredDebrisEnchantment : ModEnchantmentTemplate, IRewardEnch
 		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
 
 		var debris = state.CreateCard<Debris>(player);
-		await CardPileCmd.AddGeneratedCardToCombat(debris, PileType.Hand, addedByPlayer: true);
+		await CardPileCmdCompat.AddGeneratedCardToCombat(debris, PileType.Hand, true);
 	}
 }
 

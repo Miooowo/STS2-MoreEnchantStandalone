@@ -11,10 +11,13 @@
 - **初始卡组随机附魔设置**：新增 `starting_deck_enchant_enabled`（默认 `false`）与 `starting_deck_enchant_chance_percent`（默认 `10`）。开启后在进入新局时，对初始卡组每张牌按概率尝试随机附魔。
 - **海克斯符文联动附魔**：新增 4 个联动附魔（锻造器、白银海克斯、黄金海克斯、棱彩海克斯）。未安装海克斯符文 mod 时不会进入随机附魔池。
 - **锻造器附魔拾牌触发**：覆盖奖励、商店、事件/遗物直加、变牌后入组等路径；拾起带该附魔的牌时获得 1 个随机属性锻造器。
-- **临时海克斯发放与战后清理**：白银/黄金/棱彩海克斯附魔在每场首次打出时发放 1 个对应阶位临时海克斯，并在战斗结束后自动移除。
+- **临时海克斯发放与过房清理**：白银/黄金/棱彩海克斯附魔在每场首次打出时发放 1 个对应阶位临时海克斯，并在进入下一个房间后自动移除。
+- **调试控制台命令**：新增 `forcehextechforgereward`，可在当前战斗内强制“本场结束后的遭遇战卡牌奖励”至少出现 1 张锻造器附魔牌（若有可附魔候选）。
 
 ### 修复
 - **战斗内生牌反射兼容参数错位**：`CardPileCmdCompat.AddGeneratedCardToCombat` 改为按参数类型动态装配实参，避免在部分签名下把 `bool addedByPlayer` 误传为 `CardPilePosition` 并导致 `Object of type 'System.Boolean' cannot be converted to type 'CardPilePosition'` 异常。
+- **锻造器附魔 + 宾邦双入组少发放**：锻造器拾牌触发由“一次性门闩”改为“按牌组中同卡引用出现次数发放”，修复同一实例被重复加入牌组时只发放 1 次的问题。
+- **附魔图鉴悬浮提示空引用告警**：`NHoverTipSet.CreateAndShow(...)` 返回值改为判空后再 `SetFollowOwner()`，消除 `CS8602` 并避免潜在 NRE。
 
 ---
 ## 0.9

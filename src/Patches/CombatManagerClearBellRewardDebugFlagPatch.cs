@@ -13,5 +13,6 @@ internal static class CombatManagerClearBellRewardDebugFlagPatch
 	{
 		MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardBellCurse = false;
 		MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardRandomCurse = false;
+		MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardHextechForge = false;
 	}
 }

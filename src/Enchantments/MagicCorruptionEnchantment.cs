@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MoreEnchant.Powers;
+using MoreEnchant.Compat;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
@@ -63,7 +64,7 @@ public sealed class MagicCorruptionEnchantment : ModEnchantmentTemplate, IReward
 			return;
 
 		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
-		await PowerCmd.Apply<MagicCorruptionPower>(player.Creature, 1m, player.Creature, Card);
+		await PowerCmdCompat.Apply<MagicCorruptionPower>(player.Creature, 1m, player.Creature, Card, choiceContext);
 		MagicCorruptionPower.ApplyExhaustKeywordToAllEnchantedCards(player);
 	}
 }

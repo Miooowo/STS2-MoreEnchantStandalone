@@ -327,14 +327,14 @@
   "HEXTECH_FORGE_ENCHANTMENT.extraCardText": "On pickup: gain 1 random [gold]Attribute Forge[/gold].",
 
   "SILVER_HEXTECH_ENCHANTMENT.title": "Silver Hextech",
-  "SILVER_HEXTECH_ENCHANTMENT.description": "Rare. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Silver[/gold] Hextech rune (removed after combat).",
+  "SILVER_HEXTECH_ENCHANTMENT.description": "Rare. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Silver[/gold] Hextech rune (removed when entering the next room).",
   "SILVER_HEXTECH_ENCHANTMENT.extraCardText": "First play each combat: gain 1 temporary [gold]Silver[/gold] Hextech rune.",
 
   "GOLD_HEXTECH_ENCHANTMENT.title": "Gold Hextech",
-  "GOLD_HEXTECH_ENCHANTMENT.description": "Rare. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Gold[/gold] Hextech rune (removed after combat).",
+  "GOLD_HEXTECH_ENCHANTMENT.description": "Rare. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Gold[/gold] Hextech rune (removed when entering the next room).",
   "GOLD_HEXTECH_ENCHANTMENT.extraCardText": "First play each combat: gain 1 temporary [gold]Gold[/gold] Hextech rune.",
 
   "PRISMATIC_HEXTECH_ENCHANTMENT.title": "Prismatic Hextech",
-  "PRISMATIC_HEXTECH_ENCHANTMENT.description": "Special. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Prismatic[/gold] Hextech rune (removed after combat).",
+  "PRISMATIC_HEXTECH_ENCHANTMENT.description": "Special. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Prismatic[/gold] Hextech rune (removed when entering the next room).",
   "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "First play each combat: gain 1 temporary [gold]Prismatic[/gold] Hextech rune."
 }

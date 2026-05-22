@@ -81,7 +81,7 @@ internal sealed partial class EnchantmentCompendiumEntry : NButton
 
 		var tips = _model.HoverTips;
 		var set = NHoverTipSet.CreateAndShow(this, tips, HoverTip.GetHoverTipAlignment(this));
-		set.SetFollowOwner();
+		set?.SetFollowOwner();
 	}
 
 	protected override void OnUnfocus()

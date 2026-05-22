@@ -51,6 +51,13 @@ internal static class MoreEnchantCardRewardUtil
 			TryApplyForcedRandomCurseCardReward(player, results, rng);
 		}
 
+		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardHextechForge &&
+		    options.Source == CardCreationSource.Encounter)
+		{
+			MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardHextechForge = false;
+			TryApplyForcedHextechForgeCardReward(results, rng);
+		}
+
 		foreach (var result in results)
 		{
 			var card = result.Card;
@@ -238,7 +245,7 @@ internal static class MoreEnchantCardRewardUtil
 		if (card?.Enchantment is BellCurseEnchantment bell && bell.TryTakeRewardRelicGrantOnce())
 			_ = TaskHelper.RunSafely(BellCurseReward.GrantCoreAfterUiFrame(player));
 
-		if (card?.Enchantment is HextechForgeEnchantment forge && forge.TryTakePickupGrantOnce())
+		if (card?.Enchantment is HextechForgeEnchantment forge && forge.TryTakePickupGrant(player))
 			_ = TaskHelper.RunSafely(HextechRunesCompat.TryGrantRandomForgeAfterUiFrame(player));
 	}
 
@@ -439,6 +446,36 @@ internal static class MoreEnchantCardRewardUtil
 				continue;
 			var enchant = (EnchantmentModel)pick.MutableClone();
 			var amount = RollEnchantAmount(rng, pick);
+			CardCmd.Enchant(enchant, card, amount);
+			return;
+		}
+	}
+
+	/// <summary>将首张可附魔的候选牌强制附上锻造器附魔（仅海克斯符文联动可用时生效）。</summary>
+	private static void TryApplyForcedHextechForgeCardReward(List<CardCreationResult> results, Rng rng)
+	{
+		EnchantmentModel forgePick;
+		try
+		{
+			forgePick = ModelDb.GetById<EnchantmentModel>(ModelDb.GetId(typeof(HextechForgeEnchantment)));
+		}
+		catch (ModelNotFoundException)
+		{
+			return;
+		}
+
+		foreach (var result in results)
+		{
+			var card = result.Card;
+			if (card.Enchantment != null)
+				continue;
+			if (ShouldSkipEnchantingRewardCard(card))
+				continue;
+			if (!forgePick.CanEnchant(card))
+				continue;
+
+			var enchant = (EnchantmentModel)forgePick.MutableClone();
+			var amount = RollEnchantAmount(rng, forgePick);
 			CardCmd.Enchant(enchant, card, amount);
 			return;
 		}

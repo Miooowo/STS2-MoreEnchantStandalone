@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,6 +11,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Runs;
 using MoreEnchant.Enchantments;
+using MoreEnchant.Compat;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments.Beta;
@@ -48,13 +50,15 @@ public sealed class PincerFlankingMarkEnchantment : ModEnchantmentTemplate, IRew
 		if (Card?.Owner?.Creature?.CombatState == null)
 			return;
 
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, Card.CombatState!);
+		if (Card.CombatState is not CombatState combatState)
+			return;
+		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
 		if (targets == null || targets.Count == 0)
 			return;
 
 		await CreatureCmd.TriggerAnim(Card.Owner.Creature, "Cast", Card.Owner.Character.CastAnimDelay);
 
 		foreach (var t in targets)
-			await PowerCmd.Apply<FlankingPower>(t, 2m, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<FlankingPower>(t, 2m, Card.Owner.Creature, Card, choiceContext);
 	}
 }

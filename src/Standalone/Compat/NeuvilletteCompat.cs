@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Commands;
+using MoreEnchant.Compat;
 
 namespace MoreEnchant.Standalone.Compat;
 
@@ -135,6 +136,6 @@ internal static class NeuvilletteCompat
 
 		var template = ModelDb.DebugPower(surgeType);
 		var power = template.ToMutable();
-		await PowerCmd.Apply(power, creature, amount, creature, source, false);
+		await PowerCmdCompat.Apply(power, creature, amount, creature, source, null, false);
 	}
 }

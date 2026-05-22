@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using MoreEnchant;
+using MoreEnchant.Compat;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
@@ -82,7 +83,7 @@ public sealed class ColossusEnchantment : ModEnchantmentTemplate, IRewardEnchant
 			return;
 
 		await CreatureCmd.TriggerAnim(creature, "Cast", owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<ColossusPower>(creature, ColossusStacks, creature, Card);
+		await PowerCmdCompat.Apply<ColossusPower>(creature, ColossusStacks, creature, Card, choiceContext);
 	}
 }
 
@@ -166,7 +167,7 @@ public sealed class HellraiserEnchantment : ModEnchantmentTemplate, IRewardEncha
 			return;
 
 		_pendingFirstPlayInCombat = false;
-		await PowerCmd.Apply<HellraiserPower>(creature, HellraiserStacks, creature, Card);
+		await PowerCmdCompat.Apply<HellraiserPower>(creature, HellraiserStacks, creature, Card, choiceContext);
 	}
 }
 
@@ -188,7 +189,7 @@ public sealed class CorrosiveWaveEnchantment : DrawWaveEnchantmentBase
 
 		var applier = Card!.Owner!.Creature;
 		foreach (var e in Card.CombatState!.HittableEnemies)
-			await PowerCmd.Apply<PoisonPower>(e, 2m, applier, Card);
+			await PowerCmdCompat.Apply<PoisonPower>(e, 2m, applier, Card, choiceContext);
 	}
 }
 
@@ -210,7 +211,7 @@ public sealed class CalamityWaveDoomEnchantment : DrawWaveEnchantmentBase
 
 		var applier = Card!.Owner!.Creature;
 		foreach (var e in Card.CombatState!.HittableEnemies)
-			await PowerCmd.Apply<DoomPower>(e, 3m, applier, Card);
+			await PowerCmdCompat.Apply<DoomPower>(e, 3m, applier, Card, choiceContext);
 	}
 }
 

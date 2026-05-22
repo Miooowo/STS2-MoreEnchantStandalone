@@ -26,6 +26,7 @@ using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using MoreEnchant;
+using MoreEnchant.Compat;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
@@ -64,7 +65,7 @@ public sealed class SlipperyFirstPlayEnchantment : ModEnchantmentTemplate, IRewa
 
 		_pendingFirstPlayInCombat = false;
 		await CreatureCmd.TriggerAnim(c, "Cast", player!.Character.CastAnimDelay);
-		await PowerCmd.Apply<SlipperyPower>(c, SlipperyStacks, c, Card);
+		await PowerCmdCompat.Apply<SlipperyPower>(c, SlipperyStacks, c, Card, choiceContext);
 	}
 }
 
@@ -102,7 +103,7 @@ public sealed class GainBufferPowerEnchantment : ModEnchantmentTemplate, IReward
 
 		_pendingFirstPlayInCombat = false;
 		await CreatureCmd.TriggerAnim(c, "Cast", player!.Character.CastAnimDelay);
-		await PowerCmd.Apply<BufferPower>(c, BufferStacks, c, Card);
+		await PowerCmdCompat.Apply<BufferPower>(c, BufferStacks, c, Card, choiceContext);
 	}
 }
 
@@ -150,7 +151,9 @@ public sealed class MeltDoubleVulnerableEnchantment : ModEnchantmentTemplate, IR
 		if (Card?.Owner?.Creature?.CombatState == null)
 			return;
 
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, Card.CombatState!);
+		if (Card.CombatState is not CombatState combatState)
+			return;
+		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
 		if (targets == null || targets.Count == 0)
 			return;
 
@@ -161,7 +164,7 @@ public sealed class MeltDoubleVulnerableEnchantment : ModEnchantmentTemplate, IR
 			var v = (decimal)t.GetPowerAmount<VulnerablePower>();
 			if (v <= 0m)
 				continue;
-			await PowerCmd.Apply<VulnerablePower>(t, v, Card.Owner.Creature, Card);
+			await PowerCmdCompat.Apply<VulnerablePower>(t, v, Card.Owner.Creature, Card, choiceContext);
 		}
 	}
 }
@@ -219,14 +222,16 @@ public sealed class DuelStrengthEnchantment : ModEnchantmentTemplate, IRewardEnc
 
 		var playerC = Card.Owner.Creature;
 		await CreatureCmd.TriggerAnim(playerC, "Cast", Card.Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<StrengthPower>(playerC, PlayerStrength, playerC, Card);
+		await PowerCmdCompat.Apply<StrengthPower>(playerC, PlayerStrength, playerC, Card, choiceContext);
 
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, Card.CombatState!);
+		if (Card.CombatState is not CombatState combatState)
+			return;
+		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
 		if (targets == null || targets.Count == 0)
 			return;
 
 		foreach (var t in targets)
-			await PowerCmd.Apply<StrengthPower>(t, EnemyStrength, playerC, Card);
+			await PowerCmdCompat.Apply<StrengthPower>(t, EnemyStrength, playerC, Card, choiceContext);
 	}
 }
 
@@ -264,7 +269,7 @@ public sealed class ReaperDoomOnDamageEnchantment : ModEnchantmentTemplate, IRew
 		if (doom <= 0)
 			return;
 
-		await PowerCmd.Apply<DoomPower>(target, doom, dealer, Card);
+		await PowerCmdCompat.Apply<DoomPower>(target, doom, dealer, Card, choiceContext);
 	}
 }
 
@@ -334,7 +339,7 @@ public sealed class PounceNextSkillFreeEnchantment : ModEnchantmentTemplate, IRe
 			return;
 
 		await CreatureCmd.TriggerAnim(c, "Cast", player.Character.CastAnimDelay);
-		await PowerCmd.Apply<FreeSkillPower>(c, 1m, c, Card);
+		await PowerCmdCompat.Apply<FreeSkillPower>(c, 1m, c, Card, choiceContext);
 	}
 }
 

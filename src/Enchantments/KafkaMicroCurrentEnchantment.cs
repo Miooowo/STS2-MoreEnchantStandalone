@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MoreEnchant.Compat;
 using MoreEnchant.Kafka;
 using MoreEnchant.Standalone;
 
@@ -51,7 +52,7 @@ public sealed class KafkaMicroCurrentEnchantment : ModEnchantmentTemplate, IRewa
 		if (!KafkaElectrocuteSupport.TryGetElectrocutePowerType(out var powerType) || powerType == null)
 			return;
 
-		var state = Card.Owner.Creature.CombatState;
+		var state = Card.Owner.Creature.CombatState as CombatState;
 		if (state == null)
 			return;
 
@@ -70,7 +71,8 @@ public sealed class KafkaMicroCurrentEnchantment : ModEnchantmentTemplate, IRewa
 		{
 			VfxCmd.PlayOnCreatureCenter(targets[0], VfxCmd.lightningPath);
 			var power = proto.ToMutable();
-			await PowerCmd.Apply(power, targets[0], DynamicVars["MicroCurrentDamage"].BaseValue, applier, Card);
+			await PowerCmdCompat.Apply(power, targets[0], DynamicVars["MicroCurrentDamage"].BaseValue, applier, Card,
+				choiceContext);
 		}
 		else
 		{
@@ -78,7 +80,8 @@ public sealed class KafkaMicroCurrentEnchantment : ModEnchantmentTemplate, IRewa
 			{
 				VfxCmd.PlayOnCreatureCenter(target, VfxCmd.lightningPath);
 				var power = proto.ToMutable();
-				await PowerCmd.Apply(power, target, DynamicVars["MicroCurrentDamage"].BaseValue, applier, Card);
+				await PowerCmdCompat.Apply(power, target, DynamicVars["MicroCurrentDamage"].BaseValue, applier, Card,
+					choiceContext);
 			}
 		}
 	}

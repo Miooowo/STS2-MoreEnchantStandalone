@@ -144,7 +144,7 @@ public sealed class ChimeraCompactEnchantment : ModEnchantmentTemplate, IRewardE
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ChimeraAugmentEnchantments.IsMoveDamage(props) ? (2m / 3m) : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		props.HasFlag(ValueProp.Move) ? (2m / 3m) : 1m;
 }
 
@@ -190,7 +190,7 @@ public sealed class ChimeraBulkyEnchantment : ModEnchantmentTemplate, IRewardEnc
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ChimeraAugmentEnchantments.IsMoveDamage(props) ? Ratio() : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		props.HasFlag(ValueProp.Move) ? Ratio() : 1m;
 }
 
@@ -220,7 +220,7 @@ public sealed class ChimeraSolidifyEnchantment : ModEnchantmentTemplate, IReward
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		props.HasFlag(ValueProp.Move) ? 3m : 1m;
 }
 

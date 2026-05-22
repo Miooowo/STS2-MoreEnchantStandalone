@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MoreEnchant.Compat;
 using MoreEnchant.Standalone;
 using MoreEnchant.Standalone.Compat;
 
@@ -28,10 +29,9 @@ public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchan
 
 	public override bool CanEnchant(CardModel card)
 	{
-		// MultiEnchantmentMod 会在 ApplyEnchantment 前强制检查 CanEnchant(card) 并直接抛异常。
-		// 蛇咬只依赖“打出时能执行附魔 hook”，不要求卡牌具有选敌目标；无目标牌会按规则挑随机敌人上毒。
-		// 为避免外部/控制台附魔（例如 Havoc）被过严的默认规则拒绝，这里直接放行。
-		return true;
+		// 多附魔模组会在附魔前强制检查 CanEnchant；这里保持“无目标牌也可随机上毒”的宽松策略，
+		// 但需要排除诅咒牌，避免奖励池在诅咒牌上被蛇咬垄断。
+		return base.CanEnchant(card) && card.Rarity != CardRarity.Curse;
 	}
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
@@ -79,7 +79,7 @@ public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchan
 		if (poisonAmount <= 0)
 			return;
 
-		var state = Card.Owner.Creature.CombatState;
+		var state = Card.Owner.Creature.CombatState as CombatState;
 		if (state == null)
 			return;
 
@@ -93,11 +93,11 @@ public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchan
 		if (targets.Count == 1)
 		{
 			VfxCmd.PlayOnCreatureCenter(targets[0], "vfx/vfx_bite");
-			await PowerCmd.Apply<PoisonPower>(targets[0], poisonAmount, applier, Card);
+			await PowerCmdCompat.Apply<PoisonPower>(targets[0], poisonAmount, applier, Card, choiceContext);
 		}
 		else
 		{
-			await PowerCmd.Apply<PoisonPower>(targets, poisonAmount, applier, Card);
+			await PowerCmdCompat.Apply<PoisonPower>(targets, poisonAmount, applier, Card, choiceContext);
 		}
 	}
 

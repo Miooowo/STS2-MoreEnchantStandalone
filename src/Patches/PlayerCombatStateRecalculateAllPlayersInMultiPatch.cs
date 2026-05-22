@@ -28,7 +28,8 @@ internal static class PlayerCombatStateRecalculateAllPlayersInMultiPatch
 		CombatState? combatState = null;
 		foreach (var card in __instance.AllCards)
 		{
-			combatState = card.CombatState;
+			if (card.CombatState is CombatState cs)
+				combatState = cs;
 			if (combatState != null)
 				break;
 		}

@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using MoreEnchant.Compat;
 using MoreEnchant;
 using MoreEnchant.Standalone;
 
@@ -32,7 +33,9 @@ public sealed class LikeDaggerEnchantment : ModEnchantmentTemplate, IRewardEncha
 			return;
 
 		await CreatureCmd.TriggerAnim(player.Creature, "Cast", player.Character.CastAnimDelay);
-		await CardPileCmd.AddToCombatAndPreview<Shiv>(player.Creature, PileType.Hand, 1, true);
+		var shiv = player.Creature.CombatState?.CreateCard<Shiv>(player);
+		if (shiv != null)
+			await CardPileCmdCompat.AddGeneratedCardToCombat(shiv, PileType.Hand, true);
 	}
 }
 
@@ -55,7 +58,7 @@ public sealed class ChargeUpEnchantment : ModEnchantmentTemplate, IRewardEnchant
 			return;
 
 		await CreatureCmd.TriggerAnim(c, "Cast", Card!.Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<EnergyNextTurnPower>(c, DynamicVars.Energy.BaseValue, c, Card);
+		await PowerCmdCompat.Apply<EnergyNextTurnPower>(c, DynamicVars.Energy.BaseValue, c, Card, choiceContext);
 	}
 }
 
@@ -78,7 +81,7 @@ public sealed class InitiativeEnergyEnchantment : ModEnchantmentTemplate, IRewar
 			return;
 
 		await CreatureCmd.TriggerAnim(c, "Cast", Card!.Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<EnergyNextTurnPower>(c, DynamicVars.Energy.BaseValue, c, Card);
+		await PowerCmdCompat.Apply<EnergyNextTurnPower>(c, DynamicVars.Energy.BaseValue, c, Card, choiceContext);
 	}
 }
 
@@ -207,7 +210,7 @@ public sealed class SpectralEtherealEnchantment : ModEnchantmentTemplate, IRewar
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Ethereal) };
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props)
+	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props)
 	{
 		if (ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props))
 			return BlockMultiplier;

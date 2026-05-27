@@ -94,7 +94,7 @@ public sealed class DoubtCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 }
 
 /// <summary>愚行：保留、永恒；战斗内费用从 0 起每打出一次 +1；打出后回到手牌（本战斗）。</summary>
-public sealed class FollyCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity, IAfterCardGeneratedForCombatCompat
+public sealed class FollyCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
 	private int _rampThisCombat;
 
@@ -126,7 +126,7 @@ public sealed class FollyCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 		Card.EnergyCost.SetCustomBaseCost(System.Math.Max(0, _rampThisCombat));
 	}
 
-	public Task AfterCardGeneratedForCombatCompat(CardModel card, bool addedByPlayer)
+	public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
 	{
 		if (!ReferenceEquals(card, Card))
 			return Task.CompletedTask;
@@ -401,7 +401,7 @@ public sealed class DecayCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, null, Card);
 	}
 
-	public async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
 	{
 		if (side != CombatSide.Player)
 			return;
@@ -424,7 +424,7 @@ public sealed class RegretCurseEnchantment : ModEnchantmentTemplate, IRewardEnch
 
 	public override bool HasExtraCardText => true;
 
-	public async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
 	{
 		if (side != CombatSide.Player)
 			return;
@@ -473,7 +473,7 @@ public sealed class AnguishCurseEnchantment : ModEnchantmentTemplate, IRewardEnc
 }
 
 /// <summary>愧疚：附魔时按 <see cref="MegaCrit.Sts2.Core.Models.Enchantments.Mocks.MockFreeEnchantment"/> 将能量基准归零、辉星基准尽量归零；战斗中再按 <see cref="MegaCrit.Sts2.Core.Models.Potions.TouchOfInsanity"/> 使用 <see cref="CardModel.SetToFreeThisCombat"/>（<see cref="BeforeCombatStart"/> / <see cref="AfterCardGeneratedForCombat"/>）。移除倒计时与 <see cref="MegaCrit.Sts2.Core.Models.Cards.Guilty"/> 相同，使用 <c>Combats</c> 动态变量。</summary>
-public sealed class GuiltCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity, IAfterCardGeneratedForCombatCompat
+public sealed class GuiltCurseEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
 	private const int CombatsToRemove = 5;
 
@@ -562,7 +562,7 @@ public sealed class GuiltCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 		return Task.CompletedTask;
 	}
 
-	public Task AfterCardGeneratedForCombatCompat(CardModel card, bool addedByPlayer)
+	public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
 	{
 		if (!ReferenceEquals(card, Card))
 			return Task.CompletedTask;

@@ -242,7 +242,7 @@ public sealed class BadLuckCurseEnchantment : ModEnchantmentTemplate, IRewardEnc
 		return Task.CompletedTask;
 	}
 
-	public async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
 	{
 		if (side != CombatSide.Player)
 			return;

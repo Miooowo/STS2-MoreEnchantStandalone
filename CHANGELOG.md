@@ -15,6 +15,7 @@
 - **调试控制台命令**：新增 `forcehextechforgereward`，可在当前战斗内强制“本场结束后的遭遇战卡牌奖励”至少出现 1 张锻造器附魔牌（若有可附魔候选）。
 
 ### 修复
+- **103.2 版本 API 适配**：恢复 `BeforeTurnEnd` / `EnchantBlockMultiplicative` / `AfterCardGeneratedForCombat` 等原生覆写链，移除临时 `IAfterCardGeneratedForCombatCompat` 二次分发，避免效果在 103.2 下缺失或重复触发。
 - **战斗内生牌反射兼容参数错位**：`CardPileCmdCompat.AddGeneratedCardToCombat` 改为按参数类型动态装配实参，避免在部分签名下把 `bool addedByPlayer` 误传为 `CardPilePosition` 并导致 `Object of type 'System.Boolean' cannot be converted to type 'CardPilePosition'` 异常。
 - **锻造器附魔 + 宾邦双入组少发放**：锻造器拾牌触发由“一次性门闩”改为“按牌组中同卡引用出现次数发放”，修复同一实例被重复加入牌组时只发放 1 次的问题。
 - **附魔图鉴悬浮提示空引用告警**：`NHoverTipSet.CreateAndShow(...)` 返回值改为判空后再 `SetFollowOwner()`，消除 `CS8602` 并避免潜在 NRE。

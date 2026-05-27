@@ -1,9 +1,7 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
-using MoreEnchant.Compat;
 
 namespace MoreEnchant.Patches;
 
@@ -20,23 +18,11 @@ internal static class HookAfterCardGeneratedForCombatMoreEnchantPatch
 		if (__args == null || __args.Length < 2 || __args[1] is not CardModel card)
 			return;
 
-		var addedByPlayer = ResolveAddedByPlayer(__args, card);
+		var addedByPlayer = ResolveAddedByPlayer(__args);
 		MoreEnchantCardRewardUtil.TryApplyRandomEnchantToCombatGeneratedCard(card, addedByPlayer);
-
-		if (card.Enchantment is IAfterCardGeneratedForCombatCompat enchantCompat)
-			_ = TaskHelper.RunSafely(enchantCompat.AfterCardGeneratedForCombatCompat(card, addedByPlayer));
-
-		var creature = card.Owner?.Creature;
-		if (creature == null)
-			return;
-		foreach (var power in creature.Powers)
-		{
-			if (power is IAfterCardGeneratedForCombatCompat powerCompat)
-				_ = TaskHelper.RunSafely(powerCompat.AfterCardGeneratedForCombatCompat(card, addedByPlayer));
-		}
 	}
 
-	private static bool ResolveAddedByPlayer(object[] args, CardModel card)
+	private static bool ResolveAddedByPlayer(object[] args)
 	{
 		if (args.Length < 3)
 			return false;

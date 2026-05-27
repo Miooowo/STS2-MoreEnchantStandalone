@@ -41,6 +41,6 @@ public sealed class FinaleCurtainEnchantment : ModEnchantmentTemplate, IRewardEn
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ValuePropUtil.IsPoweredAttack(props) && FinaleMechanicActive ? 3m : 1m;
 
-	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) && FinaleMechanicActive ? 3m : 1m;
 }

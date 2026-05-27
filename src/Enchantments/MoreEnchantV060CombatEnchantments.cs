@@ -31,7 +31,7 @@ public sealed class SteadfastExhaustEnchantment : ModEnchantmentTemplate, IRewar
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) ? BlockMultiplier : 1m;
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
@@ -372,7 +372,7 @@ public sealed class ShredDebrisEnchantment : ModEnchantmentTemplate, IRewardEnch
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
 
-	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
+	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
 		ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>

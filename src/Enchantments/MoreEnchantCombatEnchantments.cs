@@ -210,7 +210,7 @@ public sealed class SpectralEtherealEnchantment : ModEnchantmentTemplate, IRewar
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Ethereal) };
 
-	public decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props)
+	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props)
 	{
 		if (ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props))
 			return BlockMultiplier;

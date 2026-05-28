@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -52,10 +50,7 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 		card.Type == CardType.Skill &&
 		CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
-	{
-		if (Card?.Owner?.Creature == null)
-			return;
-		await CreatureCmd.GainBlock(Card.Owner.Creature, BlockBonus, ValueProp.Move, cardPlay, fast: false);
-	}
+	public override decimal ModifyBlockAdditive(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && props.HasFlag(ValueProp.Move) ? BlockBonus : 0m;
 }

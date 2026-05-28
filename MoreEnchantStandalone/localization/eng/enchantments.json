@@ -230,10 +230,6 @@
   "SHIVER_VULNERABLE_ENCHANTMENT.description": "When played, apply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].",
   "SHIVER_VULNERABLE_ENCHANTMENT.extraCardText": "Apply [blue]{VulnerablePower:diff()}[/blue] [gold]Vulnerable[/gold].",
 
-  "NEUTRAL_WEAK_ENCHANTMENT.title": "Neutral",
-  "NEUTRAL_WEAK_ENCHANTMENT.description": "When played, apply [blue]{WeakPower:diff()}[/blue] [gold]Weak[/gold].",
-  "NEUTRAL_WEAK_ENCHANTMENT.extraCardText": "Apply [blue]{WeakPower:diff()}[/blue] [gold]Weak[/gold].",
-
   "BACKPACK_DRAW_DISCARD_ENCHANTMENT.title": "Backpack",
   "BACKPACK_DRAW_DISCARD_ENCHANTMENT.description": "When played, draw [blue]1[/blue] card, then discard [blue]1[/blue] card.",
   "BACKPACK_DRAW_DISCARD_ENCHANTMENT.extraCardText": "Draw [blue]1[/blue], discard [blue]1[/blue].",

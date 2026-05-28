@@ -37,6 +37,7 @@ public sealed class UltimateStrikeEnchantment : ModEnchantmentTemplate, IEventEx
 public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventExclusiveEnchantment
 {
 	private const decimal BlockBonus = 11m;
+	private bool _previewFaceBlockApplied;
 
 	public override bool HasExtraCardText => false;
 
@@ -56,6 +57,8 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 		if (Card == null)
 			return;
 
+		ApplyPreviewFaceBlockBumpIfNeeded();
+
 		// 显式刷新：在“附魔落到牌上”的当帧就把卡面格挡数字与紫字同步出来。
 		RecalculateValues();
 		Card.DynamicVars.RecalculateForUpgradeOrEnchant();
@@ -64,4 +67,18 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 	public override decimal ModifyBlockAdditive(Creature target, decimal block, ValueProp props, CardModel? cardSource,
 		CardPlay? cardPlay) =>
 		props.IsPoweredCardOrMonsterMoveBlock() ? BlockBonus : 0m;
+
+	private void ApplyPreviewFaceBlockBumpIfNeeded()
+	{
+		if (Card == null || !Card.IsEnchantmentPreview || _previewFaceBlockApplied)
+			return;
+
+		// 事件附魔预览卡常不走完整战斗数值钩子；这里直接抬高预览卡的格挡面值，保证附魔瞬间可见。
+		if (Card.DynamicVars.TryGetValue("Block", out var blockVar))
+			blockVar.BaseValue += BlockBonus;
+		if (Card.DynamicVars.TryGetValue("CalculatedBlock", out var calculatedBlockVar))
+			calculatedBlockVar.BaseValue += BlockBonus;
+
+		_previewFaceBlockApplied = true;
+	}
 }

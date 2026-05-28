@@ -3,6 +3,19 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.10.1
+
+### 变更
+- 生活质量：`精小（ChimeraCompactEnchantment）` 附魔卡牌视觉缩放为 `0.8x`，`笨重（ChimeraBulkyEnchantment）` 附魔卡牌视觉缩放为 `1.2x`。
+
+### 移除
+- 彻底移除 `NeutralWeakEnchantment` 代码实现。
+
+### 修复
+- 修复图鉴悬浮文本在 canonical 附魔模型上读取 `Card` 导致 `CanonicalModelException` 的崩溃（`ChimeraCompactEnchantment` 文案补丁增加安全访问兜底）。
+
+---
+
 ## 0.10.0
 
 发布日期：2026-05-28
@@ -27,7 +40,6 @@
 - **104+ 兼容编译**：适配 `AfterCardGeneratedForCombat` 的 104+ 回调签名，修复相关 `CS0115` 覆写错误。
 - **墨影（Inky）随机附魔资格**：墨影仅可附于具备打出伤害数值的牌，避免附到无伤害牌。
 - **蛇咬升级预览**：蛇咬牌在“查看升级”时不再显示降费，并会正确预览中毒层数由 7 提升到 10。
-- **附魔图鉴稳定性**：彻底移除 `NeutralWeakEnchantment` 代码实现，并为缺失本地化标题的附魔增加图鉴过滤/排序兜底，避免 `LocException` 导致图鉴崩溃。
 
 ---
 ## 0.9.1

@@ -218,10 +218,6 @@
   "SHIVER_VULNERABLE_ENCHANTMENT.description": "打出时给予敌人[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。",
   "SHIVER_VULNERABLE_ENCHANTMENT.extraCardText": "给予敌人[blue]{VulnerablePower:diff()}[/blue]层[gold]易伤[/gold]。",
 
-  "NEUTRAL_WEAK_ENCHANTMENT.title": "中和",
-  "NEUTRAL_WEAK_ENCHANTMENT.description": "打出时给予敌人[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]。",
-  "NEUTRAL_WEAK_ENCHANTMENT.extraCardText": "给予敌人[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]。",
-
   "BACKPACK_DRAW_DISCARD_ENCHANTMENT.title": "背包",
   "BACKPACK_DRAW_DISCARD_ENCHANTMENT.description": "打出时抽[blue]1[/blue]张牌。\n丢弃[blue]1[/blue]张牌。",
   "BACKPACK_DRAW_DISCARD_ENCHANTMENT.extraCardText": "抽[blue]1[/blue]张牌。\n丢弃[blue]1[/blue]张牌。",

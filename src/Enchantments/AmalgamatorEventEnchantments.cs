@@ -50,7 +50,18 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 		card.Type == CardType.Skill &&
 		CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
+	protected override void OnEnchant()
+	{
+		base.OnEnchant();
+		if (Card == null)
+			return;
+
+		// 显式刷新：在“附魔落到牌上”的当帧就把卡面格挡数字与紫字同步出来。
+		RecalculateValues();
+		Card.DynamicVars.RecalculateForUpgradeOrEnchant();
+	}
+
 	public override decimal ModifyBlockAdditive(Creature target, decimal block, ValueProp props, CardModel? cardSource,
 		CardPlay? cardPlay) =>
-		ReferenceEquals(cardSource, Card) && props.IsPoweredCardOrMonsterMoveBlock() ? BlockBonus : 0m;
+		props.IsPoweredCardOrMonsterMoveBlock() ? BlockBonus : 0m;
 }

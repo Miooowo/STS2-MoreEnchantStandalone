@@ -81,7 +81,7 @@ internal static class MoreEnchantCardRewardUtil
 			if (chancePercent <= 0 || rng.NextInt(0, 100) >= chancePercent)
 				continue;
 
-			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancientCard);
+			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancientCard, options.Source);
 			if (pick == null)
 				continue;
 
@@ -121,7 +121,7 @@ internal static class MoreEnchantCardRewardUtil
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var ancient = card.Rarity == CardRarity.Ancient;
 		var excludeCurse = ancient;
-		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse);
+		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse, CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
@@ -156,7 +156,7 @@ internal static class MoreEnchantCardRewardUtil
 
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var ancient = card.Rarity == CardRarity.Ancient;
-		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient);
+		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient, CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
@@ -192,7 +192,7 @@ internal static class MoreEnchantCardRewardUtil
 
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var ancient = card.Rarity == CardRarity.Ancient;
-		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient);
+		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient, CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
@@ -229,7 +229,7 @@ internal static class MoreEnchantCardRewardUtil
 			if (rng.NextInt(0, 100) >= chancePercent)
 				continue;
 
-			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: card.Rarity == CardRarity.Ancient);
+			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: card.Rarity == CardRarity.Ancient, CardCreationSource.Encounter);
 			if (pick == null)
 				continue;
 
@@ -291,7 +291,7 @@ internal static class MoreEnchantCardRewardUtil
 
 	private static EnchantmentRewardRarity GetRewardRarity(EnchantmentModel template)
 	{
-		if (template is Clone or TezcatarasEmber or Goopy or Glam)
+		if (template is Clone or TezcatarasEmber or Goopy or Glam or Imbued or Instinct)
 			return EnchantmentRewardRarity.Special;
 		if (template is IRewardEnchantRarity withRarity)
 			return withRarity.RewardRarity;
@@ -299,7 +299,7 @@ internal static class MoreEnchantCardRewardUtil
 	}
 
 	private static bool IsEligibleRewardTemplate(EnchantmentModel t) =>
-		t is not DeprecatedEnchantment and not MockFreeEnchantment;
+		t is not DeprecatedEnchantment and not MockFreeEnchantment and not IEventExclusiveEnchantment;
 
 	private static bool ShouldSkipEnchantingRewardCard(CardModel card) =>
 		card.Rarity is CardRarity.Token or CardRarity.Status;
@@ -319,12 +319,15 @@ internal static class MoreEnchantCardRewardUtil
 	private static EnchantmentModel? RollEnchantmentTemplate(CardModel card, EnchantmentModel[] templates,
 		Rng rng,
 		MoreEnchantSettings settings,
-		bool excludeCurse)
+		bool excludeCurse,
+		CardCreationSource source)
 	{
 		var byRarity = new Dictionary<EnchantmentRewardRarity, List<EnchantmentModel>>();
 		foreach (var t in templates)
 		{
 			if (t is IBetaGatedRewardEnchantment && !settings.BetaRewardEnchantmentsEnabled)
+				continue;
+			if (!IsTemplateAllowedForSource(t, source))
 				continue;
 			if (!t.CanEnchant(card))
 				continue;
@@ -383,6 +386,13 @@ internal static class MoreEnchantCardRewardUtil
 		return byRarity.TryGetValue(bucket, out var picked) && picked.Count > 0
 			? rng.NextItem(picked)
 			: rng.NextItem(byRarity.Values.SelectMany(x => x).ToList());
+	}
+
+	private static bool IsTemplateAllowedForSource(EnchantmentModel template, CardCreationSource source)
+	{
+		if (template is RoyallyApproved && source != CardCreationSource.Shop)
+			return false;
+		return true;
 	}
 
 	private static decimal RollEnchantAmount(Rng rng, EnchantmentModel pick)

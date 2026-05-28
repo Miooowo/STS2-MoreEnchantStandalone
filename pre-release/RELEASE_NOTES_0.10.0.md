@@ -12,10 +12,7 @@
 - Rebalanced `Gem`: now grants replay 2 only on the first play each combat.
 - Reworked `Snakebite`: base poison is 7, upgraded poison is 10; upgraded Snakebite cards no longer reduce cost.
 - Fixed Snakebite upgrade preview: no cost reduction is shown in preview, and poison preview reflects 7 -> 10.
-- Fixed Ultimate Strike text preview showing doubled bonus (`+28`); display now matches actual additive bonus (`+14`).
-- Fixed Ultimate Defend block preview to follow the Nimble-like additive block path, so card-face numbers and actual play both show `+11`.
-- Added an explicit refresh when Ultimate Defend is applied, so block number changes are visible immediately on enchant.
-- Improved Ultimate Defend preview highlight: use preview-only block delta so the changed number can render with green highlight.
+- Renamed Gem enchantment model id to `GemEnchantment` and updated localization keys accordingly.
 - Promoted `imbued` and `instinct` to Special rarity (with `tezcataras_ember`, `goopy`, `clone`, `glam`).
 - Restricted `royally_approved` to shop-only random enchant source.
 

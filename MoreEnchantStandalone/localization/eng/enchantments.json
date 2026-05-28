@@ -56,17 +56,14 @@
   "CHIMERA_STRIKE_ENCHANTMENT.description": "Title gains [gold]Strike[/gold]; [gold]Strike[/gold] tag; attacks deal {StrikeDmg:diff()} extra damage (Perfected Strike, Hellraiser, Strike Dummy, etc.).",
   "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +{StrikeDmg:diff()} attack damage.",
 
-  "CHIMERA_GEM_ENCHANTMENT.title": "Gem",
-  "CHIMERA_GEM_ENCHANTMENT.description": "On the first play each combat, gain [blue]2[/blue] replay.",
-  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "First play each combat: gain [blue]2[/blue] replay.",
+  "GEM_ENCHANTMENT.title": "Gem",
+  "GEM_ENCHANTMENT.description": "On the first play each combat, [blue]2[/blue] replay.",
 
   "ULTIMATE_STRIKE_ENCHANTMENT.title": "Ultimate Strike",
   "ULTIMATE_STRIKE_ENCHANTMENT.description": "This card's play damage is increased by {UltimateStrikeDamage:diff()}.",
-  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "Play damage +{UltimateStrikeDamage:diff()}.",
 
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "Ultimate Defend",
   "ULTIMATE_DEFEND_ENCHANTMENT.description": "Block gained from this card is increased by {UltimateDefendBlock:diff()}.",
-  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "Play block +{UltimateDefendBlock:diff()}.",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "Innate",
   "CHIMERA_INNATE_ENCHANTMENT.description": "Gain Innate.",

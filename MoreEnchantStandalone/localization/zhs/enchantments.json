@@ -54,17 +54,14 @@
   "CHIMERA_STRIKE_ENCHANTMENT.title": "打击",
   "CHIMERA_STRIKE_ENCHANTMENT.description": "卡名添加[gold]打击[/gold]。\n获得[gold]打击[/gold]标签。\n攻击额外造成{StrikeDmg:diff()}点伤害。",
 
-  "CHIMERA_GEM_ENCHANTMENT.title": "宝石",
-  "CHIMERA_GEM_ENCHANTMENT.description": "本场战斗首次打出时，获得[gold]重放[/gold]2。",
-  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "本场战斗首次打出时，获得[gold]重放[/gold]2。",
+  "GEM_ENCHANTMENT.title": "宝石",
+  "GEM_ENCHANTMENT.description": "本场战斗首次打出时，[gold]重放[/gold]2。",
 
   "ULTIMATE_STRIKE_ENCHANTMENT.title": "究极打击",
-  "ULTIMATE_STRIKE_ENCHANTMENT.description": "此牌打出时造成的伤害增加{UltimateStrikeDamage:diff()}。",
-  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "打出伤害+{UltimateStrikeDamage:diff()}。",
+  "ULTIMATE_STRIKE_ENCHANTMENT.description": "此牌造成的伤害增加{UltimateStrikeDamage:diff()}。",
 
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "究极防御",
-  "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌打出时获得的格挡增加{UltimateDefendBlock:diff()}。",
-  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "打出格挡+{UltimateDefendBlock:diff()}。",
+  "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌获得的格挡增加{UltimateDefendBlock:diff()}。",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "启动",
   "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",

@@ -1,0 +1,8 @@
+{
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_STRIKES.title": "注入打击",
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_STRIKES.description": "移除2张[gold]打击[/gold]。并为一张攻击牌[gold]附魔[/gold]：[purple]究极打击[/purple]。",
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_DEFENDS.title": "注入防御",
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_DEFENDS.description": "移除2张[gold]防御[/gold]。并为一张带有格挡的技能牌[gold]附魔[/gold]：[purple]究极防御[/purple]。",
+  "AMALGAMATOR.pages.INJECT_STRIKES.description": "熔合者将打击精髓压缩注入卡牌核心，你感到攻击回路被强行放大。",
+  "AMALGAMATOR.pages.INJECT_DEFENDS.description": "熔合者将防御模块熔接进牌面纹路，你感到格挡脉冲变得前所未有地稳定。"
+}

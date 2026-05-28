@@ -1,0 +1,8 @@
+{
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_STRIKES.title": "Inject Strikes",
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_STRIKES.description": "Remove 2 [gold]Strike[/gold] cards. Then enchant an Attack card with [purple]Ultimate Strike[/purple].",
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_DEFENDS.title": "Inject Defends",
+  "AMALGAMATOR.pages.INITIAL.options.INJECT_DEFENDS.description": "Remove 2 [gold]Defend[/gold] cards. Then enchant a Skill card with Block with [purple]Ultimate Defend[/purple].",
+  "AMALGAMATOR.pages.INJECT_STRIKES.description": "The Amalgamator condenses strike essence into a single card core, forcing your attack circuit to spike.",
+  "AMALGAMATOR.pages.INJECT_DEFENDS.description": "The Amalgamator welds defensive modules into the card's weave, making each block pulse unnaturally steady."
+}

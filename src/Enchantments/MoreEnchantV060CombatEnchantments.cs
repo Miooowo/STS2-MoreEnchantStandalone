@@ -31,8 +31,9 @@ public sealed class SteadfastExhaustEnchantment : ModEnchantmentTemplate, IRewar
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) ? BlockMultiplier : 1m;
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) ? BlockMultiplier : 1m;
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
 	{
@@ -372,8 +373,9 @@ public sealed class ShredDebrisEnchantment : ModEnchantmentTemplate, IRewardEnch
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && ValuePropCombatUtil.IsPoweredAttackMove(props) ? DamageMultiplier : 1m;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromCard<Debris>() };

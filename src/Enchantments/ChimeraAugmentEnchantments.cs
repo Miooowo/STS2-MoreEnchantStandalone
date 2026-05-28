@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Enchantments;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -50,15 +52,33 @@ public sealed class ChimeraStrikeEnchantment : ModEnchantmentTemplate, IRewardEn
 	}
 }
 
-/// <summary>宝石：获得 +2 重放。</summary>
-public sealed class ChimeraGemEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
+/// <summary>宝石：本场战斗首次打出时获得 +2 重放。</summary>
+public sealed class GemEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
+	private const int ReplayBonus = 2;
+	private bool _usedThisCombat;
+
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Special;
 
 	public override bool HasExtraCardText => false;
 
+	public override Task BeforeCombatStart()
+	{
+		_usedThisCombat = false;
+		return Task.CompletedTask;
+	}
+
 	public override int EnchantPlayCount(int originalPlayCount) =>
-		originalPlayCount + 2;
+		_usedThisCombat ? originalPlayCount : originalPlayCount + ReplayBonus;
+
+	public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+	{
+		if (_usedThisCombat || cardPlay.Card != Card)
+			return Task.CompletedTask;
+		_usedThisCombat = true;
+		Status = EnchantmentStatus.Disabled;
+		return Task.CompletedTask;
+	}
 }
 
 /// <summary>启动：固有。</summary>
@@ -144,8 +164,9 @@ public sealed class ChimeraCompactEnchantment : ModEnchantmentTemplate, IRewardE
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ChimeraAugmentEnchantments.IsMoveDamage(props) ? (2m / 3m) : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		props.HasFlag(ValueProp.Move) ? (2m / 3m) : 1m;
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && props.HasFlag(ValueProp.Move) ? (2m / 3m) : 1m;
 }
 
 /// <summary>笨重：伤害与格挡按 (费用+1)/费用 放大。（不处理费用变化）</summary>
@@ -190,8 +211,9 @@ public sealed class ChimeraBulkyEnchantment : ModEnchantmentTemplate, IRewardEnc
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ChimeraAugmentEnchantments.IsMoveDamage(props) ? Ratio() : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		props.HasFlag(ValueProp.Move) ? Ratio() : 1m;
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && props.HasFlag(ValueProp.Move) ? Ratio() : 1m;
 }
 
 /// <summary>超巨化：伤害变为 3 倍。仅攻击且牌面带打出移动伤害。</summary>
@@ -220,8 +242,9 @@ public sealed class ChimeraSolidifyEnchantment : ModEnchantmentTemplate, IReward
 	public override bool CanEnchant(CardModel card) =>
 		base.CanEnchant(card) && CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		props.HasFlag(ValueProp.Move) ? 3m : 1m;
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && props.HasFlag(ValueProp.Move) ? 3m : 1m;
 }
 
 /// <summary>重刃：力量对该牌攻击的加成按 3 倍计算（额外 +2×力量）。</summary>

@@ -1,6 +1,8 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using MoreEnchant.Standalone;
@@ -41,6 +43,9 @@ public sealed class FinaleCurtainEnchantment : ModEnchantmentTemplate, IRewardEn
 	public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props) =>
 		ValuePropUtil.IsPoweredAttack(props) && FinaleMechanicActive ? 3m : 1m;
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props) =>
-		ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) && FinaleMechanicActive ? 3m : 1m;
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay) =>
+		ReferenceEquals(cardSource, Card) && ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props) && FinaleMechanicActive
+			? 3m
+			: 1m;
 }

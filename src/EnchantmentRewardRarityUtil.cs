@@ -8,7 +8,7 @@ internal static class EnchantmentRewardRarityUtil
 {
 	internal static EnchantmentRewardRarity GetForTemplate(EnchantmentModel template)
 	{
-		if (template is Clone or TezcatarasEmber or Goopy or Glam)
+		if (template is Clone or TezcatarasEmber or Goopy or Glam or Imbued or Instinct)
 			return EnchantmentRewardRarity.Special;
 		if (template is IRewardEnchantRarity withRarity)
 			return withRarity.RewardRarity;

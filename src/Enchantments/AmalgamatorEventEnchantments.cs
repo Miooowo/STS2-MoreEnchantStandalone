@@ -16,7 +16,7 @@ public sealed class UltimateStrikeEnchantment : ModEnchantmentTemplate, IEventEx
 {
 	private const decimal DamageBonus = 14m;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
@@ -38,7 +38,7 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 {
 	private const decimal BlockBonus = 11m;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
@@ -52,5 +52,5 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 
 	public override decimal ModifyBlockAdditive(Creature target, decimal block, ValueProp props, CardModel? cardSource,
 		CardPlay? cardPlay) =>
-		ReferenceEquals(cardSource, Card) && props.HasFlag(ValueProp.Move) ? BlockBonus : 0m;
+		ReferenceEquals(cardSource, Card) && props.IsPoweredCardOrMonsterMoveBlock() ? BlockBonus : 0m;
 }

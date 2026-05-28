@@ -226,42 +226,6 @@ public sealed class ShiverVulnerableEnchantment : ModEnchantmentTemplate, IRewar
 	}
 }
 
-/// <summary>中和：打出时施加 1 层虚弱。</summary>
-public sealed class NeutralWeakEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
-{
-	private const decimal WeakStacks = 1m;
-
-	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
-
-	public override bool HasExtraCardText => true;
-
-	protected override IEnumerable<DynamicVar> CanonicalVars
-	{
-		get { yield return new PowerVar<WeakPower>(WeakStacks); }
-	}
-
-	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-		new IHoverTip[] { HoverTipFactory.FromPower<WeakPower>() };
-
-	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
-	{
-		if (Card?.Owner?.Creature?.CombatState == null)
-			return;
-
-		if (Card.CombatState is not CombatState combatState)
-			return;
-		var targets = DebuffTargetUtil.Resolve(Card, cardPlay, combatState);
-		if (targets == null || targets.Count == 0)
-			return;
-
-		await CreatureCmd.TriggerAnim(Card.Owner.Creature, "Cast", Card.Owner.Character.CastAnimDelay);
-		if (targets.Count == 1)
-			await PowerCmdCompat.Apply<WeakPower>(targets[0], WeakStacks, Card.Owner.Creature, Card, choiceContext);
-		else
-			await PowerCmdCompat.Apply<WeakPower>(targets, WeakStacks, Card.Owner.Creature, Card, choiceContext);
-	}
-}
-
 /// <summary>背包：打出时抽 1 张牌，再丢弃 1 张牌。</summary>
 public sealed class BackpackDrawDiscardEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {

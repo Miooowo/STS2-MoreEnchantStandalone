@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 using MegaCrit.Sts2.Core.Models.Enchantments;
@@ -39,7 +40,7 @@ internal static class EnchantmentBrowserOverlay
 			TryAdd(e);
 
 		result.Sort(static (a, b) =>
-			string.CompareOrdinal(a.Title.GetFormattedText(), b.Title.GetFormattedText()));
+			string.CompareOrdinal(GetSafeTitle(a), GetSafeTitle(b)));
 		return result;
 	}
 
@@ -50,6 +51,35 @@ internal static class EnchantmentBrowserOverlay
 			return false;
 		if (t == typeof(MockFreeEnchantment) || t.Namespace == typeof(MockFreeEnchantment).Namespace)
 			return false;
+		// 防御性过滤：缺失本地化键的附魔不进入图鉴，避免排序阶段抛 LocException 导致界面崩溃。
+		if (!HasLocalizedTitle(e))
+			return false;
 		return true;
+	}
+
+	private static bool HasLocalizedTitle(EnchantmentModel e)
+	{
+		try
+		{
+			_ = e.Title.GetFormattedText();
+			return true;
+		}
+		catch (LocException)
+		{
+			return false;
+		}
+	}
+
+	private static string GetSafeTitle(EnchantmentModel e)
+	{
+		try
+		{
+			return e.Title.GetFormattedText();
+		}
+		catch (LocException)
+		{
+			// 兜底：排序时若本地化丢失，回退到 ModelId，避免 InvalidOperationException 包裹排序异常。
+			return e.Id.ToString();
+		}
 	}
 }

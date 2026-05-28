@@ -32,7 +32,7 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<SnakebiteEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<KafkaMicroCurrentEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChimeraStrikeEnchantment>();
-		MoreEnchantEnchantmentRegistry.Register<ChimeraGemEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<GemEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChimeraInnateEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChimeraCompactEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChimeraBulkyEnchantment>();

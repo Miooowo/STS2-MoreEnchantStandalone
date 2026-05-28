@@ -37,7 +37,6 @@ public sealed class UltimateStrikeEnchantment : ModEnchantmentTemplate, IEventEx
 public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventExclusiveEnchantment
 {
 	private const decimal BlockBonus = 11m;
-	private bool _previewFaceBlockApplied;
 
 	public override bool HasExtraCardText => false;
 
@@ -51,34 +50,7 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 		card.Type == CardType.Skill &&
 		CardEnchantEligibility.CardHasMoveBlockNumbers(card);
 
-	protected override void OnEnchant()
-	{
-		base.OnEnchant();
-		if (Card == null)
-			return;
-
-		// 显式刷新：在“附魔落到牌上”的当帧就把卡面格挡数字与紫字同步出来。
-		RecalculateValues();
-		Card.DynamicVars.RecalculateForUpgradeOrEnchant();
-		ApplyPreviewFaceBlockBumpIfNeeded();
-	}
-
 	public override decimal ModifyBlockAdditive(Creature target, decimal block, ValueProp props, CardModel? cardSource,
 		CardPlay? cardPlay) =>
 		props.IsPoweredCardOrMonsterMoveBlock() ? BlockBonus : 0m;
-
-	private void ApplyPreviewFaceBlockBumpIfNeeded()
-	{
-		if (Card == null || !Card.IsEnchantmentPreview || _previewFaceBlockApplied)
-			return;
-
-		// 事件附魔预览卡常不走完整战斗数值钩子；这里仅抬高 PreviewValue（不改 BaseValue），
-		// 以保留绿色差值高亮（类似究极打击）。
-		if (Card.DynamicVars.TryGetValue("Block", out var blockVar))
-			blockVar.PreviewValue = blockVar.BaseValue + BlockBonus;
-		if (Card.DynamicVars.TryGetValue("CalculatedBlock", out var calculatedBlockVar))
-			calculatedBlockVar.PreviewValue = calculatedBlockVar.BaseValue + BlockBonus;
-
-		_previewFaceBlockApplied = true;
-	}
 }

@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 
-		<Version>0.9.1</Version>
+		<Version>0.10.0</Version>
 
 		<TargetFramework>net9.0</TargetFramework>
 
@@ -72,11 +72,11 @@
 		<ExportModPck>true</ExportModPck>
 		<!-- 尝试缓解无头崩溃；若仍失败请配合 ExportModPck=false 或在本机 MegaDot 编辑器里导出一次 PCK。 -->
 		<GodotExportExtraArgs>--display-driver headless --audio-driver Dummy</GodotExportExtraArgs>
-		<GithubReleaseDir>$(MSBuildProjectDirectory)\release</GithubReleaseDir>
+		<GithubReleaseDir>$(MSBuildProjectDirectory)\pre-release</GithubReleaseDir>
 		<GithubReleaseZip>$(GithubReleaseDir)\MoreEnchantStandalone-$(Version).zip</GithubReleaseZip>
 	</PropertyGroup>
 
-	<!-- Release 构建默认将 dll/json/pck 复制到 release/ 并打 zip；命令行已传 /p:PackGithubRelease=... 时不再覆盖 -->
+	<!-- Release 构建默认将 dll/json/pck 复制到 pre-release/ 并打 zip；命令行已传 /p:PackGithubRelease=... 时不再覆盖 -->
 	<Choose>
 		<When Condition="'$(PackGithubRelease)' == '' AND '$(Configuration)' == 'Release'">
 			<PropertyGroup>
@@ -164,9 +164,9 @@
 
 		      Condition="'$(PackGithubRelease)' == 'true' And Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
 
-		<Warning Text="PackGithubRelease：未找到 MoreEnchantStandalone.pck，已跳过复制到 release/ 与 zip。请成功导出 PCK 后重新构建，或关闭 PackGithubRelease。" Condition="'$(PackGithubRelease)' == 'true' And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
+		<Warning Text="PackGithubRelease：未找到 MoreEnchantStandalone.pck，已跳过复制到 pre-release/ 与 zip。请成功导出 PCK 后重新构建，或关闭 PackGithubRelease。" Condition="'$(PackGithubRelease)' == 'true' And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.pck')" />
 
-		<Warning Text="PackGithubRelease：未找到 MoreEnchantStandalone.json，已跳过复制到 release/ 与 zip。" Condition="'$(PackGithubRelease)' == 'true' And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.json')" />
+		<Warning Text="PackGithubRelease：未找到 MoreEnchantStandalone.json，已跳过复制到 pre-release/ 与 zip。" Condition="'$(PackGithubRelease)' == 'true' And !Exists('$(MSBuildProjectDirectory)\MoreEnchantStandalone.json')" />
 
 		<Exec Condition="'$(PackGithubRelease)' == 'true' And Exists('$(GithubReleaseDir)\MoreEnchantStandalone.dll') And Exists('$(GithubReleaseDir)\MoreEnchantStandalone.json') And Exists('$(GithubReleaseDir)\MoreEnchantStandalone.pck')"
 

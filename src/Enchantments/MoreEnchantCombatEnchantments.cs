@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
@@ -210,8 +211,11 @@ public sealed class SpectralEtherealEnchantment : ModEnchantmentTemplate, IRewar
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		new IHoverTip[] { HoverTipFactory.FromKeyword(CardKeyword.Ethereal) };
 
-	public override decimal EnchantBlockMultiplicative(decimal originalBlock, ValueProp props)
+	public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+		CardPlay? cardPlay)
 	{
+		if (!ReferenceEquals(cardSource, Card))
+			return 1m;
 		if (ValuePropUtil.IsPoweredCardOrMonsterMoveBlock(props))
 			return BlockMultiplier;
 		if (ShouldScaleUnpoweredBlockOnCardFace(props))

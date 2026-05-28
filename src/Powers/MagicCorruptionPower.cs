@@ -50,9 +50,9 @@ public sealed class MagicCorruptionPower : PowerModel
 		CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
 	}
 
-	public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
+	public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
 	{
-		if (!addedByPlayer || card.Enchantment == null)
+		if (creator == null || card.Enchantment == null)
 			return Task.CompletedTask;
 		if (card.Owner is not Player player || player.Creature != Owner)
 			return Task.CompletedTask;

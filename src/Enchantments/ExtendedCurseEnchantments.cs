@@ -126,7 +126,7 @@ public sealed class FollyCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 		Card.EnergyCost.SetCustomBaseCost(System.Math.Max(0, _rampThisCombat));
 	}
 
-	public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
+	public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
 	{
 		if (!ReferenceEquals(card, Card))
 			return Task.CompletedTask;
@@ -401,7 +401,7 @@ public sealed class DecayCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, null, Card);
 	}
 
-	public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	internal async Task ApplyTurnEndPenalty(PlayerChoiceContext choiceContext, CombatSide side)
 	{
 		if (side != CombatSide.Player)
 			return;
@@ -424,7 +424,7 @@ public sealed class RegretCurseEnchantment : ModEnchantmentTemplate, IRewardEnch
 
 	public override bool HasExtraCardText => true;
 
-	public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	internal async Task ApplyTurnEndPenalty(PlayerChoiceContext choiceContext, CombatSide side)
 	{
 		if (side != CombatSide.Player)
 			return;
@@ -562,7 +562,7 @@ public sealed class GuiltCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 		return Task.CompletedTask;
 	}
 
-	public override Task AfterCardGeneratedForCombat(CardModel card, bool addedByPlayer)
+	public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
 	{
 		if (!ReferenceEquals(card, Card))
 			return Task.CompletedTask;

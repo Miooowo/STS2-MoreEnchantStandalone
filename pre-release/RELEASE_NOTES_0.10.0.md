@@ -5,11 +5,12 @@
   - Inject Strikes: remove 2 Strikes, then enchant one Attack with `Ultimate Strike`.
   - Inject Defends: remove 2 Defends, then enchant one Block Skill with `Ultimate Defend`.
 - Added event-exclusive enchantments:
-  - `Ultimate Strike` (play damage fixed to 14)
-  - `Ultimate Defend` (play block fixed to 11)
+  - `Ultimate Strike` (+14 play damage)
+  - `Ultimate Defend` (+11 play block)
   These do not enter random enchant pools.
 - Rebalanced `Gem`: now grants replay 2 only on the first play each combat.
 - Reworked `Snakebite`: base poison is 7, upgraded poison is 10; upgraded Snakebite cards no longer reduce cost.
+- Fixed Snakebite upgrade preview: no cost reduction is shown in preview, and poison preview reflects 7 -> 10.
 - Promoted `imbued` and `instinct` to Special rarity (with `tezcataras_ember`, `goopy`, `clone`, `glam`).
 - Restricted `royally_approved` to shop-only random enchant source.
 

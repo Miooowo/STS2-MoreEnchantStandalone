@@ -59,12 +59,12 @@
   "CHIMERA_GEM_ENCHANTMENT.extraCardText": "本场战斗首次打出时，获得[gold]重放[/gold]2。",
 
   "ULTIMATE_STRIKE_ENCHANTMENT.title": "究极打击",
-  "ULTIMATE_STRIKE_ENCHANTMENT.description": "此牌打出时造成的伤害固定为{Damage:diff()}。",
-  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "打出伤害固定为{Damage:diff()}。",
+  "ULTIMATE_STRIKE_ENCHANTMENT.description": "此牌打出时造成的伤害增加{Damage:diff()}。",
+  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "打出伤害+{Damage:diff()}。",
 
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "究极防御",
-  "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌打出时获得的格挡固定为{Block:diff()}。",
-  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "打出格挡固定为{Block:diff()}。",
+  "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌打出时获得的格挡增加{Block:diff()}。",
+  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "打出格挡+{Block:diff()}。",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "启动",
   "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",

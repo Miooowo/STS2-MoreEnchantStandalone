@@ -12,6 +12,7 @@
 - Rebalanced `Gem`: now grants replay 2 only on the first play each combat.
 - Reworked `Snakebite`: base poison is 7, upgraded poison is 10; upgraded Snakebite cards no longer reduce cost.
 - Fixed Snakebite upgrade preview: no cost reduction is shown in preview, and poison preview reflects 7 -> 10.
+- Fully removed `NeutralWeakEnchantment` code and added compendium title-localization safeguards to prevent localization-key crashes.
 - Renamed Gem enchantment model id to `GemEnchantment` and updated localization keys accordingly.
 - Promoted `imbued` and `instinct` to Special rarity (with `tezcataras_ember`, `goopy`, `clone`, `glam`).
 - Restricted `royally_approved` to shop-only random enchant source.

@@ -61,12 +61,12 @@
   "CHIMERA_GEM_ENCHANTMENT.extraCardText": "First play each combat: gain [blue]2[/blue] replay.",
 
   "ULTIMATE_STRIKE_ENCHANTMENT.title": "Ultimate Strike",
-  "ULTIMATE_STRIKE_ENCHANTMENT.description": "This card's play damage is fixed to {Damage:diff()}.",
-  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "Play damage fixed to {Damage:diff()}.",
+  "ULTIMATE_STRIKE_ENCHANTMENT.description": "This card's play damage is increased by {Damage:diff()}.",
+  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "Play damage +{Damage:diff()}.",
 
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "Ultimate Defend",
-  "ULTIMATE_DEFEND_ENCHANTMENT.description": "Block gained from this card is fixed to {Block:diff()}.",
-  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "Play block fixed to {Block:diff()}.",
+  "ULTIMATE_DEFEND_ENCHANTMENT.description": "Block gained from this card is increased by {Block:diff()}.",
+  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "Play block +{Block:diff()}.",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "Innate",
   "CHIMERA_INNATE_ENCHANTMENT.description": "Gain Innate.",

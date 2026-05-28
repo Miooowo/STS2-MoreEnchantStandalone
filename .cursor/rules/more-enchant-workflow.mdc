@@ -12,7 +12,14 @@ alwaysApply: true
 ## 会话规则
 
 - 每次会话**完成代码/资源修改后**：执行一次 `git commit`，并更新 [CHANGELOG.md](CHANGELOG.md)（若本次改动值得记录）。  
-  **若本次为某发行版本补充/修改了 `CHANGELOG` 中该版本的小节**：须**同步**编写或更新 [`pre-release/RELEASE_NOTES_<Version>.md`](pre-release/RELEASE_NOTES_0.8.md)（文件名中 `<Version>` 与 `MoreEnchantStandalone.csproj` 的 `Version` 一致，如 `0.8` → `RELEASE_NOTES_0.8.md`）。内容应与 CHANGELOG 对应版本**要点一致**（可略短），供 `gh release create --notes-file` 使用；无新版本则不必新建文件。
+  **若本次为某发行版本补充/修改了 `CHANGELOG` 中该版本的小节**：须**同步**编写或更新 [`pre-release/RELEASE_NOTES_<Version>.md`](pre-release/RELEASE_NOTES_0.8.md)（文件名中 `<Version>` 与 `MoreEnchantStandalone.csproj` 的 `Version` 一致，如 `0.8` → `RELEASE_NOTES_0.8.md`）。
+  `RELEASE_NOTES` 编写规则（参考 Keep a Changelog 1.0.0）：
+  - 面向玩家/使用者，避免粘贴提交记录（不要 dump git log）。
+  - 按类型分组，优先使用：`Added` / `Changed` / `Removed` / `Fixed`（必要时可加 `Security`）。
+  - 仅写“可感知、可验证”的变更；每条一句话，突出影响与收益。
+  - 与 `CHANGELOG` 同版本要点保持一致，可更短但不得遗漏关键破坏性信息。
+  - 版本在上、旧版本在下；新版本建议写明发布日期（ISO 8601，如 `2026-05-28`）。
+  - 若该版本无可发布变更，不强行新增空 `RELEASE_NOTES` 文件。
 - 每次完成**影响程序行为或资源**的改动后：执行下方「发布强制命令」**第 1 步**（生成 DLL + 导出 PCK + 写入 `pre-release/` 与 zip），便于本地实测。  
   **例外**：仅文档、或仅 `.cursor/rules` 等规则说明、且用户未要求打包时，可跳过第 1 步。
 - 当用户说**「发布」**：执行第 3 步，上传发布物到 GitHub Release。

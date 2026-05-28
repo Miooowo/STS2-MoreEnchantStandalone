@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Exceptions;
 using MoreEnchant.Enchantments;
 
 namespace MoreEnchant.Patches;
@@ -18,19 +19,35 @@ internal static class ChimeraCompactEnchantmentDynamicDescriptionPatch
 	[HarmonyPostfix]
 	private static void Postfix(EnchantmentModel __instance, ref LocString __result)
 	{
-		if (__instance is not ChimeraCompactEnchantment c || c.Card == null)
+		if (__instance is not ChimeraCompactEnchantment c)
 			return;
-		if (CardEnchantEligibility.CardUsesStarCost(c.Card))
+		if (!TryGetCardSafely(c, out var card) || card == null)
+			return;
+		if (CardEnchantEligibility.CardUsesStarCost(card))
 			return;
 
 		var description = new LocString("enchantments", "CHIMERA_COMPACT_ENCHANTMENT.description_noStars");
 		description.Add("Amount", c.Amount);
 		var dynamicVarSet = c.DynamicVars.Clone(c);
 		dynamicVarSet.ClearPreview();
-		c.Card.UpdateDynamicVarPreview(CardPreviewMode.None, null, dynamicVarSet);
+		card.UpdateDynamicVarPreview(CardPreviewMode.None, null, dynamicVarSet);
 		description.Add("energyPrefix", EnergyIconHelper.GetPrefix(c));
 		dynamicVarSet.AddTo(description);
 		__result = description;
+	}
+
+	private static bool TryGetCardSafely(ChimeraCompactEnchantment enchantment, out CardModel? card)
+	{
+		try
+		{
+			card = enchantment.Card;
+			return true;
+		}
+		catch (CanonicalModelException)
+		{
+			card = null;
+			return false;
+		}
 	}
 }
 
@@ -42,14 +59,30 @@ internal static class ChimeraCompactEnchantmentDynamicExtraCardTextPatch
 	{
 		if (__result == null)
 			return;
-		if (__instance is not ChimeraCompactEnchantment c || c.Card == null)
+		if (__instance is not ChimeraCompactEnchantment c)
 			return;
-		if (CardEnchantEligibility.CardUsesStarCost(c.Card))
+		if (!TryGetCardSafely(c, out var card) || card == null)
+			return;
+		if (CardEnchantEligibility.CardUsesStarCost(card))
 			return;
 
 		var extra = new LocString("enchantments", "CHIMERA_COMPACT_ENCHANTMENT.extraCardText_noStars");
 		extra.Add("Amount", c.Amount);
 		c.DynamicVars.AddTo(extra);
 		__result = extra;
+	}
+
+	private static bool TryGetCardSafely(ChimeraCompactEnchantment enchantment, out CardModel? card)
+	{
+		try
+		{
+			card = enchantment.Card;
+			return true;
+		}
+		catch (CanonicalModelException)
+		{
+			card = null;
+			return false;
+		}
 	}
 }

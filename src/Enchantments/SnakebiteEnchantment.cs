@@ -19,7 +19,8 @@ namespace MoreEnchant.Enchantments;
 /// <summary>蛇咬：保留；此牌基础耗能变为 2（非 X 费）；打出时对目标施加中毒（层数由 <see cref="PowerVar{T}"/> 驱动）。</summary>
 public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
 {
-	private const decimal PoisonPerLayer = 7m;
+	private const decimal BasePoisonPerLayer = 7m;
+	private const decimal UpgradedPoisonPerLayer = 10m;
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Uncommon;
 
@@ -39,9 +40,12 @@ public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchan
 		get
 		{
 			yield return new EnergyVar(2);
-			yield return new PowerVar<PoisonPower>(PoisonPerLayer);
+			yield return new PowerVar<PoisonPower>(BasePoisonPerLayer);
 		}
 	}
+
+	internal static decimal GetPoisonPerLayer(CardModel? card) =>
+		card != null && card.IsUpgraded ? UpgradedPoisonPerLayer : BasePoisonPerLayer;
 
 	public override void RecalculateValues()
 	{
@@ -52,7 +56,7 @@ public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchan
 		if (!Card.EnergyCost.CostsX)
 			Card.EnergyCost.SetCustomBaseCost(2);
 
-		MultiEnchantmentCompat.RefreshAllSnakebitePoisonDisplaysOnCard(Card, PoisonPerLayer, this);
+		MultiEnchantmentCompat.RefreshAllSnakebitePoisonDisplaysOnCard(Card, GetPoisonPerLayer(Card), this);
 	}
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -75,7 +79,7 @@ public sealed class SnakebiteEnchantment : ModEnchantmentTemplate, IRewardEnchan
 
 		_ = MultiEnchantmentCompat.GetActiveTotalAmountOrDefault(this, defaultAmount: 1);
 		int layers = MultiEnchantmentCompat.GetTotalSnakebiteLayersOnCard(Card, this);
-		decimal poisonAmount = PoisonPerLayer * layers;
+		decimal poisonAmount = GetPoisonPerLayer(Card) * layers;
 		if (poisonAmount <= 0)
 			return;
 

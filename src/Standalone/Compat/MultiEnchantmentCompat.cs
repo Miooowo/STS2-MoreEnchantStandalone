@@ -18,8 +18,8 @@ public static class MultiEnchantmentCompat
 	private const string AssemblyName = "MultiEnchantmentMod";
 	private const string ApiTypeName = "MultiEnchantmentMod.MultiEnchantmentStackApi";
 
-	/// <summary>与 <see cref="SnakebiteEnchantment"/> 的每层基础毒量一致（避免 compat 反向引用该 private const）。</summary>
-	private const int SnakebitePoisonPerLayer = 7;
+	/// <summary>当只拿到 snapshot、无法直接解析卡牌升级信息时，按蛇咬基础层数回退显示。</summary>
+	private const int SnakebiteBasePoisonPerLayer = 7;
 
 	private static readonly object SnakebiteRegisterLock = new();
 	private static bool _snakebiteStackProvidersRegistered;
@@ -576,7 +576,8 @@ public static class MultiEnchantmentCompat
 				return false;
 
 			int layers = ResolveSnakebiteLayersForMemPresentation(subject);
-			int poisonTotal = SnakebitePoisonPerLayer * Math.Max(1, layers);
+			int poisonPerLayer = ResolveSnakebitePoisonPerLayer(subject);
+			int poisonTotal = poisonPerLayer * Math.Max(1, layers);
 			string formatted = FormatSnakebiteStackedPoisonText(defaultText, poisonTotal);
 			args![outIdx] = formatted;
 			return true;
@@ -690,6 +691,13 @@ public static class MultiEnchantmentCompat
 		{
 			// ignore
 		}
+	}
+
+	private static int ResolveSnakebitePoisonPerLayer(object? subject)
+	{
+		if (subject is SnakebiteEnchantment sb)
+			return (int)SnakebiteEnchantment.GetPoisonPerLayer(sb.Card);
+		return SnakebiteBasePoisonPerLayer;
 	}
 
 	private static class RuntimeProviderFactory

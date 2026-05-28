@@ -45,8 +45,8 @@
   "SWORD_ART_ENCHANTMENT.extraCardText": "Cost +1{Energy:energyIcons()}.\nOn play: [blue]{SwordArtDamage:diff()}[/blue] to a random enemy.",
 
   "SNAKEBITE_ENCHANTMENT.title": "Snakebite",
-  "SNAKEBITE_ENCHANTMENT.description": "[gold]Retain[/gold]. Cost becomes 2{Energy:energyIcons()}. When played, apply {PoisonPower:diff()} [gold]Poison[/gold].",
-  "SNAKEBITE_ENCHANTMENT.extraCardText": "Cost becomes {Energy:energyIcons()}. Apply {PoisonPower:diff()} [gold]Poison[/gold].",
+  "SNAKEBITE_ENCHANTMENT.description": "[gold]Retain[/gold]. Cost stays at 2{Energy:energyIcons()} (upgrades do not reduce it). When played, apply {PoisonPower:diff()} [gold]Poison[/gold] (base 7, upgraded 10).",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "Cost stays at {Energy:energyIcons()} (upgrades do not reduce it). Apply {PoisonPower:diff()} [gold]Poison[/gold] (base 7, upgraded 10).",
 
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "Micro Current",
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "When played, apply Kafka [gold]Electrocute[/gold] for about {MicroCurrentDamage:diff()} damage over {MicroCurrentTurns:diff()} turns.",
@@ -57,8 +57,16 @@
   "CHIMERA_STRIKE_ENCHANTMENT.extraCardText": "[gold]Strike[/gold] tag, title [gold]Strike[/gold], +{StrikeDmg:diff()} attack damage.",
 
   "CHIMERA_GEM_ENCHANTMENT.title": "Gem",
-  "CHIMERA_GEM_ENCHANTMENT.description": "Gain replay.",
-  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "Gain [blue]2[/blue] replay.",
+  "CHIMERA_GEM_ENCHANTMENT.description": "On the first play each combat, gain [blue]2[/blue] replay.",
+  "CHIMERA_GEM_ENCHANTMENT.extraCardText": "First play each combat: gain [blue]2[/blue] replay.",
+
+  "ULTIMATE_STRIKE_ENCHANTMENT.title": "Ultimate Strike",
+  "ULTIMATE_STRIKE_ENCHANTMENT.description": "This card's play damage is fixed to {Damage:diff()}.",
+  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "Play damage fixed to {Damage:diff()}.",
+
+  "ULTIMATE_DEFEND_ENCHANTMENT.title": "Ultimate Defend",
+  "ULTIMATE_DEFEND_ENCHANTMENT.description": "Block gained from this card is fixed to {Block:diff()}.",
+  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "Play block fixed to {Block:diff()}.",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "Innate",
   "CHIMERA_INNATE_ENCHANTMENT.description": "Gain Innate.",

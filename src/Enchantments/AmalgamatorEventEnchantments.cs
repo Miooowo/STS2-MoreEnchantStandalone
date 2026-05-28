@@ -22,7 +22,8 @@ public sealed class UltimateStrikeEnchantment : ModEnchantmentTemplate, IEventEx
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new DamageVar(DamageBonus, ValueProp.Move); }
+		// 不使用 DamageVar，避免预览路径重复叠加 EnchantDamageAdditive 导致紫字翻倍。
+		get { yield return new DynamicVar("UltimateStrikeDamage", DamageBonus); }
 	}
 
 	public override bool CanEnchant(CardModel card) =>
@@ -43,7 +44,7 @@ public sealed class UltimateDefendEnchantment : ModEnchantmentTemplate, IEventEx
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
-		get { yield return new BlockVar(BlockBonus, ValueProp.Move); }
+		get { yield return new DynamicVar("UltimateDefendBlock", BlockBonus); }
 	}
 
 	public override bool CanEnchant(CardModel card) =>

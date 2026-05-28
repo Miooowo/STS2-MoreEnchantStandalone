@@ -44,8 +44,8 @@
   "SWORD_ART_ENCHANTMENT.extraCardText": "此牌费用增加1{Energy:energyIcons()}。\n对随机敌人造成{SwordArtDamage:diff()}点伤害。",
 
   "SNAKEBITE_ENCHANTMENT.title": "蛇咬",
-  "SNAKEBITE_ENCHANTMENT.description": "为此牌添加[gold]保留[/gold]。\n此牌费用固定为{Energy:energyIcons()}（升级不会降低）。\n打出时对目标施加{PoisonPower:diff()}层[gold]中毒[/gold]（基础7，升级10）。",
-  "SNAKEBITE_ENCHANTMENT.extraCardText": "费用固定为{Energy:energyIcons()}（升级不会降低）。\n施加{PoisonPower:diff()}层[gold]中毒[/gold]（基础7，升级10）。",
+  "SNAKEBITE_ENCHANTMENT.description": "为此牌添加[gold]保留[/gold]。\n此牌费用固定为{Energy:energyIcons()}。\n打出时对目标施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
+  "SNAKEBITE_ENCHANTMENT.extraCardText": "费用固定为{Energy:energyIcons()}。\n施加{PoisonPower:diff()}层[gold]中毒[/gold]。",
 
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.title": "微电流",
   "KAFKA_MICRO_CURRENT_ENCHANTMENT.description": "打出时对目标施加[gold]触电[/gold]（[blue]{MicroCurrentDamage:diff()}[/blue]伤害，[blue]{MicroCurrentTurns:diff()}[/blue]回合）。",
@@ -59,12 +59,12 @@
   "CHIMERA_GEM_ENCHANTMENT.extraCardText": "本场战斗首次打出时，获得[gold]重放[/gold]2。",
 
   "ULTIMATE_STRIKE_ENCHANTMENT.title": "究极打击",
-  "ULTIMATE_STRIKE_ENCHANTMENT.description": "此牌打出时造成的伤害增加{Damage:diff()}。",
-  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "打出伤害+{Damage:diff()}。",
+  "ULTIMATE_STRIKE_ENCHANTMENT.description": "此牌打出时造成的伤害增加{UltimateStrikeDamage:diff()}。",
+  "ULTIMATE_STRIKE_ENCHANTMENT.extraCardText": "打出伤害+{UltimateStrikeDamage:diff()}。",
 
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "究极防御",
-  "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌打出时获得的格挡增加{Block:diff()}。",
-  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "打出格挡+{Block:diff()}。",
+  "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌打出时获得的格挡增加{UltimateDefendBlock:diff()}。",
+  "ULTIMATE_DEFEND_ENCHANTMENT.extraCardText": "打出格挡+{UltimateDefendBlock:diff()}。",
 
   "CHIMERA_INNATE_ENCHANTMENT.title": "启动",
   "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",

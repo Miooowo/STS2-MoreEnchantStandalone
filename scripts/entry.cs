@@ -101,6 +101,7 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<PrismaticHextechEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<UltimateStrikeEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<UltimateDefendEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SoulDetachmentEnchantment>();
 
 		// 可选拓展：若安装了 MultiEnchantmentMod，则启用蛇咬等附魔的 MergeAmount 叠层语义。
 		MultiEnchantmentCompat.TryEnableForSnakebite(typeof(SnakebiteEnchantment));

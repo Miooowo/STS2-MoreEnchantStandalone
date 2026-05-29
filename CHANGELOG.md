@@ -3,6 +3,25 @@
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
 ---
+## 0.11.0
+
+发布日期：2026-05-29
+
+### 新增
+- 新增稀有附魔 `Soul_Detachment（灵魂抽离）`：仅可附于可造成打出伤害的攻击牌；每场战斗首次打出时，对目标抽离灵魂。
+- 新增灵魂链接能力 `SoulDetachmentLinkPower`：灵魂受到的实际伤害会单向同步到本体，并包含防重入保护避免递归伤害。
+- 新增灵魂视觉补丁：灵魂实体以低透明度显示，战斗中维持持续晕眩表现。
+
+### 变更
+- 版本号升级至 `0.11.0`（`MoreEnchantStandalone.csproj` 与 `MoreEnchantStandalone.json`）。
+- 中英文本地化新增 `SOUL_DETACHMENT_ENCHANTMENT.*` 键，覆盖标题、描述与额外卡面文本。
+
+### 修复
+- 修复 `SoulDetachmentEnchantment` 在战斗内错误对 mutable 怪物模型再次 `ToMutable()` 导致的运行时异常。
+- 修复灵魂持续晕眩控制在战斗收尾边界时可能扰动结算的问题（补晕时机与结算保护收敛）。
+- 新增战败结算容错：当历史记录中出现空 `ModelId`（遭遇/角色）时，跳过统计写入并为死亡语录提供安全兜底，避免 `ArgumentNullException` 导致 GameOver 界面崩溃。
+
+---
 ## 0.10.1
 
 ### 变更

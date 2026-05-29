@@ -63,6 +63,10 @@
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "究极防御",
   "ULTIMATE_DEFEND_ENCHANTMENT.description": "此牌获得的格挡增加{UltimateDefendBlock:diff()}。",
 
+  "SOUL_DETACHMENT_ENCHANTMENT.title": "灵魂抽离",
+  "SOUL_DETACHMENT_ENCHANTMENT.description": "每场战斗首次打出此牌时，\n抽离目标灵魂：生成一个低透明、持续晕眩的目标克隆。\n对灵魂造成的伤害会同步到本体。",
+  "SOUL_DETACHMENT_ENCHANTMENT.extraCardText": "第一次打出时，\n抽离目标灵魂。",
+
   "CHIMERA_INNATE_ENCHANTMENT.title": "启动",
   "CHIMERA_INNATE_ENCHANTMENT.description": "获得固有。",
 

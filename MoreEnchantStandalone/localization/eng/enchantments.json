@@ -65,6 +65,10 @@
   "ULTIMATE_DEFEND_ENCHANTMENT.title": "Ultimate Defend",
   "ULTIMATE_DEFEND_ENCHANTMENT.description": "Block gained from this card is increased by {UltimateDefendBlock:diff()}.",
 
+  "SOUL_DETACHMENT_ENCHANTMENT.title": "Soul Detachment",
+  "SOUL_DETACHMENT_ENCHANTMENT.description": "Attack-only. The first time this card is played each combat, detach the target's Soul: summon a translucent, permanently stunned clone. Damage dealt to that Soul is also dealt to the original body.",
+  "SOUL_DETACHMENT_ENCHANTMENT.extraCardText": "First play each combat: detach target Soul. Soul is translucent and always stunned; Soul damage is mirrored to body.",
+
   "CHIMERA_INNATE_ENCHANTMENT.title": "Innate",
   "CHIMERA_INNATE_ENCHANTMENT.description": "Gain Innate.",
   "CHIMERA_INNATE_ENCHANTMENT.extraCardText": "Innate.",

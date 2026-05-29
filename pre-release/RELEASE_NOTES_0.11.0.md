@@ -10,6 +10,7 @@
 ## Fixed
 - Fixed mutable-model cloning error when summoning Soul clones from combat monsters.
 - Hardened persistent-stun timing to reduce end-of-combat edge-case side effects.
+- Fixed segmented-enemy edge case where Soul could remain after body death and lose stunned intent.
 - Added end-run safety guards for null `ModelId` in progress/death-quote paths to prevent GameOver crashes.
 
 ## Build

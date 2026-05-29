@@ -39,8 +39,12 @@ internal static class SoulDetachmentTurnControlPatch
 			if (link == null)
 				continue;
 
+			// 本体已死亡时，灵魂应立即清理，避免残留在战场上。
 			if (link.Target is { IsDead: true })
+			{
+				await CreatureCmd.Kill(enemy, force: true);
 				continue;
+			}
 
 			// 在敌方回合结束后补晕，可确保下一轮始终展示并执行“晕眩意图”。
 			await CreatureCmd.Stun(enemy);

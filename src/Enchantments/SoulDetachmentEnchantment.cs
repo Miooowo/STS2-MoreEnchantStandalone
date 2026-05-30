@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -59,6 +60,10 @@ public sealed class SoulDetachmentEnchantment : ModEnchantmentTemplate, IRewardE
 		// 必须从 canonical 模板克隆，再作为新敌人加入战场。
 		var soulModel = body.Monster.CanonicalInstance.ToMutable();
 		var soul = await CreatureCmd.Add(soulModel, combatState, CombatSide.Enemy, slotName: null);
+		// 灵魂作为“纯沙包”存在：清空克隆怪物携带的全部原生能力，
+		// 仅保留后续显式施加的灵魂链接能力与晕眩控制。
+		foreach (var power in soul.Powers.ToList())
+			await PowerCmd.Remove(power);
 
 		// 保持灵魂与本体当前血量一致，便于玩家直观理解“受伤联动”。
 		int soulMaxHp = Math.Max(1, body.CurrentHp);

@@ -95,12 +95,15 @@ internal static class MoreEnchantCardRewardUtil
 	/// <summary>
 	/// 战斗内 <see cref="CardPileCmd.AddGeneratedCardsToCombat"/> 等路径生成并入库的牌；仅 <paramref name="addedByPlayer"/> 为真时处理。
 	/// </summary>
-	internal static void TryApplyRandomEnchantToCombatGeneratedCard(CardModel card, bool addedByPlayer)
+	internal static void TryApplyRandomEnchantToCombatGeneratedCard(CardModel card, bool addedByPlayer, Player? creator = null)
 	{
-		if (!addedByPlayer || card?.Owner is not Player player)
+		if (!addedByPlayer || card == null)
 			return;
-		if (!LocalContext.IsMine(card))
+		var player = creator ?? card.Owner as Player;
+		if (player == null)
 			return;
+		// 战斗内生牌附魔同样属于确定性流程：联机下各端必须一致执行，
+		// 否则会出现卡牌附魔状态不一致并导致 Transformations RNG 计数分叉。
 
 		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
 		if (!settings.CombatGeneratedEnchantEnabled)
@@ -137,8 +140,8 @@ internal static class MoreEnchantCardRewardUtil
 	{
 		if (card.Enchantment != null)
 			return;
-		if (!LocalContext.IsMine(card))
-			return;
+		// 变牌结果是确定性流程，联机下必须各端一致消耗 Transformations RNG，
+		// 不能按 LocalContext.IsMine 仅本机执行，否则会导致 checksum 分叉。
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
 
@@ -173,8 +176,8 @@ internal static class MoreEnchantCardRewardUtil
 	{
 		if (card.Enchantment != null)
 			return;
-		if (!LocalContext.IsMine(card))
-			return;
+		// 直加牌组（事件/遗物/卷轴箱等）同样会进入联机校验；
+		// 必须各端一致执行，避免仅本机消耗 Rewards RNG 造成状态分歧。
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
 

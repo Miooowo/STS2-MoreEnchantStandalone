@@ -39,8 +39,10 @@ internal static class SoulDetachmentTurnControlPatch
 			if (link == null)
 				continue;
 
-			// 本体已死亡时，灵魂应立即清理，避免残留在战场上。
-			if (link.Target is { IsDead: true })
+			// 分段/替身类敌人在某些阶段切换时可能不是 IsDead=true，
+			// 但会表现为不再存活或已脱离当前战斗状态；这些情况同样应清理灵魂。
+			var body = link.Target;
+			if (body == null || !body.IsAlive || body.CombatState != combatState)
 			{
 				await CreatureCmd.Kill(enemy, force: true);
 				continue;

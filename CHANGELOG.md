@@ -21,6 +21,11 @@
 - 修复灵魂持续晕眩控制在战斗收尾边界时可能扰动结算的问题（补晕时机与结算保护收敛）。
 - 修复千足虫等多段敌人场景下“本体死亡后灵魂未及时清理且可能出现非晕眩意图”的问题（新增死亡后即时清理补丁）。
 - 新增战败结算容错：当历史记录中出现空 `ModelId`（遭遇/角色）时，跳过统计写入并为死亡语录提供安全兜底，避免 `ArgumentNullException` 导致 GameOver 界面崩溃。
+- 修复联机 `EVENT.NEOW` 退出时变牌附魔路径仅在本机执行导致 `Transformations` RNG 计数不一致、触发 checksum 分歧的问题（改为各端一致执行）。
+- 修复联机战斗中生牌附魔路径仅本机执行导致卡牌附魔状态不同步（例如 `MASTER_OF_STRATEGY`）并引发 `Transformations` RNG 计数分歧的问题（改为各端一致执行）。
+- 修复联机“直加牌组随机附魔”（事件/遗物/卷轴箱等）潜在仅本机执行导致 `Rewards` RNG 分歧的风险（改为各端一致执行）。
+- 修复联机 `AfterCardGeneratedForCombat` 参数可见性在不同端不一致时可能导致一端跳过“玩家生牌附魔”判定的问题（新增 `card.Owner is Player` 兜底，避免再次出现 `MASTER_OF_STRATEGY` 附魔状态分叉）。
+- 修复联机中“他人玩家生牌”场景下 `card.Owner` 可能不可用导致附魔逻辑早退的问题：`AfterCardGeneratedForCombat` 现优先使用 `creator(Player)` 作为 RNG 归属，并以 `Owner` 兜底，避免 `SWORD_SAGE` 这类回合开始生牌出现单端附魔与 `Transformations` 计数漂移。
 
 ---
 ## 0.10.1
@@ -333,3 +338,6 @@
 ## 未发布
 
 （在此记录已合并但未打版本号的改动，发布新版本时将对应条目移到上方并写上版本号与日期。）
+- 修复 `Soul_Detachment` 在千足虫等分段/替身边界下“本体死亡后灵魂仍残留”的问题：灵魂清理条件从仅 `IsDead` 扩展为 `!IsAlive` 或已脱离当前 `CombatState`，并在 `AfterDeath` 与回合末双路径同时生效。
+- 修复 `Soul_Detachment` 对千足虫分段克隆时会继承 `ReattachPower` 导致灵魂可“断肢重接”残留的问题：召唤灵魂后显式移除 `ReattachPower`，确保本体死亡后灵魂可被正常清理。
+- 调整 `Soul_Detachment` 的灵魂克隆行为为“纯沙包”：召唤后清空其所有既有 `Power`，仅保留灵魂链接能力与晕眩控制，不再继承目标原始能力。

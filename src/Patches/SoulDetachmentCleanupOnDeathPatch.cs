@@ -44,7 +44,14 @@ internal static class SoulDetachmentCleanupOnDeathPatch
 				continue;
 
 			var link = enemy.GetPower<SoulDetachmentLinkPower>();
-			if (link?.Target == creature)
+			var body = link?.Target;
+			if (body == null)
+				continue;
+
+			// 立即清理两类情况：
+			// 1) 这次死亡事件就是灵魂链接的本体；
+			// 2) 本体已不再存活/已脱离当前战斗（覆盖千足虫等分段死亡边界）。
+			if (body == creature || !body.IsAlive || body.CombatState != combatState)
 				await CreatureCmd.Kill(enemy, force: true);
 		}
 	}

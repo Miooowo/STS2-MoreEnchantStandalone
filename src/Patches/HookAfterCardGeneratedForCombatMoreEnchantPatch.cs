@@ -18,8 +18,11 @@ internal static class HookAfterCardGeneratedForCombatMoreEnchantPatch
 		if (__args == null || __args.Length < 2 || __args[1] is not CardModel card)
 			return;
 
-		var addedByPlayer = ResolveAddedByPlayer(__args);
-		MoreEnchantCardRewardUtil.TryApplyRandomEnchantToCombatGeneratedCard(card, addedByPlayer);
+		var creator = ResolveCreator(__args);
+		// 不同端 Hook 参数在某些时点可能出现 creator/flag 可见性差异；
+		// 以 card.Owner / creator 任一可用作为兜底，避免一端进入一端不进入导致 RNG 与卡状态分叉。
+		var addedByPlayer = ResolveAddedByPlayer(__args) || card.Owner is Player || creator != null;
+		MoreEnchantCardRewardUtil.TryApplyRandomEnchantToCombatGeneratedCard(card, addedByPlayer, creator);
 	}
 
 	private static bool ResolveAddedByPlayer(object[] args)
@@ -35,5 +38,12 @@ internal static class HookAfterCardGeneratedForCombatMoreEnchantPatch
 			Player creator => creator != null,
 			_ => false,
 		};
+	}
+
+	private static Player? ResolveCreator(object[] args)
+	{
+		if (args.Length < 3)
+			return null;
+		return args[2] as Player;
 	}
 }

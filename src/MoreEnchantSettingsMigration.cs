@@ -7,6 +7,7 @@ internal static class MoreEnchantSettingsMigration
 	internal static bool Apply(MoreEnchantSettings s)
 	{
 		var changed = false;
+		var defaultSettings = new MoreEnchantSettings();
 
 		if (s.WeightCurse <= 0)
 		{
@@ -44,6 +45,108 @@ internal static class MoreEnchantSettingsMigration
 			s.StartingDeckEnchantEnabled = false;
 			s.StartingDeckEnchantChancePercent = 10;
 			s.SchemaVersion = 5;
+			changed = true;
+		}
+
+		// 设置已移除：统一锁定为默认概率，并开启所有附魔路径。
+		if (s.RewardEnchantChancePercent != defaultSettings.RewardEnchantChancePercent)
+		{
+			s.RewardEnchantChancePercent = defaultSettings.RewardEnchantChancePercent;
+			changed = true;
+		}
+		if (s.ShopEnchantChancePercent != defaultSettings.ShopEnchantChancePercent)
+		{
+			s.ShopEnchantChancePercent = defaultSettings.ShopEnchantChancePercent;
+			changed = true;
+		}
+		if (s.AncientRewardEnchantChancePercent != defaultSettings.AncientRewardEnchantChancePercent)
+		{
+			s.AncientRewardEnchantChancePercent = defaultSettings.AncientRewardEnchantChancePercent;
+			changed = true;
+		}
+		if (s.CombatGeneratedEnchantChancePercent != defaultSettings.CombatGeneratedEnchantChancePercent)
+		{
+			s.CombatGeneratedEnchantChancePercent = defaultSettings.CombatGeneratedEnchantChancePercent;
+			changed = true;
+		}
+		if (s.TransformEnchantChancePercent != defaultSettings.TransformEnchantChancePercent)
+		{
+			s.TransformEnchantChancePercent = defaultSettings.TransformEnchantChancePercent;
+			changed = true;
+		}
+		if (s.DeckDirectEnchantChancePercent != defaultSettings.DeckDirectEnchantChancePercent)
+		{
+			s.DeckDirectEnchantChancePercent = defaultSettings.DeckDirectEnchantChancePercent;
+			changed = true;
+		}
+		if (s.StartingDeckEnchantChancePercent != defaultSettings.StartingDeckEnchantChancePercent)
+		{
+			s.StartingDeckEnchantChancePercent = defaultSettings.StartingDeckEnchantChancePercent;
+			changed = true;
+		}
+		if (!s.ShopEnchantEnabled)
+		{
+			s.ShopEnchantEnabled = true;
+			changed = true;
+		}
+		if (!s.AncientRewardEnchantEnabled)
+		{
+			s.AncientRewardEnchantEnabled = true;
+			changed = true;
+		}
+		if (!s.CombatGeneratedEnchantEnabled)
+		{
+			s.CombatGeneratedEnchantEnabled = true;
+			changed = true;
+		}
+		if (!s.TransformEnchantEnabled)
+		{
+			s.TransformEnchantEnabled = true;
+			changed = true;
+		}
+		if (!s.DeckDirectEnchantEnabled)
+		{
+			s.DeckDirectEnchantEnabled = true;
+			changed = true;
+		}
+		if (!s.StartingDeckEnchantEnabled)
+		{
+			s.StartingDeckEnchantEnabled = true;
+			changed = true;
+		}
+		if (!s.BetaRewardEnchantmentsEnabled)
+		{
+			s.BetaRewardEnchantmentsEnabled = true;
+			changed = true;
+		}
+		if (s.UseChimeraRarityByCardRarity != defaultSettings.UseChimeraRarityByCardRarity)
+		{
+			s.UseChimeraRarityByCardRarity = defaultSettings.UseChimeraRarityByCardRarity;
+			changed = true;
+		}
+		if (s.WeightCommon != defaultSettings.WeightCommon)
+		{
+			s.WeightCommon = defaultSettings.WeightCommon;
+			changed = true;
+		}
+		if (s.WeightUncommon != defaultSettings.WeightUncommon)
+		{
+			s.WeightUncommon = defaultSettings.WeightUncommon;
+			changed = true;
+		}
+		if (s.WeightCurse != defaultSettings.WeightCurse)
+		{
+			s.WeightCurse = defaultSettings.WeightCurse;
+			changed = true;
+		}
+		if (s.WeightRare != defaultSettings.WeightRare)
+		{
+			s.WeightRare = defaultSettings.WeightRare;
+			changed = true;
+		}
+		if (s.WeightSpecial != defaultSettings.WeightSpecial)
+		{
+			s.WeightSpecial = defaultSettings.WeightSpecial;
 			changed = true;
 		}
 

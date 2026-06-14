@@ -6,6 +6,7 @@ namespace MoreEnchant;
 public sealed class MoreEnchantSettings
 {
 	public const string StoreKey = "settings";
+	public const int DefaultRewardEnchantChancePercent = 10;
 
 	/// <summary>设置 JSON 架构版本；低于当前版本时由 <see cref="MoreEnchantSettingsStore"/> 迁移默认值。</summary>
 	[JsonPropertyName("schema_version")]
@@ -13,7 +14,7 @@ public sealed class MoreEnchantSettings
 
 	/// <summary>卡牌奖励等：每张选项获得随机附魔的基础概率（0–100，百分数）。</summary>
 	[JsonPropertyName("reward_enchant_chance_percent")]
-	public int RewardEnchantChancePercent { get; set; } = 10;
+	public int RewardEnchantChancePercent { get; set; } = DefaultRewardEnchantChancePercent;
 
 	/// <summary>商店单张卡牌是否可随机附魔（概率见 <see cref="ShopEnchantChancePercent"/>）。联机以房主设置为准。</summary>
 	[JsonPropertyName("shop_enchant_enabled")]
@@ -33,7 +34,7 @@ public sealed class MoreEnchantSettings
 
 	/// <summary>通过 <see cref="MegaCrit.Sts2.Core.Commands.CardPileCmd.AddGeneratedCardsToCombat"/> 加入战斗的牌（玩家侧）是否可随机附魔。联机以房主设置为准。</summary>
 	[JsonPropertyName("combat_generated_enchant_enabled")]
-	public bool CombatGeneratedEnchantEnabled { get; set; }
+	public bool CombatGeneratedEnchantEnabled { get; set; } = true;
 
 	/// <summary>战斗内生成牌附魔概率（0–100），独立于心商店/奖励。</summary>
 	[JsonPropertyName("combat_generated_enchant_chance_percent")]
@@ -59,7 +60,7 @@ public sealed class MoreEnchantSettings
 
 	/// <summary>进入新局时，是否对初始卡组每张牌尝试随机附魔。联机以房主设置为准。</summary>
 	[JsonPropertyName("starting_deck_enchant_enabled")]
-	public bool StartingDeckEnchantEnabled { get; set; }
+	public bool StartingDeckEnchantEnabled { get; set; } = true;
 
 	/// <summary>初始卡组随机附魔概率（0–100）。</summary>
 	[JsonPropertyName("starting_deck_enchant_chance_percent")]
@@ -90,5 +91,5 @@ public sealed class MoreEnchantSettings
 
 	/// <summary>为真时随机附魔池包含 Beta 附魔（夹击、恶魔护盾等）。联机以房主设置为准。</summary>
 	[JsonPropertyName("beta_reward_enchantments_enabled")]
-	public bool BetaRewardEnchantmentsEnabled { get; set; }
+	public bool BetaRewardEnchantmentsEnabled { get; set; } = true;
 }

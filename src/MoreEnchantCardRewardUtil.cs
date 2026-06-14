@@ -21,6 +21,8 @@ namespace MoreEnchant;
 
 internal static class MoreEnchantCardRewardUtil
 {
+	private const int DefaultEnchantChancePercent = MoreEnchantSettings.DefaultRewardEnchantChancePercent;
+	private static readonly MoreEnchantSettings DefaultSettings = new();
 
 	public static void ApplyRandomEnchantments(Player player, List<CardCreationResult> results,
 		CardCreationOptions options)
@@ -32,10 +34,6 @@ internal static class MoreEnchantCardRewardUtil
 			? player.PlayerRng.Shops
 			: player.PlayerRng.Rewards;
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
-		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
-
-		if (options.Source == CardCreationSource.Shop && !settings.ShopEnchantEnabled)
-			return;
 
 		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardBellCurse &&
 		    options.Source == CardCreationSource.Encounter)
@@ -67,21 +65,18 @@ internal static class MoreEnchantCardRewardUtil
 				continue;
 
 			bool ancientCard = card.Rarity == CardRarity.Ancient;
-			if (ancientCard && !settings.AncientRewardEnchantEnabled)
-				continue;
-
-			int chancePercent;
-			if (options.Source == CardCreationSource.Shop)
-				chancePercent = Math.Clamp(settings.ShopEnchantChancePercent, 0, 100);
-			else if (ancientCard)
-				chancePercent = Math.Clamp(settings.AncientRewardEnchantChancePercent, 0, 100);
-			else
-				chancePercent = Math.Clamp(settings.RewardEnchantChancePercent, 0, 100);
+			int chancePercent = DefaultEnchantChancePercent;
 
 			if (chancePercent <= 0 || rng.NextInt(0, 100) >= chancePercent)
 				continue;
 
-			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancientCard, options.Source);
+			var pick = RollEnchantmentTemplate(
+				card,
+				templates,
+				rng,
+				DefaultSettings,
+				excludeCurse: ancientCard,
+				options.Source);
 			if (pick == null)
 				continue;
 
@@ -105,15 +100,12 @@ internal static class MoreEnchantCardRewardUtil
 		// 战斗内生牌附魔同样属于确定性流程：联机下各端必须一致执行，
 		// 否则会出现卡牌附魔状态不一致并导致 Transformations RNG 计数分叉。
 
-		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
-		if (!settings.CombatGeneratedEnchantEnabled)
-			return;
 		if (card.Enchantment != null)
 			return;
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
 
-		var chancePercent = Math.Clamp(settings.CombatGeneratedEnchantChancePercent, 0, 100);
+		var chancePercent = DefaultEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -124,7 +116,13 @@ internal static class MoreEnchantCardRewardUtil
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var ancient = card.Rarity == CardRarity.Ancient;
 		var excludeCurse = ancient;
-		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse, CardCreationSource.Encounter);
+		var pick = RollEnchantmentTemplate(
+			card,
+			templates,
+			rng,
+			DefaultSettings,
+			excludeCurse,
+			CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
@@ -145,11 +143,7 @@ internal static class MoreEnchantCardRewardUtil
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
 
-		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
-		if (!settings.TransformEnchantEnabled)
-			return;
-
-		var chancePercent = Math.Clamp(settings.TransformEnchantChancePercent, 0, 100);
+		var chancePercent = DefaultEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -159,7 +153,13 @@ internal static class MoreEnchantCardRewardUtil
 
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var ancient = card.Rarity == CardRarity.Ancient;
-		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient, CardCreationSource.Encounter);
+		var pick = RollEnchantmentTemplate(
+			card,
+			templates,
+			rng,
+			DefaultSettings,
+			excludeCurse: ancient,
+			CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
@@ -181,11 +181,7 @@ internal static class MoreEnchantCardRewardUtil
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
 
-		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
-		if (!settings.DeckDirectEnchantEnabled)
-			return;
-
-		var chancePercent = Math.Clamp(settings.DeckDirectEnchantChancePercent, 0, 100);
+		var chancePercent = DefaultEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -195,7 +191,13 @@ internal static class MoreEnchantCardRewardUtil
 
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var ancient = card.Rarity == CardRarity.Ancient;
-		var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: ancient, CardCreationSource.Encounter);
+		var pick = RollEnchantmentTemplate(
+			card,
+			templates,
+			rng,
+			DefaultSettings,
+			excludeCurse: ancient,
+			CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
@@ -209,11 +211,7 @@ internal static class MoreEnchantCardRewardUtil
 	/// </summary>
 	internal static void TryApplyRandomEnchantToStartingDeck(Player player)
 	{
-		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
-		if (!settings.StartingDeckEnchantEnabled)
-			return;
-
-		var chancePercent = Math.Clamp(settings.StartingDeckEnchantChancePercent, 0, 100);
+		var chancePercent = DefaultEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -232,7 +230,13 @@ internal static class MoreEnchantCardRewardUtil
 			if (rng.NextInt(0, 100) >= chancePercent)
 				continue;
 
-			var pick = RollEnchantmentTemplate(card, templates, rng, settings, excludeCurse: card.Rarity == CardRarity.Ancient, CardCreationSource.Encounter);
+			var pick = RollEnchantmentTemplate(
+				card,
+				templates,
+				rng,
+				DefaultSettings,
+				excludeCurse: card.Rarity == CardRarity.Ancient,
+				CardCreationSource.Encounter);
 			if (pick == null)
 				continue;
 
@@ -328,8 +332,6 @@ internal static class MoreEnchantCardRewardUtil
 		var byRarity = new Dictionary<EnchantmentRewardRarity, List<EnchantmentModel>>();
 		foreach (var t in templates)
 		{
-			if (t is IBetaGatedRewardEnchantment && !settings.BetaRewardEnchantmentsEnabled)
-				continue;
 			if (!IsTemplateAllowedForSource(t, source))
 				continue;
 			if (!t.CanEnchant(card))

@@ -30,7 +30,7 @@ public sealed class PincerFlankingMarkEnchantment : ModEnchantmentTemplate, IRew
 	{
 		if (!base.CanEnchant(card))
 			return false;
-		return RunManager.Instance?.NetService.Type.IsMultiplayer() == true;
+		return RunManager.Instance?.NetService?.Type.IsMultiplayer() == true;
 	}
 
 	public override void RecalculateValues()

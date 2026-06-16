@@ -43,7 +43,7 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 	{
 		if (!base.CanEnchant(card))
 			return false;
-		return RunManager.Instance?.NetService.Type.IsMultiplayer() == true;
+		return RunManager.Instance?.NetService?.Type.IsMultiplayer() == true;
 	}
 
 	protected override void OnEnchant()
@@ -91,7 +91,7 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 
 		// 多人下各端 Overlay/手柄状态可能不一致，会导致 SelectionFinished 与格挡转移结果分叉（checksum 不一致）。
 		var useController = NControllerManager.Instance?.IsUsingController == true;
-		if (RunManager.Instance?.NetService.Type.IsMultiplayer() == true)
+		if (RunManager.Instance?.NetService?.Type.IsMultiplayer() == true)
 			useController = false;
 		var mode = useController ? TargetMode.Controller : TargetMode.ClickMouseToTarget;
 
@@ -135,7 +135,7 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 		if (!CombatManager.Instance.IsInProgress)
 			return false;
 		// 仅本地 UI 状态：联机时各端计数可能不同，误取消会导致与主机目标选择不一致。
-		if (RunManager.Instance?.NetService.Type.IsMultiplayer() == true)
+		if (RunManager.Instance?.NetService?.Type.IsMultiplayer() == true)
 			return false;
 		if (NOverlayStack.Instance != null && NOverlayStack.Instance.ScreenCount > 0)
 			return true;

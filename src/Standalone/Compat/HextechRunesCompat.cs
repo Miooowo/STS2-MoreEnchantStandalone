@@ -58,7 +58,7 @@ internal static class HextechRunesCompat
 
 		try
 		{
-			await ((Task)method.Invoke(null, [player, 1])!).ConfigureAwait(false);
+			await (Task)method.Invoke(null, [player, 1])!;
 			return true;
 		}
 		catch
@@ -71,7 +71,7 @@ internal static class HextechRunesCompat
 	{
 		if (Engine.GetMainLoop() is SceneTree tree)
 			await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
-		return await TryGrantRandomForge(player).ConfigureAwait(false);
+		return await TryGrantRandomForge(player);
 	}
 
 	internal static async Task<RelicModel?> TryGrantTemporaryRune(Player player, HextechRuneTier tier)
@@ -124,7 +124,7 @@ internal static class HextechRunesCompat
 			if (pool is not IEnumerable<Type> candidateTypes)
 				return null;
 
-			await ((Task)grant.Invoke(null, [player, candidateTypes, 1])!).ConfigureAwait(false);
+			await (Task)grant.Invoke(null, [player, candidateTypes, 1])!;
 		}
 		catch
 		{
@@ -150,6 +150,6 @@ internal static class HextechRunesCompat
 		var toRemove = temporaryRunes.Where(r => player.Relics.Contains(r)).ToList();
 		temporaryRunes.Clear();
 		foreach (var relic in toRemove)
-			await RelicCmd.Remove(relic).ConfigureAwait(false);
+			await RelicCmd.Remove(relic);
 	}
 }

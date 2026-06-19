@@ -75,7 +75,7 @@ public abstract class HextechTemporaryRuneFirstPlayEnchantment : ModEnchantmentT
 
 		_pendingFirstPlayInCombat = false;
 		await CreatureCmd.TriggerAnim(creature, "Cast", owner.Character.CastAnimDelay);
-		var rune = await HextechRunesCompat.TryGrantTemporaryRune(owner, RuneTier).ConfigureAwait(false);
+		var rune = await HextechRunesCompat.TryGrantTemporaryRune(owner, RuneTier);
 		if (rune != null)
 			_temporaryRunes.Add(rune);
 	}
@@ -84,7 +84,7 @@ public abstract class HextechTemporaryRuneFirstPlayEnchantment : ModEnchantmentT
 	{
 		if (Card?.Owner is not { } owner)
 			return;
-		await HextechRunesCompat.RemoveTemporaryRunes(owner, _temporaryRunes).ConfigureAwait(false);
+		await HextechRunesCompat.RemoveTemporaryRunes(owner, _temporaryRunes);
 	}
 }
 

@@ -49,6 +49,8 @@ public sealed class ClumsyCurseEnchantment : ModEnchantmentTemplate, IRewardEnch
 		var owner = Card.Owner;
 		if (owner?.PlayerCombatState == null)
 			return;
+		if (!ReferenceEquals(cardPlay.Card?.Owner, owner))
+			return;
 
 		var hand = owner.PlayerCombatState.Hand.Cards;
 		if (!hand.Contains(Card))

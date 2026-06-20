@@ -4,7 +4,7 @@
   "name": "MoreEnchantStandalone",
   "author": "ClockCycas",
   "description": "更多自定义附魔（无依赖）。所有附魔来源默认开启并使用统一随机概率；联机以房主规则为准。",
-  "version": "0.11.1-fix",
+  "version": "0.11.1-fix2",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [],

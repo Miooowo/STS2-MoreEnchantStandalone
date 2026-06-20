@@ -79,15 +79,6 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 		if (allies.Count == 0)
 			return;
 
-		// 联机下若两端各自走本地 UI 选人，极易出现目标不一致导致 checksum 分叉；
-		// 因此改为确定性自动选同一目标（队友列表首位）。
-		if (RunManager.Instance?.NetService?.Type.IsMultiplayer() == true)
-		{
-			var deterministicMate = allies[0];
-			await CreatureCmd.GainBlock(deterministicMate, block, ValueProp.Move, cardPlay);
-			return;
-		}
-
 		var tm = NTargetManager.Instance;
 		var room = NCombatRoom.Instance;
 		if (tm == null || room == null)

@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
@@ -80,17 +81,48 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 		if (allies.Count == 0)
 			return;
 		var isMultiplayer = RunManager.Instance?.NetService?.Type.IsMultiplayer() == true;
-		if (isMultiplayer && !LocalContext.IsMe(player))
+		var isChoiceOwner = !isMultiplayer || LocalContext.IsMe(player);
+		var synchronizer = isMultiplayer ? await WaitForPlayerChoiceSynchronizerAsync() : null;
+		if (isMultiplayer && synchronizer == null)
 		{
-			// 联机下只允许牌拥有者所在端进行目标选择；
-			// 其他端若也弹本地选人 UI，任一端取消/误选都会造成分叉。
+			// 极端情况下同步器缺失时，回退到确定性目标，避免继续出现 checksum 分叉。
+			await CreatureCmd.GainBlock(allies[0], block, ValueProp.Move, cardPlay);
 			return;
 		}
 
+		int? allyIndex;
+		if (isMultiplayer)
+		{
+			var choiceId = synchronizer!.ReserveChoiceId(player);
+			if (isChoiceOwner)
+			{
+				allyIndex = await SelectAllyIndexAsync(self, allies, isMultiplayer: true);
+				synchronizer.SyncLocalChoice(player, choiceId, PlayerChoiceResult.FromIndex(allyIndex ?? -1));
+			}
+			else
+			{
+				var remoteChoice = await synchronizer.WaitForRemoteChoice(player, choiceId);
+				allyIndex = remoteChoice.AsIndexOrNull();
+			}
+		}
+		else
+		{
+			allyIndex = await SelectAllyIndexAsync(self, allies, isMultiplayer: false);
+		}
+
+		if (allyIndex is null || allyIndex < 0 || allyIndex >= allies.Count)
+			return;
+
+		var mate = allies[allyIndex.Value];
+		await CreatureCmd.GainBlock(mate, block, ValueProp.Move, cardPlay);
+	}
+
+	private static async Task<int?> SelectAllyIndexAsync(Creature self, IReadOnlyList<Creature> allies, bool isMultiplayer)
+	{
 		var tm = NTargetManager.Instance;
 		var room = NCombatRoom.Instance;
 		if (tm == null || room == null)
-			return;
+			return null;
 
 		var selfNode = room.GetCreatureNode(self);
 		var startPos = selfNode != null
@@ -132,10 +164,34 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 		}
 
 		var mate = CreatureFromTargetNode(picked);
-		if (mate == null || !allies.Contains(mate))
-			return;
+		return mate == null ? null : FindCreatureIndex(allies, mate);
+	}
 
-		await CreatureCmd.GainBlock(mate, block, ValueProp.Move, cardPlay);
+	private static async Task<PlayerChoiceSynchronizer?> WaitForPlayerChoiceSynchronizerAsync()
+	{
+		var runManager = RunManager.Instance;
+		if (runManager == null)
+			return null;
+
+		for (var i = 0; i < 60; i++)
+		{
+			if (runManager.PlayerChoiceSynchronizer != null)
+				return runManager.PlayerChoiceSynchronizer;
+			await Task.Yield();
+		}
+
+		return runManager.PlayerChoiceSynchronizer;
+	}
+
+	private static int FindCreatureIndex(IReadOnlyList<Creature> allies, Creature target)
+	{
+		for (var i = 0; i < allies.Count; i++)
+		{
+			if (ReferenceEquals(allies[i], target))
+				return i;
+		}
+
+		return -1;
 	}
 
 	private static bool ShouldCancelDemonShieldTargeting()

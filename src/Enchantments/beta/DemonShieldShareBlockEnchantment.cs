@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -78,6 +79,13 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 			.ToList();
 		if (allies.Count == 0)
 			return;
+		var isMultiplayer = RunManager.Instance?.NetService?.Type.IsMultiplayer() == true;
+		if (isMultiplayer && !LocalContext.IsMe(player))
+		{
+			// 联机下只允许牌拥有者所在端进行目标选择；
+			// 其他端若也弹本地选人 UI，任一端取消/误选都会造成分叉。
+			return;
+		}
 
 		var tm = NTargetManager.Instance;
 		var room = NCombatRoom.Instance;
@@ -91,7 +99,7 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 
 		// 多人下各端 Overlay/手柄状态可能不一致，会导致 SelectionFinished 与格挡转移结果分叉（checksum 不一致）。
 		var useController = NControllerManager.Instance?.IsUsingController == true;
-		if (RunManager.Instance?.NetService?.Type.IsMultiplayer() == true)
+		if (isMultiplayer)
 			useController = false;
 		var mode = useController ? TargetMode.Controller : TargetMode.ClickMouseToTarget;
 

@@ -372,6 +372,8 @@ internal static class MoreEnchantCardRewardUtil
 			var r = GetRewardRarity(t);
 			if (excludeCurse && r == EnchantmentRewardRarity.Curse)
 				continue;
+			if (r == EnchantmentRewardRarity.Hidden)
+				continue;
 			if (!byRarity.TryGetValue(r, out var list))
 			{
 				list = [];

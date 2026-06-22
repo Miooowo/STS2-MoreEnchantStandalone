@@ -159,6 +159,18 @@ public sealed class HellraiserEnchantment : ModEnchantmentTemplate, IRewardEncha
 		return Task.CompletedTask;
 	}
 
+	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(
+		CardModel card,
+		bool isAutoPlay,
+		ResourceInfo resources,
+		PileType pileType,
+		CardPilePosition position)
+	{
+		if (!ReferenceEquals(card, Card))
+			return (pileType, position);
+		return (PileType.None, position);
+	}
+
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
 	{
 		if (!_pendingFirstPlayInCombat)

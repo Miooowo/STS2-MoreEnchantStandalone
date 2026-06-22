@@ -359,5 +359,29 @@
 
   "HAND_CRANK_ENCHANTMENT.title": "手摇曲柄",
   "HAND_CRANK_ENCHANTMENT.description": "普通。仅在安装酒狐时出现。\n每场战斗首次打出时，获得[blue]2[/blue]层[gold]活力[/gold]。",
-  "HAND_CRANK_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]2[/blue]层[gold]活力[/gold]。"
+  "HAND_CRANK_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]2[/blue]层[gold]活力[/gold]。",
+
+  "DARK_CANDLE_ENCHANTMENT.title": "幽暗烛火",
+  "DARK_CANDLE_ENCHANTMENT.description": "罕见。仅附魔诅咒牌。\n可打出原本不能打出的诅咒牌。\n打出时失去[blue]1[/blue]点生命，并将其[gold]消耗[/gold]。",
+  "DARK_CANDLE_ENCHANTMENT.extraCardText": "可打出原本不可打出的诅咒牌；打出时失去[blue]1[/blue]生命并消耗。",
+
+  "HAUNTING_ENCHANTMENT.title": "萦绕",
+  "HAUNTING_ENCHANTMENT.description": "诅咒附魔。仅附魔诅咒牌。\n此牌在回合开始时返回手牌。",
+  "HAUNTING_ENCHANTMENT.extraCardText": "回合开始时返回手牌。",
+
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.title": "随机附魔",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.description": "罕见。拾起此牌时，为牌组中的一张其他牌添加随机附魔。",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.extraCardText": "拾起时：为牌组中另一张牌添加随机附魔。",
+
+  "CHILLED_ENCHANTMENT.title": "冰镇",
+  "CHILLED_ENCHANTMENT.description": "罕见。每场战斗中第一次抽到此牌时，本回合[gold]冻结[/gold]（冻结：此牌不能被打出；下一次打出前耗能减少[blue]1[/blue]）。",
+  "CHILLED_ENCHANTMENT.extraCardText": "首抽后本回合冻结；下一次打出前耗能[blue]-1[/blue]。",
+
+  "CLASH_ENCHANTMENT.title": "交锋",
+  "CLASH_ENCHANTMENT.description": "普通。仅附魔攻击牌。\n此牌耗能变为[blue]0[/blue]。\n当手中只有攻击牌时可打出。",
+  "CLASH_ENCHANTMENT.extraCardText": "耗能变为[blue]0[/blue]；仅手中全是攻击牌时可打出。",
+
+  "SIGNATURE_MOVE_ENCHANTMENT.title": "招牌技",
+  "SIGNATURE_MOVE_ENCHANTMENT.description": "罕见。仅附魔攻击牌。\n此牌耗能变为[blue]2[/blue]。\n伤害增加[blue]10[/blue]，若不足[blue]30[/blue]则提升至[blue]30[/blue]。\n仅当此牌是手中唯一攻击牌时可打出。",
+  "SIGNATURE_MOVE_ENCHANTMENT.extraCardText": "耗能[blue]2[/blue]；伤害+10（最低30）；仅手中唯一攻击牌时可打出。"
 }

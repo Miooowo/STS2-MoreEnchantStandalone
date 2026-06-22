@@ -373,5 +373,29 @@
 
   "HAND_CRANK_ENCHANTMENT.title": "Hand Crank",
   "HAND_CRANK_ENCHANTMENT.description": "Common. Only appears when STS2_WineFox is installed. The first time this is played each combat, gain [blue]2[/blue] [gold]Vigor[/gold].",
-  "HAND_CRANK_ENCHANTMENT.extraCardText": "First play each combat: gain [blue]2[/blue] [gold]Vigor[/gold]."
+  "HAND_CRANK_ENCHANTMENT.extraCardText": "First play each combat: gain [blue]2[/blue] [gold]Vigor[/gold].",
+
+  "DARK_CANDLE_ENCHANTMENT.title": "Dark Candle",
+  "DARK_CANDLE_ENCHANTMENT.description": "Rare. Curse cards only. You can play curses that are normally unplayable. Playing this curse makes you lose [blue]1[/blue] HP and [gold]Exhaust[/gold] it.",
+  "DARK_CANDLE_ENCHANTMENT.extraCardText": "Can play normally unplayable curses; on play lose [blue]1[/blue] HP and Exhaust.",
+
+  "HAUNTING_ENCHANTMENT.title": "Haunting",
+  "HAUNTING_ENCHANTMENT.description": "Curse enchantment. Curse cards only. At the start of your turn, this card returns to your hand.",
+  "HAUNTING_ENCHANTMENT.extraCardText": "At turn start, return this card to hand.",
+
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.title": "Random Enchant",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.description": "Rare. When this card is picked up, add a random enchantment to another card in your deck.",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.extraCardText": "On pickup: add a random enchantment to another deck card.",
+
+  "CHILLED_ENCHANTMENT.title": "Chilled",
+  "CHILLED_ENCHANTMENT.description": "Rare. The first time this is drawn each combat, it becomes [gold]Frozen[/gold] for this turn (Frozen: this card cannot be played this turn; before its next play, its cost is reduced by [blue]1[/blue]).",
+  "CHILLED_ENCHANTMENT.extraCardText": "First draw each combat: Frozen this turn; before next play, cost [blue]-1[/blue].",
+
+  "CLASH_ENCHANTMENT.title": "Clash",
+  "CLASH_ENCHANTMENT.description": "Common. Attack cards only. This card's cost becomes [blue]0[/blue]. It can be played only when your hand contains only attacks.",
+  "CLASH_ENCHANTMENT.extraCardText": "Cost becomes [blue]0[/blue]; playable only if your hand is all attacks.",
+
+  "SIGNATURE_MOVE_ENCHANTMENT.title": "Signature Move",
+  "SIGNATURE_MOVE_ENCHANTMENT.description": "Rare. Attack cards only. This card's cost becomes [blue]2[/blue]. Damage +[blue]10[/blue], and if below [blue]30[/blue], set to [blue]30[/blue]. Playable only when this is the only attack in your hand.",
+  "SIGNATURE_MOVE_ENCHANTMENT.extraCardText": "Cost [blue]2[/blue]; damage +10 (min 30); only playable as your only attack."
 }

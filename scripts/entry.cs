@@ -97,6 +97,12 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<SynthesisEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<LogisticsEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<HandCrankEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<DarkCandleEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<HauntingEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<RandomEnchantOnPickupEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ChilledEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ClashEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SignatureMoveEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<FeedEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ColossusEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<HellraiserEnchantment>();

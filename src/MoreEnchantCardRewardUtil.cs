@@ -254,6 +254,38 @@ internal static class MoreEnchantCardRewardUtil
 
 		if (card?.Enchantment is HextechForgeEnchantment forge && forge.TryTakePickupGrant(player))
 			_ = TaskHelper.RunSafely(HextechRunesCompat.TryGrantRandomForgeAfterUiFrame(player));
+
+		if (card?.Enchantment is RandomEnchantOnPickupEnchantment randomEnchant && randomEnchant.TryTakePickupTriggerOnce())
+			TryApplyRandomEnchantmentToAnotherDeckCard(player, card);
+	}
+
+	private static void TryApplyRandomEnchantmentToAnotherDeckCard(Player player, CardModel sourceCard)
+	{
+		var candidates = player.Deck.Cards
+			.Where(c => c != null && !ReferenceEquals(c, sourceCard) && c.Enchantment == null)
+			.ToList();
+		if (candidates.Count == 0)
+			return;
+
+		var rng = player.PlayerRng.Rewards;
+		var target = rng.NextItem(candidates);
+		if (target == null)
+			return;
+
+		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var pick = RollEnchantmentTemplate(
+			target,
+			templates,
+			rng,
+			DefaultSettings,
+			excludeCurse: target.Rarity == CardRarity.Ancient,
+			CardCreationSource.Encounter);
+		if (pick == null)
+			return;
+
+		var enchant = (EnchantmentModel)pick.MutableClone();
+		var amount = RollEnchantAmount(rng, pick);
+		CardCmd.Enchant(enchant, target, amount);
 	}
 
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(

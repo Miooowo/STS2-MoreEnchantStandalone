@@ -327,5 +327,37 @@
 
   "PRISMATIC_HEXTECH_ENCHANTMENT.title": "棱彩海克斯",
   "PRISMATIC_HEXTECH_ENCHANTMENT.description": "每场战斗中首次打出此牌时，\n获得1个临时棱彩阶海克斯（进入下一个房间后移除）。",
-  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "获得1个临时棱彩阶海克斯。"
+  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "获得1个临时棱彩阶海克斯。",
+
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.title": "以毒攻毒",
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.description": "仅在安装星引擎时出现。[gold]消耗[/gold]。\n失去[blue]2[/blue]点生命。\n下[blue]2[/blue]个回合开始时，各回复[blue]3[/blue]点生命。",
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。失去[blue]2[/blue]生命。\n下[blue]2[/blue]个回合开始：回复[blue]3[/blue]生命。",
+
+  "SOUL_LINK_ENCHANTMENT.title": "灵魂链接",
+  "SOUL_LINK_ENCHANTMENT.description": "仅在安装星引擎时出现。[gold]消耗[/gold]。\n选择一名敌人；链接存在期间，当你失去生命时，目标失去等量生命。",
+  "SOUL_LINK_ENCHANTMENT.extraCardText": "[gold]消耗[/gold]。链接一名敌人：你失去生命时，目标失去等量生命。",
+
+  "RANDOM_SELECT_ENCHANTMENT.title": "错误的目标",
+  "RANDOM_SELECT_ENCHANTMENT.description": "仅在安装星引擎时出现。此牌耗能[blue]+1[/blue]，并视作能力牌。\n当你获得负面效果时，将该负面效果转移给随机敌人。",
+  "RANDOM_SELECT_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]，视作能力牌。\n获得负面时，将其转移给随机敌人。",
+
+  "SUPPORT_GUM_ENCHANTMENT.title": "支援口香糖",
+  "SUPPORT_GUM_ENCHANTMENT.description": "仅在安装星引擎且多人模式时出现。\n每场战斗首次打出时，选择另一名玩家：其回复[blue]2[/blue]点生命并抽[blue]1[/blue]张牌。",
+  "SUPPORT_GUM_ENCHANTMENT.extraCardText": "本场首次打出：选择另一名玩家，回复[blue]2[/blue]生命并抽[blue]1[/blue]。",
+
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.title": "能量补充棒",
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.description": "仅在安装星引擎且多人模式时出现。\n每场战斗首次打出时，选择另一名玩家：其获得[blue]8[/blue]层[gold]活力[/gold]。",
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.extraCardText": "本场首次打出：选择另一名玩家，获得[blue]8[/blue]层[gold]活力[/gold]。",
+
+  "SYNTHESIS_ENCHANTMENT.title": "合成",
+  "SYNTHESIS_ENCHANTMENT.description": "普通。仅在安装酒狐（STS2_WineFox）时出现。\n此牌添加[gold]合成[/gold]。",
+  "SYNTHESIS_ENCHANTMENT.extraCardText": "此牌添加[gold]合成[/gold]。",
+
+  "LOGISTICS_ENCHANTMENT.title": "物流",
+  "LOGISTICS_ENCHANTMENT.description": "罕见。仅在安装酒狐且多人模式时出现。\n每场战斗首次打出时，将此牌的一张[gold]非附魔[/gold]复制品添加至随机一位其他玩家手牌。",
+  "LOGISTICS_ENCHANTMENT.extraCardText": "本场首次打出：将此牌的非附魔复制品加入随机其他玩家手牌。",
+
+  "HAND_CRANK_ENCHANTMENT.title": "手摇曲柄",
+  "HAND_CRANK_ENCHANTMENT.description": "普通。仅在安装酒狐时出现。\n每场战斗首次打出时，获得[blue]2[/blue]层[gold]活力[/gold]。",
+  "HAND_CRANK_ENCHANTMENT.extraCardText": "本场首次打出：获得[blue]2[/blue]层[gold]活力[/gold]。"
 }

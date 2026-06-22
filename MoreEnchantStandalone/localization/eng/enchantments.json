@@ -341,5 +341,37 @@
 
   "PRISMATIC_HEXTECH_ENCHANTMENT.title": "Prismatic Hextech",
   "PRISMATIC_HEXTECH_ENCHANTMENT.description": "Special. Only appears when HextechRunes mod is installed. The first time you play this each combat, gain 1 temporary [gold]Prismatic[/gold] Hextech rune (removed when entering the next room).",
-  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "First play each combat: gain 1 temporary [gold]Prismatic[/gold] Hextech rune."
+  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "First play each combat: gain 1 temporary [gold]Prismatic[/gold] Hextech rune.",
+
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.title": "Fight Fire with Fire",
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.description": "Uncommon. Only appears when Astral Party is installed. [gold]Exhaust[/gold]. Lose [blue]2[/blue] HP. At the start of your next [blue]2[/blue] turns, heal [blue]3[/blue] HP.",
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Lose [blue]2[/blue] HP. Next [blue]2[/blue] turn starts: heal [blue]3[/blue].",
+
+  "SOUL_LINK_ENCHANTMENT.title": "Soul Link",
+  "SOUL_LINK_ENCHANTMENT.description": "Rare. Only appears when Astral Party is installed. [gold]Exhaust[/gold]. Choose an enemy. While linked, whenever you lose HP, that enemy loses the same amount of HP.",
+  "SOUL_LINK_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Link to an enemy: when you lose HP, it loses the same HP.",
+
+  "RANDOM_SELECT_ENCHANTMENT.title": "Wrong Target",
+  "RANDOM_SELECT_ENCHANTMENT.description": "Rare. Only appears when Astral Party is installed. Cost +1. Treated as a [gold]Power[/gold] when played. Whenever you gain a debuff, transfer that debuff to a random enemy.",
+  "RANDOM_SELECT_ENCHANTMENT.extraCardText": "Cost +1. Treated as [gold]Power[/gold]. Debuffs gained are transferred to a random enemy.",
+
+  "SUPPORT_GUM_ENCHANTMENT.title": "Support Gum",
+  "SUPPORT_GUM_ENCHANTMENT.description": "Uncommon. Astral Party multiplayer only. The first time this is played each combat, choose another player: they heal [blue]2[/blue] HP and draw [blue]1[/blue] card.",
+  "SUPPORT_GUM_ENCHANTMENT.extraCardText": "First play each combat: choose another player to heal [blue]2[/blue] and draw [blue]1[/blue].",
+
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.title": "Energy Supplement Bar",
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.description": "Uncommon. Astral Party multiplayer only. The first time this is played each combat, choose another player: they gain [blue]8[/blue] [gold]Vigor[/gold].",
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.extraCardText": "First play each combat: choose another player to gain [blue]8[/blue] [gold]Vigor[/gold].",
+
+  "SYNTHESIS_ENCHANTMENT.title": "Synthesis",
+  "SYNTHESIS_ENCHANTMENT.description": "Common. Only appears when STS2_WineFox is installed. This card gains [gold]Craft[/gold].",
+  "SYNTHESIS_ENCHANTMENT.extraCardText": "This card gains [gold]Craft[/gold].",
+
+  "LOGISTICS_ENCHANTMENT.title": "Logistics",
+  "LOGISTICS_ENCHANTMENT.description": "Rare. STS2_WineFox multiplayer only. The first time this is played each combat, add an unenchanted copy of this card to a random other player's hand.",
+  "LOGISTICS_ENCHANTMENT.extraCardText": "First play each combat: add an unenchanted copy of this card to a random other player's hand.",
+
+  "HAND_CRANK_ENCHANTMENT.title": "Hand Crank",
+  "HAND_CRANK_ENCHANTMENT.description": "Common. Only appears when STS2_WineFox is installed. The first time this is played each combat, gain [blue]2[/blue] [gold]Vigor[/gold].",
+  "HAND_CRANK_ENCHANTMENT.extraCardText": "First play each combat: gain [blue]2[/blue] [gold]Vigor[/gold]."
 }

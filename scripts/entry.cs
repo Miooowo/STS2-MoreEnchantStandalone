@@ -89,6 +89,9 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<PincerFlankingMarkEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SlyKeywordEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SurgeEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<MelusineStickerEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<OldCaseSubmittedEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<FinalJudgmentEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<FightFireWithFireEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SoulLinkEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<RandomSelectEnchantment>();
@@ -100,6 +103,7 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<DarkCandleEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<HauntingEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<RandomEnchantOnPickupEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<HateBridgeEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ChilledEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ClashEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SignatureMoveEnchantment>();

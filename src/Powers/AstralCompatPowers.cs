@@ -86,6 +86,36 @@ public sealed class MoreEnchantSoulLinkPower : PowerModel
 	}
 }
 
+/// <summary>灵魂链接目标标记：用于在目标的 Power 栏展示“已被灵魂链接”。</summary>
+public sealed class MoreEnchantSoulLinkTargetPower : PowerModel
+{
+	private sealed class LinkSourceData
+	{
+		public string SourceName = string.Empty;
+	}
+
+	public override PowerType Type => PowerType.Debuff;
+
+	public override PowerStackType StackType => PowerStackType.Single;
+
+	public void SetLinkSourceName(string? sourceName)
+	{
+		var data = GetInternalData<LinkSourceData>();
+		data.SourceName = sourceName?.Trim() ?? string.Empty;
+	}
+
+	public string GetLinkSourceName()
+	{
+		var data = GetInternalData<LinkSourceData>();
+		return data.SourceName;
+	}
+
+	protected override object InitInternalData()
+	{
+		return new LinkSourceData();
+	}
+}
+
 /// <summary>错误的目标：当拥有者获得负面效果时，将该负面转移给随机敌人。</summary>
 public sealed class MoreEnchantWrongTargetPower : PowerModel
 {

@@ -7,6 +7,12 @@
   "FROZEN_KEYWORD_POWER.description": "This card cannot be played this turn; before its next play, its cost is reduced by [blue]1[/blue].",
   "MORE_ENCHANT_SOUL_LINK_POWER.title": "Soul Link",
   "MORE_ENCHANT_SOUL_LINK_POWER.description": "Whenever you lose HP, the linked target loses the same amount of HP.",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.title": "Soul Link (Target)",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.description": "This creature is linked by Soul Link.",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.smartDescription": "Soul Link applied by [gold]{LinkSourceName}[/gold].",
   "MORE_ENCHANT_WRONG_TARGET_POWER.title": "Wrong Target",
-  "MORE_ENCHANT_WRONG_TARGET_POWER.description": "Whenever you gain a debuff, transfer it to a random enemy."
+  "MORE_ENCHANT_WRONG_TARGET_POWER.description": "Whenever you gain a debuff, transfer it to a random enemy.",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.title": "Fight Fire with Fire",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.description": "At the start of the next [blue]{Amount}[/blue] turns: heal [blue]3[/blue] HP.",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.smartDescription": "At the start of the next [blue]{Amount}[/blue] turns, [gold]{OwnerName}[/gold] heals [blue]3[/blue] HP."
 }

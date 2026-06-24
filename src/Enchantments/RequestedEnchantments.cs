@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reflection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using MoreEnchant.Powers;
 using MoreEnchant.Standalone;
 
 namespace MoreEnchant.Enchantments;
@@ -24,7 +29,8 @@ public sealed class DarkCandleEnchantment : ModEnchantmentTemplate, IRewardEncha
 	public override bool HasExtraCardText => true;
 
 	public override bool CanEnchant(CardModel card) =>
-		base.CanEnchant(card) && card.Rarity == CardRarity.Curse;
+		CardEnchantEligibility.IsCurseLikeCard(card) &&
+		(base.CanEnchant(card) || CardEnchantEligibility.IsCurseBaseCanEnchantBypass(card));
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{
@@ -36,6 +42,21 @@ public sealed class DarkCandleEnchantment : ModEnchantmentTemplate, IRewardEncha
 		if (Card == null)
 			return;
 
+		// 幽暗烛火允许打出原本不可打出的诅咒：附魔时移除 Unplayable 关键词，避免底层拦截。
+		try
+		{
+			var removeKeyword = typeof(CardCmd).GetMethod(
+				"RemoveKeyword",
+				BindingFlags.Public | BindingFlags.Static,
+				binder: null,
+				types: new[] { typeof(CardModel), typeof(CardKeyword) },
+				modifiers: null);
+			removeKeyword?.Invoke(null, new object[] { Card, CardKeyword.Unplayable });
+		}
+		catch
+		{
+			// 某些卡牌关键词集合不可变时忽略，交由 IsPlayable 补丁兜底。
+		}
 		CardCmd.ApplyKeyword(Card, CardKeyword.Exhaust);
 	}
 
@@ -75,7 +96,8 @@ public sealed class HauntingEnchantment : ModEnchantmentTemplate, IRewardEnchant
 	public override bool HasExtraCardText => true;
 
 	public override bool CanEnchant(CardModel card) =>
-		base.CanEnchant(card) && card.Rarity == CardRarity.Curse;
+		CardEnchantEligibility.IsCurseLikeCard(card) &&
+		(base.CanEnchant(card) || CardEnchantEligibility.IsCurseBaseCanEnchantBypass(card));
 
 	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 	{
@@ -95,7 +117,26 @@ public sealed class RandomEnchantOnPickupEnchantment : ModEnchantmentTemplate, I
 
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
+
+	internal bool TryTakePickupTriggerOnce() =>
+		Interlocked.CompareExchange(ref _pickupTriggeredGate, 1, 0) == 0;
+
+	internal void ResetPickupTriggerGateForClonedCard() =>
+		Interlocked.Exchange(ref _pickupTriggeredGate, 0);
+}
+
+/// <summary>我恨桥：罕见；仅单人；拾取该牌时进入滑脚木桥事件。</summary>
+public sealed class HateBridgeEnchantment : ModEnchantmentTemplate, IRewardEnchantRarity
+{
+	private int _pickupTriggeredGate;
+
+	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
+
+	public override bool HasExtraCardText => false;
+
+	public override bool CanEnchant(CardModel card) =>
+		base.CanEnchant(card) && RunManager.Instance?.NetService?.Type.IsMultiplayer() != true;
 
 	internal bool TryTakePickupTriggerOnce() =>
 		Interlocked.CompareExchange(ref _pickupTriggeredGate, 1, 0) == 0;
@@ -114,6 +155,11 @@ public sealed class ChilledEnchantment : ModEnchantmentTemplate, IRewardEnchantR
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
 	public override bool HasExtraCardText => true;
+
+	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	[
+		HoverTipFactory.FromPower<FrozenKeywordPower>()
+	];
 
 	protected override IEnumerable<DynamicVar> CanonicalVars
 	{

@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
@@ -102,11 +103,80 @@ public sealed class SoulLinkEnchantment : ModEnchantmentTemplate, IRewardEnchant
 		var target = await ResolveLinkedEnemyAsync(choiceContext, cardPlay, owner, self);
 		if (target == null)
 			return;
+		var sourceName = ResolveCreatureDisplayName(self);
 
 		await CreatureCmd.TriggerAnim(self, "Cast", owner.Character.CastAnimDelay);
 
 		var link = await PowerCmdCompat.Apply<MoreEnchantSoulLinkPower>(self, 1m, self, Card, choiceContext);
 		link?.SetLinkedTarget(target);
+
+		// 清理上一次标记，避免目标切换时旧目标残留“被链接”提示。
+		var allEnemies = self.CombatState.GetOpponentsOf(self).Where(c => c.IsAlive).ToList();
+		foreach (var enemy in allEnemies)
+		{
+			if (ReferenceEquals(enemy, target))
+				continue;
+			var marker = enemy.GetPower<MoreEnchantSoulLinkTargetPower>();
+			if (marker != null)
+				await PowerCmd.Remove(marker);
+		}
+
+		if (target.GetPower<MoreEnchantSoulLinkTargetPower>() == null)
+		{
+			var marker = await PowerCmdCompat.Apply<MoreEnchantSoulLinkTargetPower>(target, 1m, self, Card, choiceContext);
+			marker?.SetLinkSourceName(sourceName);
+		}
+		else
+		{
+			target.GetPower<MoreEnchantSoulLinkTargetPower>()?.SetLinkSourceName(sourceName);
+		}
+	}
+
+	private static string ResolveCreatureDisplayName(Creature creature)
+	{
+		try
+		{
+			var titleLoc = creature.GetType().GetProperty("TitleLocString")?.GetValue(creature) as LocString;
+			var titleLocText = titleLoc?.GetFormattedText();
+			if (!string.IsNullOrWhiteSpace(titleLocText))
+				return titleLocText!;
+		}
+		catch
+		{
+			// ignored
+		}
+
+		try
+		{
+			var title = creature.GetType().GetProperty("Title")?.GetValue(creature);
+			if (title is LocString loc)
+			{
+				var text = loc.GetFormattedText();
+				if (!string.IsNullOrWhiteSpace(text))
+					return text;
+			}
+			else if (title is string s && !string.IsNullOrWhiteSpace(s))
+			{
+				return s;
+			}
+		}
+		catch
+		{
+			// ignored
+		}
+
+		try
+		{
+			var name = creature.GetType().GetProperty("Name")?.GetValue(creature) as string;
+			if (!string.IsNullOrWhiteSpace(name))
+				return name;
+		}
+		catch
+		{
+			// ignored
+		}
+
+		return "施加者";
 	}
 
 	private async Task<Creature?> ResolveLinkedEnemyAsync(

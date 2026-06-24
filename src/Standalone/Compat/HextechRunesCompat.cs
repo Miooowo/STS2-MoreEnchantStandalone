@@ -74,7 +74,7 @@ internal static class HextechRunesCompat
 		return await TryGrantRandomForge(player);
 	}
 
-	internal static async Task<RelicModel?> TryGrantTemporaryRune(Player player, HextechRuneTier tier)
+	internal static async Task<ModelId?> TryGrantTemporaryRune(Player player, HextechRuneTier tier)
 	{
 		if (!IsHextechRunesModAvailable())
 			return null;
@@ -136,18 +136,29 @@ internal static class HextechRunesCompat
 			if (before.Contains(relic))
 				continue;
 			if (isHextechRelic.Invoke(null, [relic]) is true)
-				return relic;
+				return relic.Id;
 		}
 
 		return null;
 	}
 
-	internal static async Task RemoveTemporaryRunes(Player player, List<RelicModel> temporaryRunes)
+	internal static async Task RemoveTemporaryRunes(Player player, List<ModelId> temporaryRunes)
 	{
 		if (temporaryRunes.Count == 0)
 			return;
 
-		var toRemove = temporaryRunes.Where(r => player.Relics.Contains(r)).ToList();
+		// 不能按对象引用匹配：跨房间后 relic 实例可能重建，改为按 ModelId 且按数量移除。
+		var available = player.Relics.ToList();
+		var toRemove = new List<RelicModel>();
+		foreach (var pendingId in temporaryRunes)
+		{
+			var matchIndex = available.FindIndex(r => r.Id == pendingId);
+			if (matchIndex < 0)
+				continue;
+			toRemove.Add(available[matchIndex]);
+			available.RemoveAt(matchIndex);
+		}
+
 		temporaryRunes.Clear();
 		foreach (var relic in toRemove)
 			await RelicCmd.Remove(relic);

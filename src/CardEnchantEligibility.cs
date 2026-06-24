@@ -24,12 +24,40 @@ internal static class CardEnchantEligibility
 		"HIDDEN_DAGGERS",
 	};
 
+	private static readonly HashSet<string> CurseLikeCardEntries = new(StringComparer.OrdinalIgnoreCase)
+	{
+		"ASCENDERS_BANE",
+		"INJURY",
+		"WOUND",
+	};
+
 	internal static bool IsScorchingExcludedByCardId(CardModel card)
 	{
 		if (card?.Id.Entry is not { } entry)
 			return false;
 		return ScorchingExcludedCardEntries.Contains(entry);
 	}
+
+	internal static bool IsAscendersBane(CardModel card) =>
+		string.Equals(card?.Id.Entry, "ASCENDERS_BANE", StringComparison.OrdinalIgnoreCase);
+
+	/// <summary>
+	/// 诅咒类卡识别：优先按 Rarity/Type，其次兜底到已知 ID（如 ASCENDERS_BANE / INJURY / WOUND）。
+	/// </summary>
+	internal static bool IsCurseLikeCard(CardModel card)
+	{
+		if (card == null)
+			return false;
+		if (card.Rarity == CardRarity.Curse || card.Type == CardType.Curse)
+			return true;
+		return card.Id.Entry is { } entry && CurseLikeCardEntries.Contains(entry);
+	}
+
+	/// <summary>
+	/// 对已知会被 EnchantmentModel 基础过滤误拦的诅咒类卡放行（仅供特定附魔使用）。
+	/// </summary>
+	internal static bool IsCurseBaseCanEnchantBypass(CardModel card) =>
+		card?.Id.Entry is { } entry && CurseLikeCardEntries.Contains(entry);
 
 	/// <summary>牌是否使用辉星费用（星 X 或 <see cref="CardModel.CanonicalStarCost"/> ≥ 0）；多数非储君牌为 false。</summary>
 	internal static bool CardUsesStarCost(CardModel card) =>

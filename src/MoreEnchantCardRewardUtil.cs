@@ -1,16 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Models.Enchantments.Mocks;
 using MegaCrit.Sts2.Core.Models.Exceptions;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
 using MoreEnchant.Enchantments;
@@ -23,6 +28,17 @@ internal static class MoreEnchantCardRewardUtil
 {
 	private const int DefaultEnchantChancePercent = MoreEnchantSettings.DefaultRewardEnchantChancePercent;
 	private static readonly MoreEnchantSettings DefaultSettings = new();
+	private static readonly string[] SlipperyWoodenBridgeEventIdCandidates =
+	[
+		"SLIPPERY_WOODEN_BRIDGE",
+		"SLIPPERY_BRIDGE",
+		"WOODEN_BRIDGE",
+	];
+	private static readonly string[] SlipperyWoodenBridgeEventTitleCandidates =
+	[
+		"滑脚木桥",
+		"Slippery Wooden Bridge",
+	];
 
 	public static void ApplyRandomEnchantments(Player player, List<CardCreationResult> results,
 		CardCreationOptions options)
@@ -54,6 +70,20 @@ internal static class MoreEnchantCardRewardUtil
 		{
 			MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardHextechForge = false;
 			TryApplyForcedHextechForgeCardReward(results, rng);
+		}
+
+		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardHateBridge &&
+		    options.Source == CardCreationSource.Encounter)
+		{
+			MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardHateBridge = false;
+			TryApplyForcedHateBridgeCardReward(results, rng);
+		}
+
+		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardRandomEnchantOnPickup &&
+		    options.Source == CardCreationSource.Encounter)
+		{
+			MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardRandomEnchantOnPickup = false;
+			TryApplyForcedRandomEnchantOnPickupCardReward(results, rng);
 		}
 
 		foreach (var result in results)
@@ -256,36 +286,136 @@ internal static class MoreEnchantCardRewardUtil
 			_ = TaskHelper.RunSafely(HextechRunesCompat.TryGrantRandomForgeAfterUiFrame(player));
 
 		if (card?.Enchantment is RandomEnchantOnPickupEnchantment randomEnchant && randomEnchant.TryTakePickupTriggerOnce())
-			TryApplyRandomEnchantmentToAnotherDeckCard(player, card);
+			_ = TaskHelper.RunSafely(TryApplyRandomEnchantmentToSelectedDeckCardAfterUiFrame(player, card));
+
+		if (card?.Enchantment is HateBridgeEnchantment hateBridge && hateBridge.TryTakePickupTriggerOnce())
+			TryEnterSlipperyWoodenBridgeEvent(player);
 	}
 
-	private static void TryApplyRandomEnchantmentToAnotherDeckCard(Player player, CardModel sourceCard)
+	private static void TryEnterSlipperyWoodenBridgeEvent(Player player)
 	{
+		var runManager = RunManager.Instance;
+		if (player?.RunState == null || runManager == null)
+			return;
+		if (runManager.NetService?.Type.IsMultiplayer() == true)
+			return;
+
+		var targetEvent = FindSlipperyWoodenBridgeEvent();
+		if (targetEvent == null)
+			return;
+
+		TryEnterEventRoomViaDebugApi(runManager, targetEvent);
+	}
+
+	private static EventModel? FindSlipperyWoodenBridgeEvent()
+	{
+		foreach (var e in ModelDb.AllEvents)
+		{
+			if (e == null)
+				continue;
+			if (SlipperyWoodenBridgeEventIdCandidates.Any(id =>
+				    string.Equals(e.Id.Entry, id, StringComparison.OrdinalIgnoreCase)))
+				return e;
+		}
+
+		foreach (var e in ModelDb.AllEvents)
+		{
+			if (e == null)
+				continue;
+
+			try
+			{
+				var title = e.Title.GetFormattedText();
+				if (SlipperyWoodenBridgeEventTitleCandidates.Any(t =>
+					    title.Contains(t, StringComparison.OrdinalIgnoreCase)))
+					return e;
+			}
+			catch (LocException)
+			{
+				// ignore broken loc entries
+			}
+		}
+
+		return null;
+	}
+
+	private static void TryEnterEventRoomViaDebugApi(RunManager runManager, EventModel eventModel)
+	{
+		try
+		{
+			var method = runManager.GetType().GetMethod(
+				"EnterRoomDebug",
+				BindingFlags.Public | BindingFlags.Instance);
+			if (method == null)
+				return;
+
+			var parameters = method.GetParameters();
+			if (parameters.Length != 4)
+				return;
+
+			var roomTypeArg = ParseEnum(parameters[0].ParameterType, "Event", "Unknown");
+			var mapPointTypeArg = ParseEnum(parameters[1].ParameterType, "Event", "Unknown");
+			if (roomTypeArg == null || mapPointTypeArg == null)
+				return;
+
+			method.Invoke(runManager, [roomTypeArg, mapPointTypeArg, eventModel, false]);
+		}
+		catch
+		{
+			// ignore; pickup triggers should never hard-crash reward flow
+		}
+	}
+
+	private static object? ParseEnum(Type enumType, params string[] preferredNames)
+	{
+		if (!enumType.IsEnum)
+			return null;
+
+		foreach (var name in preferredNames)
+		{
+			if (Enum.TryParse(enumType, name, ignoreCase: true, out var parsed) && parsed != null)
+				return parsed;
+		}
+
+		var values = Enum.GetValues(enumType);
+		return values.Length > 0 ? values.GetValue(0) : null;
+	}
+
+	private static async Task TryApplyRandomEnchantmentToSelectedDeckCardAfterUiFrame(Player player, CardModel sourceCard)
+	{
+		await Task.Yield();
+
 		var candidates = player.Deck.Cards
 			.Where(c => c != null && !ReferenceEquals(c, sourceCard) && c.Enchantment == null)
 			.ToList();
 		if (candidates.Count == 0)
 			return;
 
-		var rng = player.PlayerRng.Rewards;
-		var target = rng.NextItem(candidates);
-		if (target == null)
+		var selected = (await CardSelectCmd.FromSimpleGrid(
+				new BlockingPlayerChoiceContext(),
+				candidates,
+				player,
+				new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1)))
+			.FirstOrDefault();
+		if (selected == null)
 			return;
+
+		var rng = player.PlayerRng.Rewards;
 
 		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
 		var pick = RollEnchantmentTemplate(
-			target,
+			selected,
 			templates,
 			rng,
 			DefaultSettings,
-			excludeCurse: target.Rarity == CardRarity.Ancient,
+			excludeCurse: selected.Rarity == CardRarity.Ancient,
 			CardCreationSource.Encounter);
 		if (pick == null)
 			return;
 
 		var enchant = (EnchantmentModel)pick.MutableClone();
 		var amount = RollEnchantAmount(rng, pick);
-		CardCmd.Enchant(enchant, target, amount);
+		CardCmd.Enchant(enchant, selected, amount);
 	}
 
 	private static (float Common, float Uncommon, float Curse, float Rare, float Special) GetEffectiveBucketWeights(
@@ -525,6 +655,66 @@ internal static class MoreEnchantCardRewardUtil
 
 			var enchant = (EnchantmentModel)forgePick.MutableClone();
 			var amount = RollEnchantAmount(rng, forgePick);
+			CardCmd.Enchant(enchant, card, amount);
+			return;
+		}
+	}
+
+	/// <summary>将首张可附魔候选牌强制附上「我恨桥」。</summary>
+	private static void TryApplyForcedHateBridgeCardReward(List<CardCreationResult> results, Rng rng)
+	{
+		EnchantmentModel bridgePick;
+		try
+		{
+			bridgePick = ModelDb.GetById<EnchantmentModel>(ModelDb.GetId(typeof(HateBridgeEnchantment)));
+		}
+		catch (ModelNotFoundException)
+		{
+			return;
+		}
+
+		foreach (var result in results)
+		{
+			var card = result.Card;
+			if (card.Enchantment != null)
+				continue;
+			if (ShouldSkipEnchantingRewardCard(card))
+				continue;
+			if (!bridgePick.CanEnchant(card))
+				continue;
+
+			var enchant = (EnchantmentModel)bridgePick.MutableClone();
+			var amount = RollEnchantAmount(rng, bridgePick);
+			CardCmd.Enchant(enchant, card, amount);
+			return;
+		}
+	}
+
+	/// <summary>将首张可附魔候选牌强制附上「随机附魔」。</summary>
+	private static void TryApplyForcedRandomEnchantOnPickupCardReward(List<CardCreationResult> results, Rng rng)
+	{
+		EnchantmentModel randomEnchantPick;
+		try
+		{
+			randomEnchantPick = ModelDb.GetById<EnchantmentModel>(ModelDb.GetId(typeof(RandomEnchantOnPickupEnchantment)));
+		}
+		catch (ModelNotFoundException)
+		{
+			return;
+		}
+
+		foreach (var result in results)
+		{
+			var card = result.Card;
+			if (card.Enchantment != null)
+				continue;
+			if (ShouldSkipEnchantingRewardCard(card))
+				continue;
+			if (!randomEnchantPick.CanEnchant(card))
+				continue;
+
+			var enchant = (EnchantmentModel)randomEnchantPick.MutableClone();
+			var amount = RollEnchantAmount(rng, randomEnchantPick);
 			CardCmd.Enchant(enchant, card, amount);
 			return;
 		}

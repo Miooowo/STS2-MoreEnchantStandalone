@@ -11,6 +11,9 @@ internal static class ModelDbDebugEnchantmentsAppendPatch
 	[HarmonyPostfix]
 	private static void Postfix(ref IEnumerable<EnchantmentModel> __result)
 	{
-		__result = __result.Concat(MoreEnchantEnchantmentRegistry.ResolveAppended()).Distinct();
+		__result = __result
+			.Concat(MoreEnchantEnchantmentRegistry.ResolveAppended())
+			.GroupBy(static e => e.Id)
+			.Select(static g => g.First());
 	}
 }

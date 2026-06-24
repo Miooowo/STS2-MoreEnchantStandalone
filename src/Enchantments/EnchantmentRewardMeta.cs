@@ -9,7 +9,7 @@ public enum EnchantmentRewardRarity
 	Curse,
 	Rare,
 	Special,
-	/// <summary>隐藏档：不会参与游戏内随机附魔池，但仍可在附魔图鉴中展示（若满足图鉴展示条件）。</summary>
+	/// <summary>隐藏档：不会参与游戏内随机附魔池；若安装了独立模组 EnchantmentCompendium 且满足图鉴展示条件，仍可在附魔图鉴中展示。</summary>
 	Hidden
 }
 

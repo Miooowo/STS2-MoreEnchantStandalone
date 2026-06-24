@@ -303,6 +303,18 @@
   "SURGE_ENCHANTMENT.description": "Rare. Only appears in rewards when the Neuvillette mod is installed.\nWhen played, heal [blue]{Surge:diff()}[/blue] HP, then gain that much [gold]Tidefall[/gold] ([gold]SurgePower[/gold], same as cards like Walk Into Rain; [gold]Living Water[/gold] stacks add to both heal and Tidefall).",
   "SURGE_ENCHANTMENT.extraCardText": "When played, heal [blue]{Surge:diff()}[/blue] and gain equal Tidefall stacks.",
 
+  "MELUSINE_STICKER_ENCHANTMENT.title": "Sticker",
+  "MELUSINE_STICKER_ENCHANTMENT.description": "Common. Only appears when the Neuvillette mod is installed.\nThe first time this is played each combat, gain 1 random [gold]Melusine Sticker[/gold].",
+  "MELUSINE_STICKER_ENCHANTMENT.extraCardText": "First play each combat: gain 1 random [gold]Melusine Sticker[/gold].",
+
+  "OLD_CASE_SUBMITTED_ENCHANTMENT.title": "Old Case Submitted",
+  "OLD_CASE_SUBMITTED_ENCHANTMENT.description": "Rare. Only appears when the Neuvillette mod is installed.\nThe first time this is played each combat, choose 1 card in your discard pile to [gold]Submit[/gold].",
+  "OLD_CASE_SUBMITTED_ENCHANTMENT.extraCardText": "First play each combat: choose 1 discard card to [gold]Submit[/gold].",
+
+  "FINAL_JUDGMENT_ENCHANTMENT.title": "Final Judgment",
+  "FINAL_JUDGMENT_ENCHANTMENT.description": "Rare. Attack cards only. Only appears when the Neuvillette mod is installed.\nThis card's cost cannot be reduced below [blue]2[/blue]. Gains [gold]Void[/gold] and [gold]Exhaust[/gold].\nIf the target is a non-boss enemy, kill it. If the target is a boss, it loses half of its current HP.",
+  "FINAL_JUDGMENT_ENCHANTMENT.extraCardText": "Cost floor [blue]2[/blue], [gold]Void[/gold], [gold]Exhaust[/gold]; kill non-boss, bosses lose half current HP.",
+
   "FEED_ENCHANTMENT.title": "Feast",
   "FEED_ENCHANTMENT.description": "Rare. Only on cards with play damage. [gold]Exhaust[/gold]. When your attack with this card kills a non-[gold]Minion[/gold] enemy, gain [blue]3[/blue] Max HP.",
   "FEED_ENCHANTMENT.extraCardText": "[gold]Exhaust[/gold]. Non-minion kill: +[blue]3[/blue] Max HP.",
@@ -366,6 +378,7 @@
   "SYNTHESIS_ENCHANTMENT.title": "Synthesis",
   "SYNTHESIS_ENCHANTMENT.description": "Common. Only appears when STS2_WineFox is installed. This card gains [gold]Craft[/gold].",
   "SYNTHESIS_ENCHANTMENT.extraCardText": "This card gains [gold]Craft[/gold].",
+  "SYNTHESIS_ENCHANTMENT.craftLeadText": "[gold]Craft[/gold].",
 
   "LOGISTICS_ENCHANTMENT.title": "Logistics",
   "LOGISTICS_ENCHANTMENT.description": "Rare. STS2_WineFox multiplayer only. The first time this is played each combat, add an unenchanted copy of this card to a random other player's hand.",
@@ -384,11 +397,15 @@
   "HAUNTING_ENCHANTMENT.extraCardText": "At turn start, return this card to hand.",
 
   "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.title": "Random Enchant",
-  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.description": "Rare. When this card is picked up, add a random enchantment to another card in your deck.",
-  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.extraCardText": "On pickup: add a random enchantment to another deck card.",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.description": "Rare. When this card is picked up, choose another card in your deck, then add a random enchantment to it.",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.extraCardText": "On pickup: choose another deck card, then add a random enchantment to it.",
+
+  "HATE_BRIDGE_ENCHANTMENT.title": "I Hate Bridge",
+  "HATE_BRIDGE_ENCHANTMENT.description": "Rare. Singleplayer only. When this card is picked up, enter the [gold]Slippery Wooden Bridge[/gold] event.",
+  "HATE_BRIDGE_ENCHANTMENT.extraCardText": "On pickup: enter the [gold]Slippery Wooden Bridge[/gold] event.",
 
   "CHILLED_ENCHANTMENT.title": "Chilled",
-  "CHILLED_ENCHANTMENT.description": "Rare. The first time this is drawn each combat, it becomes [gold]Frozen[/gold] for this turn (Frozen: this card cannot be played this turn; before its next play, its cost is reduced by [blue]1[/blue]).",
+  "CHILLED_ENCHANTMENT.description": "Rare. The first time this is drawn each combat, it becomes [gold]Frozen[/gold] for this turn.",
   "CHILLED_ENCHANTMENT.extraCardText": "First draw each combat: Frozen this turn; before next play, cost [blue]-1[/blue].",
 
   "CLASH_ENCHANTMENT.title": "Clash",

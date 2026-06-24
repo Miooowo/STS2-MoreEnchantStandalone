@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
@@ -24,7 +25,7 @@ public sealed class SynthesisEnchantment : ModEnchantmentTemplate, IRewardEnchan
 {
 	public EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Common;
 
-	public override bool HasExtraCardText => true;
+	public override bool HasExtraCardText => false;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips
 	{
@@ -41,6 +42,38 @@ public sealed class SynthesisEnchantment : ModEnchantmentTemplate, IRewardEnchan
 
 	protected override void OnEnchant()
 	{
+		EnsureCraftKeywordOnCard();
+	}
+
+	public override void RecalculateValues()
+	{
+		EnsureCraftKeywordOnCard();
+	}
+
+	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
+	{
+		if (Card == null || !WineFoxCompat.TryGetCraftIntoHandMethod(out var craftIntoHandMethod))
+			return;
+
+		var parameters = craftIntoHandMethod.GetParameters();
+		var args = new object?[parameters.Length];
+		for (var i = 0; i < parameters.Length; i++)
+		{
+			var parameter = parameters[i];
+			args[i] = parameter.ParameterType switch
+			{
+				var t when t == typeof(PlayerChoiceContext) => choiceContext,
+				var t when t == typeof(CardModel) => Card,
+				_ => parameter.HasDefaultValue ? parameter.DefaultValue : null
+			};
+		}
+
+		if (craftIntoHandMethod.Invoke(null, args) is Task task)
+			await task;
+	}
+
+	private void EnsureCraftKeywordOnCard()
+	{
 		if (Card == null || !WineFoxCompat.IsWineFoxModAvailable())
 			return;
 		if (!WineFoxCompat.TryGetCraftKeyword(out var craftKeyword))
@@ -48,7 +81,7 @@ public sealed class SynthesisEnchantment : ModEnchantmentTemplate, IRewardEnchan
 		if (Card.Keywords.Contains(craftKeyword))
 			return;
 
-		CardCmd.ApplyKeyword(Card, craftKeyword);
+		Card.AddKeyword(craftKeyword);
 	}
 }
 
@@ -58,7 +91,9 @@ public sealed class LogisticsEnchantment : WineFoxFirstPlayEnchantmentBase
 	public override EnchantmentRewardRarity RewardRarity => EnchantmentRewardRarity.Rare;
 
 	public override bool CanEnchant(CardModel card) =>
-		base.CanEnchant(card) && RunManager.Instance?.NetService?.Type.IsMultiplayer() == true;
+		RunManager.Instance?.NetService?.Type.IsMultiplayer() == true
+		&& WineFoxCompat.IsWineFoxModAvailable()
+		&& (base.CanEnchant(card) || CardEnchantEligibility.IsCurseLikeCard(card));
 
 	protected override async Task<bool> TryApplyFirstPlayEffect(PlayerChoiceContext choiceContext, Player owner, Creature self)
 	{
@@ -165,6 +200,10 @@ public abstract class WineFoxFirstPlayEnchantmentBase : ModEnchantmentTemplate, 
 		{
 			var remoteChoice = await synchronizer.WaitForRemoteChoice(owner, choiceId);
 			allyIndex = remoteChoice.AsIndexOrNull();
+
+			// 联机计数器对齐：本地拥有者端已消耗一次 CombatTargets RNG，
+			// 远端也需等量消耗以保持 RunState.Rng 计数一致，避免 checksum 分歧。
+			_ = owner.RunState?.Rng.CombatTargets.NextItem(allies);
 		}
 
 		return allyIndex;

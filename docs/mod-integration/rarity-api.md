@@ -27,7 +27,7 @@ public interface IRewardEnchantRarity
 
 > 说明：附魔模板未实现 `IRewardEnchantRarity` 时，默认按 `Common` 处理。
 >
-> 说明：`Hidden` 不会参与游戏内随机附魔池（奖励/商店/事件等随机路径均不会被抽中），但只要附魔已注册且有本地化标题，仍会出现在附魔图鉴中。
+> 说明：`Hidden` 不会参与游戏内随机附魔池（奖励/商店/事件等随机路径均不会被抽中）。若同时安装了独立模组 **EnchantmentCompendium**，且附魔已注册并有本地化标题，仍可在附魔图鉴中展示。
 
 ## 方案一：硬依赖（推荐）
 

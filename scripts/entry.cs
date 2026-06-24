@@ -89,6 +89,24 @@ public static class Entry
 		MoreEnchantEnchantmentRegistry.Register<PincerFlankingMarkEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SlyKeywordEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<SurgeEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<MelusineStickerEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<OldCaseSubmittedEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<FinalJudgmentEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<FightFireWithFireEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SoulLinkEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<RandomSelectEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SupportGumEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<EnergySupplementBarEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SynthesisEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<LogisticsEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<HandCrankEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<DarkCandleEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<HauntingEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<RandomEnchantOnPickupEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<HateBridgeEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ChilledEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<ClashEnchantment>();
+		MoreEnchantEnchantmentRegistry.Register<SignatureMoveEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<FeedEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<ColossusEnchantment>();
 		MoreEnchantEnchantmentRegistry.Register<HellraiserEnchantment>();
@@ -112,14 +130,6 @@ public static class Entry
 		EnsureGodotScriptsRegistered(Assembly.GetExecutingAssembly());
 		_ = MoreEnchantSettingsStore.Get();
 
-		// 与游戏本体一致：Slay the Spire 2 Steam AppID（MegaCrit.Sts2.Core.Platform.Steam.SteamInitializer.steamAppId）
-		const uint Sts2SteamAppId = 2868840u;
-		if (!SteamApps.BIsSubscribedApp(new AppId_t(Sts2SteamAppId)))
-		{
-			const string msg = "MoreEnchantStandalone 需要在 Steam 正版《杀戮尖塔2》中运行。";
-			GD.PushError(msg);
-			throw new InvalidOperationException(msg);
-		}
 	}
 
 	private static void EnsureGodotScriptsRegistered(Assembly assembly)

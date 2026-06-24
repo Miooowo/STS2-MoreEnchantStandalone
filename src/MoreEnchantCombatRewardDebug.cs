@@ -9,6 +9,10 @@ internal static class MoreEnchantCombatRewardDebug
 
 	internal static volatile bool ForceNextEncounterCardRewardHextechForge;
 
+	internal static volatile bool ForceNextEncounterCardRewardHateBridge;
+
+	internal static volatile bool ForceNextEncounterCardRewardRandomEnchantOnPickup;
+
 	internal static void RequestForceBellCurseOnNextEncounterCardReward() =>
 		ForceNextEncounterCardRewardBellCurse = true;
 
@@ -17,4 +21,10 @@ internal static class MoreEnchantCombatRewardDebug
 
 	internal static void RequestForceHextechForgeOnNextEncounterCardReward() =>
 		ForceNextEncounterCardRewardHextechForge = true;
+
+	internal static void RequestForceHateBridgeOnNextEncounterCardReward() =>
+		ForceNextEncounterCardRewardHateBridge = true;
+
+	internal static void RequestForceRandomEnchantOnPickupOnNextEncounterCardReward() =>
+		ForceNextEncounterCardRewardRandomEnchantOnPickup = true;
 }

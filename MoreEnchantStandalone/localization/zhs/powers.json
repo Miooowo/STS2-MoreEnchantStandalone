@@ -2,5 +2,17 @@
   "MAGIC_CORRUPTION_POWER.title": "魔法腐化",
   "MAGIC_CORRUPTION_POWER.description": "你所有带附魔的牌可以免费打出，其在打出后[gold]消耗[/gold]。",
   "SLIPPERY_POWER.description": "这个生物下一次要受到伤害时，只会受到[blue]1[/blue]点伤害。",
-  "SLIPPERY_POWER.smartDescription": "[gold]{OwnerName}[/gold]下[blue]{Amount}[/blue]次要受到伤害时，只会受到[blue]1[/blue]点伤害。"
+  "SLIPPERY_POWER.smartDescription": "[gold]{OwnerName}[/gold]下[blue]{Amount}[/blue]次要受到伤害时，只会受到[blue]1[/blue]点伤害。",
+  "FROZEN_KEYWORD_POWER.title": "冻结",
+  "FROZEN_KEYWORD_POWER.description": "此牌本回合不能被打出；在其下一次打出前，耗能减少[blue]1[/blue]。",
+  "MORE_ENCHANT_SOUL_LINK_POWER.title": "灵魂链接",
+  "MORE_ENCHANT_SOUL_LINK_POWER.description": "当你失去生命时，已链接目标失去等量生命。",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.title": "灵魂链接（目标）",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.description": "该生物已被灵魂链接。",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.smartDescription": "来自[gold]{LinkSourceName}[/gold]的灵魂链接。",
+  "MORE_ENCHANT_WRONG_TARGET_POWER.title": "错误的目标",
+  "MORE_ENCHANT_WRONG_TARGET_POWER.description": "当你获得负面效果时，将其转移给随机敌人。",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.title": "以毒攻毒",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.description": "下[blue]{Amount}[/blue]个回合开始：回复[blue]3[/blue]生命。",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.smartDescription": "[gold]{OwnerName}[/gold]下[blue]{Amount}[/blue]个回合开始：回复[blue]3[/blue]生命。"
 }

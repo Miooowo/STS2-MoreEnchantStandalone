@@ -290,6 +290,18 @@
   "SURGE_ENCHANTMENT.description": "[gold]潮涌[/gold]3。",
   "SURGE_ENCHANTMENT.extraCardText": "潮涌3。",
 
+  "MELUSINE_STICKER_ENCHANTMENT.title": "贴纸",
+  "MELUSINE_STICKER_ENCHANTMENT.description": "每场战斗首次打出时，获得1张随机[gold]美露莘贴纸[/gold]。",
+  "MELUSINE_STICKER_ENCHANTMENT.extraCardText": "第一次打出时，获得1张随机[gold]美露莘贴纸[/gold]。",
+
+  "OLD_CASE_SUBMITTED_ENCHANTMENT.title": "旧案呈堂",
+  "OLD_CASE_SUBMITTED_ENCHANTMENT.description": "每场战斗首次打出时，选择弃牌堆中的1张牌进行[gold]呈堂[/gold]。",
+  "OLD_CASE_SUBMITTED_ENCHANTMENT.extraCardText": "第一次打出时，从弃牌堆选择1张牌进行[gold]呈堂[/gold]。",
+
+  "FINAL_JUDGMENT_ENCHANTMENT.title": "最终裁定",
+  "FINAL_JUDGMENT_ENCHANTMENT.description": "此牌费用不会低于[blue]2[/blue]。获得[gold]虚无[/gold]与[gold]消耗[/gold]。\n若目标是非Boss敌人：将其消灭；若目标是Boss：使其失去当前生命值一半的生命。",
+  "FINAL_JUDGMENT_ENCHANTMENT.extraCardText": "非Boss直接消灭，Boss失去当前生命一半。",
+
   "FEED_ENCHANTMENT.title": "狂宴",
   "FEED_ENCHANTMENT.description": "[gold]斩杀[/gold]时，永久获得3点最大生命值。\n[gold]消耗[/gold]。",
   "FEED_ENCHANTMENT.extraCardText": "[gold]斩杀[/gold]时，永久获得3点最大生命值。",
@@ -327,5 +339,64 @@
 
   "PRISMATIC_HEXTECH_ENCHANTMENT.title": "棱彩海克斯",
   "PRISMATIC_HEXTECH_ENCHANTMENT.description": "每场战斗中首次打出此牌时，\n获得1个临时棱彩阶海克斯（进入下一个房间后移除）。",
-  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "获得1个临时棱彩阶海克斯。"
+  "PRISMATIC_HEXTECH_ENCHANTMENT.extraCardText": "获得1个临时棱彩阶海克斯。",
+
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.title": "以毒攻毒",
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.description": "此牌添加[gold]消耗[/gold]。\n失去[blue]2[/blue]点生命。\n下[blue]2[/blue]个回合开始时，回复[blue]3[/blue]点生命。",
+  "FIGHT_FIRE_WITH_FIRE_ENCHANTMENT.extraCardText": "失去[blue]2[/blue]生命。\n下[blue]2[/blue]个回合开始：回复[blue]3[/blue]生命。",
+
+  "SOUL_LINK_ENCHANTMENT.title": "灵魂链接",
+  "SOUL_LINK_ENCHANTMENT.description": "此牌添加[gold]消耗[/gold]。\n选择一名敌人；链接存在期间，当你失去生命时，目标失去等量生命。",
+  "SOUL_LINK_ENCHANTMENT.extraCardText": "链接一名敌人：你失去生命时，目标失去等量生命。",
+
+  "RANDOM_SELECT_ENCHANTMENT.title": "错误的目标",
+  "RANDOM_SELECT_ENCHANTMENT.description": "此牌耗能[blue]+1[/blue]，并视作能力牌。\n当你获得负面效果时，将该负面效果转移给随机敌人。",
+  "RANDOM_SELECT_ENCHANTMENT.extraCardText": "耗能[blue]+1[/blue]，视作能力牌。\n获得负面时，将其转移给随机敌人。",
+
+  "SUPPORT_GUM_ENCHANTMENT.title": "支援口香糖",
+  "SUPPORT_GUM_ENCHANTMENT.description": "每场战斗首次打出时，选择一名玩家，其回复[blue]2[/blue]点生命并抽[blue]1[/blue]张牌。",
+  "SUPPORT_GUM_ENCHANTMENT.extraCardText": "第一次打出时，选择一名玩家，其回复[blue]2[/blue]生命并抽[blue]1[/blue]张牌。",
+
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.title": "能量补充棒",
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.description": "每场战斗首次打出时，选择另一名玩家，其获得[blue]8[/blue]层[gold]活力[/gold]。",
+  "ENERGY_SUPPLEMENT_BAR_ENCHANTMENT.extraCardText": "第一次打出时，选择另一名玩家，其获得[blue]8[/blue]层[gold]活力[/gold]。",
+
+  "SYNTHESIS_ENCHANTMENT.title": "合成",
+  "SYNTHESIS_ENCHANTMENT.description": "此牌添加[gold]合成[/gold]。",
+  "SYNTHESIS_ENCHANTMENT.extraCardText": "此牌添加[gold]合成[/gold]。",
+  "SYNTHESIS_ENCHANTMENT.craftLeadText": "[gold]合成[/gold]。",
+
+  "LOGISTICS_ENCHANTMENT.title": "物流",
+  "LOGISTICS_ENCHANTMENT.description": "每场战斗首次打出时，将此牌的一张[gold]非附魔[/gold]复制品添加至随机一位其他玩家手牌。",
+  "LOGISTICS_ENCHANTMENT.extraCardText": "第一次打出时，将此牌的非附魔复制品加入随机其他玩家手牌。",
+
+  "HAND_CRANK_ENCHANTMENT.title": "手摇曲柄",
+  "HAND_CRANK_ENCHANTMENT.description": "每场战斗首次打出时，获得[blue]2[/blue]层[gold]活力[/gold]。",
+  "HAND_CRANK_ENCHANTMENT.extraCardText": "第一次打出时，获得[blue]2[/blue]层[gold]活力[/gold]。",
+
+  "DARK_CANDLE_ENCHANTMENT.title": "幽暗烛火",
+  "DARK_CANDLE_ENCHANTMENT.description": "可打出原本不能打出的诅咒牌。\n打出时失去[blue]1[/blue]点生命，并将其[gold]消耗[/gold]。",
+  "DARK_CANDLE_ENCHANTMENT.extraCardText": "打出时失去[blue]1[/blue]生命并消耗。",
+
+  "HAUNTING_ENCHANTMENT.title": "萦绕",
+  "HAUNTING_ENCHANTMENT.description": "此牌在回合开始时返回手牌。",
+  "HAUNTING_ENCHANTMENT.extraCardText": "回合开始时返回手牌。",
+
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.title": "随机附魔",
+  "RANDOM_ENCHANT_ON_PICKUP_ENCHANTMENT.description": "拾起此牌时，选择牌组中的一张其他牌，随机为其添加附魔。",
+
+  "HATE_BRIDGE_ENCHANTMENT.title": "我恨桥",
+  "HATE_BRIDGE_ENCHANTMENT.description": "拾起此牌时，进入[gold]滑脚木桥[/gold]事件。",
+
+  "CHILLED_ENCHANTMENT.title": "冰镇",
+  "CHILLED_ENCHANTMENT.description": "每场战斗中第一次抽到此牌时，本回合[gold]冻结[/gold]。",
+  "CHILLED_ENCHANTMENT.extraCardText": "当被冻结后，下一次打出前耗能[blue]-1[/blue]。",
+
+  "CLASH_ENCHANTMENT.title": "交锋",
+  "CLASH_ENCHANTMENT.description": "此牌耗能变为[blue]0[/blue]。\n当手中只有攻击牌时可打出。",
+  "CLASH_ENCHANTMENT.extraCardText": "当手牌中只有攻击牌时可打出。",
+
+  "SIGNATURE_MOVE_ENCHANTMENT.title": "招牌技",
+  "SIGNATURE_MOVE_ENCHANTMENT.description": "此牌耗能变为[blue]2[/blue]。\n伤害增加[blue]10[/blue]，若不足[blue]30[/blue]则提升至[blue]30[/blue]。\n此牌是手牌中唯一攻击牌时可打出。",
+  "SIGNATURE_MOVE_ENCHANTMENT.extraCardText": "此牌是手牌中唯一攻击牌时可打出。"
 }

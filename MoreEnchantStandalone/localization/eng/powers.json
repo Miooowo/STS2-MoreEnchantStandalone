@@ -2,5 +2,17 @@
   "MAGIC_CORRUPTION_POWER.title": "Magic Corruption",
   "MAGIC_CORRUPTION_POWER.description": "Your enchanted cards cost [blue]0[/blue]{Energy:energyIcons()} and [blue]0[/blue] [gold]Stars[/gold], and [gold]Exhaust[/gold] when played (Powers keep their normal destination).",
   "SLIPPERY_POWER.description": "The next time this creature takes damage, it only takes [blue]1[/blue] damage.",
-  "SLIPPERY_POWER.smartDescription": "The next [blue]{Amount}[/blue] times [gold]{OwnerName}[/gold] takes damage, it only takes [blue]1[/blue] damage each time."
+  "SLIPPERY_POWER.smartDescription": "The next [blue]{Amount}[/blue] times [gold]{OwnerName}[/gold] takes damage, it only takes [blue]1[/blue] damage each time.",
+  "FROZEN_KEYWORD_POWER.title": "Frozen",
+  "FROZEN_KEYWORD_POWER.description": "This card cannot be played this turn; before its next play, its cost is reduced by [blue]1[/blue].",
+  "MORE_ENCHANT_SOUL_LINK_POWER.title": "Soul Link",
+  "MORE_ENCHANT_SOUL_LINK_POWER.description": "Whenever you lose HP, the linked target loses the same amount of HP.",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.title": "Soul Link (Target)",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.description": "This creature is linked by Soul Link.",
+  "MORE_ENCHANT_SOUL_LINK_TARGET_POWER.smartDescription": "Soul Link applied by [gold]{LinkSourceName}[/gold].",
+  "MORE_ENCHANT_WRONG_TARGET_POWER.title": "Wrong Target",
+  "MORE_ENCHANT_WRONG_TARGET_POWER.description": "Whenever you gain a debuff, transfer it to a random enemy.",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.title": "Fight Fire with Fire",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.description": "At the start of the next [blue]{Amount}[/blue] turns: heal [blue]3[/blue] HP.",
+  "FIGHT_FIRE_WITH_FIRE_HEAL_POWER.smartDescription": "At the start of the next [blue]{Amount}[/blue] turns, [gold]{OwnerName}[/gold] heals [blue]3[/blue] HP."
 }

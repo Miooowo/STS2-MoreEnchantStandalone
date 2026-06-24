@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -97,24 +99,141 @@ public sealed class SoulLinkEnchantment : ModEnchantmentTemplate, IRewardEnchant
 		if (Card?.Owner is not { Creature: { } self } owner || self.CombatState == null)
 			return;
 
-		var target = ResolveLinkedEnemy(cardPlay, self.CombatState);
+		var target = await ResolveLinkedEnemyAsync(choiceContext, cardPlay, owner, self);
 		if (target == null)
 			return;
 
 		await CreatureCmd.TriggerAnim(self, "Cast", owner.Character.CastAnimDelay);
-		var link = await PowerCmdCompat.Apply<SoulLinkMirrorDamagePower>(self, 1m, self, Card, choiceContext);
+
+		var link = await PowerCmdCompat.Apply<MoreEnchantSoulLinkPower>(self, 1m, self, Card, choiceContext);
 		link?.SetLinkedTarget(target);
 	}
 
-	private Creature? ResolveLinkedEnemy(CardPlay? cardPlay, ICombatState state)
+	private async Task<Creature?> ResolveLinkedEnemyAsync(
+		PlayerChoiceContext choiceContext,
+		CardPlay? cardPlay,
+		Player owner,
+		Creature self)
 	{
 		if (cardPlay?.Target is { IsAlive: true, IsEnemy: true } direct)
 			return direct;
 
-		var hittable = state.HittableEnemies;
-		if (hittable.Count == 0 || Card?.Owner?.RunState == null)
+		var state = self.CombatState;
+		if (state == null)
 			return null;
-		return Card.Owner.RunState.Rng.CombatTargets.NextItem(hittable);
+
+		var enemies = state.HittableEnemies.ToList();
+		if (enemies.Count == 0)
+			return null;
+
+		var isMultiplayer = RunManager.Instance?.NetService?.Type.IsMultiplayer() == true;
+		if (!isMultiplayer)
+		{
+			var localIndex = await SelectEnemyIndexAsync(self, enemies);
+			if (localIndex is >= 0 and < int.MaxValue)
+				return enemies[localIndex.Value];
+			return owner.RunState?.Rng.CombatTargets.NextItem(enemies);
+		}
+
+		var synchronizer = await WaitForPlayerChoiceSynchronizerAsync();
+		if (synchronizer == null)
+			return owner.RunState?.Rng.CombatTargets.NextItem(enemies);
+
+		int? enemyIndex;
+		var choiceId = synchronizer.ReserveChoiceId(owner);
+		if (LocalContext.IsMe(owner))
+		{
+			enemyIndex = await SelectEnemyIndexAsync(self, enemies);
+			synchronizer.SyncLocalChoice(owner, choiceId, PlayerChoiceResult.FromIndex(enemyIndex ?? -1));
+		}
+		else
+		{
+			var remoteChoice = await synchronizer.WaitForRemoteChoice(owner, choiceId);
+			enemyIndex = remoteChoice.AsIndexOrNull();
+		}
+
+		if (enemyIndex is null || enemyIndex < 0 || enemyIndex >= enemies.Count)
+			return null;
+
+		return enemies[enemyIndex.Value];
+	}
+
+	private static async Task<int?> SelectEnemyIndexAsync(Creature self, IReadOnlyList<Creature> enemies)
+	{
+		var tm = NTargetManager.Instance;
+		var room = NCombatRoom.Instance;
+		if (tm == null || room == null)
+			return null;
+
+		var selfNode = room.GetCreatureNode(self);
+		var startPos = selfNode != null
+			? selfNode.GlobalPosition + Vector2.Down * 60f
+			: Vector2.Zero;
+
+		tm.StartTargeting(TargetType.AnyEnemy, startPos, TargetMode.ClickMouseToTarget, ShouldCancelTargeting, null);
+
+		Node? picked;
+		try
+		{
+			picked = await tm.SelectionFinished();
+		}
+		finally
+		{
+			room.EnableControllerNavigation();
+			NRun.Instance?.GlobalUi.MultiplayerPlayerContainer.UnlockNavigation();
+		}
+
+		var target = CreatureFromTargetNode(picked);
+		return target == null ? null : FindCreatureIndex(enemies, target);
+	}
+
+	private static async Task<PlayerChoiceSynchronizer?> WaitForPlayerChoiceSynchronizerAsync()
+	{
+		var runManager = RunManager.Instance;
+		if (runManager == null)
+			return null;
+
+		for (var i = 0; i < 60; i++)
+		{
+			if (runManager.PlayerChoiceSynchronizer != null)
+				return runManager.PlayerChoiceSynchronizer;
+			await Task.Yield();
+		}
+
+		return runManager.PlayerChoiceSynchronizer;
+	}
+
+	private static int FindCreatureIndex(IReadOnlyList<Creature> creatures, Creature target)
+	{
+		for (var i = 0; i < creatures.Count; i++)
+		{
+			if (ReferenceEquals(creatures[i], target))
+				return i;
+		}
+
+		return -1;
+	}
+
+	private static bool ShouldCancelTargeting()
+	{
+		if (!CombatManager.Instance.IsInProgress)
+			return false;
+		if (RunManager.Instance?.NetService?.Type.IsMultiplayer() == true)
+			return false;
+		if (NOverlayStack.Instance != null && NOverlayStack.Instance.ScreenCount > 0)
+			return true;
+		return NCapstoneContainer.Instance?.InUse == true;
+	}
+
+	private static Creature? CreatureFromTargetNode(Node? node)
+	{
+		if (node == null)
+			return null;
+		if (node is NCreature nc)
+			return nc.Entity;
+		if (node is NMultiplayerPlayerState nps)
+			return nps.Player.Creature;
+		return null;
 	}
 }
 
@@ -157,7 +276,7 @@ public sealed class RandomSelectEnchantment : ModEnchantmentTemplate, IRewardEnc
 		if (Card?.Owner?.Creature is not { } creature)
 			return;
 
-		await PowerCmdCompat.Apply<RandomSelectWrongTargetPower>(creature, 1m, creature, Card, choiceContext);
+		await PowerCmdCompat.Apply<MoreEnchantWrongTargetPower>(creature, 1m, creature, Card, choiceContext);
 	}
 }
 

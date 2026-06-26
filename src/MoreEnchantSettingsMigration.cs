@@ -7,7 +7,6 @@ internal static class MoreEnchantSettingsMigration
 	internal static bool Apply(MoreEnchantSettings s)
 	{
 		var changed = false;
-		var defaultSettings = new MoreEnchantSettings();
 
 		if (s.WeightCurse <= 0)
 		{
@@ -48,105 +47,87 @@ internal static class MoreEnchantSettingsMigration
 			changed = true;
 		}
 
-		// 设置已移除：统一锁定为默认概率，并开启所有附魔路径。
-		if (s.RewardEnchantChancePercent != defaultSettings.RewardEnchantChancePercent)
+		var rewardChance = Math.Clamp(s.RewardEnchantChancePercent, 0, 100);
+		if (rewardChance != s.RewardEnchantChancePercent)
 		{
-			s.RewardEnchantChancePercent = defaultSettings.RewardEnchantChancePercent;
+			s.RewardEnchantChancePercent = rewardChance;
 			changed = true;
 		}
-		if (s.ShopEnchantChancePercent != defaultSettings.ShopEnchantChancePercent)
+
+		var shopChance = Math.Clamp(s.ShopEnchantChancePercent, 0, 100);
+		if (shopChance != s.ShopEnchantChancePercent)
 		{
-			s.ShopEnchantChancePercent = defaultSettings.ShopEnchantChancePercent;
+			s.ShopEnchantChancePercent = shopChance;
 			changed = true;
 		}
-		if (s.AncientRewardEnchantChancePercent != defaultSettings.AncientRewardEnchantChancePercent)
+
+		var ancientChance = Math.Clamp(s.AncientRewardEnchantChancePercent, 0, 100);
+		if (ancientChance != s.AncientRewardEnchantChancePercent)
 		{
-			s.AncientRewardEnchantChancePercent = defaultSettings.AncientRewardEnchantChancePercent;
+			s.AncientRewardEnchantChancePercent = ancientChance;
 			changed = true;
 		}
-		if (s.CombatGeneratedEnchantChancePercent != defaultSettings.CombatGeneratedEnchantChancePercent)
+
+		var combatChance = Math.Clamp(s.CombatGeneratedEnchantChancePercent, 0, 100);
+		if (combatChance != s.CombatGeneratedEnchantChancePercent)
 		{
-			s.CombatGeneratedEnchantChancePercent = defaultSettings.CombatGeneratedEnchantChancePercent;
+			s.CombatGeneratedEnchantChancePercent = combatChance;
 			changed = true;
 		}
-		if (s.TransformEnchantChancePercent != defaultSettings.TransformEnchantChancePercent)
+
+		var transformChance = Math.Clamp(s.TransformEnchantChancePercent, 0, 100);
+		if (transformChance != s.TransformEnchantChancePercent)
 		{
-			s.TransformEnchantChancePercent = defaultSettings.TransformEnchantChancePercent;
+			s.TransformEnchantChancePercent = transformChance;
 			changed = true;
 		}
-		if (s.DeckDirectEnchantChancePercent != defaultSettings.DeckDirectEnchantChancePercent)
+
+		var deckDirectChance = Math.Clamp(s.DeckDirectEnchantChancePercent, 0, 100);
+		if (deckDirectChance != s.DeckDirectEnchantChancePercent)
 		{
-			s.DeckDirectEnchantChancePercent = defaultSettings.DeckDirectEnchantChancePercent;
+			s.DeckDirectEnchantChancePercent = deckDirectChance;
 			changed = true;
 		}
-		if (s.StartingDeckEnchantChancePercent != defaultSettings.StartingDeckEnchantChancePercent)
+
+		var startingDeckChance = Math.Clamp(s.StartingDeckEnchantChancePercent, 0, 100);
+		if (startingDeckChance != s.StartingDeckEnchantChancePercent)
 		{
-			s.StartingDeckEnchantChancePercent = defaultSettings.StartingDeckEnchantChancePercent;
+			s.StartingDeckEnchantChancePercent = startingDeckChance;
 			changed = true;
 		}
-		if (!s.ShopEnchantEnabled)
+
+		var weightCommon = Math.Clamp(s.WeightCommon, 0, 2000);
+		if (weightCommon != s.WeightCommon)
 		{
-			s.ShopEnchantEnabled = true;
+			s.WeightCommon = weightCommon;
 			changed = true;
 		}
-		if (!s.AncientRewardEnchantEnabled)
+
+		var weightUncommon = Math.Clamp(s.WeightUncommon, 0, 2000);
+		if (weightUncommon != s.WeightUncommon)
 		{
-			s.AncientRewardEnchantEnabled = true;
+			s.WeightUncommon = weightUncommon;
 			changed = true;
 		}
-		if (!s.CombatGeneratedEnchantEnabled)
+
+		var weightCurse = Math.Clamp(s.WeightCurse, 0, 2000);
+		if (weightCurse != s.WeightCurse)
 		{
-			s.CombatGeneratedEnchantEnabled = true;
+			s.WeightCurse = weightCurse;
 			changed = true;
 		}
-		if (!s.TransformEnchantEnabled)
+
+		var weightRare = Math.Clamp(s.WeightRare, 0, 2000);
+		if (weightRare != s.WeightRare)
 		{
-			s.TransformEnchantEnabled = true;
+			s.WeightRare = weightRare;
 			changed = true;
 		}
-		if (!s.DeckDirectEnchantEnabled)
+
+		var weightSpecial = Math.Clamp(s.WeightSpecial, 0, 2000);
+		if (weightSpecial != s.WeightSpecial)
 		{
-			s.DeckDirectEnchantEnabled = true;
-			changed = true;
-		}
-		if (!s.StartingDeckEnchantEnabled)
-		{
-			s.StartingDeckEnchantEnabled = true;
-			changed = true;
-		}
-		if (!s.BetaRewardEnchantmentsEnabled)
-		{
-			s.BetaRewardEnchantmentsEnabled = true;
-			changed = true;
-		}
-		if (s.UseChimeraRarityByCardRarity != defaultSettings.UseChimeraRarityByCardRarity)
-		{
-			s.UseChimeraRarityByCardRarity = defaultSettings.UseChimeraRarityByCardRarity;
-			changed = true;
-		}
-		if (s.WeightCommon != defaultSettings.WeightCommon)
-		{
-			s.WeightCommon = defaultSettings.WeightCommon;
-			changed = true;
-		}
-		if (s.WeightUncommon != defaultSettings.WeightUncommon)
-		{
-			s.WeightUncommon = defaultSettings.WeightUncommon;
-			changed = true;
-		}
-		if (s.WeightCurse != defaultSettings.WeightCurse)
-		{
-			s.WeightCurse = defaultSettings.WeightCurse;
-			changed = true;
-		}
-		if (s.WeightRare != defaultSettings.WeightRare)
-		{
-			s.WeightRare = defaultSettings.WeightRare;
-			changed = true;
-		}
-		if (s.WeightSpecial != defaultSettings.WeightSpecial)
-		{
-			s.WeightSpecial = defaultSettings.WeightSpecial;
+			s.WeightSpecial = weightSpecial;
 			changed = true;
 		}
 

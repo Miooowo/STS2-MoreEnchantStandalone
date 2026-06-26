@@ -26,8 +26,6 @@ namespace MoreEnchant;
 
 internal static class MoreEnchantCardRewardUtil
 {
-	private const int DefaultEnchantChancePercent = MoreEnchantSettings.DefaultRewardEnchantChancePercent;
-	private static readonly MoreEnchantSettings DefaultSettings = new();
 	private static readonly string[] SlipperyWoodenBridgeEventIdCandidates =
 	[
 		"SLIPPERY_WOODEN_BRIDGE",
@@ -45,11 +43,12 @@ internal static class MoreEnchantCardRewardUtil
 	{
 		if (options.Flags.HasFlag(CardCreationFlags.NoModifyHooks))
 			return;
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
 
 		var rng = options.Source == CardCreationSource.Shop
 			? player.PlayerRng.Shops
 			: player.PlayerRng.Rewards;
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var templates = GetEligibleRewardTemplates(settings);
 
 		if (MoreEnchantCombatRewardDebug.ForceNextEncounterCardRewardBellCurse &&
 		    options.Source == CardCreationSource.Encounter)
@@ -95,7 +94,23 @@ internal static class MoreEnchantCardRewardUtil
 				continue;
 
 			bool ancientCard = card.Rarity == CardRarity.Ancient;
-			int chancePercent = DefaultEnchantChancePercent;
+			int chancePercent;
+			if (options.Source == CardCreationSource.Shop)
+			{
+				if (!settings.ShopEnchantEnabled)
+					continue;
+				chancePercent = settings.ShopEnchantChancePercent;
+			}
+			else if (ancientCard)
+			{
+				if (!settings.AncientRewardEnchantEnabled)
+					continue;
+				chancePercent = settings.AncientRewardEnchantChancePercent;
+			}
+			else
+			{
+				chancePercent = settings.RewardEnchantChancePercent;
+			}
 
 			if (chancePercent <= 0 || rng.NextInt(0, 100) >= chancePercent)
 				continue;
@@ -104,7 +119,7 @@ internal static class MoreEnchantCardRewardUtil
 				card,
 				templates,
 				rng,
-				DefaultSettings,
+				settings,
 				excludeCurse: ancientCard,
 				options.Source);
 			if (pick == null)
@@ -134,8 +149,11 @@ internal static class MoreEnchantCardRewardUtil
 			return;
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.CombatGeneratedEnchantEnabled)
+			return;
 
-		var chancePercent = DefaultEnchantChancePercent;
+		var chancePercent = settings.CombatGeneratedEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -143,14 +161,14 @@ internal static class MoreEnchantCardRewardUtil
 		if (rng.NextInt(0, 100) >= chancePercent)
 			return;
 
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var templates = GetEligibleRewardTemplates(settings);
 		var ancient = card.Rarity == CardRarity.Ancient;
 		var excludeCurse = ancient;
 		var pick = RollEnchantmentTemplate(
 			card,
 			templates,
 			rng,
-			DefaultSettings,
+			settings,
 			excludeCurse,
 			CardCreationSource.Encounter);
 		if (pick == null)
@@ -172,8 +190,11 @@ internal static class MoreEnchantCardRewardUtil
 		// 不能按 LocalContext.IsMine 仅本机执行，否则会导致 checksum 分叉。
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.TransformEnchantEnabled)
+			return;
 
-		var chancePercent = DefaultEnchantChancePercent;
+		var chancePercent = settings.TransformEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -181,13 +202,13 @@ internal static class MoreEnchantCardRewardUtil
 		if (rng.NextInt(0, 100) >= chancePercent)
 			return;
 
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var templates = GetEligibleRewardTemplates(settings);
 		var ancient = card.Rarity == CardRarity.Ancient;
 		var pick = RollEnchantmentTemplate(
 			card,
 			templates,
 			rng,
-			DefaultSettings,
+			settings,
 			excludeCurse: ancient,
 			CardCreationSource.Encounter);
 		if (pick == null)
@@ -210,8 +231,11 @@ internal static class MoreEnchantCardRewardUtil
 		// 必须各端一致执行，避免仅本机消耗 Rewards RNG 造成状态分歧。
 		if (ShouldSkipEnchantingRewardCard(card))
 			return;
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.DeckDirectEnchantEnabled)
+			return;
 
-		var chancePercent = DefaultEnchantChancePercent;
+		var chancePercent = settings.DeckDirectEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -219,13 +243,13 @@ internal static class MoreEnchantCardRewardUtil
 		if (rng.NextInt(0, 100) >= chancePercent)
 			return;
 
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var templates = GetEligibleRewardTemplates(settings);
 		var ancient = card.Rarity == CardRarity.Ancient;
 		var pick = RollEnchantmentTemplate(
 			card,
 			templates,
 			rng,
-			DefaultSettings,
+			settings,
 			excludeCurse: ancient,
 			CardCreationSource.Encounter);
 		if (pick == null)
@@ -241,7 +265,11 @@ internal static class MoreEnchantCardRewardUtil
 	/// </summary>
 	internal static void TryApplyRandomEnchantToStartingDeck(Player player)
 	{
-		var chancePercent = DefaultEnchantChancePercent;
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		if (!settings.StartingDeckEnchantEnabled)
+			return;
+
+		var chancePercent = settings.StartingDeckEnchantChancePercent;
 		if (chancePercent <= 0)
 			return;
 
@@ -250,7 +278,7 @@ internal static class MoreEnchantCardRewardUtil
 			return;
 
 		var rng = player.PlayerRng.Rewards;
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var templates = GetEligibleRewardTemplates(settings);
 		foreach (var card in cards)
 		{
 			if (card == null || card.Enchantment != null)
@@ -264,7 +292,7 @@ internal static class MoreEnchantCardRewardUtil
 				card,
 				templates,
 				rng,
-				DefaultSettings,
+				settings,
 				excludeCurse: card.Rarity == CardRarity.Ancient,
 				CardCreationSource.Encounter);
 			if (pick == null)
@@ -402,12 +430,13 @@ internal static class MoreEnchantCardRewardUtil
 
 		var rng = player.PlayerRng.Rewards;
 
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		var templates = GetEligibleRewardTemplates(settings);
 		var pick = RollEnchantmentTemplate(
 			selected,
 			templates,
 			rng,
-			DefaultSettings,
+			settings,
 			excludeCurse: selected.Rarity == CardRarity.Ancient,
 			CardCreationSource.Encounter);
 		if (pick == null)
@@ -469,6 +498,14 @@ internal static class MoreEnchantCardRewardUtil
 
 	private static bool IsEligibleRewardTemplate(EnchantmentModel t) =>
 		t is not DeprecatedEnchantment and not MockFreeEnchantment and not IEventExclusiveEnchantment;
+
+	private static EnchantmentModel[] GetEligibleRewardTemplates(MoreEnchantSettings settings)
+	{
+		return ModelDb.DebugEnchantments
+			.Where(IsEligibleRewardTemplate)
+			.Where(t => settings.BetaRewardEnchantmentsEnabled || t is not IBetaGatedRewardEnchantment)
+			.ToArray();
+	}
 
 	private static bool ShouldSkipEnchantingRewardCard(CardModel card) =>
 		card.Rarity is CardRarity.Token or CardRarity.Status;

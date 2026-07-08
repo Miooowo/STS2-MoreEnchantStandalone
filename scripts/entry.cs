@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Godot;
 using HarmonyLib;
@@ -14,6 +15,7 @@ namespace MoreEnchant.scripts;
 public static class Entry
 {
 	public const string ModId = "MoreEnchantStandalone";
+	private static bool _ritsuAssemblyHookInstalled;
 
 	public static void Init()
 	{
@@ -128,8 +130,27 @@ public static class Entry
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 
 		EnsureGodotScriptsRegistered(Assembly.GetExecutingAssembly());
+		InstallRitsuLibAssemblyLoadHook();
+		_ = RitsuLibRunSavedDataCompat.IsAvailable();
 		_ = MoreEnchantSettingsStore.Get();
+		_ = RitsuLibModSettingsCompat.TryRegisterSettingsPage();
 
+	}
+
+	private static void InstallRitsuLibAssemblyLoadHook()
+	{
+		if (_ritsuAssemblyHookInstalled)
+			return;
+		_ritsuAssemblyHookInstalled = true;
+		AppDomain.CurrentDomain.AssemblyLoad += (_, args) =>
+		{
+			var name = args.LoadedAssembly.GetName().Name;
+			if (!string.Equals(name, "STS2RitsuLib", StringComparison.OrdinalIgnoreCase) &&
+			    !string.Equals(name, "STS2-RitsuLib", StringComparison.OrdinalIgnoreCase))
+				return;
+			_ = RitsuLibRunSavedDataCompat.IsAvailable();
+			_ = RitsuLibModSettingsCompat.TryRegisterSettingsPage();
+		};
 	}
 
 	private static void EnsureGodotScriptsRegistered(Assembly assembly)

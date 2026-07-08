@@ -9,3 +9,14 @@ c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\refint
 c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.pdb
 c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\ref\MoreEnchantStandalone.dll
 c:\Users\Miooo\Documents\MoreEnchantStandalone\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.sourcelink.json
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\bin\Debug\MoreEnchantStandalone.deps.json
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\bin\Debug\MoreEnchantStandalone.dll
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\bin\Debug\MoreEnchantStandalone.pdb
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.csproj.AssemblyReference.cache
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.GeneratedMSBuildEditorConfig.editorconfig
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.csproj.CoreCompileInputs.cache
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.sourcelink.json
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.dll
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\refint\MoreEnchantStandalone.dll
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\MoreEnchantStandalone.pdb
+F:\git\STS2-MoreEnchant-beta\.godot\mono\temp\obj\Debug\ref\MoreEnchantStandalone.dll

@@ -9,7 +9,7 @@ namespace MoreEnchant.Standalone;
 
 /// <summary>
 /// 本模组 <see cref="ModEnchantmentTemplate"/> 若未在资源中提供 <c>enchantments/&lt;id&gt;.png</c>，
-/// 在语言为简体中文（<c>zhs</c>）时，将 <see cref="EnchantmentModel.IconPath"/> 从原版 missing 贴图改为模组内 <c>images/enchantments/enchantment_icon.png</c>（需在 PCK 中存在）；其他语言仍用原版 missing。
+/// 在语言为简体中文（<c>zhs</c>）时，将 <see cref="EnchantmentModel.IconPath"/> 从原版 missing 贴图改为模组内附魔书图标（源资源 <c>images/enchantments/enchanted_book.gif</c>，Godot 无法导入 GIF，故使用同目录导出的 <c>enchanted_book.png</c> 纹理；需在 PCK 中存在）；其他语言仍用原版 missing。
 /// </summary>
 [HarmonyPatch(typeof(EnchantmentModel), "get_IconPath")]
 	internal static class EnchantmentModMissingIconFallbackPatch
@@ -20,7 +20,7 @@ namespace MoreEnchant.Standalone;
 		AccessTools.Field(typeof(EnchantmentModel), "_iconPath")!;
 
 	private static readonly string FallbackPath =
-		ImageHelper.GetImagePath("enchantments/enchantment_icon.png");
+		ImageHelper.GetImagePath("enchantments/enchanted_book.png");
 
 	[HarmonyPostfix]
 	private static void Postfix(EnchantmentModel __instance, ref string __result)

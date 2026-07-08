@@ -4,15 +4,15 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Miooo\.nuget\packages\</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\AppData\Local\Temp\cursor-sandbox-cache\28cdf41fa0dd90bbc200d0951f9839d4\nuget</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\OEM\AppData\Local\Temp\cursor-sandbox-cache\28cdf41fa0dd90bbc200d0951f9839d4\nuget</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">7.0.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\Miooo\.nuget\packages\" />
+    <SourceRoot Include="C:\Users\OEM\AppData\Local\Temp\cursor-sandbox-cache\28cdf41fa0dd90bbc200d0951f9839d4\nuget\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)godot.sourcegenerators\4.5.1\build\Godot.SourceGenerators.props" Condition="Exists('$(NuGetPackageRoot)godot.sourcegenerators\4.5.1\build\Godot.SourceGenerators.props')" />
+    <Import Project="$(NuGetPackageRoot)\godot.sourcegenerators\4.5.1\build\Godot.SourceGenerators.props" Condition="Exists('$(NuGetPackageRoot)\godot.sourcegenerators\4.5.1\build\Godot.SourceGenerators.props')" />
   </ImportGroup>
 </Project>

@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net9.0": {
       "Godot.SourceGenerators/4.5.1": {
@@ -103,30 +103,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Miooo\\.nuget\\packages\\": {}
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget": {}
   },
   "project": {
-    "version": "0.8.0",
+    "version": "0.12.1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
+      "projectUniqueName": "F:\\git\\STS2-MoreEnchant-beta\\MoreEnchantStandalone.csproj",
       "projectName": "MoreEnchantStandalone",
-      "projectPath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
-      "packagesPath": "C:\\Users\\Miooo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\.godot\\mono\\temp\\obj\\",
+      "projectPath": "F:\\git\\STS2-MoreEnchant-beta\\MoreEnchantStandalone.csproj",
+      "packagesPath": "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget",
+      "outputPath": "F:\\git\\STS2-MoreEnchant-beta\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Miooo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\OEM\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
+          "framework": "net9.0",
           "targetAlias": "net9.0",
           "projectReferences": {}
         }
@@ -141,10 +140,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net9.0": {
+        "framework": "net9.0",
         "targetAlias": "net9.0",
         "dependencies": {
           "Godot.SourceGenerators": {
@@ -176,15 +176,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.13, 9.0.13]"
+            "version": "[9.0.17, 9.0.17]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.13, 9.0.13]"
+            "version": "[9.0.17, 9.0.17]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[9.0.13, 9.0.13]"
+            "version": "[9.0.17, 9.0.17]"
           }
         ],
         "frameworkReferences": {
@@ -192,7 +192,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

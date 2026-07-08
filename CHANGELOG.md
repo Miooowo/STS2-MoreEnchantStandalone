@@ -2,6 +2,11 @@
 
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
+## 未发布
+
+### 修复
+- 将新增的 7 个附魔图标统一重命名为英文 `*_enchantment.png`（`like_dagger`、`charge_up`、`initiative_energy`、`frost_channel`、`synthesis`、`spectral_ethereal`、`kafka_micro_current`），避免中文文件名导致图标路径无法命中时回退缺失图标。
+
 ## 0.12.1
 
 发布日期：2026-06-26

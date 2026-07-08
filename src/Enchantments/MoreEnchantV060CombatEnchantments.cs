@@ -120,7 +120,8 @@ public sealed class BloodlettingEnergyEnchantment : ModEnchantmentTemplate, IRew
 			creature,
 			HpLossAmount,
 			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-			card);
+			card,
+			null);
 		await PlayerCmd.GainEnergy(EnergyGain, player);
 	}
 }

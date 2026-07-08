@@ -69,7 +69,8 @@ public sealed class DemonShieldShareBlockEnchantment : ModEnchantmentTemplate, I
 			self,
 			HpLoss,
 			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-			card);
+			card,
+			null);
 
 		var block = (decimal)self.Block;
 		if (block <= 0m)

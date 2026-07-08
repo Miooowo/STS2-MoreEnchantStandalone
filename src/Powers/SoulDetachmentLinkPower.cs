@@ -53,8 +53,8 @@ public sealed class SoulDetachmentLinkPower : PowerModel
 				body,
 				damage,
 				ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.SkipHurtAnim,
-				dealer,
-				cardSource);
+				cardSource,
+				null);
 		}
 		finally
 		{

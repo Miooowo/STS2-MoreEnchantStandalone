@@ -398,7 +398,7 @@ public sealed class DecayCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 			return;
 
 		await CreatureCmd.Damage(choiceContext, cre, HpLossOnPlay,
-			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, null, Card);
+			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, Card, cardPlay);
 	}
 
 	internal async Task ApplyTurnEndPenalty(PlayerChoiceContext choiceContext, CombatSide side)
@@ -413,7 +413,7 @@ public sealed class DecayCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 			return;
 
 		await CreatureCmd.Damage(choiceContext, p.Creature, DynamicVars.Damage.BaseValue,
-			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, null, Card);
+			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, Card, null);
 	}
 }
 
@@ -440,7 +440,7 @@ public sealed class RegretCurseEnchantment : ModEnchantmentTemplate, IRewardEnch
 			return;
 
 		await CreatureCmd.Damage(choiceContext, p.Creature, n,
-			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, null, Card);
+			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, Card, null);
 	}
 }
 

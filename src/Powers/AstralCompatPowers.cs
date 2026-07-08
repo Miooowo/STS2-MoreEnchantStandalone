@@ -76,8 +76,8 @@ public sealed class MoreEnchantSoulLinkPower : PowerModel
 				linked,
 				hpLoss,
 				ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.SkipHurtAnim,
-				Owner,
-				cardSource);
+				cardSource,
+				null);
 		}
 		finally
 		{

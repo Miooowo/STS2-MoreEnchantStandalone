@@ -333,7 +333,7 @@ public sealed class SwordArtEnchantment : ModEnchantmentTemplate, IRewardEnchant
 		if (target == null)
 			return;
 
-		await DamageCmd.Attack(RandomHitDamage).FromCard(card).Targeting(target)
+		await DamageCmd.Attack(RandomHitDamage).FromCard(card, cardPlay).Targeting(target)
 			.WithHitFx("vfx/vfx_attack_slash", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
 	}

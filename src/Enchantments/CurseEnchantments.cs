@@ -255,7 +255,7 @@ public sealed class BadLuckCurseEnchantment : ModEnchantmentTemplate, IRewardEnc
 		if (hand == null || !hand.Contains(Card))
 			return;
 
-		await CreatureCmd.Damage(choiceContext, p.Creature, DynamicVars.Damage.BaseValue, ValueProp.Move, null, Card);
+		await CreatureCmd.Damage(choiceContext, p.Creature, DynamicVars.Damage.BaseValue, ValueProp.Move, Card, null);
 	}
 }
 

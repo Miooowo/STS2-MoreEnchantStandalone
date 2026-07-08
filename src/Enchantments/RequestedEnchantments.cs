@@ -83,8 +83,8 @@ public sealed class DarkCandleEnchantment : ModEnchantmentTemplate, IRewardEncha
 			self,
 			HpLossOnPlay,
 			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-			null,
-			Card);
+			Card,
+			cardPlay);
 	}
 }
 

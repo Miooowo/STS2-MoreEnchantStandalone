@@ -69,7 +69,8 @@ public sealed class FightFireWithFireEnchantment : ModEnchantmentTemplate, IRewa
 			creature,
 			HpLoss,
 			ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-			Card);
+			Card,
+			null);
 		await PowerCmdCompat.Apply<FightFireWithFireHealPower>(creature, HealTurns, creature, Card, choiceContext);
 	}
 }

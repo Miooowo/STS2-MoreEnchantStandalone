@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Hooks;
 using MoreEnchant.Powers;
 
@@ -11,16 +13,20 @@ namespace MoreEnchant.Patches;
 /// <summary>
 /// 回合末控制：灵魂维持晕眩，且当本体死亡时清理灵魂。
 /// </summary>
-[HarmonyPatch(typeof(Hook), nameof(Hook.AfterTurnEnd))]
+[HarmonyPatch(typeof(Hook), nameof(Hook.AfterSideTurnEnd))]
 internal static class SoulDetachmentTurnControlPatch
 {
 	[HarmonyPostfix]
-	private static void Postfix(CombatState combatState, CombatSide side, ref Task __result)
+	private static void Postfix(
+		ICombatState combatState,
+		CombatSide side,
+		IEnumerable<Creature> creatures,
+		ref Task __result)
 	{
 		__result = RunAfterHook(__result, combatState, side);
 	}
 
-	private static async Task RunAfterHook(Task original, CombatState combatState, CombatSide side)
+	private static async Task RunAfterHook(Task original, ICombatState combatState, CombatSide side)
 	{
 		await original;
 		if (side != CombatSide.Enemy)

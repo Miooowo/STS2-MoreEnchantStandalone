@@ -129,8 +129,8 @@ public sealed class FinalJudgmentEnchantment : ModEnchantmentTemplate, IRewardEn
 					cardPlay.Target,
 					hpLoss,
 					ValueProp.Unblockable | ValueProp.Unpowered,
-					null,
-					Card);
+					Card,
+					cardPlay);
 			}
 			return;
 		}

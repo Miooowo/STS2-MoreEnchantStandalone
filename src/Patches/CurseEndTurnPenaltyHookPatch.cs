@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
@@ -11,18 +13,22 @@ using MoreEnchant.Enchantments;
 namespace MoreEnchant.Patches;
 
 /// <summary>
-/// 104+ 下部分附魔不再覆写 TurnEnd 钩子，改为在 Hook.BeforeTurnEnd 后补执行诅咒回合末自伤逻辑。
+/// 部分附魔不再覆写 TurnEnd 钩子，改为在 <see cref="Hook.BeforeSideTurnEnd"/> 后补执行诅咒回合末自伤逻辑。
 /// </summary>
-[HarmonyPatch(typeof(Hook), nameof(Hook.BeforeTurnEnd))]
+[HarmonyPatch(typeof(Hook), nameof(Hook.BeforeSideTurnEnd))]
 internal static class CurseEndTurnPenaltyHookPatch
 {
 	[HarmonyPostfix]
-	private static void Postfix(CombatState combatState, CombatSide side, ref Task __result)
+	private static void Postfix(
+		ICombatState combatState,
+		CombatSide side,
+		IEnumerable<Creature> creatures,
+		ref Task __result)
 	{
 		__result = RunAfterHook(__result, combatState, side);
 	}
 
-	private static async Task RunAfterHook(Task original, CombatState combatState, CombatSide side)
+	private static async Task RunAfterHook(Task original, ICombatState combatState, CombatSide side)
 	{
 		await original;
 		if (side != CombatSide.Player)

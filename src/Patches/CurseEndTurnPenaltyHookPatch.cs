@@ -22,7 +22,7 @@ internal static class CurseEndTurnPenaltyHookPatch
 	private static void Postfix(
 		ICombatState combatState,
 		CombatSide side,
-		IEnumerable<Creature> creatures,
+		IEnumerable<Creature> participants,
 		ref Task __result)
 	{
 		__result = RunAfterHook(__result, combatState, side);

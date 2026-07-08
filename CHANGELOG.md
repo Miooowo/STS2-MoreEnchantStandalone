@@ -13,7 +13,7 @@
 - 简体中文下，无专属图标的附魔兜底图标改为附魔书（`enchanted_book.gif`；因 Godot 无法导入 GIF，游戏内使用同目录导出的 `enchanted_book.png` 纹理）。
 
 ### 修复
-- 适配新版 `Hook.BeforeSideTurnEnd` / `Hook.AfterSideTurnEnd`（替换已移除的 `BeforeTurnEnd` / `AfterTurnEnd`），修复模组初始化时 Harmony 补丁崩溃。
+- 适配新版 `Hook.BeforeSideTurnEnd` / `Hook.AfterSideTurnEnd`（替换已移除的 `BeforeTurnEnd` / `AfterTurnEnd`），修复模组初始化时 Harmony 补丁崩溃；Postfix 第三参须命名为 `participants` 以匹配游戏方法签名。
 - 适配 `CreatureCmd.Damage` 与 `AttackCommand.FromCard` 新签名（`CardModel` + `CardPlay?`），修复编译与运行时 API 不兼容。
 
 ## 0.12.1

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cAKr3OJptG4=",
+  "success": true,
+  "projectFilePath": "F:\\git\\STS2-MoreEnchant-beta\\.tools\\gif-convert\\gif-convert.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\sixlabors.imagesharp\\3.1.11\\sixlabors.imagesharp.3.1.11.nupkg.sha512"
+  ],
+  "logs": []
+}

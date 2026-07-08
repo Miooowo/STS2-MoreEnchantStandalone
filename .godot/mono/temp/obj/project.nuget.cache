@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "3qDUGsDzFuE=",
+  "dgSpecHash": "C+tr0/Y2eeQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Miooo\\Documents\\MoreEnchantStandalone\\MoreEnchantStandalone.csproj",
+  "projectFilePath": "F:\\git\\STS2-MoreEnchant-beta\\MoreEnchantStandalone.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Miooo\\.nuget\\packages\\godot.sourcegenerators\\4.5.1\\godot.sourcegenerators.4.5.1.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\godotsharp\\4.5.1\\godotsharp.4.5.1.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\system.io.hashing\\9.0.0\\system.io.hashing.9.0.0.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.13\\microsoft.netcore.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.13\\microsoft.windowsdesktop.app.ref.9.0.13.nupkg.sha512",
-    "C:\\Users\\Miooo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.13\\microsoft.aspnetcore.app.ref.9.0.13.nupkg.sha512"
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\godot.sourcegenerators\\4.5.1\\godot.sourcegenerators.4.5.1.nupkg.sha512",
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\godotsharp\\4.5.1\\godotsharp.4.5.1.nupkg.sha512",
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\system.io.hashing\\9.0.0\\system.io.hashing.9.0.0.nupkg.sha512",
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\microsoft.netcore.app.ref\\9.0.17\\microsoft.netcore.app.ref.9.0.17.nupkg.sha512",
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\microsoft.windowsdesktop.app.ref\\9.0.17\\microsoft.windowsdesktop.app.ref.9.0.17.nupkg.sha512",
+    "C:\\Users\\OEM\\AppData\\Local\\Temp\\cursor-sandbox-cache\\28cdf41fa0dd90bbc200d0951f9839d4\\nuget\\microsoft.aspnetcore.app.ref\\9.0.17\\microsoft.aspnetcore.app.ref.9.0.17.nupkg.sha512"
   ],
   "logs": []
 }

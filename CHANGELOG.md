@@ -2,10 +2,13 @@
 
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
-## 未发布
+## 0.12.2
 
-### 修复
-- 将新增的 7 个附魔图标统一重命名为英文 `*_enchantment.png`（`like_dagger`、`charge_up`、`initiative_energy`、`frost_channel`、`synthesis`、`spectral_ethereal`、`kafka_micro_current`），避免中文文件名导致图标路径无法命中时回退缺失图标。
+### 新增
+- 新增7个附魔图标：充电，冰霜，合成，微电流，先机，幽灵，与小刀（感谢企鹅）
+
+### 变更
+- 简体中文下，无专属图标的附魔兜底图标改为附魔书（`enchanted_book.gif`；因 Godot 无法导入 GIF，游戏内使用同目录导出的 `enchanted_book.png` 纹理）。
 
 ## 0.12.1
 

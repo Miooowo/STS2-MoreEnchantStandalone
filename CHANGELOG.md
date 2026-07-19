@@ -12,6 +12,7 @@
 
 ### 变更
 - 简体中文下，无专属图标的附魔兜底图标改为附魔书（`enchanted_book.gif`；因 Godot 无法导入 GIF，游戏内使用同目录导出的 `enchanted_book.png` 纹理）。
+- 打击附魔：中文卡名已含「打击」时只追加「击」，避免「完美打击打击」一类重复。
 
 ### 修复
 - 适配新版 `Hook.BeforeSideTurnEnd` / `Hook.AfterSideTurnEnd`（替换已移除的 `BeforeTurnEnd` / `AfterTurnEnd`），修复模组初始化时 Harmony 补丁崩溃；Postfix 第三参须命名为 `participants` 以匹配游戏方法签名。

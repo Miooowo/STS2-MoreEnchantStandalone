@@ -2,22 +2,32 @@
 
 格式遵循常见约定：新版本在上；未发行改动可放在 **未发布** 小标题下。
 
+## 0.12.3-beta
+
+发布日期：2026-07-19
+
+### 新增
+- RitsuLib 设置新增「仅允许指定附魔」白名单（按 ID / 中英标题匹配）与「附魔黑名单」逐项开关，控制随机附魔池。
+
+### 变更
+- 打击附魔：中文卡名已含「打击」时只追加「击」，避免「完美打击打击」一类重复。
+
+### 修复
+- 适配打出后去向钩子：`ModifyCardPlayResultPileTypeAndPosition` 更名为 `ModifyCardPlayResultLocation`（返回 `CardLocation`）。
+
 ## 0.12.2-beta
 
 发布日期：2026-07-08
 
 ### 新增
 - 新增7个附魔图标：充电，冰霜，合成，微电流，先机，幽灵，与小刀（感谢企鹅）
-- RitsuLib 设置新增「仅允许指定附魔」白名单（按 ID / 中英标题匹配）与「附魔黑名单」逐项开关，控制随机附魔池。
 
 ### 变更
 - 简体中文下，无专属图标的附魔兜底图标改为附魔书（`enchanted_book.gif`；因 Godot 无法导入 GIF，游戏内使用同目录导出的 `enchanted_book.png` 纹理）。
-- 打击附魔：中文卡名已含「打击」时只追加「击」，避免「完美打击打击」一类重复。
 
 ### 修复
 - 适配新版 `Hook.BeforeSideTurnEnd` / `Hook.AfterSideTurnEnd`（替换已移除的 `BeforeTurnEnd` / `AfterTurnEnd`），修复模组初始化时 Harmony 补丁崩溃；Postfix 第三参须命名为 `participants` 以匹配游戏方法签名。
 - 适配 `CreatureCmd.Damage` 与 `AttackCommand.FromCard` 新签名（`CardModel` + `CardPlay?`），修复编译与运行时 API 不兼容。
-- 适配打出后去向钩子：`ModifyCardPlayResultPileTypeAndPosition` 更名为 `ModifyCardPlayResultLocation`（返回 `CardLocation`）。
 
 ## 0.12.1
 

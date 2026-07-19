@@ -48,5 +48,12 @@
   "ME_SETTINGS.weight_rare.label": "Rare Weight",
   "ME_SETTINGS.weight_rare.description": "Relative weight for rare bucket in custom mode (0-2000).",
   "ME_SETTINGS.weight_special.label": "Special Weight",
-  "ME_SETTINGS.weight_special.description": "Relative weight for special bucket in custom mode (0-2000)."
+  "ME_SETTINGS.weight_special.description": "Relative weight for special bucket in custom mode (0-2000).",
+  "ME_SETTINGS.section.pool_filter.title": "Allow Only These Enchantments",
+  "ME_SETTINGS.section.pool_filter.description": "Enter enchantment IDs / English / Chinese titles (comma or newline separated). Leave empty for no restriction; when non-empty, only matches remain in the random pool.",
+  "ME_SETTINGS.reward_enchant_only_filter.label": "Allow only these enchantments",
+  "ME_SETTINGS.reward_enchant_only_filter.description": "Example: SCORCHING_ENCHANTMENT or Scorching. Unmatched names are ignored.",
+  "ME_SETTINGS.reward_enchant_only_filter.label.placeholder": "ID / English / Chinese name…",
+  "ME_SETTINGS.section.blacklist.title": "Enchantment Blacklist",
+  "ME_SETTINGS.section.blacklist.description": "Turn a switch off to keep that enchantment out of the random pool (all on by default)."
 }

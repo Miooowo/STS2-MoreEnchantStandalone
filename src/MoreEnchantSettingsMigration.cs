@@ -47,6 +47,32 @@ internal static class MoreEnchantSettingsMigration
 			changed = true;
 		}
 
+		if (s.SchemaVersion < 6)
+		{
+			s.RewardEnchantOnlyFilter ??= "";
+			s.BlacklistedEnchantmentIds ??= [];
+			s.SchemaVersion = 6;
+			changed = true;
+		}
+
+		s.RewardEnchantOnlyFilter ??= "";
+		if (s.BlacklistedEnchantmentIds == null)
+		{
+			s.BlacklistedEnchantmentIds = [];
+			changed = true;
+		}
+		else
+		{
+			var before = s.BlacklistedEnchantmentIds.Count;
+			s.BlacklistedEnchantmentIds = s.BlacklistedEnchantmentIds
+				.Where(static id => !string.IsNullOrWhiteSpace(id))
+				.Select(static id => id.Trim().ToUpperInvariant())
+				.Distinct(StringComparer.Ordinal)
+				.ToList();
+			if (s.BlacklistedEnchantmentIds.Count != before)
+				changed = true;
+		}
+
 		var rewardChance = Math.Clamp(s.RewardEnchantChancePercent, 0, 100);
 		if (rewardChance != s.RewardEnchantChancePercent)
 		{

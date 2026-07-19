@@ -499,11 +499,16 @@ internal static class MoreEnchantCardRewardUtil
 	private static bool IsEligibleRewardTemplate(EnchantmentModel t) =>
 		t is not DeprecatedEnchantment and not MockFreeEnchantment and not IEventExclusiveEnchantment;
 
+	/// <summary>设置页黑名单候选：与随机池资格一致（不含 Beta / 白黑名单过滤）。</summary>
+	internal static IEnumerable<EnchantmentModel> EnumerateSettingsPoolCandidates() =>
+		ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate);
+
 	private static EnchantmentModel[] GetEligibleRewardTemplates(MoreEnchantSettings settings)
 	{
 		return ModelDb.DebugEnchantments
 			.Where(IsEligibleRewardTemplate)
 			.Where(t => settings.BetaRewardEnchantmentsEnabled || t is not IBetaGatedRewardEnchantment)
+			.Where(t => EnchantmentPoolFilter.IsAllowed(t, settings))
 			.ToArray();
 	}
 
@@ -641,7 +646,8 @@ internal static class MoreEnchantCardRewardUtil
 	/// <summary>将首张可附魔的候选牌强制附上随机诅咒档附魔（铃铛诅咒遗物在拾起时由 RewardSynchronizer 补丁发放）。</summary>
 	private static void TryApplyForcedRandomCurseCardReward(Player player, List<CardCreationResult> results, Rng rng)
 	{
-		var templates = ModelDb.DebugEnchantments.Where(IsEligibleRewardTemplate).ToArray();
+		var settings = MoreEnchantMultiplayerSettings.GetEffectiveSettings();
+		var templates = GetEligibleRewardTemplates(settings);
 
 		foreach (var result in results)
 		{

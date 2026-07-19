@@ -48,5 +48,12 @@
   "ME_SETTINGS.weight_rare.label": "稀有权重",
   "ME_SETTINGS.weight_rare.description": "自定义模式下的稀有档相对权重（0-2000）。",
   "ME_SETTINGS.weight_special.label": "特殊权重",
-  "ME_SETTINGS.weight_special.description": "自定义模式下的特殊档相对权重（0-2000）。"
+  "ME_SETTINGS.weight_special.description": "自定义模式下的特殊档相对权重（0-2000）。",
+  "ME_SETTINGS.section.pool_filter.title": "仅允许指定附魔",
+  "ME_SETTINGS.section.pool_filter.description": "输入附魔 ID / 英文名 / 中文名（逗号或换行分隔）。留空不限制；非空时随机池仅保留匹配项。",
+  "ME_SETTINGS.reward_enchant_only_filter.label": "仅允许这些附魔",
+  "ME_SETTINGS.reward_enchant_only_filter.description": "例如：SCORCHING_ENCHANTMENT 或 灼热。匹配失败的名称会被忽略。",
+  "ME_SETTINGS.reward_enchant_only_filter.label.placeholder": "ID / name / 中文名…",
+  "ME_SETTINGS.section.blacklist.title": "附魔黑名单",
+  "ME_SETTINGS.section.blacklist.description": "关闭开关后，该附魔不会出现在对局随机附魔池中（默认全部开启）。"
 }

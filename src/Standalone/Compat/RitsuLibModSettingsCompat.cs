@@ -109,6 +109,24 @@ internal static class RitsuLibModSettingsCompat
 		InvokeFluent(pageBuilder, "WithTitle", BuildText("ME_SETTINGS.page.title", "MoreEnchant"));
 		InvokeFluent(pageBuilder, "WithModDisplayName", BuildText("ME_SETTINGS.page.modDisplayName", "MoreEnchant"));
 		InvokeFluent(pageBuilder, "AddSection", "more_enchant_general", sectionDelegate);
+
+		var configurePoolFilterMethod = typeof(RitsuLibModSettingsCompat).GetMethod(
+			nameof(ConfigurePoolFilterSection),
+			BindingFlags.NonPublic | BindingFlags.Static);
+		if (configurePoolFilterMethod != null)
+		{
+			var poolFilterDelegate = CreateTypedDelegate(sectionBuilderType, configurePoolFilterMethod);
+			InvokeFluent(pageBuilder, "AddSection", "more_enchant_pool_filter", poolFilterDelegate);
+		}
+
+		var configureBlacklistMethod = typeof(RitsuLibModSettingsCompat).GetMethod(
+			nameof(ConfigureBlacklistSection),
+			BindingFlags.NonPublic | BindingFlags.Static);
+		if (configureBlacklistMethod != null)
+		{
+			var blacklistDelegate = CreateTypedDelegate(sectionBuilderType, configureBlacklistMethod);
+			InvokeFluent(pageBuilder, "AddSection", "more_enchant_blacklist", blacklistDelegate);
+		}
 	}
 
 	private static void ConfigureGeneralSection(object sectionBuilder)
@@ -304,6 +322,82 @@ internal static class RitsuLibModSettingsCompat
 		ConfigureEntryEnabledWhen(sectionBuilder, "weight_special", () => !MoreEnchantSettingsStore.Get().UseChimeraRarityByCardRarity);
 	}
 
+	private static void ConfigurePoolFilterSection(object sectionBuilder)
+	{
+		InvokeFluent(sectionBuilder, "WithTitle",
+			BuildText("ME_SETTINGS.section.pool_filter.title", "仅允许指定附魔"));
+		InvokeFluent(sectionBuilder, "WithDescription",
+			BuildText("ME_SETTINGS.section.pool_filter.description",
+				"输入附魔 ID / 英文名 / 中文名（逗号或换行分隔）。留空不限制；非空时随机池仅保留匹配项。"));
+		InvokeFluent(sectionBuilder, "WithEnabledWhen", new Func<bool>(() => !IsMultiplayerClient()));
+
+		AddMultilineStringEntry(sectionBuilder, "reward_enchant_only_filter", "仅允许这些附魔",
+			() => MoreEnchantSettingsStore.Get().RewardEnchantOnlyFilter ?? "",
+			value =>
+			{
+				var settings = MoreEnchantSettingsStore.Get();
+				settings.RewardEnchantOnlyFilter = value ?? "";
+			},
+			"例如：SCORCHING_ENCHANTMENT 或 灼热。匹配失败的名称会被忽略。",
+			"ID / name / 中文名…");
+	}
+
+	private static void ConfigureBlacklistSection(object sectionBuilder)
+	{
+		InvokeFluent(sectionBuilder, "WithTitle",
+			BuildText("ME_SETTINGS.section.blacklist.title", "附魔黑名单"));
+		InvokeFluent(sectionBuilder, "WithDescription",
+			BuildText("ME_SETTINGS.section.blacklist.description",
+				"关闭开关后，该附魔不会出现在对局随机附魔池中（默认全部开启）。"));
+		InvokeFluent(sectionBuilder, "WithEnabledWhen", new Func<bool>(() => !IsMultiplayerClient()));
+		try
+		{
+			InvokeFluent(sectionBuilder, "Collapsible", true);
+		}
+		catch (MissingMethodException)
+		{
+			// 旧版 RitsuLib 可能无 Collapsible。
+		}
+
+		IEnumerable<MegaCrit.Sts2.Core.Models.EnchantmentModel> candidates;
+		try
+		{
+			candidates = MoreEnchantCardRewardUtil.EnumerateSettingsPoolCandidates()
+				.OrderBy(static e => e.Title.GetFormattedText(), StringComparer.CurrentCultureIgnoreCase)
+				.ToList();
+		}
+		catch (Exception ex)
+		{
+			Log.Debug($"[RitsuLibModSettingsCompat] Blacklist candidates unavailable: {ex.Message}");
+			return;
+		}
+
+		foreach (var enchantment in candidates)
+		{
+			var idEntry = enchantment.Id.Entry;
+			var toggleId = "blacklist_" + idEntry;
+			string label;
+			try
+			{
+				label = enchantment.Title.GetFormattedText();
+				if (string.IsNullOrWhiteSpace(label))
+					label = idEntry;
+			}
+			catch
+			{
+				label = idEntry;
+			}
+
+			AddToggleEntryLiteral(sectionBuilder, toggleId, label, idEntry,
+				() => !EnchantmentPoolFilter.IsBlacklisted(idEntry, MoreEnchantSettingsStore.Get()),
+				value =>
+				{
+					var settings = MoreEnchantSettingsStore.Get();
+					EnchantmentPoolFilter.SetBlacklisted(idEntry, blacklisted: !value, settings);
+				});
+		}
+	}
+
 	private static void ConfigureEntryEnabledWhen(object sectionBuilder, string id, Func<bool> predicate)
 	{
 		InvokeFluent(sectionBuilder, "WithEntryEnabledWhen", id, predicate);
@@ -320,6 +414,36 @@ internal static class RitsuLibModSettingsCompat
 		var binding = CreateCallbackBinding(typeof(bool), $"settings::{id}", () => read(), value => write((bool)value));
 		InvokeFluent(sectionBuilder, "AddToggle", id, BuildText(SettingLabelKey(id), label), binding,
 			description == null ? null : BuildText(SettingDescriptionKey(id), description), null);
+	}
+
+	/// <summary>黑名单项：标签用运行时附魔标题（Literal），描述为 Id.Entry。</summary>
+	private static void AddToggleEntryLiteral(
+		object sectionBuilder,
+		string id,
+		string label,
+		string description,
+		Func<bool> read,
+		Action<bool> write)
+	{
+		var binding = CreateCallbackBinding(typeof(bool), $"settings::{id}", () => read(), value => write((bool)value));
+		InvokeFluent(sectionBuilder, "AddToggle", id, BuildLiteralText(label), binding,
+			BuildLiteralText(description), null);
+	}
+
+	private static void AddMultilineStringEntry(
+		object sectionBuilder,
+		string id,
+		string label,
+		Func<string> read,
+		Action<string> write,
+		string? description = null,
+		string? placeholder = null)
+	{
+		var binding = CreateCallbackBinding(typeof(string), $"settings::{id}", () => read(), value => write((string)value));
+		InvokeFluent(sectionBuilder, "AddMultilineString", id, BuildText(SettingLabelKey(id), label), binding,
+			placeholder == null ? null : BuildText($"{SettingLabelKey(id)}.placeholder", placeholder),
+			null,
+			description == null ? null : BuildText(SettingDescriptionKey(id), description));
 	}
 
 	private static void AddIntSliderEntry(
@@ -412,6 +536,19 @@ internal static class RitsuLibModSettingsCompat
 		if (_modSettingsTextLocStringMethod == null)
 			throw new InvalidOperationException("RitsuLib ModSettingsText.LocString is unavailable.");
 		return _modSettingsTextLocStringMethod.Invoke(null, [SettingsLocTable, key, fallback])!;
+	}
+
+	private static object BuildLiteralText(string text)
+	{
+		var literalMethod = _modSettingsTextType?.GetMethod(
+			"Literal",
+			BindingFlags.Public | BindingFlags.Static,
+			null,
+			[typeof(string)],
+			null);
+		if (literalMethod == null)
+			return BuildText("ME_SETTINGS.literal", text);
+		return literalMethod.Invoke(null, [text])!;
 	}
 
 	private static string SettingLabelKey(string id) => $"ME_SETTINGS.{id}.label";

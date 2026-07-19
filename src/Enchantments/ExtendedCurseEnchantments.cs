@@ -158,16 +158,15 @@ public sealed class FollyCurseEnchantment : ModEnchantmentTemplate, IRewardEncha
 		return Task.CompletedTask;
 	}
 
-	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(
+	public override CardLocation ModifyCardPlayResultLocation(
 		CardModel card,
 		bool isAutoPlay,
 		ResourceInfo resources,
-		PileType pileType,
-		CardPilePosition position)
+		CardLocation cardLocation)
 	{
-		if (!ReferenceEquals(card, Card) || pileType != PileType.Discard)
-			return (pileType, position);
-		return (PileType.Hand, position);
+		if (!ReferenceEquals(card, Card) || cardLocation.pileType != PileType.Discard)
+			return cardLocation;
+		return new CardLocation(cardLocation.player, PileType.Hand, cardLocation.position);
 	}
 }
 

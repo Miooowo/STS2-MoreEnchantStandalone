@@ -330,16 +330,15 @@ public sealed class RandomSelectEnchantment : ModEnchantmentTemplate, IRewardEnc
 		Card.EnergyCost.SetCustomBaseCost(canonical + 1);
 	}
 
-	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(
+	public override CardLocation ModifyCardPlayResultLocation(
 		CardModel card,
 		bool isAutoPlay,
 		ResourceInfo resources,
-		PileType pileType,
-		CardPilePosition position)
+		CardLocation cardLocation)
 	{
 		if (!ReferenceEquals(card, Card))
-			return (pileType, position);
-		return (PileType.None, position);
+			return cardLocation;
+		return new CardLocation(cardLocation.player, PileType.None, cardLocation.position);
 	}
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)

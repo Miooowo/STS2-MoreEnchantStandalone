@@ -42,19 +42,18 @@ public sealed class MagicCorruptionEnchantment : ModEnchantmentTemplate, IReward
 		Card.EnergyCost.SetCustomBaseCost(FixedEnergyCost);
 	}
 
-	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(
+	public override CardLocation ModifyCardPlayResultLocation(
 		CardModel card,
 		bool isAutoPlay,
 		ResourceInfo resources,
-		PileType pileType,
-		CardPilePosition position)
+		CardLocation cardLocation)
 	{
 		if (!ReferenceEquals(card, Card))
-			return (pileType, position);
+			return cardLocation;
 		if (card.Type == CardType.Power || card.IsDupe)
-			return (pileType, position);
+			return cardLocation;
 
-		return (PileType.None, position);
+		return new CardLocation(cardLocation.player, PileType.None, cardLocation.position);
 	}
 
 	public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)

@@ -92,24 +92,23 @@ public sealed class MagicCorruptionPower : PowerModel
 		return true;
 	}
 
-	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(
+	public override CardLocation ModifyCardPlayResultLocation(
 		CardModel card,
 		bool isAutoPlay,
 		ResourceInfo resources,
-		PileType pileType,
-		CardPilePosition position)
+		CardLocation cardLocation)
 	{
 		if (card.Owner.Creature != Owner)
-			return (pileType, position);
+			return cardLocation;
 		if (card.Enchantment == null)
-			return (pileType, position);
+			return cardLocation;
 		if (card.Enchantment is MagicCorruptionEnchantment)
-			return (pileType, position);
+			return cardLocation;
 		if (card.Type == CardType.Power || card.IsDupe)
-			return (pileType, position);
-		if (pileType == PileType.None)
-			return (pileType, position);
+			return cardLocation;
+		if (cardLocation.pileType == PileType.None)
+			return cardLocation;
 
-		return (PileType.Exhaust, position);
+		return new CardLocation(cardLocation.player, PileType.Exhaust, cardLocation.position);
 	}
 }

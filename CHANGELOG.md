@@ -15,6 +15,7 @@
 ### 修复
 - 适配新版 `Hook.BeforeSideTurnEnd` / `Hook.AfterSideTurnEnd`（替换已移除的 `BeforeTurnEnd` / `AfterTurnEnd`），修复模组初始化时 Harmony 补丁崩溃；Postfix 第三参须命名为 `participants` 以匹配游戏方法签名。
 - 适配 `CreatureCmd.Damage` 与 `AttackCommand.FromCard` 新签名（`CardModel` + `CardPlay?`），修复编译与运行时 API 不兼容。
+- 适配打出后去向钩子：`ModifyCardPlayResultPileTypeAndPosition` 更名为 `ModifyCardPlayResultLocation`（返回 `CardLocation`）。
 
 ## 0.12.1
 
